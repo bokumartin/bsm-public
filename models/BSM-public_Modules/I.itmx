@@ -5,9 +5,9 @@
 		<name>I</name>
 		<uuid>f48cdf44-c0cb-41fc-a5c4-250e64491d3d</uuid>
 		<vendor>isee systems, inc.</vendor>
-		<product version="1.9.4" isee:build_number="1992" isee:saved_by_v1="true" lang="en">Stella Architect</product>
+		<product version="1.8.2" isee:build_number="1691" isee:saved_by_v1="true" lang="en">Stella Architect</product>
 	</header>
-	<sim_specs isee:sim_duration="1.5" isee:simulation_delay="0.125" isee:restore_on_start="false" method="Euler" time_units="Months" isee:instantaneous_flows="false">
+	<sim_specs isee:simulation_delay="0.1" isee:restore_on_start="false" method="Euler" time_units="Months" isee:instantaneous_flows="false">
 		<start>0</start>
 		<stop>12</stop>
 		<dt reciprocal="true">4</dt>
@@ -87,6 +87,11 @@
 		</unit>
 		<unit name="TonnesPerGram">
 			<eqn>Tonnes/g</eqn>
+		</unit>
+		<unit name="Tonnes">
+			<eqn/>
+			<alias>tonne</alias>
+			<alias>metric ton</alias>
 		</unit>
 		<unit name="HoursPerProjectPerYr">
 			<eqn>hr/(projects*yr)</eqn>
@@ -413,29 +418,29 @@ COMMENTS: </doc>
 				<units>Unitless</units>
 			</aux>
 			<group name="Import Logic" run="false">
-				<entity name="desired_exports"/>
-				<entity name="distributed_ceiling_for_EtOH_import"/>
-				<entity name="rollup_imports"/>
-				<entity name="non_subsidized_PoP_price_rel_to_import_threshold"/>
-				<entity name="threshold_PoP_price_for_import"/>
-				<entity name="EtOH_Import_from_x_US"/>
-				<entity name="frac_import_capacity_utilized"/>
 				<entity name="export_price_rel_to_threshold"/>
 				<entity name="export_price_from_US_incl_tariff"/>
+				<entity name="frac_import_capacity_utilized"/>
 				<entity name="import_cost_before_tariff"/>
+				<entity name="non_subsidized_PoP_price_rel_to_import_threshold"/>
+				<entity name="rollup_imports"/>
+				<entity name="distributed_ceiling_for_EtOH_import"/>
+				<entity name="EtOH_Import_from_x_US"/>
+				<entity name="threshold_PoP_price_for_import"/>
+				<entity name="desired_exports"/>
 			</group>
 			<group name="Interfaces to Other Modules 1" run="false">
 				<entity name="EtOH_PoP_price"/>
 			</group>
 			<group name="Inputs and Initializations" run="false">
-				<entity name="import_tariff"/>
-				<entity name="ceiling_for_EtOH_import"/>
-				<entity name="import_cost_reduction_factor"/>
-				<entity name="baseline_exports"/>
-				<entity name="distribution_of_imports"/>
-				<entity name="base_threshold_PoP_price_for_import"/>
-				<entity name="export_price_responsiveness"/>
 				<entity name="export_tariff"/>
+				<entity name="base_threshold_PoP_price_for_import"/>
+				<entity name="distribution_of_imports"/>
+				<entity name="baseline_exports"/>
+				<entity name="import_cost_reduction_factor"/>
+				<entity name="export_price_responsiveness"/>
+				<entity name="ceiling_for_EtOH_import"/>
+				<entity name="import_tariff"/>
 			</group>
 			<aux name="export tariff">
 				<doc>DEFINITION: Tariff associated with ethanol exports from US--time dependent scenario.  Note stepwise graphical function
@@ -533,8 +538,8 @@ COMMENTS: value developed to calibrate exports against recent history</doc>
 				</graph>
 				<table color="black" background="#E0E0E0" text_align="right" font_size="12pt" orientation="vertical" wrap_text="false" isee:auto_fit="true" isee:use_alternate_row_colors="false" isee:unlimited_table_length="false" blank_column_width="80" column_width="160" interval="1" report_balances="beginning" report_flows="instantaneous" header_font_style="normal" header_font_weight="normal" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="12pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 				<button color="black" background="#E0E0E0" font_size="12pt" border_width="thin" border_style="solid" transparent="false" corner_radius="0" isee:flat="false" icon_side="top" isee:highlight_on_hover="false" isee:highlight_color="#959595"/>
-				<isee:annotation color="black" background="#E0E0E0" font_size="12pt" border_width="thin" border_style="solid" transparent="false" corner_radius="0" isee:flat="false" icon_side="top" isee:highlight_on_hover="false" isee:highlight_color="#959595" popup_corner_radius="0" popup_background_color="#FFFECF"/>
-				<slider color="black" background="#E0E0E0" font_size="12pt" num_ticks="3" label_side="top" wrap_title="true" vertical="false" isee:fancy_appearance="false" isee:show_hover_tip="when_deciding" input_expands="true" input_width="100"/>
+				<isee:annotation color="black" background="#E0E0E0" font_size="12pt" border_width="thin" border_style="solid" transparent="false" corner_radius="0" isee:flat="false" icon_side="top" isee:highlight_on_hover="false" isee:highlight_color="#959595" popup_background_color="#FFFECF"/>
+				<slider color="black" background="#E0E0E0" font_size="12pt" num_ticks="3" label_side="top" wrap_title="true" vertical="false" isee:show_hover_tip="when_deciding" input_expands="true" input_width="100"/>
 				<isee:sim_speed_slider color="black" background="white"/>
 				<isee:time_slider color="black" background="white"/>
 				<isee:pie_input color="black" background="white" legend_position="bottom" isee:transparent="false"/>
@@ -551,10 +556,8 @@ COMMENTS: value developed to calibrate exports against recent history</doc>
 				<isee:navigation_widget color="black" background="white" border_color="#999999" border_width="thin" border_style="solid" item_spacing="6" appearance="tabs" corner_radius="4" selected_item_color="black" selected_item_background="white" item_background="#DDDDDD"/>
 				<isee:shape color="black" background="white" opacity="1" transparent_background="true"/>
 				<isee:selector color="black" background="white"/>
-				<isee:iframe color="black" background="white"/>
-				<isee:financial_table color="black" background="white" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="true" background="white" page_width="1024" page_height="784" isee:page_cols="2" isee:popup_graphs_are_comparative="true" type="stock_flow">
+			<view isee:show_pages="true" page_width="1024" page_height="784" isee:page_cols="2" isee:popup_graphs_are_comparative="true" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="9pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -591,63 +594,63 @@ COMMENTS: value developed to calibrate exports against recent history</doc>
 					</graph>
 					<table color="black" background="#E0E0E0" text_align="right" font_size="12pt" orientation="vertical" wrap_text="false" isee:auto_fit="true" isee:use_alternate_row_colors="false" isee:unlimited_table_length="false" blank_column_width="80" column_width="160" interval="1" report_balances="beginning" report_flows="instantaneous" header_font_style="normal" header_font_weight="normal" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="12pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 				</style>
-				<connector uid="4550" angle="12.5288">
+				<connector uid="4549" angle="12.5288">
 					<from>
-						<alias uid="4551"/>
+						<alias uid="4550"/>
 					</from>
 					<to>import_cost_before_tariff</to>
 				</connector>
-				<connector uid="4552" angle="0">
+				<connector uid="4551" angle="0">
 					<from>
-						<alias uid="4553"/>
+						<alias uid="4552"/>
 					</from>
 					<to>import_cost_before_tariff</to>
 				</connector>
-				<connector uid="4554" angle="90">
+				<connector uid="4553" angle="90">
 					<from>import_cost_before_tariff</from>
 					<to>threshold_PoP_price_for_import</to>
 				</connector>
-				<connector uid="4555" angle="0">
+				<connector uid="4554" angle="0">
 					<from>EtOH_Import_from_x_US</from>
 					<to>rollup_imports</to>
 				</connector>
-				<connector uid="4556" angle="0">
+				<connector uid="4555" angle="0">
 					<from>frac_import_capacity_utilized</from>
 					<to>EtOH_Import_from_x_US</to>
 				</connector>
-				<connector uid="4557" angle="90">
+				<connector uid="4556" angle="90">
 					<from>threshold_PoP_price_for_import</from>
 					<to>non_subsidized_PoP_price_rel_to_import_threshold</to>
 				</connector>
-				<connector uid="4558" angle="90">
+				<connector uid="4557" angle="90">
 					<from>distributed_ceiling_for_EtOH_import</from>
 					<to>EtOH_Import_from_x_US</to>
 				</connector>
-				<connector uid="4559" angle="0">
+				<connector uid="4558" angle="0">
 					<from>
-						<alias uid="4560"/>
+						<alias uid="4559"/>
 					</from>
 					<to>non_subsidized_PoP_price_rel_to_import_threshold</to>
 				</connector>
-				<connector uid="4561" angle="0">
+				<connector uid="4560" angle="0">
 					<from>
-						<alias uid="4562"/>
+						<alias uid="4561"/>
 					</from>
 					<to>distributed_ceiling_for_EtOH_import</to>
 				</connector>
-				<connector uid="4563" angle="0">
+				<connector uid="4562" angle="0">
 					<from>non_subsidized_PoP_price_rel_to_import_threshold</from>
 					<to>frac_import_capacity_utilized</to>
 				</connector>
-				<connector uid="4564" angle="26.5651">
+				<connector uid="4563" angle="26.5651">
 					<from>
-						<alias uid="4565"/>
+						<alias uid="4564"/>
 					</from>
 					<to>distributed_ceiling_for_EtOH_import</to>
 				</connector>
-				<connector uid="4566" angle="0">
+				<connector uid="4565" angle="0">
 					<from>
-						<alias uid="4567"/>
+						<alias uid="4566"/>
 					</from>
 					<to>threshold_PoP_price_for_import</to>
 				</connector>
@@ -665,106 +668,106 @@ COMMENTS: value developed to calibrate exports against recent history</doc>
 				<aux color="black" font_color="black" x="1585" y="222" name="distributed ceiling for EtOH import"/>
 				<aux color="black" font_color="black" x="1449" y="144" name="frac import capacity utilized"/>
 				<group locked="true" color="black" font_color="black" x="844" y="50" width="924" height="341" name="Import Logic">
-					<item uid="4566"/>
-					<item uid="4559"/>
-					<item uid="4568"/>
-					<item uid="4562"/>
-					<item uid="4564"/>
 					<item uid="4551"/>
-					<item uid="4560"/>
-					<item uid="4557"/>
-					<item uid="4558"/>
+					<item uid="4566"/>
 					<item uid="4555"/>
-					<item uid="4565"/>
-					<item uid="4550"/>
-					<item uid="4554"/>
-					<item uid="4561"/>
-					<item uid="4556"/>
-					<item uid="4553"/>
-					<item uid="4569"/>
-					<item uid="4567"/>
+					<item uid="4560"/>
 					<item uid="4552"/>
-					<item uid="4570"/>
+					<item uid="4553"/>
+					<item uid="4549"/>
+					<item uid="4567"/>
+					<item uid="4554"/>
+					<item uid="4557"/>
+					<item uid="4556"/>
+					<item uid="4564"/>
+					<item uid="4559"/>
+					<item uid="4550"/>
+					<item uid="4568"/>
 					<item uid="4563"/>
+					<item uid="4558"/>
+					<item uid="4562"/>
+					<item uid="4561"/>
+					<item uid="4569"/>
+					<item uid="4565"/>
 				</group>
 				<group locked="true" color="black" font_color="black" x="850" y="618" width="667" height="67" name="Interfaces to Other Modules 1">
-					<item uid="4571"/>
+					<item uid="4570"/>
 				</group>
 				<group locked="true" color="black" font_color="black" x="847.5" y="417" width="917" height="173" name="Inputs and Initializations"/>
-				<text_box color="black" font_size="24pt" padding="5" appearance="transparent" uid="4572" x="8" y="8.5" width="701" height="51">Biomass Scenario Ethanol Import Module</text_box>
-				<text_box color="red" vertical_text_align="center" font_color="red" padding="5" border_color="red" border_width="2" border_style="solid" appearance="transparent" uid="4573" x="12" y="255" width="350" height="36">RED:  Data Input (Constant, Ass&apos;n, Scenario, SSheet)</text_box>
-				<text_box color="#008F44" vertical_text_align="center" font_color="#008F44" padding="5" border_color="#008F44" border_width="2" border_style="solid" appearance="transparent" uid="4574" x="385" y="208" width="350" height="36">GREEN:  Output from this Sector to another Sector</text_box>
-				<text_box color="blue" vertical_text_align="center" font_color="blue" padding="5" border_color="blue" border_width="2" border_style="solid" appearance="transparent" uid="4575" x="12" y="207" width="350" height="36">BLUE:  Input to this Sector from another Sector</text_box>
-				<text_box color="black" vertical_text_align="center" padding="5" border_width="2" border_style="solid" appearance="transparent" uid="4576" x="385" y="255" width="350" height="36">BLACK:  Internal Calculation Within This Sector</text_box>
-				<text_box color="#7F00FF" vertical_text_align="center" font_color="#7F00FF" padding="5" border_color="#7F00FF" border_width="2" border_style="solid" appearance="transparent" uid="4577" x="12" y="160" width="350" height="36">Purple:  Input to this MODULE from another MODULE</text_box>
-				<text_box color="#65183E" vertical_text_align="center" font_color="#65183E" padding="5" border_color="#65183E" border_width="2" border_style="solid" appearance="transparent" uid="4578" x="385" y="160" width="350" height="36">Brown:  Output from this MODULE from another MODULE</text_box>
+				<text_box color="black" font_size="24pt" padding="5" appearance="transparent" uid="4571" x="8" y="8.5" width="701" height="51">Biomass Scenario Ethanol Import Module</text_box>
+				<text_box color="red" vertical_text_align="center" font_color="red" padding="5" border_color="red" border_width="2" border_style="solid" appearance="transparent" uid="4572" x="12" y="255" width="350" height="36">RED:  Data Input (Constant, Ass&apos;n, Scenario, SSheet)</text_box>
+				<text_box color="#008F44" vertical_text_align="center" font_color="#008F44" padding="5" border_color="#008F44" border_width="2" border_style="solid" appearance="transparent" uid="4573" x="385" y="208" width="350" height="36">GREEN:  Output from this Sector to another Sector</text_box>
+				<text_box color="blue" vertical_text_align="center" font_color="blue" padding="5" border_color="blue" border_width="2" border_style="solid" appearance="transparent" uid="4574" x="12" y="207" width="350" height="36">BLUE:  Input to this Sector from another Sector</text_box>
+				<text_box color="black" vertical_text_align="center" padding="5" border_width="2" border_style="solid" appearance="transparent" uid="4575" x="385" y="255" width="350" height="36">BLACK:  Internal Calculation Within This Sector</text_box>
+				<text_box color="#7F00FF" vertical_text_align="center" font_color="#7F00FF" padding="5" border_color="#7F00FF" border_width="2" border_style="solid" appearance="transparent" uid="4576" x="12" y="160" width="350" height="36">Purple:  Input to this MODULE from another MODULE</text_box>
+				<text_box color="#65183E" vertical_text_align="center" font_color="#65183E" padding="5" border_color="#65183E" border_width="2" border_style="solid" appearance="transparent" uid="4577" x="385" y="160" width="350" height="36">Brown:  Output from this MODULE from another MODULE</text_box>
 				<aux color="red" font_color="red" x="1552.5" y="454" name="export tariff"/>
 				<aux color="black" font_color="black" label_angle="151.813" x="1040" y="144" name="export price from US incl tariff"/>
-				<connector uid="4579" angle="358.264">
+				<connector uid="4578" angle="358.264">
 					<from>
-						<alias uid="4570"/>
+						<alias uid="4569"/>
 					</from>
 					<to>export_price_from_US_incl_tariff</to>
 				</connector>
-				<connector uid="4580" angle="176.186">
+				<connector uid="4579" angle="176.186">
 					<from>
-						<alias uid="4560"/>
+						<alias uid="4559"/>
 					</from>
 					<to>export_price_from_US_incl_tariff</to>
 				</connector>
 				<aux color="black" font_color="black" label_angle="151.813" x="1040" y="236" name="export price rel to threshold"/>
-				<connector uid="4581" angle="271.637">
+				<connector uid="4580" angle="271.637">
 					<from>export_price_from_US_incl_tariff</from>
 					<to>export_price_rel_to_threshold</to>
 				</connector>
-				<connector uid="4582" angle="165.964">
+				<connector uid="4581" angle="165.964">
 					<from>import_cost_before_tariff</from>
 					<to>export_price_rel_to_threshold</to>
 				</connector>
 				<aux color="red" font_color="red" x="903.5" y="454" name="baseline exports"/>
 				<aux color="#00AA00" font_color="#00AA00" x="929" y="236" name="desired exports"/>
 				<aux color="red" font_color="red" x="921.5" y="516" name="export price responsiveness"/>
-				<connector uid="4583" angle="185.194">
+				<connector uid="4582" angle="185.194">
 					<from>export_price_rel_to_threshold</from>
 					<to>desired_exports</to>
 				</connector>
-				<connector uid="4584" angle="90">
+				<connector uid="4583" angle="90">
 					<from>
 						<alias uid="4568"/>
 					</from>
 					<to>desired_exports</to>
 				</connector>
-				<connector uid="4585" angle="160.56">
+				<connector uid="4584" angle="160.56">
 					<from>
-						<alias uid="4569"/>
+						<alias uid="4567"/>
 					</from>
 					<to>desired_exports</to>
 				</connector>
-				<alias color="blue" font_style="italic" font_weight="bold" uid="4560" x="1128" y="135" width="18" height="18">
+				<alias color="blue" font_style="italic" font_weight="bold" uid="4559" x="1128" y="135" width="18" height="18">
 					<of>EtOH_PoP_price</of>
 				</alias>
-				<alias color="#008F44" font_style="italic" font_color="#008F44" uid="4571" x="1030" y="631" width="18" height="18">
+				<alias color="#008F44" font_style="italic" font_color="#008F44" uid="4570" x="1030" y="631" width="18" height="18">
 					<of>EtOH_Import_from_x_US</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="4551" x="1163" y="333" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="4550" x="1163" y="333" width="18" height="18">
 					<of>base_threshold_PoP_price_for_import</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="4567" x="1143" y="216" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="4566" x="1143" y="216" width="18" height="18">
 					<of>import_tariff</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" label_angle="154.598" uid="4553" x="1172" y="284" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" label_angle="154.598" uid="4552" x="1172" y="284" width="18" height="18">
 					<of>import_cost_reduction_factor</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="4565" x="1454" y="282" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="4564" x="1454" y="282" width="18" height="18">
 					<of>ceiling_for_EtOH_import</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="4562" x="1447" y="213" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="4561" x="1447" y="213" width="18" height="18">
 					<of>distribution_of_imports</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="4570" x="920" y="135" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="4569" x="920" y="135" width="18" height="18">
 					<of>export_tariff</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="4569" x="1034.5" y="312" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="4567" x="1034.5" y="312" width="18" height="18">
 					<of>export_price_responsiveness</of>
 				</alias>
 				<alias color="red" font_style="italic" font_color="red" uid="4568" x="920" y="312" width="18" height="18">

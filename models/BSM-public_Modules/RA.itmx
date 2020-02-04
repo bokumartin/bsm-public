@@ -5,9 +5,9 @@
 		<name>RA</name>
 		<uuid>f48cdf44-c0cb-41fc-a5c4-250e64491d3d</uuid>
 		<vendor>isee systems, inc.</vendor>
-		<product version="1.9.4" isee:build_number="1992" isee:saved_by_v1="true" lang="en">Stella Architect</product>
+		<product version="1.8.2" isee:build_number="1691" isee:saved_by_v1="true" lang="en">Stella Architect</product>
 	</header>
-	<sim_specs isee:sim_duration="1.5" isee:simulation_delay="0.125" isee:restore_on_start="false" method="Euler" time_units="Months" isee:instantaneous_flows="false">
+	<sim_specs isee:simulation_delay="0.1" isee:restore_on_start="false" method="Euler" time_units="Months" isee:instantaneous_flows="false">
 		<start>0</start>
 		<stop>12</stop>
 		<dt reciprocal="true">4</dt>
@@ -17,6 +17,10 @@
 			<elem name="Pond"/>
 			<elem name="PBR"/>
 		</dim>
+		<dim name="CtoATech">
+			<elem name="BC"/>
+			<elem name="TC"/>
+		</dim>
 		<dim name="CtoRRTech">
 			<elem name="FP"/>
 			<elem name="FT"/>
@@ -25,18 +29,14 @@
 			<elem name="F"/>
 			<elem name="APR"/>
 		</dim>
-		<dim name="CtoATech">
-			<elem name="BC"/>
-			<elem name="TC"/>
-		</dim>
-		<dim name="Gen">
-			<elem name="One"/>
-			<elem name="OnePointFive"/>
-		</dim>
 		<dim name="OilCropTech">
 			<elem name="TransEster"/>
 			<elem name="HEFA"/>
 			<elem name="Catalytic"/>
+		</dim>
+		<dim name="Gen">
+			<elem name="One"/>
+			<elem name="OnePointFive"/>
 		</dim>
 	</dimensions>
 	<isee:prefs show_module_prefix="true" live_update_on_drag="true" show_restore_buttons="false" layer="model" interface_scale_ui="true" interface_max_page_width="10000" interface_max_page_height="10000" interface_min_page_width="0" interface_min_page_height="0" saved_runs="5" keep="false" rifp="false"/>
@@ -103,6 +103,11 @@
 		</unit>
 		<unit name="TonnesPerGram">
 			<eqn>Tonnes/g</eqn>
+		</unit>
+		<unit name="Tonnes">
+			<eqn/>
+			<alias>tonne</alias>
+			<alias>metric ton</alias>
 		</unit>
 		<unit name="HoursPerProjectPerYr">
 			<eqn>hr/(projects*yr)</eqn>
@@ -295,7 +300,7 @@ COMMENTS: </doc>
 				<units>Gallons/(US Dollars*Years)</units>
 			</aux>
 			<aux name="S to EtOH Platform Attr" access="input">
-				<eqn>attractiveness_C</eqn>
+				<eqn>{_l_}attractiveness_C</eqn>
 				<units>Unitless</units>
 			</aux>
 			<aux name="Total Attr" access="output">
@@ -320,7 +325,7 @@ S_to_J_platform_Attr</eqn>
 				<dimensions>
 					<dim name="CtoRRTech"/>
 				</dimensions>
-				<eqn>attractiveness_C</eqn>
+				<eqn>{_l_}attractiveness_C</eqn>
 				<units>Unitless</units>
 			</aux>
 			<aux name="Max Plant Construction Capacity">
@@ -1788,7 +1793,7 @@ COMMENTS: </doc>
 				<units>per year</units>
 			</aux>
 			<aux name="S to J platform Attr" access="input">
-				<eqn>attractiveness_C</eqn>
+				<eqn>{_l_}attractiveness_C</eqn>
 				<units>Unitless</units>
 			</aux>
 			<aux name="RAT S to J">
@@ -1841,37 +1846,37 @@ COMMENTS: </doc>
 				<units>Unitless</units>
 			</aux>
 			<group name="Relative Attractiveness and Desired Starts" run="false">
-				<entity name="S_to_J_platform_Attr"/>
-				<entity name="Des_C_to_EtOH_yrly_starts"/>
-				<entity name="Des_C_to_B_yrly_starts"/>
-				<entity name="RAT_Algae"/>
-				<entity name="RAT_Oilcrop"/>
-				<entity name="Des_OC_to_RR_yrly_starts"/>
-				<entity name="C_toB_Platform_Attr_C"/>
+				<entity name="Des_A_to_RR_yrly_starts"/>
+				<entity name="Des_C_to_RR_yrly_starts"/>
+				<entity name="C_to_RR_Platform_Attr_C"/>
+				<entity name="Total_Attr"/>
+				<entity name="OilCrop_Platform_Attr_C"/>
+				<entity name="Max_Plant_Construction_Capacity"/>
+				<entity name="Algae_Platform_Attr_C"/>
 				<entity name="RAT_S_to_J"/>
 				<entity name="C_to_EtOH_Platform_Attr_C"/>
-				<entity name="Algae_Platform_Attr_C"/>
-				<entity name="S_to_EtOH_Platform_Attr"/>
-				<entity name="OilCrop_Platform_Attr_C"/>
-				<entity name="Des_SJ_yrly_starts"/>
-				<entity name="RAT_C_to_B"/>
-				<entity name="Max_Plant_Construction_Capacity"/>
-				<entity name="RAT_C_to_EtOH"/>
-				<entity name="Total_Attr"/>
-				<entity name="RAT_S_to_EtOH"/>
-				<entity name="C_to_RR_Platform_Attr_C"/>
-				<entity name="Des_S_to_EtOH_yrly_starts"/>
-				<entity name="Des_C_to_RR_yrly_starts"/>
 				<entity name="RAT_C_to_RR"/>
-				<entity name="Des_A_to_RR_yrly_starts"/>
+				<entity name="RAT_C_to_EtOH"/>
+				<entity name="RAT_Oilcrop"/>
+				<entity name="RAT_Algae"/>
+				<entity name="S_to_EtOH_Platform_Attr"/>
+				<entity name="Des_C_to_B_yrly_starts"/>
+				<entity name="RAT_S_to_EtOH"/>
+				<entity name="Des_OC_to_RR_yrly_starts"/>
+				<entity name="Des_S_to_EtOH_yrly_starts"/>
+				<entity name="Des_C_to_EtOH_yrly_starts"/>
+				<entity name="S_to_J_platform_Attr"/>
+				<entity name="RAT_C_to_B"/>
+				<entity name="C_toB_Platform_Attr_C"/>
+				<entity name="Des_SJ_yrly_starts"/>
 			</group>
 			<group name="Attractiveness of Other Investment Option" run="false">
-				<entity name="region_scaling_factor"/>
-				<entity name="k_OTHER"/>
-				<entity name="Platform_Attr_OTHER"/>
-				<entity name="invest_attractiveness_weighting"/>
-				<entity name="RAT_OTHER"/>
 				<entity name="NPV_rel_to_a_million_OTHER"/>
+				<entity name="Platform_Attr_OTHER"/>
+				<entity name="RAT_OTHER"/>
+				<entity name="k_OTHER"/>
+				<entity name="invest_attractiveness_weighting"/>
+				<entity name="region_scaling_factor"/>
 			</group>
 			<group name="Cumulative Subsidy Constraints" run="false">
 				<entity name="use_system_wide_spending_input"/>
@@ -2338,8 +2343,8 @@ COMMENTS: </doc>
 				</graph>
 				<table color="black" background="#E0E0E0" text_align="right" font_size="12pt" orientation="vertical" wrap_text="false" isee:auto_fit="true" isee:use_alternate_row_colors="false" isee:unlimited_table_length="false" blank_column_width="80" column_width="160" interval="1" report_balances="beginning" report_flows="instantaneous" header_font_style="normal" header_font_weight="normal" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="12pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 				<button color="black" background="#E0E0E0" font_size="12pt" border_width="thin" border_style="solid" transparent="false" corner_radius="0" isee:flat="false" icon_side="top" isee:highlight_on_hover="false" isee:highlight_color="#959595"/>
-				<isee:annotation color="black" background="#E0E0E0" font_size="12pt" border_width="thin" border_style="solid" transparent="false" corner_radius="0" isee:flat="false" icon_side="top" isee:highlight_on_hover="false" isee:highlight_color="#959595" popup_corner_radius="0" popup_background_color="#FFFECF"/>
-				<slider color="black" background="#E0E0E0" font_size="12pt" num_ticks="3" label_side="top" wrap_title="true" vertical="false" isee:fancy_appearance="false" isee:show_hover_tip="when_deciding" input_expands="true" input_width="100"/>
+				<isee:annotation color="black" background="#E0E0E0" font_size="12pt" border_width="thin" border_style="solid" transparent="false" corner_radius="0" isee:flat="false" icon_side="top" isee:highlight_on_hover="false" isee:highlight_color="#959595" popup_background_color="#FFFECF"/>
+				<slider color="black" background="#E0E0E0" font_size="12pt" num_ticks="3" label_side="top" wrap_title="true" vertical="false" isee:show_hover_tip="when_deciding" input_expands="true" input_width="100"/>
 				<isee:sim_speed_slider color="black" background="white"/>
 				<isee:time_slider color="black" background="white"/>
 				<isee:pie_input color="black" background="white" legend_position="bottom" isee:transparent="false"/>
@@ -2356,10 +2361,8 @@ COMMENTS: </doc>
 				<isee:navigation_widget color="black" background="white" border_color="#999999" border_width="thin" border_style="solid" item_spacing="6" appearance="tabs" corner_radius="4" selected_item_color="black" selected_item_background="white" item_background="#DDDDDD"/>
 				<isee:shape color="black" background="white" opacity="1" transparent_background="true"/>
 				<isee:selector color="black" background="white"/>
-				<isee:iframe color="black" background="white"/>
-				<isee:financial_table color="black" background="white" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="true" background="white" page_width="1024" page_height="784" isee:page_cols="3" isee:page_rows="5" zoom="140" isee:popup_graphs_are_comparative="true" type="stock_flow">
+			<view isee:show_pages="true" page_width="1024" page_height="784" isee:page_cols="3" isee:page_rows="5" zoom="140" isee:popup_graphs_are_comparative="true" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="9pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -2396,623 +2399,623 @@ COMMENTS: </doc>
 					</graph>
 					<table color="black" background="#E0E0E0" text_align="right" font_size="12pt" orientation="vertical" wrap_text="false" isee:auto_fit="true" isee:use_alternate_row_colors="false" isee:unlimited_table_length="false" blank_column_width="80" column_width="160" interval="1" report_balances="beginning" report_flows="instantaneous" header_font_style="normal" header_font_weight="normal" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="12pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 				</style>
-				<connector uid="5904" color="#2A2A2A" angle="0">
+				<connector uid="5903" color="#2A2A2A" angle="0">
 					<from>RAT_Oilcrop</from>
 					<to>Des_OC_to_RR_yrly_starts</to>
 				</connector>
-				<connector uid="5905" color="#2A2A2A" angle="57.9946">
+				<connector uid="5904" color="#2A2A2A" angle="57.9946">
 					<from>Algae_Platform_Attr_C</from>
 					<to>Total_Attr</to>
 				</connector>
-				<connector uid="5906" angle="26.5651">
+				<connector uid="5905" angle="26.5651">
 					<from>invest_attractiveness_weighting</from>
 					<to>Platform_Attr_OTHER</to>
 				</connector>
-				<connector uid="5907" angle="0">
+				<connector uid="5906" angle="0">
 					<from>CE_CHC_PC_maturity_gap</from>
 					<to>CE_CHC_PC_learning_inputs</to>
 				</connector>
-				<connector uid="5908" angle="309.862">
+				<connector uid="5907" angle="309.862">
 					<from>S_to_J_platform_Attr</from>
 					<to>Total_Attr</to>
 				</connector>
-				<connector uid="5909" angle="353.66">
+				<connector uid="5908" angle="353.66">
 					<from>OC_to_RR_cume_subs</from>
 					<to>OC_to_RR_cume_spend_input</to>
 				</connector>
-				<connector uid="5910" angle="20.556">
+				<connector uid="5909" angle="20.556">
 					<from>CHC_Pilot_Maturity</from>
 					<to>CHC_Pilot_diag</to>
 				</connector>
-				<connector uid="5911" angle="0">
+				<connector uid="5910" angle="0">
 					<from>CE_Commercial_Maturity</from>
 					<to>CE_CHC_C_maturity_gap</to>
 				</connector>
-				<connector uid="5912" angle="0">
+				<connector uid="5911" angle="0">
 					<from>C_to_EtOH_cume_subs</from>
 					<to>C_to_EtOH_cume_spend_input</to>
 				</connector>
-				<connector uid="5913" color="#C8C8C8" angle="319.399">
+				<connector uid="5912" color="#C8C8C8" angle="319.399">
 					<from>use_system_wide_spending_input</from>
 					<to>C_to_RR_cume_spend_input</to>
 				</connector>
-				<connector uid="5914" color="white" angle="270">
+				<connector uid="5913" color="white" angle="270">
 					<from>CHC_Pilot_diag</from>
 					<to>CHC_CHC_pilot_maturity_gap</to>
 				</connector>
-				<connector uid="5915" angle="180">
+				<connector uid="5914" angle="180">
 					<from>CHC_OHC_learning_rate_input</from>
 					<to>CHC_OHC_learning_rates</to>
 				</connector>
-				<connector uid="5916" angle="212.005">
+				<connector uid="5915" angle="212.005">
 					<from>Max_Plant_Construction_Capacity</from>
 					<to>Des_OC_to_RR_yrly_starts</to>
 				</connector>
-				<connector uid="5917" angle="0.375705">
+				<connector uid="5916" angle="0.375705">
 					<from>CHC_OHC_pilot_maturity_gap</from>
 					<to>CHC_OHC_pilot_learning_inputs</to>
 				</connector>
-				<connector uid="5918" angle="0">
+				<connector uid="5917" angle="0">
 					<from>Platform_Attr_OTHER</from>
 					<to>RAT_OTHER</to>
 				</connector>
-				<connector uid="5919" color="#C8C8C8" angle="296.565">
+				<connector uid="5918" color="#C8C8C8" angle="296.565">
 					<from>use_system_wide_spending_input</from>
 					<to>A_to_RR_cume_spend_input</to>
 				</connector>
-				<connector uid="5920" angle="287.724">
+				<connector uid="5919" angle="287.724">
 					<from>CHC_Pilot_Maturity</from>
 					<to>CHC_OHC_pilot_maturity_gap</to>
 				</connector>
-				<connector uid="5921" color="#2A2A2A" angle="0">
+				<connector uid="5920" color="#2A2A2A" angle="0">
 					<from>RAT_Algae</from>
 					<to>Des_A_to_RR_yrly_starts</to>
 				</connector>
-				<connector uid="5922" angle="0">
+				<connector uid="5921" angle="0">
 					<from>CE_CHC_C_maturity_gap</from>
 					<to>CE_CHC_C_learning_inputs</to>
 				</connector>
-				<connector uid="5923" color="#2A2A2A" angle="0">
+				<connector uid="5922" color="#2A2A2A" angle="0">
 					<from>RAT_S_to_EtOH</from>
 					<to>Des_S_to_EtOH_yrly_starts</to>
 				</connector>
-				<connector uid="5924" angle="153.435">
+				<connector uid="5923" angle="153.435">
 					<from>cume_spend_threshold</from>
 					<to>C_to_EtOH_constraint_from_cume_spend</to>
 				</connector>
-				<connector uid="5925" angle="215.538">
+				<connector uid="5924" angle="215.538">
 					<from>cume_spend_threshold</from>
 					<to>OC_to_RR_constraint_from_cume_spend</to>
 				</connector>
-				<connector uid="5926" angle="54.4623">
+				<connector uid="5925" angle="54.4623">
 					<from>
-						<alias uid="5927"/>
+						<alias uid="5926"/>
 					</from>
 					<to>CHC_CHC_pilot_learning_inputs</to>
 				</connector>
-				<connector uid="5928" angle="353.66">
+				<connector uid="5927" angle="353.66">
 					<from>A_to_RR_cume_subs</from>
 					<to>A_to_RR_cume_spend_input</to>
 				</connector>
-				<connector uid="5929" angle="288.671">
+				<connector uid="5928" angle="288.671">
 					<from>CHC_Commercial_Maturity</from>
 					<to>CHC_OHC_C_maturity_gap</to>
 				</connector>
-				<connector uid="5930" color="#C8C8C8" angle="102.529">
+				<connector uid="5929" color="#C8C8C8" angle="102.529">
 					<from>identity_matrix_CHC</from>
 					<to>CHC_Pilot_diag</to>
 				</connector>
-				<connector uid="5931" angle="0">
+				<connector uid="5930" angle="0">
 					<from>CHC_OHC_pilot_learning_inputs</from>
 					<to>pilot_inputs_CHC_to_OHC</to>
 				</connector>
-				<connector uid="5932" color="#2A2A2A" angle="0">
+				<connector uid="5931" color="#2A2A2A" angle="0">
 					<from>RAT_C_to_RR</from>
 					<to>Des_C_to_RR_yrly_starts</to>
 				</connector>
-				<connector uid="5933" color="#7F00FF" angle="347.471">
+				<connector uid="5932" color="#7F00FF" angle="347.471">
 					<from>C_toB_Platform_Attr_C</from>
 					<to>Total_Attr</to>
 				</connector>
-				<connector uid="5934" angle="0">
+				<connector uid="5933" angle="0">
 					<from>CHC_CHC_C_maturity_gap</from>
 					<to>CHC_CHC_C_learning_inputs</to>
 				</connector>
-				<connector uid="5935" angle="0">
+				<connector uid="5934" angle="0">
 					<from>CHC_CHC_PC_learning_inputs</from>
 					<to>PC_inputs_CHC_CHC</to>
 				</connector>
-				<connector uid="5936" angle="287.01">
+				<connector uid="5935" angle="287.01">
 					<from>CHC_PC_Maturity</from>
 					<to>CHC_OHC_PC_maturity_gap</to>
 				</connector>
-				<connector uid="5937" color="#2A2A2A" angle="310.601">
+				<connector uid="5936" color="#2A2A2A" angle="310.601">
 					<from>Total_Attr</from>
 					<to>RAT_Oilcrop</to>
 				</connector>
-				<connector uid="5938" color="#2A2A2A" angle="6.34019">
+				<connector uid="5937" color="#2A2A2A" angle="6.34019">
 					<from>Total_Attr</from>
 					<to>RAT_C_to_B</to>
 				</connector>
-				<connector uid="5939" angle="0">
+				<connector uid="5938" angle="0">
 					<from>CE_Pilot_Maturity</from>
 					<to>CE_CHC_pilot_maturity_gap</to>
 				</connector>
-				<connector uid="5940" color="#2A2A2A" angle="0">
+				<connector uid="5939" color="#2A2A2A" angle="0">
 					<from>C_toB_Platform_Attr_C</from>
 					<to>RAT_C_to_B</to>
 				</connector>
-				<connector uid="5941" angle="0">
+				<connector uid="5940" angle="0">
 					<from>CHC_PC_Maturity</from>
 					<to>CHC_CHC_PC_maturity_gap</to>
 				</connector>
-				<connector uid="5942" angle="0">
+				<connector uid="5941" angle="0">
 					<from>CHC_Commercial_Maturity</from>
 					<to>CHC_CHC_C_maturity_gap</to>
 				</connector>
-				<connector uid="5943" angle="0">
+				<connector uid="5942" angle="0">
 					<from>CHC_CHC_pilot_maturity_gap</from>
 					<to>CHC_CHC_pilot_learning_inputs</to>
 				</connector>
-				<connector uid="5944" angle="0">
+				<connector uid="5943" angle="0">
 					<from>NPV_rel_to_a_million_OTHER</from>
 					<to>Platform_Attr_OTHER</to>
 				</connector>
-				<connector uid="5945" color="#C8C8C8" angle="139.399">
+				<connector uid="5944" color="#C8C8C8" angle="139.399">
 					<from>identity_matrix_CHC</from>
 					<to>CHC_PC_diag</to>
 				</connector>
-				<connector uid="5946" angle="359.384">
+				<connector uid="5945" angle="359.384">
 					<from>OHC_Commercial_Maturity</from>
 					<to>CHC_OHC_C_maturity_gap</to>
 				</connector>
-				<connector uid="5947" angle="180">
+				<connector uid="5946" angle="180">
 					<from>cume_spend_threshold</from>
 					<to>C_to_B_constraint_from_cume_spend</to>
 				</connector>
-				<connector uid="5948" color="#2A2A2A" angle="0">
+				<connector uid="5947" color="#2A2A2A" angle="0">
 					<from>S_to_EtOH_Platform_Attr</from>
 					<to>RAT_S_to_EtOH</to>
 				</connector>
-				<connector uid="5949" angle="0">
+				<connector uid="5948" angle="0">
 					<from>RAT_S_to_J</from>
 					<to>Des_SJ_yrly_starts</to>
 				</connector>
-				<connector uid="5950" angle="347.471">
+				<connector uid="5949" angle="347.471">
 					<from>CE_CHC_C_learning_inputs</from>
 					<to>C_inputs_CE_to_CHC</to>
 				</connector>
-				<connector uid="5951" angle="0">
+				<connector uid="5950" angle="0">
 					<from>CHC_CHC_pilot_learning_inputs</from>
 					<to>pilot_inputs_CHC_CHC</to>
 				</connector>
-				<connector uid="5952" color="#2A2A2A" angle="0">
+				<connector uid="5951" color="#2A2A2A" angle="0">
 					<from>RAT_C_to_EtOH</from>
 					<to>Des_C_to_EtOH_yrly_starts</to>
 				</connector>
-				<connector uid="5953" angle="26.5651">
+				<connector uid="5952" angle="26.5651">
 					<from>
-						<alias uid="5954"/>
+						<alias uid="5953"/>
 					</from>
 					<to>CHC_OHC_pilot_learning_inputs</to>
 				</connector>
-				<connector uid="5955" angle="0">
+				<connector uid="5954" angle="0">
 					<from>CE_PC_maturity</from>
 					<to>CE_CHC_PC_maturity_gap</to>
 				</connector>
-				<connector uid="5956" angle="0">
+				<connector uid="5955" angle="0">
 					<from>CE_CHC_PC_learning_inputs</from>
 					<to>PC_inputs_CHC_to_CE</to>
 				</connector>
-				<connector uid="5957" angle="26.5651">
+				<connector uid="5956" angle="26.5651">
 					<from>CE_CHC_pilot_learning_inputs</from>
 					<to>pilot_inputs_CHC_to_CE</to>
 				</connector>
-				<connector uid="5958" angle="6.34019">
+				<connector uid="5957" angle="6.34019">
 					<from>CHC_OHC_C_learning_inputs</from>
 					<to>C_inputs_OHC_to_CHC</to>
 				</connector>
-				<connector uid="5959" angle="263.66">
+				<connector uid="5958" angle="263.66">
 					<from>CHC_PC_diag</from>
 					<to>CHC_CHC_PC_maturity_gap</to>
 				</connector>
-				<connector uid="5960" color="#2A2A2A" angle="296.565">
+				<connector uid="5959" color="#2A2A2A" angle="296.565">
 					<from>Total_Attr</from>
 					<to>RAT_Algae</to>
 				</connector>
-				<connector uid="5961" angle="0">
+				<connector uid="5960" angle="0">
 					<from>C_to_EtOH_cume_spend_input</from>
 					<to>C_to_EtOH_constraint_from_cume_spend</to>
 				</connector>
-				<connector uid="5962" angle="122.005">
+				<connector uid="5961" angle="122.005">
 					<from>Max_Plant_Construction_Capacity</from>
 					<to>Des_C_to_EtOH_yrly_starts</to>
 				</connector>
-				<connector uid="5963" angle="54.4623">
+				<connector uid="5962" angle="54.4623">
 					<from>CHC_PC_Maturity</from>
 					<to>CE_CHC_PC_maturity_gap</to>
 				</connector>
-				<connector uid="5964" color="#C8C8C8" angle="20.556">
+				<connector uid="5963" color="#C8C8C8" angle="20.556">
 					<from>system_wide_cume_subsidy</from>
 					<to>A_to_RR_cume_spend_input</to>
 				</connector>
-				<connector uid="5965" angle="0">
+				<connector uid="5964" angle="0">
 					<from>A_to_RR_cume_spend_input</from>
 					<to>A_to_RR_constraint_from_cume_spend</to>
 				</connector>
-				<connector uid="5966" color="#2A2A2A" angle="0">
+				<connector uid="5965" color="#2A2A2A" angle="0">
 					<from>Algae_Platform_Attr_C</from>
 					<to>RAT_Algae</to>
 				</connector>
-				<connector uid="5967" angle="347.471">
+				<connector uid="5966" angle="347.471">
 					<from>C_to_RR_cume_subs</from>
 					<to>C_to_RR_cume_spend_input</to>
 				</connector>
-				<connector uid="5968" angle="0">
+				<connector uid="5967" angle="0">
 					<from>OC_to_RR_cume_spend_input</from>
 					<to>OC_to_RR_constraint_from_cume_spend</to>
 				</connector>
-				<connector uid="5969" angle="347.471">
+				<connector uid="5968" angle="347.471">
 					<from>CHC_OHC_pilot_learning_inputs</from>
 					<to>pilot_inputs_OHC_to_CHC</to>
 				</connector>
-				<connector uid="5970" color="#C8C8C8" angle="54.4623">
+				<connector uid="5969" color="#C8C8C8" angle="54.4623">
 					<from>system_wide_cume_subsidy</from>
 					<to>C_to_RR_cume_spend_input</to>
 				</connector>
-				<connector uid="5971" angle="161.565">
+				<connector uid="5970" angle="161.565">
 					<from>Max_Plant_Construction_Capacity</from>
 					<to>Des_C_to_RR_yrly_starts</to>
 				</connector>
-				<connector uid="5972" angle="324.462">
+				<connector uid="5971" angle="324.462">
 					<from>k_OTHER</from>
 					<to>Platform_Attr_OTHER</to>
 				</connector>
-				<connector uid="5973" angle="0">
+				<connector uid="5972" angle="0">
 					<from>C_inputs_CHC_to_CE</from>
 					<to>C_learning_inputs_CE</to>
 				</connector>
-				<connector uid="5974" angle="270">
+				<connector uid="5973" angle="270">
 					<from>CHC_C_diag</from>
 					<to>CHC_CHC_C_maturity_gap</to>
 				</connector>
-				<connector uid="5975" angle="153.435">
+				<connector uid="5974" angle="153.435">
 					<from>region_scaling_factor</from>
 					<to>Platform_Attr_OTHER</to>
 				</connector>
-				<connector uid="5976" angle="353.66">
+				<connector uid="5975" angle="353.66">
 					<from>CHC_OHC_PC_learning_inputs</from>
 					<to>PC_inputs_OHC_to_CHC</to>
 				</connector>
-				<connector uid="5977" angle="0">
+				<connector uid="5976" angle="0">
 					<from>S_to_J_platform_Attr</from>
 					<to>RAT_S_to_J</to>
 				</connector>
-				<connector uid="5978" angle="220.601">
+				<connector uid="5977" angle="220.601">
 					<from>cume_spend_threshold</from>
 					<to>SJ_constraint_from_cume_spend</to>
 				</connector>
-				<connector uid="5979" angle="296.565">
+				<connector uid="5978" angle="296.565">
 					<from>C_to_EtOH_cume_subs</from>
 					<to>system_wide_cume_subsidy</to>
 				</connector>
-				<connector uid="5980" angle="296.565">
+				<connector uid="5979" angle="296.565">
 					<from>use_system_wide_spending_input</from>
 					<to>SJ_Cume_spend_input</to>
 				</connector>
-				<connector uid="5981" angle="6.34019">
+				<connector uid="5980" angle="6.34019">
 					<from>pilot_inputs_CHC_CHC</from>
 					<to>pilot_learning_inputs_CHC</to>
 				</connector>
-				<connector uid="5982" angle="347.471">
+				<connector uid="5981" angle="347.471">
 					<from>CE_CHC_PC_learning_inputs</from>
 					<to>PC_inputs_CE_to_CHC</to>
 				</connector>
-				<connector uid="5983" color="#2A2A2A" angle="47.8114">
+				<connector uid="5982" color="#2A2A2A" angle="47.8114">
 					<from>Total_Attr</from>
 					<to>RAT_S_to_EtOH</to>
 				</connector>
-				<connector uid="5984" angle="77.4712">
+				<connector uid="5983" angle="77.4712">
 					<from>Platform_Attr_OTHER</from>
 					<to>Total_Attr</to>
 				</connector>
-				<connector uid="5985" angle="180">
+				<connector uid="5984" angle="180">
 					<from>CHC_CHC_learning_rates_input</from>
 					<to>CHC_CHC_learning_rates</to>
 				</connector>
-				<connector uid="5986" angle="0.367276">
+				<connector uid="5985" angle="0.367276">
 					<from>CHC_OHC_PC_maturity_gap</from>
 					<to>CHC_OHC_PC_learning_inputs</to>
 				</connector>
-				<connector uid="5987" angle="0">
+				<connector uid="5986" angle="0">
 					<from>CE_CHC_C_learning_inputs</from>
 					<to>C_inputs_CHC_to_CE</to>
 				</connector>
-				<connector uid="5988" angle="12.5288">
+				<connector uid="5987" angle="12.5288">
 					<from>CHC_PC_Maturity</from>
 					<to>CHC_PC_diag</to>
 				</connector>
-				<connector uid="5989" angle="353.66">
+				<connector uid="5988" angle="353.66">
 					<from>SJ_cume_subs</from>
 					<to>SJ_Cume_spend_input</to>
 				</connector>
-				<connector uid="5990" angle="302.005">
+				<connector uid="5989" angle="302.005">
 					<from>C_to_RR_cume_subs</from>
 					<to>system_wide_cume_subsidy</to>
 				</connector>
-				<connector uid="5991" angle="0">
+				<connector uid="5990" angle="0">
 					<from>system_wide_cume_subsidy</from>
 					<to>SJ_Cume_spend_input</to>
 				</connector>
-				<connector uid="5992" angle="0">
+				<connector uid="5991" angle="0">
 					<from>C_to_RR_cume_spend_input</from>
 					<to>C_to_RR_constraint_from_cume_spend</to>
 				</connector>
-				<connector uid="5993" angle="353.66">
+				<connector uid="5992" angle="353.66">
 					<from>SJ_cume_subs</from>
 					<to>system_wide_cume_subsidy</to>
 				</connector>
-				<connector uid="5994" angle="0">
+				<connector uid="5993" angle="0">
 					<from>PC_inputs_CHC_to_OHC</from>
 					<to>PC_learning_inputs_OHC</to>
 				</connector>
-				<connector uid="5995" angle="52.8325">
+				<connector uid="5994" angle="52.8325">
 					<from>pilot_inputs_OHC_to_CHC</from>
 					<to>pilot_learning_inputs_CHC</to>
 				</connector>
-				<connector uid="5996" angle="0">
+				<connector uid="5995" angle="0">
 					<from>CHC_Pilot_Maturity</from>
 					<to>CHC_CHC_pilot_maturity_gap</to>
 				</connector>
-				<connector uid="5997" angle="353.66">
+				<connector uid="5996" angle="353.66">
 					<from>PC_inputs_CHC_CHC</from>
 					<to>PC_learning_inputs_CHC</to>
 				</connector>
-				<connector uid="5998" color="#2A2A2A" angle="317.112">
+				<connector uid="5997" color="#2A2A2A" angle="317.112">
 					<from>S_to_EtOH_Platform_Attr</from>
 					<to>Total_Attr</to>
 				</connector>
-				<connector uid="5999" angle="139.399">
+				<connector uid="5998" angle="139.399">
 					<from>Max_Plant_Construction_Capacity</from>
 					<to>Des_C_to_B_yrly_starts</to>
 				</connector>
-				<connector uid="6000" angle="0">
+				<connector uid="5999" angle="0">
 					<from>pilot_inputs_CHC_to_OHC</from>
 					<to>pilot_learning_inputs_OHC</to>
 				</connector>
-				<connector uid="6001" angle="0">
+				<connector uid="6000" angle="0">
 					<from>CE_CHC_pilot_learning_inputs</from>
 					<to>pilot_inputs_CE_to_CHC</to>
 				</connector>
-				<connector uid="6002" angle="0">
+				<connector uid="6001" angle="0">
 					<from>CHC_CHC_PC_maturity_gap</from>
 					<to>CHC_CHC_PC_learning_inputs</to>
 				</connector>
-				<connector uid="6003" color="#C8C8C8" angle="327.995">
+				<connector uid="6002" color="#C8C8C8" angle="327.995">
 					<from>use_system_wide_spending_input</from>
 					<to>C_to_B_cume_spend_input</to>
 				</connector>
-				<connector uid="6004" color="#C8C8C8" angle="339.444">
+				<connector uid="6003" color="#C8C8C8" angle="339.444">
 					<from>use_system_wide_spending_input</from>
 					<to>C_to_EtOH_cume_spend_input</to>
 				</connector>
-				<connector uid="6005" angle="116.345">
+				<connector uid="6004" angle="116.345">
 					<from>Max_Plant_Construction_Capacity</from>
 					<to>Des_S_to_EtOH_yrly_starts</to>
 				</connector>
-				<connector uid="6006" color="#2A2A2A" angle="0">
+				<connector uid="6005" color="#2A2A2A" angle="0">
 					<from>RAT_C_to_B</from>
 					<to>Des_C_to_B_yrly_starts</to>
 				</connector>
-				<connector uid="6007" color="#C8C8C8" angle="206.565">
+				<connector uid="6006" color="#C8C8C8" angle="206.565">
 					<from>identity_matrix_CHC</from>
 					<to>CHC_C_diag</to>
 				</connector>
-				<connector uid="6008" angle="49.2661">
+				<connector uid="6007" angle="49.2661">
 					<from>PC_inputs_OHC_to_CHC</from>
 					<to>PC_learning_inputs_CHC</to>
 				</connector>
-				<connector uid="6009" angle="0.421285">
+				<connector uid="6008" angle="0.421285">
 					<from>CHC_OHC_C_maturity_gap</from>
 					<to>CHC_OHC_C_learning_inputs</to>
 				</connector>
-				<connector uid="6010" angle="48.9151">
+				<connector uid="6009" angle="48.9151">
 					<from>C_inputs_OHC_to_CHC</from>
 					<to>C_learning_inputs_CHC</to>
 				</connector>
-				<connector uid="6011" angle="0">
+				<connector uid="6010" angle="0">
 					<from>pilot_inputs_CHC_to_CE</from>
 					<to>pilot_learning_inputs_CE</to>
 				</connector>
-				<connector uid="6012" angle="290.556">
+				<connector uid="6011" angle="290.556">
 					<from>
-						<alias uid="5954"/>
+						<alias uid="5953"/>
 					</from>
 					<to>CHC_OHC_C_learning_inputs</to>
 				</connector>
-				<connector uid="6013" angle="32.0054">
+				<connector uid="6012" angle="32.0054">
 					<from>
-						<alias uid="5927"/>
+						<alias uid="5926"/>
 					</from>
 					<to>CHC_CHC_PC_learning_inputs</to>
 				</connector>
-				<connector uid="6014" angle="200.556">
+				<connector uid="6013" angle="200.556">
 					<from>cume_spend_threshold</from>
 					<to>C_to_RR_constraint_from_cume_spend</to>
 				</connector>
-				<connector uid="6015" angle="359.349">
+				<connector uid="6014" angle="359.349">
 					<from>OHC_Pilot_Maturity</from>
 					<to>CHC_OHC_pilot_maturity_gap</to>
 				</connector>
-				<connector uid="6016" angle="310.601">
+				<connector uid="6015" angle="310.601">
 					<from>OC_to_RR_cume_subs</from>
 					<to>system_wide_cume_subsidy</to>
 				</connector>
-				<connector uid="6017" angle="0">
+				<connector uid="6016" angle="0">
 					<from>SJ_Cume_spend_input</from>
 					<to>SJ_constraint_from_cume_spend</to>
 				</connector>
-				<connector uid="6018" angle="319.399">
+				<connector uid="6017" angle="319.399">
 					<from>C_inputs_CE_to_CHC</from>
 					<to>C_learning_inputs_CHC</to>
 				</connector>
-				<connector uid="6019" angle="229.399">
+				<connector uid="6018" angle="229.399">
 					<from>cume_spend_threshold</from>
 					<to>A_to_RR_constraint_from_cume_spend</to>
 				</connector>
-				<connector uid="6020" angle="333.435">
+				<connector uid="6019" angle="333.435">
 					<from>CHC_OHC_C_learning_inputs</from>
 					<to>C_inputs_CHC_to_OHC</to>
 				</connector>
-				<connector uid="6021" angle="296.565">
+				<connector uid="6020" angle="296.565">
 					<from>C_to_B_cume_subs</from>
 					<to>system_wide_cume_subsidy</to>
 				</connector>
-				<connector uid="6022" color="#2A2A2A" angle="0">
+				<connector uid="6021" color="#2A2A2A" angle="0">
 					<from>C_to_EtOH_Platform_Attr_C</from>
 					<to>RAT_C_to_EtOH</to>
 				</connector>
-				<connector uid="6023" angle="0">
+				<connector uid="6022" angle="0">
 					<from>CE_CHC_pilot_maturity_gap</from>
 					<to>CE_CHC_pilot_learning_inputs</to>
 				</connector>
-				<connector uid="6024" color="#2A2A2A" angle="327.995">
+				<connector uid="6023" color="#2A2A2A" angle="327.995">
 					<from>C_to_EtOH_Platform_Attr_C</from>
 					<to>Total_Attr</to>
 				</connector>
-				<connector uid="6025" angle="0">
+				<connector uid="6024" angle="0">
 					<from>shared_learning_switch</from>
 					<to>CHC_CHC_learning_rates</to>
 				</connector>
-				<connector uid="6026" angle="324.462">
+				<connector uid="6025" angle="324.462">
 					<from>PC_inputs_CE_to_CHC</from>
 					<to>PC_learning_inputs_CHC</to>
 				</connector>
-				<connector uid="6027" color="#2A2A2A" angle="35.5377">
+				<connector uid="6026" color="#2A2A2A" angle="35.5377">
 					<from>Total_Attr</from>
 					<to>RAT_C_to_EtOH</to>
 				</connector>
-				<connector uid="6028" angle="333.435">
+				<connector uid="6027" angle="333.435">
 					<from>
-						<alias uid="5954"/>
+						<alias uid="5953"/>
 					</from>
 					<to>CHC_OHC_PC_learning_inputs</to>
 				</connector>
-				<connector uid="6029" angle="0">
+				<connector uid="6028" angle="0">
 					<from>PC_inputs_CHC_to_CE</from>
 					<to>PC_learning_inputs_CE</to>
 				</connector>
-				<connector uid="6030" color="#2A2A2A" angle="270">
+				<connector uid="6029" color="#2A2A2A" angle="270">
 					<from>Total_Attr</from>
 					<to>RAT_OTHER</to>
 				</connector>
-				<connector uid="6031" color="#C8C8C8" angle="63.4349">
+				<connector uid="6030" color="#C8C8C8" angle="63.4349">
 					<from>system_wide_cume_subsidy</from>
 					<to>C_to_EtOH_cume_spend_input</to>
 				</connector>
-				<connector uid="6032" angle="0">
+				<connector uid="6031" angle="0">
 					<from>C_inputs_CHC_to_OHC</from>
 					<to>C_learning_inputs_OHC</to>
 				</connector>
-				<connector uid="6033" color="#C8C8C8" angle="63.4349">
+				<connector uid="6032" color="#C8C8C8" angle="63.4349">
 					<from>system_wide_cume_subsidy</from>
 					<to>C_to_B_cume_spend_input</to>
 				</connector>
-				<connector uid="6034" angle="90">
+				<connector uid="6033" angle="90">
 					<from>Max_Plant_Construction_Capacity</from>
 					<to>Des_SJ_yrly_starts</to>
 				</connector>
-				<connector uid="6035" color="#2A2A2A" angle="57.9946">
+				<connector uid="6034" color="#2A2A2A" angle="57.9946">
 					<from>OilCrop_Platform_Attr_C</from>
 					<to>Total_Attr</to>
 				</connector>
-				<connector uid="6036" angle="0">
+				<connector uid="6035" angle="0">
 					<from>C_to_B_cume_subs</from>
 					<to>C_to_B_cume_spend_input</to>
 				</connector>
-				<connector uid="6037" angle="257.471">
+				<connector uid="6036" angle="257.471">
 					<from>Max_Plant_Construction_Capacity</from>
 					<to>Des_A_to_RR_yrly_starts</to>
 				</connector>
-				<connector uid="6038" color="#C8C8C8" angle="305.538">
+				<connector uid="6037" color="#C8C8C8" angle="305.538">
 					<from>use_system_wide_spending_input</from>
 					<to>OC_to_RR_cume_spend_input</to>
 				</connector>
-				<connector uid="6039" angle="327.995">
+				<connector uid="6038" angle="327.995">
 					<from>A_to_RR_cume_subs</from>
 					<to>system_wide_cume_subsidy</to>
 				</connector>
-				<connector uid="6040" angle="0">
+				<connector uid="6039" angle="0">
 					<from>CHC_OHC_PC_learning_inputs</from>
 					<to>PC_inputs_CHC_to_OHC</to>
 				</connector>
-				<connector uid="6041" angle="0">
+				<connector uid="6040" angle="0">
 					<from>C_to_B_cume_spend_input</from>
 					<to>C_to_B_constraint_from_cume_spend</to>
 				</connector>
-				<connector uid="6042" color="#2A2A2A" angle="319.399">
+				<connector uid="6041" color="#2A2A2A" angle="319.399">
 					<from>Total_Attr</from>
 					<to>RAT_C_to_RR</to>
 				</connector>
-				<connector uid="6043" angle="359.187">
+				<connector uid="6042" angle="359.187">
 					<from>CHC_CHC_C_learning_inputs</from>
 					<to>C_inputs_CHC_CHC</to>
 				</connector>
-				<connector uid="6044" angle="66.5226">
+				<connector uid="6043" angle="66.5226">
 					<from>Total_Attr</from>
 					<to>RAT_S_to_J</to>
 				</connector>
-				<connector uid="6045" angle="2.63582">
+				<connector uid="6044" angle="2.63582">
 					<from>C_inputs_CHC_CHC</from>
 					<to>C_learning_inputs_CHC</to>
 				</connector>
-				<connector uid="6046" angle="57.9946">
+				<connector uid="6045" angle="57.9946">
 					<from>CHC_Commercial_Maturity</from>
 					<to>CE_CHC_C_maturity_gap</to>
 				</connector>
-				<connector uid="6047" color="#C8C8C8" angle="40.6013">
+				<connector uid="6046" color="#C8C8C8" angle="40.6013">
 					<from>system_wide_cume_subsidy</from>
 					<to>OC_to_RR_cume_spend_input</to>
 				</connector>
-				<connector uid="6048" color="#2A2A2A" angle="26.5651">
+				<connector uid="6047" color="#2A2A2A" angle="26.5651">
 					<from>C_to_RR_Platform_Attr_C</from>
 					<to>Total_Attr</to>
 				</connector>
-				<connector uid="6049" angle="359.349">
+				<connector uid="6048" angle="359.349">
 					<from>OHC_PC_Maturity</from>
 					<to>CHC_OHC_PC_maturity_gap</to>
 				</connector>
-				<connector uid="6050" angle="42.4739">
+				<connector uid="6049" angle="42.4739">
 					<from>CHC_Pilot_Maturity</from>
 					<to>CE_CHC_pilot_maturity_gap</to>
 				</connector>
-				<connector uid="6051" color="#2A2A2A" angle="0">
+				<connector uid="6050" color="#2A2A2A" angle="0">
 					<from>C_to_RR_Platform_Attr_C</from>
 					<to>RAT_C_to_RR</to>
 				</connector>
-				<connector uid="6052" color="#2A2A2A" angle="0">
+				<connector uid="6051" color="#2A2A2A" angle="0">
 					<from>OilCrop_Platform_Attr_C</from>
 					<to>RAT_Oilcrop</to>
 				</connector>
-				<connector uid="6053" angle="333.435">
+				<connector uid="6052" angle="333.435">
 					<from>shared_learning_switch</from>
 					<to>CHC_OHC_learning_rates</to>
 				</connector>
-				<connector uid="6054" angle="327.995">
+				<connector uid="6053" angle="327.995">
 					<from>pilot_inputs_CE_to_CHC</from>
 					<to>pilot_learning_inputs_CHC</to>
 				</connector>
-				<connector uid="6055" angle="12.5288">
+				<connector uid="6054" angle="12.5288">
 					<from>CHC_Commercial_Maturity</from>
 					<to>CHC_C_diag</to>
 				</connector>
-				<connector uid="6056" angle="319.399">
+				<connector uid="6055" angle="319.399">
 					<from>
-						<alias uid="5927"/>
+						<alias uid="5926"/>
 					</from>
 					<to>CHC_CHC_C_learning_inputs</to>
 				</connector>
-				<text_box color="black" padding="5" border_width="thin" border_style="solid" appearance="transparent" uid="6057" x="2232" y="612.167" width="573" height="231">This sector is used to provide feedback from cumulative spending on subsidies, back to spending on STARTUP subsidies.
+				<text_box color="black" padding="5" border_width="thin" border_style="solid" appearance="transparent" uid="6056" x="2232" y="612.167" width="573" height="231">This sector is used to provide feedback from cumulative spending on subsidies, back to spending on STARTUP subsidies.
 
 + Switch &quot;use system wide spending input&quot; takes on value of 1 or 0.  When 1,  conversion specific spending inputs are based on system-wide cumulative subsidy spending.  Whe 0, conversion-specific spending inputs are based on conversion-specific cumulative spending.
 
@@ -3131,106 +3134,106 @@ Starch is not included in this calculation, because of VEETC subsidy in the init
 				<aux color="black" font_color="black" label_angle="81.0236" x="2518.5" y="536.5" name="SJ Cume spend input"/>
 				<aux color="#651818" font_color="#651818" label_angle="81.0236" x="2703.5" y="536.5" name="SJ constraint from cume spend"/>
 				<group locked="true" color="#2A2A2A" font_color="#2A2A2A" x="1062.5" y="27.5" width="1009" height="854" name="Relative Attractiveness and Desired Starts">
-					<item uid="5999"/>
 					<item uid="5904"/>
-					<item uid="6037"/>
-					<item uid="6044"/>
-					<item uid="6051"/>
-					<item uid="5998"/>
-					<item uid="5983"/>
-					<item uid="6034"/>
-					<item uid="5971"/>
-					<item uid="6006"/>
-					<item uid="6005"/>
-					<item uid="5940"/>
-					<item uid="5948"/>
-					<item uid="6030"/>
-					<item uid="6022"/>
-					<item uid="6048"/>
-					<item uid="5916"/>
-					<item uid="5966"/>
-					<item uid="5908"/>
-					<item uid="6027"/>
-					<item uid="5932"/>
-					<item uid="5921"/>
-					<item uid="6035"/>
+					<item uid="5951"/>
 					<item uid="5937"/>
-					<item uid="6052"/>
-					<item uid="5977"/>
-					<item uid="5962"/>
-					<item uid="5960"/>
-					<item uid="5923"/>
-					<item uid="6042"/>
-					<item uid="6024"/>
-					<item uid="5938"/>
-					<item uid="5952"/>
-					<item uid="5905"/>
-					<item uid="5933"/>
+					<item uid="6023"/>
+					<item uid="6051"/>
+					<item uid="5931"/>
+					<item uid="5976"/>
+					<item uid="5907"/>
+					<item uid="5965"/>
+					<item uid="5915"/>
+					<item uid="5920"/>
+					<item uid="6026"/>
+					<item uid="6047"/>
+					<item uid="5959"/>
+					<item uid="6021"/>
+					<item uid="5961"/>
+					<item uid="6041"/>
+					<item uid="5939"/>
+					<item uid="6004"/>
+					<item uid="6005"/>
+					<item uid="5970"/>
+					<item uid="5982"/>
+					<item uid="6033"/>
+					<item uid="6050"/>
+					<item uid="5936"/>
+					<item uid="5932"/>
+					<item uid="6034"/>
+					<item uid="5922"/>
+					<item uid="6043"/>
+					<item uid="5997"/>
+					<item uid="6036"/>
+					<item uid="5903"/>
+					<item uid="5947"/>
+					<item uid="5998"/>
+					<item uid="6029"/>
 				</group>
 				<group locked="true" color="#2A2A2A" font_color="#2A2A2A" x="1063.5" y="907.5" width="459" height="243" name="Attractiveness of Other Investment Option">
-					<item uid="5918"/>
-					<item uid="5984"/>
-					<item uid="5975"/>
-					<item uid="5972"/>
-					<item uid="5906"/>
-					<item uid="5944"/>
+					<item uid="5943"/>
+					<item uid="5971"/>
+					<item uid="5974"/>
+					<item uid="5905"/>
+					<item uid="5983"/>
+					<item uid="5917"/>
 				</group>
 				<group locked="false" x="2097.5" y="26.5" width="959" height="853" name="Cumulative Subsidy Constraints">
-					<item uid="6057"/>
+					<item uid="6056"/>
 				</group>
-				<text_box color="black" font_size="24pt" padding="5" appearance="transparent" uid="6058" x="8" y="18" width="701" height="51">Biomass Scenario Relative Attractiveness Module</text_box>
-				<text_box color="red" vertical_text_align="center" font_color="red" padding="5" border_color="red" border_width="2" border_style="solid" appearance="transparent" uid="6059" x="12" y="255" width="350" height="36">RED:  Data Input (Constant, Ass&apos;n, Scenario, SSheet)</text_box>
-				<text_box color="#008F44" vertical_text_align="center" font_color="#008F44" padding="5" border_color="#008F44" border_width="2" border_style="solid" appearance="transparent" uid="6060" x="385" y="208" width="350" height="36">GREEN:  Output from this Sector to another Sector</text_box>
-				<text_box color="blue" vertical_text_align="center" font_color="blue" padding="5" border_color="blue" border_width="2" border_style="solid" appearance="transparent" uid="6061" x="12" y="207" width="350" height="36">BLUE:  Input to this Sector from another Sector</text_box>
-				<text_box color="black" vertical_text_align="center" padding="5" border_width="2" border_style="solid" appearance="transparent" uid="6062" x="385" y="255" width="350" height="36">BLACK:  Internal Calculation Within This Sector</text_box>
-				<text_box color="#7F00FF" vertical_text_align="center" font_color="#7F00FF" padding="5" border_color="#7F00FF" border_width="2" border_style="solid" appearance="transparent" uid="6063" x="12" y="160" width="350" height="36">Purple:  Input to this MODULE from another MODULE</text_box>
-				<text_box color="#65183E" vertical_text_align="center" font_color="#65183E" padding="5" border_color="#65183E" border_width="2" border_style="solid" appearance="transparent" uid="6064" x="385" y="160" width="350" height="36">Brown:  Output from this MODULE from another MODULE</text_box>
-				<text_box color="black" font_size="16pt" padding="5" appearance="transparent" uid="6065" x="11" y="411" width="701" height="51">Relative Attractiveness | Spillover learning | total industry subsidies  </text_box>
+				<text_box color="black" font_size="24pt" padding="5" appearance="transparent" uid="6057" x="8" y="18" width="701" height="51">Biomass Scenario Relative Attractiveness Module</text_box>
+				<text_box color="red" vertical_text_align="center" font_color="red" padding="5" border_color="red" border_width="2" border_style="solid" appearance="transparent" uid="6058" x="12" y="255" width="350" height="36">RED:  Data Input (Constant, Ass&apos;n, Scenario, SSheet)</text_box>
+				<text_box color="#008F44" vertical_text_align="center" font_color="#008F44" padding="5" border_color="#008F44" border_width="2" border_style="solid" appearance="transparent" uid="6059" x="385" y="208" width="350" height="36">GREEN:  Output from this Sector to another Sector</text_box>
+				<text_box color="blue" vertical_text_align="center" font_color="blue" padding="5" border_color="blue" border_width="2" border_style="solid" appearance="transparent" uid="6060" x="12" y="207" width="350" height="36">BLUE:  Input to this Sector from another Sector</text_box>
+				<text_box color="black" vertical_text_align="center" padding="5" border_width="2" border_style="solid" appearance="transparent" uid="6061" x="385" y="255" width="350" height="36">BLACK:  Internal Calculation Within This Sector</text_box>
+				<text_box color="#7F00FF" vertical_text_align="center" font_color="#7F00FF" padding="5" border_color="#7F00FF" border_width="2" border_style="solid" appearance="transparent" uid="6062" x="12" y="160" width="350" height="36">Purple:  Input to this MODULE from another MODULE</text_box>
+				<text_box color="#65183E" vertical_text_align="center" font_color="#65183E" padding="5" border_color="#65183E" border_width="2" border_style="solid" appearance="transparent" uid="6063" x="385" y="160" width="350" height="36">Brown:  Output from this MODULE from another MODULE</text_box>
+				<text_box color="black" font_size="16pt" padding="5" appearance="transparent" uid="6064" x="11" y="411" width="701" height="51">Relative Attractiveness | Spillover learning | total industry subsidies  </text_box>
 				<aux color="red" font_color="red" label_angle="109.991" x="749.964" y="1854.5" name="CE gen 15 learning rate input"/>
 				<aux color="blue" label_angle="109.991" x="572.25" y="1854.5" name="Gen15 CE learning rates"/>
-				<connector uid="6066" angle="313.369">
+				<connector uid="6065" angle="313.369">
 					<from>shared_learning_switch</from>
 					<to>Gen15_CE_learning_rates</to>
 				</connector>
-				<connector uid="6067" angle="187.64">
+				<connector uid="6066" angle="187.64">
 					<from>CE_gen_15_learning_rate_input</from>
 					<to>Gen15_CE_learning_rates</to>
 				</connector>
 				<aux color="blue" label_angle="109.991" x="564.25" y="1775.25" name="CE CHC learning rates"/>
-				<connector uid="6068" angle="333.435">
+				<connector uid="6067" angle="333.435">
 					<from>
-						<alias uid="6069"/>
+						<alias uid="6068"/>
 					</from>
 					<to>CE_CHC_C_learning_inputs</to>
 				</connector>
-				<connector uid="6070" angle="35.5377">
+				<connector uid="6069" angle="35.5377">
 					<from>
-						<alias uid="6069"/>
+						<alias uid="6068"/>
 					</from>
 					<to>CE_CHC_pilot_learning_inputs</to>
 				</connector>
-				<connector uid="6071" angle="6.34019">
+				<connector uid="6070" angle="6.34019">
 					<from>
-						<alias uid="6069"/>
+						<alias uid="6068"/>
 					</from>
 					<to>CE_CHC_PC_learning_inputs</to>
 				</connector>
-				<connector uid="6072" angle="319.399">
+				<connector uid="6071" angle="319.399">
 					<from>shared_learning_switch</from>
 					<to>CE_CHC_learning_rates</to>
 				</connector>
 				<aux color="red" font_color="red" label_angle="109.991" x="742.25" y="1775.25" name="CE CHC learning rate input"/>
-				<connector uid="6073" angle="180">
+				<connector uid="6072" angle="180">
 					<from>CE_CHC_learning_rate_input</from>
 					<to>CE_CHC_learning_rates</to>
 				</connector>
-				<connector uid="6074" angle="180">
+				<connector uid="6073" angle="180">
 					<from>CHC_gen_15_learning_rate_input</from>
 					<to>Gen15_CHC_learning_rates</to>
 				</connector>
 				<aux color="red" font_color="red" label_angle="109.991" x="755.25" y="1934.11" name="CHC gen 15 learning rate input"/>
 				<aux color="blue" label_angle="109.991" x="577.25" y="1934.11" name="Gen15 CHC learning rates"/>
-				<connector uid="6075" angle="296.368">
+				<connector uid="6074" angle="296.368">
 					<from>shared_learning_switch</from>
 					<to>Gen15_CHC_learning_rates</to>
 				</connector>
@@ -3240,87 +3243,87 @@ Starch is not included in this calculation, because of VEETC subsidy in the init
 				<aux x="1261.17" y="1211.83" name="Gen 15 CE Pilot maturity gap"/>
 				<aux color="black" font_color="black" x="1251.17" y="1281.83" name="Gen15 CE PC maturity gap"/>
 				<aux color="black" font_color="black" x="1254.17" y="1361.83" name="Gen15 CE C maturity gap"/>
-				<connector uid="6076" angle="0">
+				<connector uid="6075" angle="0">
 					<from>SE_Pilot_Maturity_1</from>
 					<to>Gen_15_CE_Pilot_maturity_gap</to>
 				</connector>
-				<connector uid="6077" angle="55.8669">
+				<connector uid="6076" angle="55.8669">
 					<from>CE_Pilot_Maturity</from>
 					<to>Gen_15_CE_Pilot_maturity_gap</to>
 				</connector>
-				<connector uid="6078" angle="55.9998">
+				<connector uid="6077" angle="55.9998">
 					<from>CE_PC_maturity</from>
 					<to>Gen15_CE_PC_maturity_gap</to>
 				</connector>
-				<connector uid="6079" angle="55.2346">
+				<connector uid="6078" angle="55.2346">
 					<from>CE_Commercial_Maturity</from>
 					<to>Gen15_CE_C_maturity_gap</to>
 				</connector>
-				<connector uid="6080" angle="1.011">
+				<connector uid="6079" angle="1.011">
 					<from>SE_PC_maturity_1</from>
 					<to>Gen15_CE_PC_maturity_gap</to>
 				</connector>
-				<connector uid="6081" angle="0">
+				<connector uid="6080" angle="0">
 					<from>SE_Commercial_Maturity_1</from>
 					<to>Gen15_CE_C_maturity_gap</to>
 				</connector>
 				<aux x="1575.17" y="1211.83" name="Gen15 CE pilot learning inputs"/>
 				<aux x="1582.17" y="1276.83" name="Gen15 CE PC learning inputs"/>
 				<aux x="1582.17" y="1356.83" name="Gen15 CE C learning inputs"/>
-				<connector uid="6082" angle="0">
+				<connector uid="6081" angle="0">
 					<from>Gen_15_CE_Pilot_maturity_gap</from>
 					<to>Gen15_CE_pilot_learning_inputs</to>
 				</connector>
-				<connector uid="6083" angle="45.734">
+				<connector uid="6082" angle="45.734">
 					<from>
-						<alias uid="6084"/>
+						<alias uid="6083"/>
 					</from>
 					<to>Gen15_CE_pilot_learning_inputs</to>
 				</connector>
-				<connector uid="6085" angle="359.72">
+				<connector uid="6084" angle="359.72">
 					<from>Gen15_CE_PC_maturity_gap</from>
 					<to>Gen15_CE_PC_learning_inputs</to>
 				</connector>
-				<connector uid="6086" angle="353.502">
+				<connector uid="6085" angle="353.502">
 					<from>Gen15_CE_C_maturity_gap</from>
 					<to>Gen15_CE_C_learning_inputs</to>
 				</connector>
-				<connector uid="6087" angle="346.218">
+				<connector uid="6086" angle="346.218">
 					<from>
-						<alias uid="6084"/>
+						<alias uid="6083"/>
 					</from>
 					<to>Gen15_CE_C_learning_inputs</to>
 				</connector>
-				<connector uid="6088" angle="15.899">
+				<connector uid="6087" angle="15.899">
 					<from>
-						<alias uid="6084"/>
+						<alias uid="6083"/>
 					</from>
 					<to>Gen15_CE_PC_learning_inputs</to>
 				</connector>
 				<aux color="blue" label_side="top" x="1803.17" y="1211.83" name="pilot inputs gen15 to CE"/>
 				<aux x="1803.17" y="1276.83" name="PC inputs gen15 to CE"/>
 				<aux label_side="left" label_angle="135" x="1788.17" y="1354.83" name="C inputs Gen15 to CE"/>
-				<connector uid="6089" angle="0">
+				<connector uid="6088" angle="0">
 					<from>Gen15_CE_pilot_learning_inputs</from>
 					<to>pilot_inputs_gen15_to_CE</to>
 				</connector>
-				<connector uid="6090" angle="0">
+				<connector uid="6089" angle="0">
 					<from>Gen15_CE_PC_learning_inputs</from>
 					<to>PC_inputs_gen15_to_CE</to>
 				</connector>
-				<connector uid="6091" angle="0.556252">
+				<connector uid="6090" angle="0.556252">
 					<from>Gen15_CE_C_learning_inputs</from>
 					<to>C_inputs_Gen15_to_CE</to>
 				</connector>
-				<connector uid="6092" angle="329.972">
+				<connector uid="6091" angle="329.972">
 					<from>pilot_inputs_gen15_to_CE</from>
 					<to>pilot_learning_inputs_CE</to>
 				</connector>
-				<connector uid="6093" angle="321.596">
+				<connector uid="6092" angle="321.596">
 					<from>PC_inputs_gen15_to_CE</from>
 					<to>PC_learning_inputs_CE</to>
 				</connector>
-				<connector uid="6094" angle="322.6">
+				<connector uid="6093" angle="322.6">
 					<from>C_inputs_Gen15_to_CE</from>
 					<to>C_learning_inputs_CE</to>
 				</connector>
@@ -3330,115 +3333,115 @@ Starch is not included in this calculation, because of VEETC subsidy in the init
 				<aux x="1543.17" y="2030.83" name="Gen15 CHC pilot\nlearning inputs"/>
 				<aux x="1550.17" y="2095.83" name="Gen15 CHC learning inputs"/>
 				<aux x="1550.17" y="2175.83" name="Gen15 CHC C learning inputs"/>
-				<connector uid="6095" angle="359.284">
+				<connector uid="6094" angle="359.284">
 					<from>Gen_15_CHC_Pilot_maturity_gap</from>
 					<to>Gen15_CHC_pilot_learning_inputs</to>
 				</connector>
-				<connector uid="6096" angle="0.445873">
+				<connector uid="6095" angle="0.445873">
 					<from>Gen15_CHC_PC_maturity_gap</from>
 					<to>Gen15_CHC_learning_inputs</to>
 				</connector>
-				<connector uid="6097" angle="0.451139">
+				<connector uid="6096" angle="0.451139">
 					<from>Gen15_CHC_C_maturity_gap</from>
 					<to>Gen15_CHC_C_learning_inputs</to>
 				</connector>
 				<aux color="blue" label_side="top" x="1771.17" y="2030.83" name="pilot inputs gen15 to CHC"/>
 				<aux x="1771.17" y="2095.83" name="PC inputs gen15 to CHC"/>
 				<aux label_side="left" label_angle="135" x="1756.17" y="2173.83" name="C inputs Gen15 to CHC"/>
-				<connector uid="6098" angle="0">
+				<connector uid="6097" angle="0">
 					<from>Gen15_CHC_pilot_learning_inputs</from>
 					<to>pilot_inputs_gen15_to_CHC</to>
 				</connector>
-				<connector uid="6099" angle="0">
+				<connector uid="6098" angle="0">
 					<from>Gen15_CHC_learning_inputs</from>
 					<to>PC_inputs_gen15_to_CHC</to>
 				</connector>
-				<connector uid="6100" angle="0.556252">
+				<connector uid="6099" angle="0.556252">
 					<from>Gen15_CHC_C_learning_inputs</from>
 					<to>C_inputs_Gen15_to_CHC</to>
 				</connector>
-				<connector uid="6101" angle="359.478">
+				<connector uid="6100" angle="359.478">
 					<from>
-						<alias uid="6102"/>
+						<alias uid="6101"/>
 					</from>
 					<to>Gen_15_CHC_Pilot_maturity_gap</to>
 				</connector>
-				<connector uid="6103" angle="0.550604">
+				<connector uid="6102" angle="0.550604">
 					<from>
-						<alias uid="6104"/>
+						<alias uid="6103"/>
 					</from>
 					<to>Gen15_CHC_PC_maturity_gap</to>
 				</connector>
-				<connector uid="6105" angle="0.545363">
+				<connector uid="6104" angle="0.545363">
 					<from>
-						<alias uid="6106"/>
+						<alias uid="6105"/>
 					</from>
 					<to>Gen15_CHC_C_maturity_gap</to>
 				</connector>
-				<connector uid="6107" angle="48.0128">
+				<connector uid="6106" angle="48.0128">
 					<from>
-						<alias uid="6108"/>
+						<alias uid="6107"/>
 					</from>
 					<to>Gen15_CHC_pilot_learning_inputs</to>
 				</connector>
-				<connector uid="6109" angle="15.5241">
+				<connector uid="6108" angle="15.5241">
 					<from>
-						<alias uid="6108"/>
+						<alias uid="6107"/>
 					</from>
 					<to>Gen15_CHC_learning_inputs</to>
 				</connector>
-				<connector uid="6110" angle="336.194">
+				<connector uid="6109" angle="336.194">
 					<from>
-						<alias uid="6108"/>
+						<alias uid="6107"/>
 					</from>
 					<to>Gen15_CHC_C_learning_inputs</to>
 				</connector>
-				<connector uid="6111" angle="300.619">
+				<connector uid="6110" angle="300.619">
 					<from>CHC_Pilot_Maturity</from>
 					<to>Gen_15_CHC_Pilot_maturity_gap</to>
 				</connector>
-				<connector uid="6112" angle="311.26">
+				<connector uid="6111" angle="311.26">
 					<from>CHC_PC_Maturity</from>
 					<to>Gen15_CHC_PC_maturity_gap</to>
 				</connector>
-				<connector uid="6113" angle="319.907">
+				<connector uid="6112" angle="319.907">
 					<from>CHC_Commercial_Maturity</from>
 					<to>Gen15_CHC_C_maturity_gap</to>
 				</connector>
-				<connector uid="6114" angle="41.1643">
+				<connector uid="6113" angle="41.1643">
 					<from>pilot_inputs_gen15_to_CHC</from>
 					<to>pilot_learning_inputs_CHC</to>
 				</connector>
-				<connector uid="6115" angle="34.5212">
+				<connector uid="6114" angle="34.5212">
 					<from>PC_inputs_gen15_to_CHC</from>
 					<to>PC_learning_inputs_CHC</to>
 				</connector>
-				<connector uid="6116" angle="28.5064">
+				<connector uid="6115" angle="28.5064">
 					<from>C_inputs_Gen15_to_CHC</from>
 					<to>C_learning_inputs_CHC</to>
 				</connector>
-				<alias color="blue" font_style="italic" uid="5954" x="1420.17" y="2270.83" width="18" height="18">
+				<alias color="blue" font_style="italic" uid="5953" x="1420.17" y="2270.83" width="18" height="18">
 					<of>CHC_OHC_learning_rates</of>
 				</alias>
-				<alias color="blue" font_style="italic" uid="5927" x="1534.17" y="1862.83" width="18" height="18">
+				<alias color="blue" font_style="italic" uid="5926" x="1534.17" y="1862.83" width="18" height="18">
 					<of>CHC_CHC_learning_rates</of>
 				</alias>
-				<alias color="blue" font_style="italic" uid="6069" x="1467.17" y="1561.83" width="18" height="18">
+				<alias color="blue" font_style="italic" uid="6068" x="1467.17" y="1561.83" width="18" height="18">
 					<of>CE_CHC_learning_rates</of>
 				</alias>
-				<alias color="blue" font_style="italic" uid="6084" x="1457" y="1314.83" width="18" height="18">
+				<alias color="blue" font_style="italic" uid="6083" x="1457" y="1314.83" width="18" height="18">
 					<of>Gen15_CE_learning_rates</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="6102" x="965" y="2015.83" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="6101" x="965" y="2015.83" width="18" height="18">
 					<of>SE_Pilot_Maturity_1</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="6104" x="972" y="2091.83" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="6103" x="972" y="2091.83" width="18" height="18">
 					<of>SE_PC_maturity_1</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="6106" x="972" y="2171.83" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="6105" x="972" y="2171.83" width="18" height="18">
 					<of>SE_Commercial_Maturity_1</of>
 				</alias>
-				<alias color="blue" font_style="italic" uid="6108" x="1430" y="2126" width="18" height="18">
+				<alias color="blue" font_style="italic" uid="6107" x="1430" y="2126" width="18" height="18">
 					<of>Gen15_CHC_learning_rates</of>
 				</alias>
 			</view>

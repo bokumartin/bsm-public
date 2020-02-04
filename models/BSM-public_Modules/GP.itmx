@@ -5,9 +5,9 @@
 		<name>GP</name>
 		<uuid>f48cdf44-c0cb-41fc-a5c4-250e64491d3d</uuid>
 		<vendor>isee systems, inc.</vendor>
-		<product version="1.9.4" isee:build_number="1992" isee:saved_by_v1="true" lang="en">Stella Architect</product>
+		<product version="1.8.2" isee:build_number="1691" isee:saved_by_v1="true" lang="en">Stella Architect</product>
 	</header>
-	<sim_specs isee:sim_duration="1.5" isee:simulation_delay="0.125" isee:restore_on_start="false" method="Euler" time_units="Months" isee:instantaneous_flows="false">
+	<sim_specs isee:simulation_delay="0.1" isee:restore_on_start="false" method="Euler" time_units="Months" isee:instantaneous_flows="false">
 		<start>0</start>
 		<stop>12</stop>
 		<dt reciprocal="true">4</dt>
@@ -19,10 +19,6 @@
 			<elem name="Wheat"/>
 			<elem name="Other_Grains"/>
 			<elem name="Cotton"/>
-		</dim>
-		<dim name="PECrop">
-			<elem name="Herbaceous"/>
-			<elem name="Woody"/>
 		</dim>
 		<dim name="ProdnYear" size="10"/>
 		<dim name="Region">
@@ -36,6 +32,10 @@
 			<elem name="SP"/>
 			<elem name="M"/>
 			<elem name="P"/>
+		</dim>
+		<dim name="PECrop">
+			<elem name="Herbaceous"/>
+			<elem name="Woody"/>
 		</dim>
 	</dimensions>
 	<isee:prefs show_module_prefix="true" live_update_on_drag="true" show_restore_buttons="false" layer="model" interface_scale_ui="true" interface_max_page_width="10000" interface_max_page_height="10000" interface_min_page_width="0" interface_min_page_height="0" saved_runs="5" keep="false" rifp="false"/>
@@ -60,10 +60,6 @@
 			<eqn/>
 			<alias>gal</alias>
 			<alias>gallon</alias>
-		</unit>
-		<unit name="Tons">
-			<eqn/>
-			<alias>ton</alias>
 		</unit>
 		<unit name="US Dollars">
 			<eqn/>
@@ -114,6 +110,11 @@
 		</unit>
 		<unit name="TonnesPerGram">
 			<eqn>Tonnes/g</eqn>
+		</unit>
+		<unit name="Tonnes">
+			<eqn/>
+			<alias>tonne</alias>
+			<alias>metric ton</alias>
 		</unit>
 		<unit name="HoursPerProjectPerYr">
 			<eqn>hr/(projects*yr)</eqn>
@@ -6265,11 +6266,11 @@ COMMENTS: </doc>
 				<entity name="chg_HC_yield_growth_multiplier"/>
 				<entity name="HC_BCAP_CHST_Subsidy"/>
 				<entity name="Pasture_Net_HC_HCCPT"/>
-				<entity name="Pasture_HC_BCAP_CHST_Subsidy"/>
 				<entity name="HC_Yield_Growth_Multiplier"/>
 				<entity name="HC_GP_Pasture"/>
 				<entity name="HC_HCCPT"/>
 				<entity name="Pasture_HC_HCCPT"/>
+				<entity name="Pasture_HC_BCAP_CHST_Subsidy"/>
 				<entity name="BAY_HC_YPA_by_yr"/>
 				<entity name="HC_YPA_by_yr"/>
 				<entity name="HerbCell_GPPA_by_yr_Pasture"/>
@@ -6319,40 +6320,40 @@ COMMENTS: </doc>
 				<entity name="Pasture_Hay_BCAP_CHST_Subsidy"/>
 			</group>
 			<group name="Production Costs" run="false">
-				<entity name="net_WC_PCPA_by_yr_pasture"/>
-				<entity name="Crop_PCPA_cost_multiplier"/>
-				<entity name="HAY_PCPA_input_cost_sensitivity_factor"/>
-				<entity name="Res_PCPA_cost_multiplier"/>
-				<entity name="Hay_PCPA"/>
-				<entity name="WC_PCPA_input_cost_sensitivity_factor"/>
-				<entity name="delta_in_gasoline_input_cost"/>
-				<entity name="HC_PCPA_cost_multiplier"/>
-				<entity name="net_HC_PCPA_by_yr"/>
-				<entity name="HC_PCPA_by_yr_Pasture"/>
-				<entity name="Pasture_as_Pasture_PCPA"/>
-				<entity name="net_WC_PCPA_by_yr"/>
-				<entity name="BCAP_WC_est_subs_by_year"/>
-				<entity name="BCAP_WC_est_subs_by_year_pasture"/>
-				<entity name="BCAP_HC_est_subs_by_year_pasture"/>
-				<entity name="HC_PCPA_by_yr"/>
-				<entity name="Sec_Crop_PCPA"/>
-				<entity name="avg_gasoline_input_cost_PoD"/>
-				<entity name="Annual_PCPA"/>
-				<entity name="Crop_PCPA_input_cost_sensitivity_factor"/>
-				<entity name="WC_PCPA_cost_multiplier"/>
-				<entity name="net_HC_PCPA_by_yr_Pasture"/>
-				<entity name="HC_PCPA_input_cost_sensitivity_factor"/>
-				<entity name="WC_PCPA_by_yr_pasture"/>
+				<entity name="Residue_PCPA_input_cost_sensitivity_factor"/>
+				<entity name="Hay_PCPA_cost_multiplier"/>
+				<entity name="BCAP_HC_est_subs_by_year"/>
+				<entity name="Residue_PCPA"/>
 				<entity name="WC_PCPA_by_yr"/>
+				<entity name="HC_PCPA_input_cost_sensitivity_factor"/>
+				<entity name="Secondary_Crop_PCPA_cost_multiplier"/>
+				<entity name="net_HC_PCPA_by_yr_Pasture"/>
+				<entity name="WC_PCPA_cost_multiplier"/>
+				<entity name="Crop_PCPA_input_cost_sensitivity_factor"/>
+				<entity name="Annual_PCPA"/>
+				<entity name="avg_gasoline_input_cost_PoD"/>
+				<entity name="HC_PCPA_by_yr"/>
+				<entity name="WC_PCPA_by_yr_pasture"/>
+				<entity name="BCAP_WC_est_subs_by_year"/>
+				<entity name="Sec_Crop_PCPA"/>
+				<entity name="Pasture_as_Pasture_PCPA"/>
+				<entity name="HC_PCPA_by_yr_Pasture"/>
+				<entity name="BCAP_HC_est_subs_by_year_pasture"/>
 				<entity name="input_cost_sensitivity_switch"/>
 				<entity name="Secondary_Crop_PCPA_input_cost_sensitivity_factor"/>
-				<entity name="Secondary_Crop_PCPA_cost_multiplier"/>
+				<entity name="HC_PCPA_cost_multiplier"/>
+				<entity name="delta_in_gasoline_input_cost"/>
 				<entity name="Residue_Net_PCPA"/>
-				<entity name="Residue_PCPA"/>
-				<entity name="BCAP_HC_est_subs_by_year"/>
-				<entity name="Hay_PCPA_cost_multiplier"/>
+				<entity name="BCAP_WC_est_subs_by_year_pasture"/>
+				<entity name="WC_PCPA_input_cost_sensitivity_factor"/>
+				<entity name="net_HC_PCPA_by_yr"/>
+				<entity name="HAY_PCPA_input_cost_sensitivity_factor"/>
+				<entity name="Res_PCPA_cost_multiplier"/>
+				<entity name="Crop_PCPA_cost_multiplier"/>
+				<entity name="Hay_PCPA"/>
+				<entity name="net_WC_PCPA_by_yr"/>
 				<entity name="Pasture_as_Cellulose_PCPA"/>
-				<entity name="Residue_PCPA_input_cost_sensitivity_factor"/>
+				<entity name="net_WC_PCPA_by_yr_pasture"/>
 			</group>
 			<group name="Mosule Outputs" run="false">
 				<entity name="PCEC_YPA_by_year"/>
@@ -6764,8 +6765,8 @@ COMMENTS: </doc>
 				</graph>
 				<table color="black" background="#E0E0E0" text_align="right" font_size="12pt" orientation="vertical" wrap_text="false" isee:auto_fit="true" isee:use_alternate_row_colors="false" isee:unlimited_table_length="false" blank_column_width="80" column_width="160" interval="1" report_balances="beginning" report_flows="instantaneous" header_font_style="normal" header_font_weight="normal" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="12pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 				<button color="black" background="#E0E0E0" font_size="12pt" border_width="thin" border_style="solid" transparent="false" corner_radius="0" isee:flat="false" icon_side="top" isee:highlight_on_hover="false" isee:highlight_color="#959595"/>
-				<isee:annotation color="black" background="#E0E0E0" font_size="12pt" border_width="thin" border_style="solid" transparent="false" corner_radius="0" isee:flat="false" icon_side="top" isee:highlight_on_hover="false" isee:highlight_color="#959595" popup_corner_radius="0" popup_background_color="#FFFECF"/>
-				<slider color="black" background="#E0E0E0" font_size="12pt" num_ticks="3" label_side="top" wrap_title="true" vertical="false" isee:fancy_appearance="false" isee:show_hover_tip="when_deciding" input_expands="true" input_width="100"/>
+				<isee:annotation color="black" background="#E0E0E0" font_size="12pt" border_width="thin" border_style="solid" transparent="false" corner_radius="0" isee:flat="false" icon_side="top" isee:highlight_on_hover="false" isee:highlight_color="#959595" popup_background_color="#FFFECF"/>
+				<slider color="black" background="#E0E0E0" font_size="12pt" num_ticks="3" label_side="top" wrap_title="true" vertical="false" isee:show_hover_tip="when_deciding" input_expands="true" input_width="100"/>
 				<isee:sim_speed_slider color="black" background="white"/>
 				<isee:time_slider color="black" background="white"/>
 				<isee:pie_input color="black" background="white" legend_position="bottom" isee:transparent="false"/>
@@ -6782,10 +6783,8 @@ COMMENTS: </doc>
 				<isee:navigation_widget color="black" background="white" border_color="#999999" border_width="thin" border_style="solid" item_spacing="6" appearance="tabs" corner_radius="4" selected_item_color="black" selected_item_background="white" item_background="#DDDDDD"/>
 				<isee:shape color="black" background="white" opacity="1" transparent_background="true"/>
 				<isee:selector color="black" background="white"/>
-				<isee:iframe color="black" background="white"/>
-				<isee:financial_table color="black" background="white" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="true" background="white" page_width="1024" page_height="784" isee:page_cols="5" isee:page_rows="3" zoom="120" isee:popup_graphs_are_comparative="true" type="stock_flow">
+			<view isee:show_pages="true" page_width="983" page_height="694" isee:page_cols="5" isee:page_rows="4" isee:scroll_x="1326.25" isee:scroll_y="1275" zoom="80" isee:popup_graphs_are_comparative="true" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="9pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -6822,1535 +6821,1535 @@ COMMENTS: </doc>
 					</graph>
 					<table color="black" background="#E0E0E0" text_align="right" font_size="12pt" orientation="vertical" wrap_text="false" isee:auto_fit="true" isee:use_alternate_row_colors="false" isee:unlimited_table_length="false" blank_column_width="80" column_width="160" interval="1" report_balances="beginning" report_flows="instantaneous" header_font_style="normal" header_font_weight="normal" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="12pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 				</style>
-				<connector uid="4089" angle="90">
+				<connector uid="4088" angle="90">
 					<from>BCAP_Ann_Payment_Start_Time</from>
 					<to>Establishment_Payment_Pct</to>
 				</connector>
-				<connector uid="4090" angle="0">
+				<connector uid="4089" angle="0">
 					<from>
-						<alias uid="4091"/>
+						<alias uid="4090"/>
 					</from>
 					<to>Turn_Off_Annual_Payment</to>
 				</connector>
-				<connector uid="4092" angle="167.471">
+				<connector uid="4091" angle="167.471">
 					<from>
-						<alias uid="4093"/>
+						<alias uid="4092"/>
 					</from>
 					<to>PCEC_YPA_by_year</to>
 				</connector>
-				<connector uid="4094" angle="26.5651">
+				<connector uid="4093" angle="26.5651">
 					<from>
-						<alias uid="4095"/>
+						<alias uid="4094"/>
 					</from>
 					<to>Pasture_PCEC_EST</to>
 				</connector>
-				<connector uid="4096" angle="0">
+				<connector uid="4095" angle="0">
 					<from>Annual_GPPA</from>
 					<to>Net_Annual_GPPA</to>
 				</connector>
-				<connector uid="4097" angle="0">
+				<connector uid="4096" angle="0">
 					<from>
-						<alias uid="4098"/>
+						<alias uid="4097"/>
 					</from>
 					<to>Ag_PCEC_CHST</to>
 				</connector>
-				<connector uid="4099" angle="0">
+				<connector uid="4098" angle="0">
 					<from>HC_GPPA_by_yr</from>
 					<to>HC_GPPA_Wtd_by_yr</to>
 				</connector>
-				<connector uid="4100" angle="0">
+				<connector uid="4099" angle="0">
 					<from>
-						<alias uid="4101"/>
+						<alias uid="4100"/>
 					</from>
 					<to>Turn_Off_CHST</to>
 				</connector>
-				<connector uid="4102" angle="90">
+				<connector uid="4101" angle="90">
 					<from>Pasture_HC_BCAP_CHST_Subsidy</from>
 					<to>Pasture_Net_HC_HCCPT</to>
 				</connector>
-				<connector uid="4103" angle="6.34019">
+				<connector uid="4102" angle="6.34019">
 					<from>ag_discount_factor_stack</from>
 					<to>HC_PCPA_Wtd_by_yr_Pasture</to>
 				</connector>
-				<connector uid="4104" angle="180">
+				<connector uid="4103" angle="180">
 					<from>Pasture_WC_HCCPT</from>
 					<to>Pasture_Net_WC_HCCPT</to>
 				</connector>
-				<connector uid="4105" angle="45">
+				<connector uid="4104" angle="45">
 					<from>
-						<alias uid="4106"/>
+						<alias uid="4105"/>
 					</from>
 					<to>annual_payment_subsidy_annual_residue</to>
 				</connector>
-				<connector uid="4107" angle="57.9946">
+				<connector uid="4106" angle="57.9946">
 					<from>Disc_HC_PCPA</from>
 					<to>Ann_Net_HC_GPPA</to>
 				</connector>
-				<connector uid="4108" angle="324.462">
+				<connector uid="4107" angle="324.462">
 					<from>
-						<alias uid="4109"/>
+						<alias uid="4108"/>
 					</from>
 					<to>HS_wtd_WC_YPA_by_yr</to>
 				</connector>
-				<connector uid="4110" angle="15.8039">
+				<connector uid="4109" angle="15.8039">
 					<from>Pasture_Hay_CHST</from>
 					<to>BCAP_CHST_payment</to>
 				</connector>
-				<connector uid="4111" angle="90">
+				<connector uid="4110" angle="90">
 					<from>
-						<alias uid="4112"/>
+						<alias uid="4111"/>
 					</from>
 					<to>BAY_HC_YPA_by_yr</to>
 				</connector>
-				<connector uid="4113" angle="6.34019">
+				<connector uid="4112" angle="6.34019">
 					<from>Turn_Off_Annual_Payment</from>
 					<to>Annual_Payment_Subsidy</to>
 				</connector>
-				<connector uid="4114" angle="0">
+				<connector uid="4113" angle="0">
 					<from>
-						<alias uid="4115"/>
+						<alias uid="4114"/>
 					</from>
 					<to>HC_YPA_pasture_by_yr</to>
 				</connector>
-				<connector uid="4116" angle="35.5377">
+				<connector uid="4115" angle="35.5377">
 					<from>WC_YPA_by_yr</from>
 					<to>HS_wtd_WC_YPA_by_yr</to>
 				</connector>
-				<connector uid="4117" angle="339.444">
+				<connector uid="4116" angle="339.444">
 					<from>
-						<alias uid="4118"/>
+						<alias uid="4117"/>
 					</from>
 					<to>Max_CHST_per_Ton_Ceiling</to>
 				</connector>
-				<connector uid="4119" angle="0">
+				<connector uid="4118" angle="0">
 					<from>WC_GPPA_by_pasture</from>
 					<to>WC_GPPA_Wtd_by_yr_Pasture</to>
 				</connector>
-				<connector uid="4120" angle="180">
+				<connector uid="4119" angle="180">
 					<from>WC_HCCPT</from>
 					<to>WC_BCAP_CHST_Subsidy</to>
 				</connector>
-				<connector uid="4121" angle="0">
+				<connector uid="4120" angle="0">
 					<from>
-						<alias uid="4122"/>
+						<alias uid="4121"/>
 					</from>
 					<to>HC_Price_FarmGate</to>
 				</connector>
-				<connector uid="4123" angle="0">
+				<connector uid="4122" angle="0">
 					<from>
-						<alias uid="4124"/>
+						<alias uid="4123"/>
 					</from>
 					<to>WC_PCPA_by_yr_pasture</to>
 				</connector>
-				<connector uid="4125" angle="270">
+				<connector uid="4124" angle="270">
 					<from>WC_PCPA_by_yr</from>
 					<to>WC_PCPA_by_yr_pasture</to>
 				</connector>
-				<connector uid="4126" angle="0">
+				<connector uid="4125" angle="0">
 					<from>HC_PCPA_Wtd_by_yr</from>
 					<to>Disc_HC_PCPA</to>
 				</connector>
-				<connector uid="4127" angle="20.556">
+				<connector uid="4126" angle="20.556">
 					<from>
-						<alias uid="4128"/>
+						<alias uid="4127"/>
 					</from>
 					<to>Pasture_Hay_CHST</to>
 				</connector>
-				<connector uid="4129" angle="12.5288">
+				<connector uid="4128" angle="12.5288">
 					<from>BCAP_WC_est_subs_by_year</from>
 					<to>net_WC_PCPA_by_yr</to>
 				</connector>
-				<connector uid="4130" angle="298.671">
+				<connector uid="4129" angle="298.671">
 					<from>Residue_CHST</from>
 					<to>BCAP_CHST_payment</to>
 				</connector>
-				<connector uid="4131" angle="54.4623">
+				<connector uid="4130" angle="54.4623">
 					<from>HC_YPA_by_yr</from>
 					<to>HS_wtd_HC_YPA_by_yr</to>
 				</connector>
-				<connector uid="4132" angle="180">
+				<connector uid="4131" angle="180">
 					<from>
-						<alias uid="4133"/>
+						<alias uid="4132"/>
 					</from>
 					<to>ForRes_Net_HCCPT</to>
 				</connector>
-				<connector uid="4134" angle="0">
+				<connector uid="4133" angle="0">
 					<from>
-						<alias uid="4135"/>
+						<alias uid="4134"/>
 					</from>
 					<to>Establishment_Payment_Pct</to>
 				</connector>
-				<connector uid="4136" angle="44.4226">
+				<connector uid="4135" angle="44.4226">
 					<from>Residue_Annual_subs</from>
 					<to>BCAP_annual_payment</to>
 				</connector>
-				<connector uid="4137" angle="0">
+				<connector uid="4136" angle="0">
 					<from>
-						<alias uid="4138"/>
+						<alias uid="4137"/>
 					</from>
 					<to>HC_PCPA_by_yr_Pasture</to>
 				</connector>
-				<connector uid="4139" angle="54.4623">
+				<connector uid="4138" angle="54.4623">
 					<from>Ann_Net_WC_GPPA</from>
 					<to>Ann_Net_PCEC_GPPA</to>
 				</connector>
-				<connector uid="4140" angle="12.5288">
+				<connector uid="4139" angle="12.5288">
 					<from>
-						<alias uid="4141"/>
+						<alias uid="4140"/>
 					</from>
 					<to>Residue_PCPA</to>
 				</connector>
-				<connector uid="4142" angle="180">
+				<connector uid="4141" angle="180">
 					<from>
-						<alias uid="4143"/>
+						<alias uid="4142"/>
 					</from>
 					<to>Pasture_YPA</to>
 				</connector>
-				<connector uid="4144" angle="35.5377">
+				<connector uid="4143" angle="35.5377">
 					<from>
-						<alias uid="4145"/>
+						<alias uid="4144"/>
 					</from>
 					<to>WC_YPA_by_yr</to>
 				</connector>
-				<connector uid="4146" angle="0">
+				<connector uid="4145" angle="0">
 					<from>
-						<alias uid="4147"/>
+						<alias uid="4146"/>
 					</from>
 					<to>WC_PCPA_Wtd_by_yr</to>
 				</connector>
-				<connector uid="4148" angle="26.5651">
+				<connector uid="4147" angle="26.5651">
 					<from>
-						<alias uid="4149"/>
+						<alias uid="4148"/>
 					</from>
 					<to>Pasture_as_Cellulose_PCPA</to>
 				</connector>
-				<connector uid="4150" angle="12.5288">
+				<connector uid="4149" angle="12.5288">
 					<from>
-						<alias uid="4151"/>
+						<alias uid="4150"/>
 					</from>
 					<to>ForRes_BCAP_CHST_Subsidy</to>
 				</connector>
-				<connector uid="4152" angle="0">
+				<connector uid="4151" angle="0">
 					<from>Hay_YPA</from>
 					<to>Pasture_YPA</to>
 				</connector>
-				<connector uid="4153" angle="0">
+				<connector uid="4152" angle="0">
 					<from>Disc_WC_GPPA</from>
 					<to>Ann_Net_WC_GPPA</to>
 				</connector>
-				<connector uid="4154" angle="0">
+				<connector uid="4153" angle="0">
 					<from>
-						<alias uid="4155"/>
+						<alias uid="4154"/>
 					</from>
 					<to>ForRes_BCAP_CHST_Subsidy</to>
 				</connector>
-				<connector uid="4156" color="#C8C8C8" angle="32.0054">
+				<connector uid="4155" color="#C8C8C8" angle="32.0054">
 					<from>input_cost_sensitivity_switch</from>
 					<to>WC_PCPA_cost_multiplier</to>
 				</connector>
-				<connector uid="4157" angle="12.5288">
+				<connector uid="4156" angle="12.5288">
 					<from>
-						<alias uid="4158"/>
+						<alias uid="4157"/>
 					</from>
 					<to>Residue_CHST</to>
 				</connector>
-				<connector uid="4159" angle="54.4623">
+				<connector uid="4158" angle="54.4623">
 					<from>ag_discount_factor_stack</from>
 					<to>HC_PCPA_Wtd_by_yr</to>
 				</connector>
-				<connector uid="4160" angle="90">
+				<connector uid="4159" angle="90">
 					<from>
-						<alias uid="4161"/>
+						<alias uid="4160"/>
 					</from>
 					<to>Pasture_Hay_HCCPT</to>
 				</connector>
-				<connector uid="4162" color="#C8C8C8" angle="54.4623">
+				<connector uid="4161" color="#C8C8C8" angle="54.4623">
 					<from>
-						<alias uid="4163"/>
+						<alias uid="4162"/>
 					</from>
 					<to>Residue_BCAP_CHST_Subsidy</to>
 				</connector>
-				<connector uid="4164" angle="12.5288">
+				<connector uid="4163" angle="12.5288">
 					<from>Net_Sec_Crop_GPPA</from>
 					<to>Tot_Annual_GPPA_no_Res</to>
 				</connector>
-				<connector uid="4165" angle="90">
+				<connector uid="4164" angle="90">
 					<from>PCEC_Pasture_yield_factor</from>
 					<to>Pasture_PCEC_YPA_by_year</to>
 				</connector>
-				<connector uid="4166" angle="20.556">
+				<connector uid="4165" angle="20.556">
 					<from>HC_PCPA_by_yr</from>
 					<to>BCAP_HC_est_subs_by_year</to>
 				</connector>
-				<connector uid="4167" color="#C8C8C8" angle="90">
+				<connector uid="4166" color="#C8C8C8" angle="90">
 					<from>
-						<alias uid="4168"/>
+						<alias uid="4167"/>
 					</from>
 					<to>Ann_Net_PCEC_GPPA</to>
 				</connector>
-				<connector uid="4169" angle="0">
+				<connector uid="4168" angle="0">
 					<from>
-						<alias uid="4170"/>
+						<alias uid="4169"/>
 					</from>
 					<to>Ag_PCEC_EST</to>
 				</connector>
-				<connector uid="4171" angle="180">
+				<connector uid="4170" angle="180">
 					<from>Pasture_HC_HCCPT</from>
 					<to>Pasture_Net_HC_HCCPT</to>
 				</connector>
-				<connector uid="4172" angle="270">
+				<connector uid="4171" angle="270">
 					<from>
-						<alias uid="4173"/>
+						<alias uid="4172"/>
 					</from>
 					<to>WC_HCCPT</to>
 				</connector>
-				<connector uid="4174" angle="270">
+				<connector uid="4173" angle="270">
 					<from>Net_Annual_YPA_Nom_Units</from>
 					<to>Annual_YPA_TPA</to>
 				</connector>
-				<connector uid="4175" angle="270">
+				<connector uid="4174" angle="270">
 					<from>PCEC_YPA_by_year</from>
 					<to>Pasture_PCEC_YPA_by_year</to>
 				</connector>
-				<connector uid="4176" angle="40.6013">
+				<connector uid="4175" angle="40.6013">
 					<from>
-						<alias uid="4177"/>
+						<alias uid="4176"/>
 					</from>
 					<to>Ann_Net_HC_GPPA_CRP</to>
 				</connector>
-				<connector uid="4178" angle="90">
+				<connector uid="4177" angle="90">
 					<from>Pasture_Net_HC_HCCPT</from>
 					<to>HC_GP_Pasture</to>
 				</connector>
-				<connector uid="4179" color="#C8C8C8" angle="180">
+				<connector uid="4178" color="#C8C8C8" angle="180">
 					<from>
-						<alias uid="4180"/>
+						<alias uid="4179"/>
 					</from>
 					<to>BCAP_WC_est_subs_by_year_pasture</to>
 				</connector>
-				<connector uid="4181" angle="0">
+				<connector uid="4180" angle="0">
 					<from>Secondary_Crop_PCPA_input_cost_sensitivity_factor</from>
 					<to>Secondary_Crop_PCPA_cost_multiplier</to>
 				</connector>
-				<connector uid="4182" angle="45">
+				<connector uid="4181" angle="45">
 					<from>
-						<alias uid="4183"/>
+						<alias uid="4182"/>
 					</from>
 					<to>ag_discount_factor_stack</to>
 				</connector>
-				<connector uid="4184" angle="6.34019">
+				<connector uid="4183" angle="6.34019">
 					<from>
-						<alias uid="4185"/>
+						<alias uid="4184"/>
 					</from>
 					<to>Pasture_PCEC_EST</to>
 				</connector>
-				<connector uid="4186" angle="0">
+				<connector uid="4185" angle="0">
 					<from>
-						<alias uid="4187"/>
+						<alias uid="4186"/>
 					</from>
 					<to>Ann_Net_HC_GPPA_CRP</to>
 				</connector>
-				<connector uid="4188" angle="310.601">
+				<connector uid="4187" angle="310.601">
 					<from>Disc_WC_PCPA_Pasture</from>
 					<to>Ann_Net_WC_GPPA_Pasture</to>
 				</connector>
-				<connector uid="4189" angle="0">
+				<connector uid="4188" angle="0">
 					<from>Res_GPPA</from>
 					<to>Net_Residue_GPPA</to>
 				</connector>
-				<connector uid="4190" angle="90">
+				<connector uid="4189" angle="90">
 					<from>HC_Net_HCCPT</from>
 					<to>HC_GP</to>
 				</connector>
-				<connector uid="4191" angle="90">
+				<connector uid="4190" angle="90">
 					<from>
-						<alias uid="4192"/>
+						<alias uid="4191"/>
 					</from>
 					<to>Pasture_HC_HCCPT</to>
 				</connector>
-				<connector uid="4193" angle="175.914">
+				<connector uid="4192" angle="175.914">
 					<from>
-						<alias uid="4194"/>
+						<alias uid="4193"/>
 					</from>
 					<to>Residue_YPA</to>
 				</connector>
-				<connector uid="4195" angle="0">
+				<connector uid="4194" angle="0">
 					<from>
-						<alias uid="4196"/>
+						<alias uid="4195"/>
 					</from>
 					<to>BAY_Annual_YPA_Nom_Units</to>
 				</connector>
-				<connector uid="4197" angle="339.444">
+				<connector uid="4196" angle="339.444">
 					<from>WC_PCPA_by_yr_pasture</from>
 					<to>BCAP_WC_est_subs_by_year_pasture</to>
 				</connector>
-				<connector uid="4198" color="#9F9F9F" angle="296.565">
+				<connector uid="4197" color="#9F9F9F" angle="296.565">
 					<from>
-						<alias uid="4199"/>
+						<alias uid="4198"/>
 					</from>
 					<to>Ann_Net_HC_GPPA_Pasture</to>
 				</connector>
-				<connector uid="4200" angle="18.4349">
+				<connector uid="4199" angle="18.4349">
 					<from>HC_PCPA_input_cost_sensitivity_factor</from>
 					<to>HC_PCPA_cost_multiplier</to>
 				</connector>
-				<connector uid="4201" angle="0">
+				<connector uid="4200" angle="0">
 					<from>BAY_Hay_YPA</from>
 					<to>Hay_YPA</to>
 				</connector>
-				<connector uid="4202" angle="18.4349">
+				<connector uid="4201" angle="18.4349">
 					<from>Residue_YPA</from>
 					<to>Res_GPPA</to>
 				</connector>
-				<connector uid="4203" angle="0">
+				<connector uid="4202" angle="0">
 					<from>WC_PCPA_by_yr</from>
 					<to>net_WC_PCPA_by_yr</to>
 				</connector>
-				<connector uid="4204" angle="324.462">
+				<connector uid="4203" angle="324.462">
 					<from>
-						<alias uid="4205"/>
+						<alias uid="4204"/>
 					</from>
 					<to>HS_wtd_HC_YPA_by_yr</to>
 				</connector>
-				<connector uid="4206" angle="20.556">
+				<connector uid="4205" angle="20.556">
 					<from>
-						<alias uid="4207"/>
+						<alias uid="4206"/>
 					</from>
 					<to>Ann_Net_Pasture_as_Cellulose_GPPA</to>
 				</connector>
-				<connector uid="4208" angle="270">
+				<connector uid="4207" angle="270">
 					<from>
-						<alias uid="4209"/>
+						<alias uid="4208"/>
 					</from>
 					<to>HC_HCCPT</to>
 				</connector>
-				<connector uid="4210" angle="0">
+				<connector uid="4209" angle="0">
 					<from>Secondary_Crop_PCPA_cost_multiplier</from>
 					<to>Sec_Crop_PCPA</to>
 				</connector>
-				<connector uid="4211" color="#C8C8C8" angle="305.538">
+				<connector uid="4210" color="#C8C8C8" angle="305.538">
 					<from>
-						<alias uid="4163"/>
+						<alias uid="4162"/>
 					</from>
 					<to>Pasture_HC_BCAP_CHST_Subsidy</to>
 				</connector>
-				<connector uid="4212" angle="331.846">
+				<connector uid="4211" angle="331.846">
 					<from>Pasture_PCEC_CHST</from>
 					<to>BCAP_CHST_payment</to>
 				</connector>
-				<connector uid="4213" angle="90">
+				<connector uid="4212" angle="90">
 					<from>Hay_YPA</from>
 					<to>Hay_GPPA</to>
 				</connector>
-				<connector uid="4214" angle="245.145">
+				<connector uid="4213" angle="245.145">
 					<from>
-						<alias uid="4215"/>
+						<alias uid="4214"/>
 					</from>
 					<to>BCAP_annual_payment</to>
 				</connector>
-				<connector uid="4216" angle="18.4349">
+				<connector uid="4215" angle="18.4349">
 					<from>BCAP_WC_est_subs_by_year_pasture</from>
 					<to>net_WC_PCPA_by_yr_pasture</to>
 				</connector>
-				<connector uid="4217" color="#C8C8C8" angle="290.556">
+				<connector uid="4216" color="#C8C8C8" angle="290.556">
 					<from>
-						<alias uid="4163"/>
+						<alias uid="4162"/>
 					</from>
 					<to>Pasture_WC_BCAP_CHST_Subsidy</to>
 				</connector>
-				<connector uid="4218" angle="90">
+				<connector uid="4217" angle="90">
 					<from>HC_BCAP_CHST_Subsidy</from>
 					<to>HC_Net_HCCPT</to>
 				</connector>
-				<connector uid="4219" angle="319.399">
+				<connector uid="4218" angle="319.399">
 					<from>ag_discount_factor_stack</from>
 					<to>WC_GPPA_Wtd_by_yr</to>
 				</connector>
-				<connector uid="4220" angle="0">
+				<connector uid="4219" angle="0">
 					<from>
-						<alias uid="4221"/>
+						<alias uid="4220"/>
 					</from>
 					<to>Pasture_Hay_CHST</to>
 				</connector>
-				<connector uid="4222" angle="215.538">
+				<connector uid="4221" angle="215.538">
 					<from>
-						<alias uid="4093"/>
+						<alias uid="4092"/>
 					</from>
 					<to>PCEC_Pasture_yield_factor</to>
 				</connector>
-				<connector uid="4223" angle="0">
+				<connector uid="4222" angle="0">
 					<from>HerbCell_GPPA_Wtd_by_yr_Pasture</from>
 					<to>Disc_HerbCell_GPPA_Pasture</to>
 				</connector>
-				<connector uid="4224" angle="161.565">
+				<connector uid="4223" angle="161.565">
 					<from>HC_HCCPT</from>
 					<to>HC_Net_HCCPT</to>
 				</connector>
-				<connector uid="4225" angle="0">
+				<connector uid="4224" angle="0">
 					<from>Crop_PCPA_input_cost_sensitivity_factor</from>
 					<to>Crop_PCPA_cost_multiplier</to>
 				</connector>
-				<connector uid="4226" angle="0">
+				<connector uid="4225" angle="0">
 					<from>Residue_Price_Field</from>
 					<to>Res_GPPA</to>
 				</connector>
-				<connector uid="4227" color="#C8C8C8" angle="161.565">
+				<connector uid="4226" color="#C8C8C8" angle="161.565">
 					<from>
-						<alias uid="4180"/>
+						<alias uid="4179"/>
 					</from>
 					<to>BCAP_WC_est_subs_by_year</to>
 				</connector>
-				<connector uid="4228" angle="180">
+				<connector uid="4227" angle="180">
 					<from>Pasture_Hay_HCCPT</from>
 					<to>Pasture_Cellulose_Net_HCCPT</to>
 				</connector>
-				<connector uid="4229" color="#C8C8C8" angle="257.471">
+				<connector uid="4228" color="#C8C8C8" angle="257.471">
 					<from>
-						<alias uid="4230"/>
+						<alias uid="4229"/>
 					</from>
 					<to>WC_GPPA_by_yr</to>
 				</connector>
-				<connector uid="4231" color="#C8C8C8" angle="186.34">
+				<connector uid="4230" color="#C8C8C8" angle="186.34">
 					<from>
-						<alias uid="4180"/>
+						<alias uid="4179"/>
 					</from>
 					<to>BCAP_HC_est_subs_by_year</to>
 				</connector>
-				<connector uid="4232" angle="339.444">
+				<connector uid="4231" angle="339.444">
 					<from>BCAP_HC_est_subs_by_year_pasture</from>
 					<to>net_HC_PCPA_by_yr_Pasture</to>
 				</connector>
-				<connector uid="4233" angle="90">
+				<connector uid="4232" angle="90">
 					<from>ForRes_BCAP_CHST_Subsidy</from>
 					<to>ForRes_Net_HCCPT</to>
 				</connector>
-				<connector uid="4234" angle="45">
+				<connector uid="4233" angle="45">
 					<from>
-						<alias uid="4235"/>
+						<alias uid="4234"/>
 					</from>
 					<to>Residue_Annual_subs</to>
 				</connector>
-				<connector uid="4236" angle="12.5288">
+				<connector uid="4235" angle="12.5288">
 					<from>WC_PCPA_by_yr_pasture</from>
 					<to>net_WC_PCPA_by_yr_pasture</to>
 				</connector>
-				<connector uid="4237" angle="0">
+				<connector uid="4236" angle="0">
 					<from>Turn_Off_CHST</from>
 					<to>Max_CHST_per_Ton_Ceiling</to>
 				</connector>
-				<connector uid="4238" angle="0">
+				<connector uid="4237" angle="0">
 					<from>Disc_HC_GPPA</from>
 					<to>Ann_Net_HC_GPPA</to>
 				</connector>
-				<connector uid="4239" angle="38.4232">
+				<connector uid="4238" angle="38.4232">
 					<from>Pasture_PCEC_EST</from>
 					<to>BCAP_EST_payment</to>
 				</connector>
-				<connector uid="4240" angle="0">
+				<connector uid="4239" angle="0">
 					<from>Net_Annual_GPPA</from>
 					<to>Tot_Annual_GPPA_no_Res</to>
 				</connector>
-				<connector uid="4241" angle="288.435">
+				<connector uid="4240" angle="288.435">
 					<from>delta_in_gasoline_input_cost</from>
 					<to>HC_PCPA_cost_multiplier</to>
 				</connector>
-				<connector uid="4242" angle="20.556">
+				<connector uid="4241" angle="20.556">
 					<from>HC_PCPA_by_yr_Pasture</from>
 					<to>BCAP_HC_est_subs_by_year_pasture</to>
 				</connector>
-				<connector uid="4243" color="#C8C8C8" angle="159.444">
+				<connector uid="4242" color="#C8C8C8" angle="159.444">
 					<from>
-						<alias uid="4230"/>
+						<alias uid="4229"/>
 					</from>
 					<to>HerbCell_GPPA_by_yr_Pasture</to>
 				</connector>
-				<connector uid="4244" angle="305.538">
+				<connector uid="4243" angle="305.538">
 					<from>ag_discount_factor_stack</from>
 					<to>WC_PCPA_Wtd_by_yr_Pasture</to>
 				</connector>
-				<connector uid="4245" angle="305.538">
+				<connector uid="4244" angle="305.538">
 					<from>
-						<alias uid="4151"/>
+						<alias uid="4150"/>
 					</from>
 					<to>ForRes_BCAP_CHST_Subsidy_1</to>
 				</connector>
-				<connector uid="4246" angle="32.0054">
+				<connector uid="4245" angle="32.0054">
 					<from>
-						<alias uid="4247"/>
+						<alias uid="4246"/>
 					</from>
 					<to>Hay_PCPA</to>
 				</connector>
-				<connector uid="4248" angle="32.0054">
+				<connector uid="4247" angle="32.0054">
 					<from>
-						<alias uid="4249"/>
+						<alias uid="4248"/>
 					</from>
 					<to>Pasture_PCEC_CHST</to>
 				</connector>
-				<connector uid="4250" angle="90">
+				<connector uid="4249" angle="90">
 					<from>Res_Net_HCCPT</from>
 					<to>Residue_Price_Field</to>
 				</connector>
-				<connector uid="4251" angle="0">
+				<connector uid="4250" angle="0">
 					<from>
-						<alias uid="4252"/>
+						<alias uid="4251"/>
 					</from>
 					<to>HC_PCPA_Wtd_by_yr_Pasture</to>
 				</connector>
-				<connector uid="4253" angle="353.66">
+				<connector uid="4252" angle="353.66">
 					<from>
-						<alias uid="4254"/>
+						<alias uid="4253"/>
 					</from>
 					<to>Residue_CHST</to>
 				</connector>
-				<connector uid="4255" color="#C8C8C8" angle="270">
+				<connector uid="4254" color="#C8C8C8" angle="270">
 					<from>
-						<alias uid="4168"/>
+						<alias uid="4167"/>
 					</from>
 					<to>Ann_Net_PCEC_GPPA_Pasture</to>
 				</connector>
-				<connector uid="4256" angle="310.601">
+				<connector uid="4255" angle="310.601">
 					<from>Disc_WC_PCPA</from>
 					<to>Ann_Net_WC_GPPA</to>
 				</connector>
-				<connector uid="4257" angle="270">
+				<connector uid="4256" angle="270">
 					<from>MAX_residue_YPA</from>
 					<to>Residue_YPA</to>
 				</connector>
-				<connector uid="4258" color="#C8C8C8" angle="57.9946">
+				<connector uid="4257" color="#C8C8C8" angle="57.9946">
 					<from>input_cost_sensitivity_switch</from>
 					<to>Secondary_Crop_PCPA_cost_multiplier</to>
 				</connector>
-				<connector uid="4259" angle="0">
+				<connector uid="4258" angle="0">
 					<from>HC_GPPA_Wtd_by_yr</from>
 					<to>Disc_HC_GPPA</to>
 				</connector>
-				<connector uid="4260" angle="12.5288">
+				<connector uid="4259" angle="12.5288">
 					<from>
-						<alias uid="4261"/>
+						<alias uid="4260"/>
 					</from>
 					<to>HC_PCPA_by_yr</to>
 				</connector>
-				<connector uid="4262" angle="0">
+				<connector uid="4261" angle="0">
 					<from>
-						<alias uid="4263"/>
+						<alias uid="4262"/>
 					</from>
 					<to>avg_gasoline_input_cost_PoD</to>
 				</connector>
-				<connector uid="4264" angle="333.435">
+				<connector uid="4263" angle="333.435">
 					<from>delta_in_gasoline_input_cost</from>
 					<to>Secondary_Crop_PCPA_cost_multiplier</to>
 				</connector>
-				<connector uid="4265" color="#C8C8C8" angle="263.66">
+				<connector uid="4264" color="#C8C8C8" angle="263.66">
 					<from>
-						<alias uid="4230"/>
+						<alias uid="4229"/>
 					</from>
 					<to>WC_GPPA_by_pasture</to>
 				</connector>
-				<connector uid="4266" angle="6.34019">
+				<connector uid="4265" angle="6.34019">
 					<from>
-						<alias uid="4267"/>
+						<alias uid="4266"/>
 					</from>
 					<to>Annual_YPA_TPA</to>
 				</connector>
-				<connector uid="4268" angle="12.5288">
+				<connector uid="4267" angle="12.5288">
 					<from>
-						<alias uid="4269"/>
+						<alias uid="4268"/>
 					</from>
 					<to>Ann_Net_Pasture_as_Pasture_GPPA</to>
 				</connector>
-				<connector uid="4270" angle="339.444">
+				<connector uid="4269" angle="339.444">
 					<from>Annual_GPPA</from>
 					<to>Sec_Crop_GPPA_for_OP</to>
 				</connector>
-				<connector uid="4271" angle="198.435">
+				<connector uid="4270" angle="198.435">
 					<from>Pasture_HC_HCCPT</from>
 					<to>Pasture_HC_BCAP_CHST_Subsidy</to>
 				</connector>
-				<connector uid="4272" color="#C8C8C8" angle="102.529">
+				<connector uid="4271" color="#C8C8C8" angle="102.529">
 					<from>
-						<alias uid="4230"/>
+						<alias uid="4229"/>
 					</from>
 					<to>HC_GPPA_by_yr</to>
 				</connector>
-				<connector uid="4273" angle="200.556">
+				<connector uid="4272" angle="200.556">
 					<from>Residue_HCCPT</from>
 					<to>Residue_BCAP_CHST_Subsidy</to>
 				</connector>
-				<connector uid="4274" angle="20.556">
+				<connector uid="4273" angle="20.556">
 					<from>
-						<alias uid="4275"/>
+						<alias uid="4274"/>
 					</from>
 					<to>Annual_Payment_Subsidy</to>
 				</connector>
-				<connector uid="4276" color="#C8C8C8" angle="296.565">
+				<connector uid="4275" color="#C8C8C8" angle="296.565">
 					<from>
-						<alias uid="4277"/>
+						<alias uid="4276"/>
 					</from>
 					<to>Pasture_Hay_BCAP_CHST_Subsidy</to>
 				</connector>
-				<connector uid="4278" angle="270">
+				<connector uid="4277" angle="270">
 					<from>
-						<alias uid="4279"/>
+						<alias uid="4278"/>
 					</from>
 					<to>Pasture_PCEC_CHST</to>
 				</connector>
-				<connector uid="4280" angle="26.5651">
+				<connector uid="4279" angle="26.5651">
 					<from>
-						<alias uid="4281"/>
+						<alias uid="4280"/>
 					</from>
 					<to>Ag_PCEC_EST</to>
 				</connector>
-				<connector uid="4282" angle="90">
+				<connector uid="4281" angle="90">
 					<from>Pasture_Hay_BCAP_CHST_Subsidy</from>
 					<to>Pasture_Cellulose_Net_HCCPT</to>
 				</connector>
-				<connector uid="4283" angle="90">
+				<connector uid="4282" angle="90">
 					<from>WC_BCAP_CHST_Subsidy</from>
 					<to>WC_Net_HCCPT</to>
 				</connector>
-				<connector uid="4284" angle="341.565">
+				<connector uid="4283" angle="341.565">
 					<from>
-						<alias uid="4285"/>
+						<alias uid="4284"/>
 					</from>
 					<to>Establishment_Payment_Pct</to>
 				</connector>
-				<connector uid="4286" angle="110.556">
+				<connector uid="4285" angle="110.556">
 					<from>
-						<alias uid="4287"/>
+						<alias uid="4286"/>
 					</from>
 					<to>BCAP_EST_payment</to>
 				</connector>
-				<connector uid="4288" angle="90">
+				<connector uid="4287" angle="90">
 					<from>
-						<alias uid="4289"/>
+						<alias uid="4288"/>
 					</from>
 					<to>HS_Wtd_Pasture_YPA</to>
 				</connector>
-				<connector uid="4290" angle="0">
+				<connector uid="4289" angle="0">
 					<from>BAY_Annual_YPA_Nom_Units</from>
 					<to>Net_Annual_YPA_Nom_Units</to>
 				</connector>
-				<connector uid="4291" angle="225">
+				<connector uid="4290" angle="225">
 					<from>HC_Price_FarmGate</from>
 					<to>Pasture_As_Cellulose_GP</to>
 				</connector>
-				<connector uid="4292" angle="180">
+				<connector uid="4291" angle="180">
 					<from>
-						<alias uid="4293"/>
+						<alias uid="4292"/>
 					</from>
 					<to>Pasture_as_Pasture_PCPA</to>
 				</connector>
-				<connector uid="4294" angle="0">
+				<connector uid="4293" angle="0">
 					<from>Residue_PCPA</from>
 					<to>Residue_Net_PCPA</to>
 				</connector>
-				<connector uid="4295" color="#C8C8C8" angle="333.435">
+				<connector uid="4294" color="#C8C8C8" angle="333.435">
 					<from>
-						<alias uid="4277"/>
+						<alias uid="4276"/>
 					</from>
 					<to>Pasture_WC_BCAP_CHST_Subsidy</to>
 				</connector>
-				<connector uid="4296" angle="347.471">
+				<connector uid="4295" angle="347.471">
 					<from>ag_discount_factor_stack</from>
 					<to>WC_PCPA_Wtd_by_yr</to>
 				</connector>
-				<connector uid="4297" color="#C8C8C8" angle="69.444">
+				<connector uid="4296" color="#C8C8C8" angle="69.444">
 					<from>
-						<alias uid="4277"/>
+						<alias uid="4276"/>
 					</from>
 					<to>HC_BCAP_CHST_Subsidy</to>
 				</connector>
-				<connector uid="4298" angle="199.323">
+				<connector uid="4297" angle="199.323">
 					<from>
-						<alias uid="4133"/>
+						<alias uid="4132"/>
 					</from>
 					<to>ForRes_BCAP_CHST_Subsidy</to>
 				</connector>
-				<connector uid="4299" angle="347.471">
+				<connector uid="4298" angle="347.471">
 					<from>
-						<alias uid="4300"/>
+						<alias uid="4299"/>
 					</from>
 					<to>BAY_Hay_YPA</to>
 				</connector>
-				<connector uid="4301" angle="270">
+				<connector uid="4300" angle="270">
 					<from>WC_YPA_by_yr_pasture</from>
 					<to>WC_GPPA_by_pasture</to>
 				</connector>
-				<connector uid="4302" color="#5E5E5E" angle="315">
+				<connector uid="4301" color="#5E5E5E" angle="315">
 					<from>Hay_PCPA</from>
 					<to>Pasture_as_Pasture_PCPA</to>
 				</connector>
-				<connector uid="4303" angle="319.399">
+				<connector uid="4302" angle="319.399">
 					<from>
-						<alias uid="4304"/>
+						<alias uid="4303"/>
 					</from>
 					<to>UrbanRes_Price_CityGate</to>
 				</connector>
-				<connector uid="4305" angle="290.556">
+				<connector uid="4304" angle="290.556">
 					<from>Ann_Net_HC_GPPA</from>
 					<to>Ann_Net_PCEC_GPPA</to>
 				</connector>
-				<connector uid="4306" angle="63.4349">
+				<connector uid="4305" angle="63.4349">
 					<from>Disc_HC_PCPA_Pasture</from>
 					<to>Ann_Net_HC_GPPA_Pasture</to>
 				</connector>
-				<connector uid="4307" angle="90">
+				<connector uid="4306" angle="90">
 					<from>HS_wtd_WC_YPA_by_yr</from>
 					<to>WC_GPPA_by_yr</to>
 				</connector>
-				<connector uid="4308" angle="18.4349">
+				<connector uid="4307" angle="18.4349">
 					<from>
-						<alias uid="4309"/>
+						<alias uid="4308"/>
 					</from>
 					<to>Ag_PCEC_EST</to>
 				</connector>
-				<connector uid="4310" angle="90">
+				<connector uid="4309" angle="90">
 					<from>Residue_BCAP_CHST_Subsidy</from>
 					<to>Res_Net_HCCPT</to>
 				</connector>
-				<connector uid="4311" angle="0">
+				<connector uid="4310" angle="0">
 					<from>
-						<alias uid="4304"/>
+						<alias uid="4303"/>
 					</from>
 					<to>ForRes_Price_ForestGate</to>
 				</connector>
-				<connector uid="4312" angle="12.5288">
+				<connector uid="4311" angle="12.5288">
 					<from>
-						<alias uid="4313"/>
+						<alias uid="4312"/>
 					</from>
 					<to>Pasture_PCEC_CHST</to>
 				</connector>
-				<connector uid="4314" angle="20.556">
+				<connector uid="4313" angle="20.556">
 					<from>
-						<alias uid="4315"/>
+						<alias uid="4314"/>
 					</from>
 					<to>Net_Hay_GPPA</to>
 				</connector>
-				<connector uid="4316" angle="276.34">
+				<connector uid="4315" angle="276.34">
 					<from>ag_discount_factor_stack</from>
 					<to>WC_GPPA_Wtd_by_yr_Pasture</to>
 				</connector>
-				<connector uid="4317" angle="347.471">
+				<connector uid="4316" angle="347.471">
 					<from>WC_GPPA_by_yr</from>
 					<to>WC_GPPA_Wtd_by_yr</to>
 				</connector>
-				<connector uid="4318" color="#C8C8C8" angle="347.471">
+				<connector uid="4317" color="#C8C8C8" angle="347.471">
 					<from>
-						<alias uid="4277"/>
+						<alias uid="4276"/>
 					</from>
 					<to>WC_BCAP_CHST_Subsidy</to>
 				</connector>
-				<connector uid="4319" angle="0">
+				<connector uid="4318" angle="0">
 					<from>WC_GPPA_Wtd_by_yr_Pasture</from>
 					<to>Disc_WC_GPPA_Pasture</to>
 				</connector>
-				<connector uid="4320" angle="296.565">
+				<connector uid="4319" angle="296.565">
 					<from>Ann_Net_HC_GPPA_Pasture</from>
 					<to>Ann_Net_PCEC_GPPA_Pasture</to>
 				</connector>
-				<connector uid="4321" angle="341.565">
+				<connector uid="4320" angle="341.565">
 					<from>
-						<alias uid="4322"/>
+						<alias uid="4321"/>
 					</from>
 					<to>Turn_Off_Annual_Payment</to>
 				</connector>
-				<connector uid="4323" angle="26.5651">
+				<connector uid="4322" angle="26.5651">
 					<from>Annual_Payment_Subsidy</from>
 					<to>Ag_Cellulose_Annual_subs</to>
 				</connector>
-				<connector uid="4324" angle="90">
+				<connector uid="4323" angle="90">
 					<from>Pasture_Cellulose_Net_HCCPT</from>
 					<to>Pasture_As_Cellulose_GP</to>
 				</connector>
-				<connector uid="4325" angle="270">
+				<connector uid="4324" angle="270">
 					<from>BCAP_Ann_Payment_Start_Time</from>
 					<to>Turn_Off_Annual_Payment</to>
 				</connector>
-				<connector uid="4326" angle="353.66">
+				<connector uid="4325" angle="353.66">
 					<from>
-						<alias uid="4327"/>
+						<alias uid="4326"/>
 					</from>
 					<to>PCEC_Pasture_yield_factor</to>
 				</connector>
-				<connector uid="4328" color="#C8C8C8" angle="302.005">
+				<connector uid="4327" color="#C8C8C8" angle="302.005">
 					<from>
-						<alias uid="4163"/>
+						<alias uid="4162"/>
 					</from>
 					<to>WC_BCAP_CHST_Subsidy</to>
 				</connector>
-				<connector uid="4329" angle="282.529">
+				<connector uid="4328" angle="282.529">
 					<from>
-						<alias uid="4330"/>
+						<alias uid="4329"/>
 					</from>
 					<to>Pasture_PCEC_EST</to>
 				</connector>
-				<connector uid="4331" angle="0">
+				<connector uid="4330" angle="0">
 					<from>Hay_PCPA_cost_multiplier</from>
 					<to>Hay_PCPA</to>
 				</connector>
-				<connector uid="4332" angle="339.444">
+				<connector uid="4331" angle="339.444">
 					<from>Net_Annual_GPPA</from>
 					<to>Tot_GPPA_with_Res</to>
 				</connector>
-				<connector uid="4333" angle="20.556">
+				<connector uid="4332" angle="20.556">
 					<from>
-						<alias uid="4334"/>
+						<alias uid="4333"/>
 					</from>
 					<to>Net_Sec_Crop_GPPA</to>
 				</connector>
-				<connector uid="4335" angle="0">
+				<connector uid="4334" angle="0">
 					<from>
-						<alias uid="4336"/>
+						<alias uid="4335"/>
 					</from>
 					<to>Sec_Crop_GPPA_for_OP</to>
 				</connector>
-				<connector uid="4337" angle="0">
+				<connector uid="4336" angle="0">
 					<from>WC_PCPA_input_cost_sensitivity_factor</from>
 					<to>WC_PCPA_cost_multiplier</to>
 				</connector>
-				<connector uid="4338" angle="0">
+				<connector uid="4337" angle="0">
 					<from>HC_PCPA_by_yr</from>
 					<to>net_HC_PCPA_by_yr</to>
 				</connector>
-				<connector uid="4339" angle="270">
+				<connector uid="4338" angle="270">
 					<from>HC_PCPA_by_yr</from>
 					<to>HC_PCPA_by_yr_Pasture</to>
 				</connector>
-				<connector uid="4340" angle="90">
+				<connector uid="4339" angle="90">
 					<from>residue_switches</from>
 					<to>Residue_YPA</to>
 				</connector>
-				<connector uid="4341" angle="359.924">
+				<connector uid="4340" angle="359.924">
 					<from>Implicit_Pasture_as_Pasture_GP</from>
 					<to>Implicit_Pasture_GPPA</to>
 				</connector>
-				<connector uid="4342" angle="32.0054">
+				<connector uid="4341" angle="32.0054">
 					<from>
-						<alias uid="4343"/>
+						<alias uid="4342"/>
 					</from>
 					<to>Hay_GP</to>
 				</connector>
-				<connector uid="4344" angle="353.66">
+				<connector uid="4343" angle="353.66">
 					<from>
-						<alias uid="4345"/>
+						<alias uid="4344"/>
 					</from>
 					<to>PCEC_YPA_by_year</to>
 				</connector>
-				<connector uid="4346" angle="12.5288">
+				<connector uid="4345" angle="12.5288">
 					<from>
-						<alias uid="4347"/>
+						<alias uid="4346"/>
 					</from>
 					<to>Annual_PCPA</to>
 				</connector>
-				<connector uid="4348" angle="0">
+				<connector uid="4347" angle="0">
 					<from>Hay_PCPA</from>
 					<to>Pasture_as_Cellulose_PCPA</to>
 				</connector>
-				<connector uid="4349" angle="0">
+				<connector uid="4348" angle="0">
 					<from>
-						<alias uid="4350"/>
+						<alias uid="4349"/>
 					</from>
 					<to>Ag_Cellulose_Annual_subs</to>
 				</connector>
-				<connector uid="4351" angle="180">
+				<connector uid="4350" angle="180">
 					<from>
-						<alias uid="4352"/>
+						<alias uid="4351"/>
 					</from>
 					<to>MAX_residue_YPA</to>
 				</connector>
-				<connector uid="4353" angle="18.4349">
+				<connector uid="4352" angle="18.4349">
 					<from>Net_Annual_YPA_Nom_Units</from>
 					<to>Annual_GPPA</to>
 				</connector>
-				<connector uid="4354" angle="0">
+				<connector uid="4353" angle="0">
 					<from>BAY_HC_YPA_by_yr</from>
 					<to>HC_YPA_by_yr</to>
 				</connector>
-				<connector uid="4355" color="#C8C8C8" angle="90">
+				<connector uid="4354" color="#C8C8C8" angle="90">
 					<from>
-						<alias uid="4199"/>
+						<alias uid="4198"/>
 					</from>
 					<to>Ann_Net_HC_GPPA</to>
 				</connector>
-				<connector uid="4356" angle="0">
+				<connector uid="4355" angle="0">
 					<from>WC_GP</from>
 					<to>WC_GPPA_by_yr</to>
 				</connector>
-				<connector uid="4357" angle="10.6348">
+				<connector uid="4356" angle="10.6348">
 					<from>Ag_PCEC_EST</from>
 					<to>BCAP_EST_payment</to>
 				</connector>
-				<connector uid="4358" angle="0">
+				<connector uid="4357" angle="0">
 					<from>WC_PCPA_cost_multiplier</from>
 					<to>WC_PCPA_by_yr</to>
 				</connector>
-				<connector uid="4359" angle="18.4349">
+				<connector uid="4358" angle="18.4349">
 					<from>
-						<alias uid="4360"/>
+						<alias uid="4359"/>
 					</from>
 					<to>WC_PCPA_by_yr</to>
 				</connector>
-				<connector uid="4361" color="#C8C8C8" angle="71.5651">
+				<connector uid="4360" color="#C8C8C8" angle="71.5651">
 					<from>
-						<alias uid="4277"/>
+						<alias uid="4276"/>
 					</from>
 					<to>Residue_BCAP_CHST_Subsidy</to>
 				</connector>
-				<connector uid="4362" angle="339.444">
+				<connector uid="4361" angle="339.444">
 					<from>
-						<alias uid="4363"/>
+						<alias uid="4362"/>
 					</from>
 					<to>WC_YPA_by_yr_pasture</to>
 				</connector>
-				<connector uid="4364" angle="0">
+				<connector uid="4363" angle="0">
 					<from>
-						<alias uid="4365"/>
+						<alias uid="4364"/>
 					</from>
 					<to>WC_PCPA_Wtd_by_yr_Pasture</to>
 				</connector>
-				<connector uid="4366" angle="0">
+				<connector uid="4365" angle="0">
 					<from>
-						<alias uid="4367"/>
+						<alias uid="4366"/>
 					</from>
 					<to>BCAP_Ann_Payment_Start_Time</to>
 				</connector>
-				<connector uid="4368" angle="290.978">
+				<connector uid="4367" angle="290.978">
 					<from>
-						<alias uid="4122"/>
+						<alias uid="4121"/>
 					</from>
 					<to>WC_Price_FarmGate</to>
 				</connector>
-				<connector uid="4369" color="#C8C8C8" angle="63.4349">
+				<connector uid="4368" color="#C8C8C8" angle="63.4349">
 					<from>input_cost_sensitivity_switch</from>
 					<to>Crop_PCPA_cost_multiplier</to>
 				</connector>
-				<connector uid="4370" angle="6.34019">
+				<connector uid="4369" angle="6.34019">
 					<from>
-						<alias uid="4371"/>
+						<alias uid="4370"/>
 					</from>
 					<to>PCEC_Pasture_yield_factor</to>
 				</connector>
-				<connector uid="4372" angle="0">
+				<connector uid="4371" angle="0">
 					<from>Annual_YPA_TPA</from>
 					<to>MAX_residue_YPA</to>
 				</connector>
-				<connector uid="4373" angle="0">
+				<connector uid="4372" angle="0">
 					<from>Sec_Crop_GPPA_for_OP</from>
 					<to>Net_Sec_Crop_GPPA</to>
 				</connector>
-				<connector uid="4374" angle="0">
+				<connector uid="4373" angle="0">
 					<from>Residue_PCPA_input_cost_sensitivity_factor</from>
 					<to>Res_PCPA_cost_multiplier</to>
 				</connector>
-				<connector uid="4375" angle="20.1252">
+				<connector uid="4374" angle="20.1252">
 					<from>Ag_Cellulose_Annual_subs</from>
 					<to>BCAP_annual_payment</to>
 				</connector>
-				<connector uid="4376" angle="20.556">
+				<connector uid="4375" angle="20.556">
 					<from>
-						<alias uid="4377"/>
+						<alias uid="4376"/>
 					</from>
 					<to>HC_YPA_by_yr</to>
 				</connector>
-				<connector uid="4378" angle="0">
+				<connector uid="4377" angle="0">
 					<from>Res_PCPA_cost_multiplier</from>
 					<to>Residue_PCPA</to>
 				</connector>
-				<connector uid="4379" angle="161.565">
+				<connector uid="4378" angle="161.565">
 					<from>
-						<alias uid="4380"/>
+						<alias uid="4379"/>
 					</from>
 					<to>Residue_PCPA</to>
 				</connector>
-				<connector uid="4381" angle="180">
+				<connector uid="4380" angle="180">
 					<from>HC_HCCPT</from>
 					<to>HC_BCAP_CHST_Subsidy</to>
 				</connector>
-				<connector uid="4382" angle="0">
+				<connector uid="4381" angle="0">
 					<from>
-						<alias uid="4383"/>
+						<alias uid="4382"/>
 					</from>
 					<to>Hay_GP</to>
 				</connector>
-				<connector uid="4384" angle="0">
+				<connector uid="4383" angle="0">
 					<from>Net_Residue_GPPA</from>
 					<to>Tot_GPPA_with_Res</to>
 				</connector>
-				<connector uid="4385" angle="6.34019">
+				<connector uid="4384" angle="6.34019">
 					<from>
-						<alias uid="4386"/>
+						<alias uid="4385"/>
 					</from>
 					<to>Annual_GP</to>
 				</connector>
-				<connector uid="4387" angle="153.435">
+				<connector uid="4386" angle="153.435">
 					<from>Pasture_WC_HCCPT</from>
 					<to>Pasture_WC_BCAP_CHST_Subsidy</to>
 				</connector>
-				<connector uid="4388" angle="0">
+				<connector uid="4387" angle="0">
 					<from>Pasture_WC_GP</from>
 					<to>WC_GPPA_by_pasture</to>
 				</connector>
-				<connector uid="4389" angle="0">
+				<connector uid="4388" angle="0">
 					<from>Residue_Price_Farmgate</from>
 					<to>Residue_Price_Field</to>
 				</connector>
-				<connector uid="4390" angle="243.435">
+				<connector uid="4389" angle="243.435">
 					<from>Pasture_Net_WC_HCCPT</from>
 					<to>Pasture_WC_GP</to>
 				</connector>
-				<connector uid="4391" angle="0">
+				<connector uid="4390" angle="0">
 					<from>Disc_WC_GPPA_Pasture</from>
 					<to>Ann_Net_WC_GPPA_Pasture</to>
 				</connector>
-				<connector uid="4392" angle="90">
+				<connector uid="4391" angle="90">
 					<from>WC_Net_HCCPT</from>
 					<to>WC_GP</to>
 				</connector>
-				<connector uid="4393" angle="347.471">
+				<connector uid="4392" angle="347.471">
 					<from>WC_PCPA_by_yr</from>
 					<to>BCAP_WC_est_subs_by_year</to>
 				</connector>
-				<connector uid="4394" color="#C8C8C8" angle="54.4623">
+				<connector uid="4393" color="#C8C8C8" angle="54.4623">
 					<from>input_cost_sensitivity_switch</from>
 					<to>Res_PCPA_cost_multiplier</to>
 				</connector>
-				<connector uid="4395" angle="0">
+				<connector uid="4394" angle="0">
 					<from>WC_PCPA_Wtd_by_yr</from>
 					<to>Disc_WC_PCPA</to>
 				</connector>
-				<connector uid="4396" angle="0">
+				<connector uid="4395" angle="0">
 					<from>HC_PCPA_cost_multiplier</from>
 					<to>HC_PCPA_by_yr</to>
 				</connector>
-				<connector uid="4397" angle="186.34">
+				<connector uid="4396" angle="186.34">
 					<from>
-						<alias uid="4398"/>
+						<alias uid="4397"/>
 					</from>
 					<to>HS_Wtd_Pasture_YPA</to>
 				</connector>
-				<connector uid="4399" angle="319.399">
+				<connector uid="4398" angle="319.399">
 					<from>HC_Price_FarmGate</from>
 					<to>HC_GP_Pasture</to>
 				</connector>
-				<connector uid="4400" angle="0">
+				<connector uid="4399" angle="0">
 					<from>Hay_GPPA</from>
 					<to>Net_Hay_GPPA</to>
 				</connector>
-				<connector uid="4401" angle="90">
+				<connector uid="4400" angle="90">
 					<from>
-						<alias uid="4279"/>
+						<alias uid="4278"/>
 					</from>
 					<to>Ag_PCEC_CHST</to>
 				</connector>
-				<connector uid="4402" angle="192.529">
+				<connector uid="4401" angle="192.529">
 					<from>
-						<alias uid="4403"/>
+						<alias uid="4402"/>
 					</from>
 					<to>ForRes_BCAP_CHST_Subsidy_1</to>
 				</connector>
-				<connector uid="4404" angle="0">
+				<connector uid="4403" angle="0">
 					<from>annual_payment_subsidy_annual_residue</from>
 					<to>Residue_Annual_subs</to>
 				</connector>
-				<connector uid="4405" angle="319.399">
+				<connector uid="4404" angle="319.399">
 					<from>
-						<alias uid="4406"/>
+						<alias uid="4405"/>
 					</from>
 					<to>Hay_YPA</to>
 				</connector>
-				<connector uid="4407" angle="0">
+				<connector uid="4406" angle="0">
 					<from>HC_PCPA_Wtd_by_yr_Pasture</from>
 					<to>Disc_HC_PCPA_Pasture</to>
 				</connector>
-				<connector uid="4408" color="#C8C8C8" angle="6.34019">
+				<connector uid="4407" color="#C8C8C8" angle="6.34019">
 					<from>
-						<alias uid="4163"/>
+						<alias uid="4162"/>
 					</from>
 					<to>HC_BCAP_CHST_Subsidy</to>
 				</connector>
-				<connector uid="4409" angle="0">
+				<connector uid="4408" angle="0">
 					<from>HC_Price_FarmGate</from>
 					<to>HC_GP</to>
 				</connector>
-				<connector uid="4410" angle="159.444">
+				<connector uid="4409" angle="159.444">
 					<from>WC_HCCPT</from>
 					<to>WC_Net_HCCPT</to>
 				</connector>
-				<connector uid="4411" angle="147.588">
+				<connector uid="4410" angle="147.588">
 					<from>Forest_and_Urban_Annual_Subs</from>
 					<to>BCAP_annual_payment</to>
 				</connector>
-				<connector uid="4412" angle="0">
+				<connector uid="4411" angle="0">
 					<from>ForRes_Price_ForestGate</from>
 					<to>ForRes_GP</to>
 				</connector>
-				<connector uid="4413" angle="0">
+				<connector uid="4412" angle="0">
 					<from>WC_GPPA_Wtd_by_yr</from>
 					<to>Disc_WC_GPPA</to>
 				</connector>
-				<connector uid="4414" angle="77.4712">
+				<connector uid="4413" angle="77.4712">
 					<from>
-						<alias uid="4415"/>
+						<alias uid="4414"/>
 					</from>
 					<to>BCAP_CHST_payment</to>
 				</connector>
-				<connector uid="4416" angle="0">
+				<connector uid="4415" angle="0">
 					<from>Disc_HerbCell_GPPA_Pasture</from>
 					<to>Ann_Net_HC_GPPA_Pasture</to>
 				</connector>
-				<connector uid="4417" angle="40.6013">
+				<connector uid="4416" angle="40.6013">
 					<from>UrbanRes_Net_HCCPT</from>
 					<to>UrbanRes_GP</to>
 				</connector>
-				<connector uid="4418" angle="347.471">
+				<connector uid="4417" angle="347.471">
 					<from>
-						<alias uid="4419"/>
+						<alias uid="4418"/>
 					</from>
 					<to>Pasture_PCEC_EST</to>
 				</connector>
-				<connector uid="4420" angle="83.6598">
+				<connector uid="4419" angle="83.6598">
 					<from>
-						<alias uid="4330"/>
+						<alias uid="4329"/>
 					</from>
 					<to>Ag_PCEC_EST</to>
 				</connector>
-				<connector uid="4421" angle="353.66">
+				<connector uid="4420" angle="353.66">
 					<from>
-						<alias uid="4422"/>
+						<alias uid="4421"/>
 					</from>
 					<to>Pasture_PCEC_CHST</to>
 				</connector>
-				<connector uid="4423" angle="296.565">
+				<connector uid="4422" angle="296.565">
 					<from>delta_in_gasoline_input_cost</from>
 					<to>WC_PCPA_cost_multiplier</to>
 				</connector>
-				<connector uid="4424" angle="0">
+				<connector uid="4423" angle="0">
 					<from>Annual_GP</from>
 					<to>Annual_GPPA</to>
 				</connector>
-				<connector uid="4425" angle="319.399">
+				<connector uid="4424" angle="319.399">
 					<from>delta_in_gasoline_input_cost</from>
 					<to>Res_PCPA_cost_multiplier</to>
 				</connector>
-				<connector uid="4426" angle="270">
+				<connector uid="4425" angle="270">
 					<from>Pasture_YPA</from>
 					<to>Implicit_Pasture_GPPA</to>
 				</connector>
-				<connector uid="4427" angle="35.5377">
+				<connector uid="4426" angle="35.5377">
 					<from>ag_discount_factor_stack</from>
 					<to>HerbCell_GPPA_Wtd_by_yr_Pasture</to>
 				</connector>
-				<connector uid="4428" angle="339.444">
+				<connector uid="4427" angle="339.444">
 					<from>BCAP_HC_est_subs_by_year</from>
 					<to>net_HC_PCPA_by_yr</to>
 				</connector>
-				<connector uid="4429" angle="90">
+				<connector uid="4428" angle="90">
 					<from>
-						<alias uid="4430"/>
+						<alias uid="4429"/>
 					</from>
 					<to>Residue_HCCPT</to>
 				</connector>
-				<connector uid="4431" angle="18.4349">
+				<connector uid="4430" angle="18.4349">
 					<from>
-						<alias uid="4432"/>
+						<alias uid="4431"/>
 					</from>
 					<to>Sec_Crop_PCPA</to>
 				</connector>
-				<connector uid="4433" angle="83.6598">
+				<connector uid="4432" angle="83.6598">
 					<from>ag_discount_factor_stack</from>
 					<to>HC_GPPA_Wtd_by_yr</to>
 				</connector>
-				<connector uid="4434" color="#C8C8C8" angle="0">
+				<connector uid="4433" color="#C8C8C8" angle="0">
 					<from>input_cost_sensitivity_switch</from>
 					<to>HC_PCPA_cost_multiplier</to>
 				</connector>
-				<connector uid="4435" angle="18.4349">
+				<connector uid="4434" angle="18.4349">
 					<from>
-						<alias uid="4436"/>
+						<alias uid="4435"/>
 					</from>
 					<to>Net_Annual_YPA_Nom_Units</to>
 				</connector>
-				<connector uid="4437" angle="20.556">
+				<connector uid="4436" angle="20.556">
 					<from>
-						<alias uid="4438"/>
+						<alias uid="4437"/>
 					</from>
 					<to>Net_Annual_GPPA</to>
 				</connector>
-				<connector uid="4439" angle="270">
+				<connector uid="4438" angle="270">
 					<from>Annual_Payment_Subsidy</from>
 					<to>annual_payment_subsidy_annual_residue</to>
 				</connector>
-				<connector uid="4440" angle="6.34019">
+				<connector uid="4439" angle="6.34019">
 					<from>HerbCell_GPPA_by_yr_Pasture</from>
 					<to>HerbCell_GPPA_Wtd_by_yr_Pasture</to>
 				</connector>
-				<connector uid="4441" angle="32.0054">
+				<connector uid="4440" angle="32.0054">
 					<from>
-						<alias uid="4442"/>
+						<alias uid="4441"/>
 					</from>
 					<to>Ag_PCEC_CHST</to>
 				</connector>
-				<connector uid="4443" color="#C8C8C8" angle="282.529">
+				<connector uid="4442" color="#C8C8C8" angle="282.529">
 					<from>
-						<alias uid="4444"/>
+						<alias uid="4443"/>
 					</from>
 					<to>Ann_Net_WC_GPPA_Pasture</to>
 				</connector>
-				<connector uid="4445" angle="0">
+				<connector uid="4444" angle="0">
 					<from>avg_gasoline_input_cost_PoD</from>
 					<to>delta_in_gasoline_input_cost</to>
 				</connector>
-				<connector uid="4446" angle="305.538">
+				<connector uid="4445" angle="305.538">
 					<from>
-						<alias uid="4155"/>
+						<alias uid="4154"/>
 					</from>
 					<to>ForRes_BCAP_CHST_Subsidy_1</to>
 				</connector>
-				<connector uid="4447" angle="0">
+				<connector uid="4446" angle="0">
 					<from>
-						<alias uid="4448"/>
+						<alias uid="4447"/>
 					</from>
 					<to>HC_PCPA_Wtd_by_yr</to>
 				</connector>
-				<connector uid="4449" angle="310.601">
+				<connector uid="4448" angle="310.601">
 					<from>delta_in_gasoline_input_cost</from>
 					<to>Hay_PCPA_cost_multiplier</to>
 				</connector>
-				<connector uid="4450" color="#C8C8C8" angle="200.556">
+				<connector uid="4449" color="#C8C8C8" angle="200.556">
 					<from>
-						<alias uid="4180"/>
+						<alias uid="4179"/>
 					</from>
 					<to>BCAP_HC_est_subs_by_year_pasture</to>
 				</connector>
-				<connector uid="4451" color="#C8C8C8" angle="35.5377">
+				<connector uid="4450" color="#C8C8C8" angle="35.5377">
 					<from>
-						<alias uid="4277"/>
+						<alias uid="4276"/>
 					</from>
 					<to>Pasture_HC_BCAP_CHST_Subsidy</to>
 				</connector>
-				<connector uid="4452" angle="306.271">
+				<connector uid="4451" angle="306.271">
 					<from>Ag_PCEC_CHST</from>
 					<to>BCAP_CHST_payment</to>
 				</connector>
-				<connector uid="4453" angle="26.5651">
+				<connector uid="4452" angle="26.5651">
 					<from>
-						<alias uid="4454"/>
+						<alias uid="4453"/>
 					</from>
 					<to>Establishment_Payment_Pct</to>
 				</connector>
-				<connector uid="4455" angle="0">
+				<connector uid="4454" angle="0">
 					<from>WC_PCPA_Wtd_by_yr_Pasture</from>
 					<to>Disc_WC_PCPA_Pasture</to>
 				</connector>
-				<connector uid="4456" angle="347.471">
+				<connector uid="4455" angle="347.471">
 					<from>HC_PCPA_by_yr_Pasture</from>
 					<to>net_HC_PCPA_by_yr_Pasture</to>
 				</connector>
-				<connector uid="4457" angle="40.6013">
+				<connector uid="4456" angle="40.6013">
 					<from>
-						<alias uid="4458"/>
+						<alias uid="4457"/>
 					</from>
 					<to>BAY_HC_YPA_by_yr</to>
 				</connector>
-				<connector uid="4459" color="#C8C8C8" angle="63.4349">
+				<connector uid="4458" color="#C8C8C8" angle="63.4349">
 					<from>
-						<alias uid="4444"/>
+						<alias uid="4443"/>
 					</from>
 					<to>Ann_Net_WC_GPPA</to>
 				</connector>
-				<connector uid="4460" angle="359.904">
+				<connector uid="4459" angle="359.904">
 					<from>Hay_GP</from>
 					<to>Hay_GPPA</to>
 				</connector>
-				<connector uid="4461" angle="54.4623">
+				<connector uid="4460" angle="54.4623">
 					<from>Ann_Net_WC_GPPA_Pasture</from>
 					<to>Ann_Net_PCEC_GPPA_Pasture</to>
 				</connector>
-				<connector uid="4462" angle="0">
+				<connector uid="4461" angle="0">
 					<from>
-						<alias uid="4463"/>
+						<alias uid="4462"/>
 					</from>
 					<to>Annual_GP</to>
 				</connector>
-				<connector uid="4464" angle="347.471">
+				<connector uid="4463" angle="347.471">
 					<from>delta_in_gasoline_input_cost</from>
 					<to>Crop_PCPA_cost_multiplier</to>
 				</connector>
-				<connector uid="4465" angle="270">
+				<connector uid="4464" angle="270">
 					<from>HS_wtd_HC_YPA_by_yr</from>
 					<to>HC_YPA_pasture_by_yr</to>
 				</connector>
-				<connector uid="4466" angle="180">
+				<connector uid="4465" angle="180">
 					<from>
-						<alias uid="4403"/>
+						<alias uid="4402"/>
 					</from>
 					<to>UrbanRes_Net_HCCPT</to>
 				</connector>
-				<connector uid="4467" angle="333.435">
+				<connector uid="4466" angle="333.435">
 					<from>
-						<alias uid="4468"/>
+						<alias uid="4467"/>
 					</from>
 					<to>PCEC_YPA_by_year</to>
 				</connector>
-				<connector uid="4469" angle="90">
+				<connector uid="4468" angle="90">
 					<from>ForRes_BCAP_CHST_Subsidy_1</from>
 					<to>UrbanRes_Net_HCCPT</to>
 				</connector>
-				<connector uid="4470" angle="0">
+				<connector uid="4469" angle="0">
 					<from>
-						<alias uid="4471"/>
+						<alias uid="4470"/>
 					</from>
 					<to>WC_YPA_by_yr</to>
 				</connector>
-				<connector uid="4472" angle="0">
+				<connector uid="4471" angle="0">
 					<from>UrbanRes_Price_CityGate</from>
 					<to>UrbanRes_GP</to>
 				</connector>
-				<connector uid="4473" angle="70.0169">
+				<connector uid="4472" angle="70.0169">
 					<from>
-						<alias uid="4122"/>
+						<alias uid="4121"/>
 					</from>
 					<to>Residue_Price_Farmgate</to>
 				</connector>
-				<connector uid="4474" angle="0">
+				<connector uid="4473" angle="0">
 					<from>Pasture_as_Cellulose_GPPA</from>
 					<to>Ann_Net_Pasture_as_Cellulose_GPPA</to>
 				</connector>
-				<connector uid="4475" angle="0">
+				<connector uid="4474" angle="0">
 					<from>HC_GP</from>
 					<to>HC_GPPA_by_yr</to>
 				</connector>
-				<connector uid="4476" angle="40.6013">
+				<connector uid="4475" angle="40.6013">
 					<from>ForRes_Net_HCCPT</from>
 					<to>ForRes_GP</to>
 				</connector>
-				<connector uid="4477" angle="90">
+				<connector uid="4476" angle="90">
 					<from>
-						<alias uid="4367"/>
+						<alias uid="4366"/>
 					</from>
 					<to>Turn_Off_CHST</to>
 				</connector>
-				<connector uid="4478" angle="0">
+				<connector uid="4477" angle="0">
 					<from>Implicit_Pasture_GPPA</from>
 					<to>Ann_Net_Pasture_as_Pasture_GPPA</to>
 				</connector>
-				<connector uid="4479" angle="180">
+				<connector uid="4478" angle="180">
 					<from>
-						<alias uid="4480"/>
+						<alias uid="4479"/>
 					</from>
 					<to>Residue_Net_PCPA</to>
 				</connector>
-				<connector uid="4481" angle="270">
+				<connector uid="4480" angle="270">
 					<from>HS_wtd_WC_YPA_by_yr</from>
 					<to>WC_YPA_by_yr_pasture</to>
 				</connector>
-				<connector uid="4482" angle="270">
+				<connector uid="4481" angle="270">
 					<from>Pasture_WC_BCAP_CHST_Subsidy</from>
 					<to>Pasture_Net_WC_HCCPT</to>
 				</connector>
-				<connector uid="4483" angle="198.435">
+				<connector uid="4482" angle="198.435">
 					<from>Pasture_Hay_HCCPT</from>
 					<to>Pasture_Hay_BCAP_CHST_Subsidy</to>
 				</connector>
-				<connector uid="4484" angle="90">
+				<connector uid="4483" angle="90">
 					<from>
-						<alias uid="4485"/>
+						<alias uid="4484"/>
 					</from>
 					<to>Pasture_WC_HCCPT</to>
 				</connector>
-				<connector uid="4486" angle="90">
+				<connector uid="4485" angle="90">
 					<from>HS_Wtd_Pasture_YPA</from>
 					<to>Pasture_as_Cellulose_GPPA</to>
 				</connector>
-				<connector uid="4487" color="#C8C8C8" angle="282.529">
+				<connector uid="4486" color="#C8C8C8" angle="282.529">
 					<from>
-						<alias uid="4163"/>
+						<alias uid="4162"/>
 					</from>
 					<to>Pasture_Hay_BCAP_CHST_Subsidy</to>
 				</connector>
-				<connector uid="4488" angle="0">
+				<connector uid="4487" angle="0">
 					<from>HC_GP_Pasture</from>
 					<to>HerbCell_GPPA_by_yr_Pasture</to>
 				</connector>
-				<connector uid="4489" angle="263.66">
+				<connector uid="4488" angle="263.66">
 					<from>HC_YPA_pasture_by_yr</from>
 					<to>HerbCell_GPPA_by_yr_Pasture</to>
 				</connector>
-				<connector uid="4490" angle="180">
+				<connector uid="4489" angle="180">
 					<from>Residue_HCCPT</from>
 					<to>Res_Net_HCCPT</to>
 				</connector>
-				<connector uid="4491" color="#C8C8C8" angle="49.3987">
+				<connector uid="4490" color="#C8C8C8" angle="49.3987">
 					<from>input_cost_sensitivity_switch</from>
 					<to>Hay_PCPA_cost_multiplier</to>
 				</connector>
-				<connector uid="4492" angle="0">
+				<connector uid="4491" angle="0">
 					<from>Pasture_As_Cellulose_GP</from>
 					<to>Pasture_as_Cellulose_GPPA</to>
 				</connector>
-				<connector uid="4493" angle="270">
+				<connector uid="4492" angle="270">
 					<from>Hay_GP</from>
 					<to>Implicit_Pasture_as_Pasture_GP</to>
 				</connector>
-				<connector uid="4494" angle="18.4349">
+				<connector uid="4493" angle="18.4349">
 					<from>
-						<alias uid="4495"/>
+						<alias uid="4494"/>
 					</from>
 					<to>Ag_PCEC_CHST</to>
 				</connector>
-				<connector uid="4496" angle="239.974">
+				<connector uid="4495" angle="239.974">
 					<from>
-						<alias uid="4497"/>
+						<alias uid="4496"/>
 					</from>
 					<to>BCAP_CHST_payment</to>
 				</connector>
-				<connector uid="4498" angle="0">
+				<connector uid="4497" angle="0">
 					<from>Crop_PCPA_cost_multiplier</from>
 					<to>Annual_PCPA</to>
 				</connector>
-				<connector uid="4499" angle="0">
+				<connector uid="4498" angle="0">
 					<from>HAY_PCPA_input_cost_sensitivity_factor</from>
 					<to>Hay_PCPA_cost_multiplier</to>
 				</connector>
-				<connector uid="4500" angle="90">
+				<connector uid="4499" angle="90">
 					<from>
-						<alias uid="4501"/>
+						<alias uid="4500"/>
 					</from>
 					<to>Net_Residue_GPPA</to>
 				</connector>
-				<connector uid="4502" angle="359.883">
+				<connector uid="4501" angle="359.883">
 					<from>WC_Price_FarmGate</from>
 					<to>WC_GP</to>
 				</connector>
-				<connector uid="4503" angle="49.3987">
+				<connector uid="4502" angle="49.3987">
 					<from>
-						<alias uid="4504"/>
+						<alias uid="4503"/>
 					</from>
 					<to>Turn_Off_CHST</to>
 				</connector>
-				<connector uid="4505" angle="90">
+				<connector uid="4504" angle="90">
 					<from>HS_wtd_HC_YPA_by_yr</from>
 					<to>HC_GPPA_by_yr</to>
 				</connector>
-				<connector uid="4506" angle="317.603">
+				<connector uid="4505" angle="317.603">
 					<from>WC_Price_FarmGate</from>
 					<to>Pasture_WC_GP</to>
 				</connector>
-				<text_box color="black" padding="1" appearance="transparent" uid="4507" x="490" y="781" width="136" height="25">From FSM</text_box>
-				<text_box color="black" padding="1" appearance="transparent" uid="4508" x="246" y="662" width="136" height="25">From FM</text_box>
-				<text_box color="black" padding="1" appearance="transparent" uid="4509" x="492" y="663" width="136" height="25">From OIM</text_box>
-				<text_box color="black" padding="5" border_width="thin" border_style="solid" appearance="transparent" uid="4510" x="187" y="2007" width="108" height="25">misc inputs</text_box>
-				<text_box color="black" padding="5" border_width="thin" border_style="solid" appearance="transparent" uid="4511" x="7" y="2002" width="160" height="41">pricing and grower payment inputs</text_box>
-				<text_box color="black" padding="5" border_width="thin" border_style="solid" appearance="transparent" uid="4512" x="303" y="2073" width="443" height="28">BCAP inputs</text_box>
-				<text_box color="black" padding="5" border_width="thin" border_style="solid" appearance="transparent" uid="4513" x="2007" y="1691" width="136" height="81">does BCAP apply to pasture as cellulose???</text_box>
-				<text_box color="black" font_size="24pt" padding="5" appearance="transparent" uid="4514" x="8" y="13" width="638" height="51">Biomass Scenario Model Grower Payment Module</text_box>
-				<text_box color="red" vertical_text_align="center" font_color="red" padding="5" border_color="red" border_width="2" border_style="solid" appearance="transparent" uid="4515" x="12" y="250" width="350" height="36">RED:  Data Input (Constant, Ass&apos;n, Scenario, SSheet)</text_box>
-				<text_box color="#008F44" vertical_text_align="center" font_color="#008F44" padding="5" border_color="#008F44" border_width="2" border_style="solid" appearance="transparent" uid="4516" x="385" y="203" width="350" height="36">GREEN:  Output from this Sector to another Sector</text_box>
-				<text_box color="blue" vertical_text_align="center" font_color="blue" padding="5" border_color="blue" border_width="2" border_style="solid" appearance="transparent" uid="4517" x="12" y="202" width="350" height="36">BLUE:  Input to this Sector from another Sector</text_box>
-				<text_box color="black" vertical_text_align="center" padding="5" border_width="2" border_style="solid" appearance="transparent" uid="4518" x="385" y="250" width="350" height="36">BLACK:  Internal Calculation Within This Sector</text_box>
-				<text_box color="#7F00FF" vertical_text_align="center" font_color="#7F00FF" padding="5" border_color="#7F00FF" border_width="2" border_style="solid" appearance="transparent" uid="4519" x="12" y="155" width="350" height="36">Purple:  Input to this MODULE from another MODULE</text_box>
-				<text_box color="#65183E" vertical_text_align="center" font_color="#65183E" padding="5" border_color="#65183E" border_width="2" border_style="solid" appearance="transparent" uid="4520" x="385" y="155" width="350" height="36">Brown:  Output from this MODULE from another MODULE</text_box>
-				<text_box color="black" padding="1" appearance="transparent" uid="4521" x="34" y="663" width="136" height="25">From FLM</text_box>
+				<text_box color="black" padding="1" appearance="transparent" uid="4506" x="490" y="781" width="136" height="25">From FSM</text_box>
+				<text_box color="black" padding="1" appearance="transparent" uid="4507" x="246" y="662" width="136" height="25">From FM</text_box>
+				<text_box color="black" padding="1" appearance="transparent" uid="4508" x="492" y="663" width="136" height="25">From OIM</text_box>
+				<text_box color="black" padding="5" border_width="thin" border_style="solid" appearance="transparent" uid="4509" x="187" y="2007" width="108" height="25">misc inputs</text_box>
+				<text_box color="black" padding="5" border_width="thin" border_style="solid" appearance="transparent" uid="4510" x="7" y="2002" width="160" height="41">pricing and grower payment inputs</text_box>
+				<text_box color="black" padding="5" border_width="thin" border_style="solid" appearance="transparent" uid="4511" x="303" y="2073" width="443" height="28">BCAP inputs</text_box>
+				<text_box color="black" padding="5" border_width="thin" border_style="solid" appearance="transparent" uid="4512" x="2007" y="1691" width="136" height="81">does BCAP apply to pasture as cellulose???</text_box>
+				<text_box color="black" font_size="24pt" padding="5" appearance="transparent" uid="4513" x="8" y="13" width="638" height="51">Biomass Scenario Model Grower Payment Module</text_box>
+				<text_box color="red" vertical_text_align="center" font_color="red" padding="5" border_color="red" border_width="2" border_style="solid" appearance="transparent" uid="4514" x="12" y="250" width="350" height="36">RED:  Data Input (Constant, Ass&apos;n, Scenario, SSheet)</text_box>
+				<text_box color="#008F44" vertical_text_align="center" font_color="#008F44" padding="5" border_color="#008F44" border_width="2" border_style="solid" appearance="transparent" uid="4515" x="385" y="203" width="350" height="36">GREEN:  Output from this Sector to another Sector</text_box>
+				<text_box color="blue" vertical_text_align="center" font_color="blue" padding="5" border_color="blue" border_width="2" border_style="solid" appearance="transparent" uid="4516" x="12" y="202" width="350" height="36">BLUE:  Input to this Sector from another Sector</text_box>
+				<text_box color="black" vertical_text_align="center" padding="5" border_width="2" border_style="solid" appearance="transparent" uid="4517" x="385" y="250" width="350" height="36">BLACK:  Internal Calculation Within This Sector</text_box>
+				<text_box color="#7F00FF" vertical_text_align="center" font_color="#7F00FF" padding="5" border_color="#7F00FF" border_width="2" border_style="solid" appearance="transparent" uid="4518" x="12" y="155" width="350" height="36">Purple:  Input to this MODULE from another MODULE</text_box>
+				<text_box color="#65183E" vertical_text_align="center" font_color="#65183E" padding="5" border_color="#65183E" border_width="2" border_style="solid" appearance="transparent" uid="4519" x="385" y="155" width="350" height="36">Brown:  Output from this MODULE from another MODULE</text_box>
+				<text_box color="black" padding="1" appearance="transparent" uid="4520" x="34" y="663" width="136" height="25">From FLM</text_box>
 				<aux color="#65183E" font_color="#65183E" label_side="top" x="1794" y="96" name="Net Annual YPA Nom Units"/>
 				<aux color="black" font_color="black" label_angle="150.706" x="1652" y="60" name="Annual GP"/>
 				<aux color="black" font_color="black" label_angle="322.149" x="1907" y="60" name="Annual GPPA"/>
@@ -8593,145 +8592,146 @@ COMMENTS: </doc>
 				<aux color="black" font_color="black" label_side="top" x="1911" y="188" name="MAX residue YPA"/>
 				<aux color="red" font_color="red" x="309" y="1797" name="harvest index"/>
 				<group isee:name_image="true" locked="false" x="1" y="1755" width="761" height="588" name="inputs">
+					<item uid="4509"/>
 					<item uid="4510"/>
 					<item uid="4511"/>
-					<item uid="4512"/>
-					<item uid="4522"/>
+					<item uid="4521"/>
 				</group>
 				<group isee:name_image="true" locked="false" color="#444444" font_color="#444444" x="808" y="25" width="2048" height="1771" name="Ag Grower Payment">
+					<item uid="4522"/>
+					<item uid="4385"/>
+					<item uid="4462"/>
+					<item uid="4266"/>
+					<item uid="4435"/>
+					<item uid="4195"/>
+					<item uid="4429"/>
+					<item uid="4351"/>
+					<item uid="4335"/>
 					<item uid="4523"/>
-					<item uid="4386"/>
-					<item uid="4463"/>
-					<item uid="4267"/>
-					<item uid="4436"/>
-					<item uid="4196"/>
-					<item uid="4430"/>
-					<item uid="4352"/>
-					<item uid="4336"/>
+					<item uid="4193"/>
+					<item uid="4437"/>
+					<item uid="4500"/>
+					<item uid="4333"/>
+					<item uid="4342"/>
+					<item uid="4121"/>
+					<item uid="4382"/>
 					<item uid="4524"/>
-					<item uid="4194"/>
-					<item uid="4438"/>
-					<item uid="4501"/>
-					<item uid="4334"/>
-					<item uid="4343"/>
-					<item uid="4122"/>
-					<item uid="4383"/>
+					<item uid="4299"/>
+					<item uid="4405"/>
+					<item uid="4204"/>
+					<item uid="4208"/>
+					<item uid="4142"/>
+					<item uid="4314"/>
+					<item uid="4268"/>
+					<item uid="4162"/>
 					<item uid="4525"/>
-					<item uid="4300"/>
-					<item uid="4406"/>
-					<item uid="4205"/>
-					<item uid="4209"/>
-					<item uid="4143"/>
-					<item uid="4315"/>
-					<item uid="4269"/>
-					<item uid="4163"/>
+					<item uid="4111"/>
+					<item uid="4114"/>
+					<item uid="4376"/>
+					<item uid="4457"/>
+					<item uid="4191"/>
+					<item uid="4229"/>
+					<item uid="4251"/>
+					<item uid="4447"/>
+					<item uid="4198"/>
+					<item uid="4276"/>
+					<item uid="4470"/>
+					<item uid="4144"/>
+					<item uid="4172"/>
+					<item uid="4182"/>
 					<item uid="4526"/>
-					<item uid="4112"/>
-					<item uid="4115"/>
-					<item uid="4377"/>
-					<item uid="4458"/>
-					<item uid="4192"/>
-					<item uid="4230"/>
-					<item uid="4252"/>
-					<item uid="4448"/>
-					<item uid="4199"/>
-					<item uid="4277"/>
-					<item uid="4471"/>
-					<item uid="4145"/>
-					<item uid="4173"/>
-					<item uid="4183"/>
-					<item uid="4527"/>
-					<item uid="4363"/>
-					<item uid="4109"/>
-					<item uid="4147"/>
-					<item uid="4365"/>
-					<item uid="4168"/>
-					<item uid="4444"/>
-					<item uid="4485"/>
-					<item uid="4513"/>
-					<item uid="4398"/>
-					<item uid="4289"/>
-					<item uid="4177"/>
-					<item uid="4187"/>
-					<item uid="4207"/>
-					<item uid="4161"/>
+					<item uid="4362"/>
+					<item uid="4108"/>
+					<item uid="4146"/>
+					<item uid="4364"/>
+					<item uid="4167"/>
+					<item uid="4443"/>
+					<item uid="4484"/>
+					<item uid="4512"/>
+					<item uid="4397"/>
+					<item uid="4288"/>
+					<item uid="4176"/>
+					<item uid="4186"/>
+					<item uid="4206"/>
+					<item uid="4160"/>
 				</group>
 				<group isee:name_image="true" locked="true" color="#515151" font_color="#515151" x="3087" y="43" width="1402" height="855" name="Production Costs">
-					<item uid="4264"/>
-					<item uid="4181"/>
-					<item uid="4428"/>
-					<item uid="4358"/>
-					<item uid="4480"/>
+					<item uid="4245"/>
+					<item uid="4230"/>
 					<item uid="4379"/>
-					<item uid="4434"/>
-					<item uid="4302"/>
-					<item uid="4346"/>
-					<item uid="4337"/>
-					<item uid="4374"/>
-					<item uid="4166"/>
-					<item uid="4432"/>
-					<item uid="4123"/>
-					<item uid="4331"/>
-					<item uid="4292"/>
-					<item uid="4137"/>
-					<item uid="4241"/>
-					<item uid="4456"/>
-					<item uid="4393"/>
-					<item uid="4348"/>
-					<item uid="4360"/>
-					<item uid="4148"/>
-					<item uid="4294"/>
-					<item uid="4425"/>
-					<item uid="4210"/>
-					<item uid="4216"/>
-					<item uid="4260"/>
-					<item uid="4498"/>
-					<item uid="4200"/>
-					<item uid="4203"/>
-					<item uid="4236"/>
-					<item uid="4464"/>
-					<item uid="4293"/>
-					<item uid="4227"/>
-					<item uid="4262"/>
-					<item uid="4491"/>
-					<item uid="4179"/>
-					<item uid="4125"/>
-					<item uid="4369"/>
-					<item uid="4156"/>
-					<item uid="4141"/>
-					<item uid="4499"/>
-					<item uid="4258"/>
-					<item uid="4339"/>
-					<item uid="4396"/>
-					<item uid="4232"/>
-					<item uid="4423"/>
-					<item uid="4394"/>
-					<item uid="4479"/>
-					<item uid="4347"/>
-					<item uid="4261"/>
-					<item uid="4140"/>
-					<item uid="4450"/>
-					<item uid="4445"/>
-					<item uid="4359"/>
-					<item uid="4242"/>
-					<item uid="4338"/>
-					<item uid="4263"/>
-					<item uid="4129"/>
-					<item uid="4180"/>
-					<item uid="4378"/>
-					<item uid="4138"/>
-					<item uid="4124"/>
-					<item uid="4431"/>
-					<item uid="4247"/>
-					<item uid="4449"/>
-					<item uid="4197"/>
-					<item uid="4225"/>
-					<item uid="4380"/>
-					<item uid="4231"/>
-					<item uid="4149"/>
+					<item uid="4196"/>
+					<item uid="4448"/>
 					<item uid="4246"/>
+					<item uid="4430"/>
+					<item uid="4137"/>
+					<item uid="4262"/>
+					<item uid="4337"/>
+					<item uid="4128"/>
+					<item uid="4377"/>
+					<item uid="4358"/>
+					<item uid="4444"/>
+					<item uid="4478"/>
+					<item uid="4338"/>
+					<item uid="4179"/>
+					<item uid="4257"/>
+					<item uid="4393"/>
+					<item uid="4498"/>
+					<item uid="4260"/>
+					<item uid="4490"/>
+					<item uid="4261"/>
+					<item uid="4259"/>
+					<item uid="4215"/>
+					<item uid="4209"/>
+					<item uid="4424"/>
+					<item uid="4124"/>
+					<item uid="4293"/>
+					<item uid="4359"/>
+					<item uid="4199"/>
+					<item uid="4292"/>
+					<item uid="4139"/>
+					<item uid="4123"/>
+					<item uid="4347"/>
+					<item uid="4392"/>
+					<item uid="4178"/>
+					<item uid="4455"/>
+					<item uid="4155"/>
+					<item uid="4136"/>
+					<item uid="4226"/>
+					<item uid="4147"/>
+					<item uid="4291"/>
+					<item uid="4231"/>
+					<item uid="4235"/>
+					<item uid="4330"/>
+					<item uid="4373"/>
+					<item uid="4395"/>
+					<item uid="4368"/>
+					<item uid="4140"/>
+					<item uid="4224"/>
+					<item uid="4497"/>
+					<item uid="4345"/>
+					<item uid="4241"/>
+					<item uid="4431"/>
+					<item uid="4240"/>
+					<item uid="4122"/>
+					<item uid="4336"/>
+					<item uid="4301"/>
+					<item uid="4422"/>
+					<item uid="4148"/>
+					<item uid="4463"/>
+					<item uid="4378"/>
+					<item uid="4479"/>
+					<item uid="4165"/>
+					<item uid="4449"/>
+					<item uid="4357"/>
+					<item uid="4346"/>
+					<item uid="4427"/>
+					<item uid="4433"/>
+					<item uid="4180"/>
+					<item uid="4202"/>
+					<item uid="4263"/>
 				</group>
 				<group locked="false" color="#65183E" font_color="#65183E" x="4" y="1192" width="722" height="535" name="Mosule Outputs">
+					<item uid="4527"/>
 					<item uid="4528"/>
 					<item uid="4529"/>
 					<item uid="4530"/>
@@ -8742,76 +8742,75 @@ COMMENTS: </doc>
 					<item uid="4535"/>
 					<item uid="4536"/>
 					<item uid="4537"/>
+					<item uid="4370"/>
+					<item uid="4467"/>
 					<item uid="4538"/>
-					<item uid="4371"/>
-					<item uid="4468"/>
+					<item uid="4344"/>
 					<item uid="4539"/>
-					<item uid="4345"/>
 					<item uid="4540"/>
+					<item uid="4326"/>
 					<item uid="4541"/>
-					<item uid="4327"/>
-					<item uid="4542"/>
-					<item uid="4093"/>
+					<item uid="4092"/>
 				</group>
 				<group locked="false" color="black" font_color="black" x="3009" y="1147" width="1436" height="1107" name="BCAP Accounting">
-					<item uid="4254"/>
-					<item uid="4422"/>
-					<item uid="4495"/>
-					<item uid="4098"/>
-					<item uid="4442"/>
-					<item uid="4158"/>
-					<item uid="4279"/>
-					<item uid="4135"/>
-					<item uid="4454"/>
-					<item uid="4285"/>
-					<item uid="4118"/>
-					<item uid="4281"/>
-					<item uid="4309"/>
-					<item uid="4313"/>
-					<item uid="4221"/>
-					<item uid="4249"/>
-					<item uid="4128"/>
-					<item uid="4170"/>
-					<item uid="4330"/>
-					<item uid="4415"/>
-					<item uid="4287"/>
-					<item uid="4497"/>
-					<item uid="4367"/>
-					<item uid="4322"/>
-					<item uid="4101"/>
-					<item uid="4091"/>
-					<item uid="4504"/>
-					<item uid="4185"/>
-					<item uid="4095"/>
-					<item uid="4275"/>
-					<item uid="4419"/>
-					<item uid="4350"/>
-					<item uid="4215"/>
-					<item uid="4106"/>
-					<item uid="4235"/>
+					<item uid="4253"/>
+					<item uid="4421"/>
+					<item uid="4494"/>
+					<item uid="4097"/>
+					<item uid="4441"/>
+					<item uid="4157"/>
+					<item uid="4278"/>
+					<item uid="4134"/>
+					<item uid="4453"/>
+					<item uid="4284"/>
+					<item uid="4117"/>
+					<item uid="4280"/>
+					<item uid="4308"/>
+					<item uid="4312"/>
+					<item uid="4220"/>
+					<item uid="4248"/>
+					<item uid="4127"/>
+					<item uid="4169"/>
+					<item uid="4329"/>
+					<item uid="4414"/>
+					<item uid="4286"/>
+					<item uid="4496"/>
+					<item uid="4366"/>
+					<item uid="4321"/>
+					<item uid="4100"/>
+					<item uid="4090"/>
+					<item uid="4503"/>
+					<item uid="4184"/>
+					<item uid="4094"/>
+					<item uid="4274"/>
+					<item uid="4418"/>
+					<item uid="4349"/>
+					<item uid="4214"/>
+					<item uid="4105"/>
+					<item uid="4234"/>
 				</group>
 				<group locked="false" color="#7F00FF" font_color="#7F00FF" x="1" y="633" width="724" height="524" name="Module Inputs">
-					<item uid="4508"/>
-					<item uid="4521"/>
-					<item uid="4509"/>
 					<item uid="4507"/>
+					<item uid="4520"/>
+					<item uid="4508"/>
+					<item uid="4506"/>
 				</group>
 				<group locked="false" color="black" font_color="black" x="812" y="1831" width="2050" height="440" name="Urban and Forest">
-					<item uid="4304"/>
-					<item uid="4155"/>
-					<item uid="4151"/>
-					<item uid="4133"/>
-					<item uid="4403"/>
+					<item uid="4303"/>
+					<item uid="4154"/>
+					<item uid="4150"/>
+					<item uid="4132"/>
+					<item uid="4402"/>
 				</group>
 				<aux color="red" font_color="red" label_side="top" x="241" y="1806" name="harvest frac annual"/>
-				<connector uid="4543" angle="178.55">
+				<connector uid="4542" angle="178.55">
 					<from>
-						<alias uid="4524"/>
+						<alias uid="4523"/>
 					</from>
 					<to>Net_Annual_YPA_Nom_Units</to>
 				</connector>
 				<stock color="black" font_color="black" label_side="bottom" x="1541.5" y="161.5" name="Annual Yield Growth Multiplier"/>
-				<connector uid="4544" angle="26.1343">
+				<connector uid="4543" angle="26.1343">
 					<from>Annual_Yield_Growth_Multiplier</from>
 					<to>BAY_Annual_YPA_Nom_Units</to>
 				</connector>
@@ -8821,9 +8820,9 @@ COMMENTS: </doc>
 						<pt x="1519" y="167"/>
 					</pts>
 				</flow>
-				<connector uid="4545" angle="0.47156">
+				<connector uid="4544" angle="0.47156">
 					<from>
-						<alias uid="4523"/>
+						<alias uid="4522"/>
 					</from>
 					<to>chg_annual_yield_growth_multiplier</to>
 				</connector>
@@ -8834,13 +8833,13 @@ COMMENTS: </doc>
 						<pt x="1480" y="472"/>
 					</pts>
 				</flow>
-				<connector uid="4546" angle="357.089">
+				<connector uid="4545" angle="357.089">
 					<from>Hay_Yield_Growth_Multiplier</from>
 					<to>BAY_Hay_YPA</to>
 				</connector>
-				<connector uid="4547" angle="323.039">
+				<connector uid="4546" angle="323.039">
 					<from>
-						<alias uid="4525"/>
+						<alias uid="4524"/>
 					</from>
 					<to>chg_hay_yield_growth_multiplier</to>
 				</connector>
@@ -8851,402 +8850,402 @@ COMMENTS: </doc>
 						<pt x="1232" y="880"/>
 					</pts>
 				</flow>
-				<connector uid="4548" angle="273.945">
+				<connector uid="4547" angle="273.945">
 					<from>
-						<alias uid="4526"/>
+						<alias uid="4525"/>
 					</from>
 					<to>chg_HC_yield_growth_multiplier</to>
 				</connector>
-				<connector uid="4549" angle="19.4703">
+				<connector uid="4548" angle="19.4703">
 					<from>HC_Yield_Growth_Multiplier</from>
 					<to>BAY_HC_YPA_by_yr</to>
 				</connector>
-				<text_box color="black" padding="5" border_width="thin" border_style="solid" appearance="transparent" uid="4522" x="381" y="1763" width="375" height="27">production cost inputs</text_box>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="4161" x="1689" y="1756" width="18" height="18">
+				<text_box color="black" padding="5" border_width="thin" border_style="solid" appearance="transparent" uid="4521" x="381" y="1763" width="375" height="27">production cost inputs</text_box>
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="4160" x="1689" y="1756" width="18" height="18">
 					<of>HC_HCCPA</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="black" label_angle="85.4721" uid="4480" x="4169" y="261" width="18" height="18">
+				<alias color="blue" font_style="italic" font_color="black" label_angle="85.4721" uid="4479" x="4169" y="261" width="18" height="18">
 					<of>annual_payment_subsidy_annual_residue</of>
 				</alias>
-				<alias color="#65183E" font_style="italic" font_color="#65183E" label_angle="355.421" uid="4528" x="301" y="1234" width="18" height="18">
+				<alias color="#65183E" font_style="italic" font_color="#65183E" label_angle="355.421" uid="4527" x="301" y="1234" width="18" height="18">
 					<of>residue_switches</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="4330" x="3611" y="1745" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="4329" x="3611" y="1745" width="18" height="18">
 					<of>Cellulosic_Coeffs</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="4135" x="3178" y="1512" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="4134" x="3178" y="1512" width="18" height="18">
 					<of>BCAP_Establishment_Payment_Pct</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="4350" x="3513" y="1975" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="4349" x="3513" y="1975" width="18" height="18">
 					<of>Ag_Cellulose_Producing_Acres</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" label_angle="281.815" uid="4183" x="1997" y="1105" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" label_angle="281.815" uid="4182" x="1997" y="1105" width="18" height="18">
 					<of>farmer_discount_rate</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="4442" x="3529" y="1344" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="4441" x="3529" y="1344" width="18" height="18">
 					<of>PCEC_prodn_ag_acres</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="#008F44" label_angle="113.149" uid="4252" x="2206" y="1018" width="18" height="18">
+				<alias color="blue" font_style="italic" font_color="#008F44" label_angle="113.149" uid="4251" x="2206" y="1018" width="18" height="18">
 					<of>net_HC_PCPA_by_yr_Pasture</of>
 				</alias>
-				<alias color="#65183E" font_style="italic" font_color="#65183E" label_angle="358.033" uid="4529" x="52" y="1333" width="18" height="18">
+				<alias color="#65183E" font_style="italic" font_color="#65183E" label_angle="358.033" uid="4528" x="52" y="1333" width="18" height="18">
 					<of>Ann_Net_Pasture_as_Pasture_GPPA</of>
 				</alias>
-				<alias color="#65183E" font_style="italic" font_color="#65183E" label_angle="357.503" uid="4530" x="51" y="1299" width="18" height="18">
+				<alias color="#65183E" font_style="italic" font_color="#65183E" label_angle="357.503" uid="4529" x="51" y="1299" width="18" height="18">
 					<of>Net_Hay_GPPA</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" label_angle="323.325" uid="4367" x="3149" y="1913" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" label_angle="323.325" uid="4366" x="3149" y="1913" width="18" height="18">
 					<of>BCAP_CHST_Sunset_Time</of>
 				</alias>
-				<alias color="#65183E" font_style="italic" font_color="#65183E" label_angle="357.261" uid="4537" x="49" y="1585" width="18" height="18">
+				<alias color="#65183E" font_style="italic" font_color="#65183E" label_angle="357.261" uid="4536" x="49" y="1585" width="18" height="18">
 					<of>Pasture_YPA</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="4463" x="1191" y="51" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="4462" x="1191" y="51" width="18" height="18">
 					<of>Annual_Regional_Price_Input</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" label_angle="181.973" uid="4128" x="3533" y="1619" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" label_angle="181.973" uid="4127" x="3533" y="1619" width="18" height="18">
 					<of>cell_prodn_pasture_hvsted_for_cell</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="#008F44" uid="4185" x="3503" y="1837" width="18" height="18">
+				<alias color="blue" font_style="italic" font_color="#008F44" uid="4184" x="3503" y="1837" width="18" height="18">
 					<of>BCAP_HC_est_subs_by_year_pasture</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="4523" x="1168" y="160" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="4522" x="1168" y="160" width="18" height="18">
 					<of>nominal_yield_growth_assns</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" label_angle="258.185" uid="4360" x="3710" y="548" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" label_angle="258.185" uid="4359" x="3710" y="548" width="18" height="18">
 					<of>INITIAL_WC_PCPA_by_yr</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" label_angle="172.032" uid="4149" x="4352" y="381" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" label_angle="172.032" uid="4148" x="4352" y="381" width="18" height="18">
 					<of>Pasture_as_Cellulose_PCPA_Factor</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="#008F44" uid="4281" x="3496" y="1755" width="18" height="18">
+				<alias color="blue" font_style="italic" font_color="#008F44" uid="4280" x="3496" y="1755" width="18" height="18">
 					<of>BCAP_HC_est_subs_by_year</of>
 				</alias>
-				<alias color="#65183E" font_style="italic" font_color="#65183E" label_angle="357.918" uid="4531" x="52" y="1263" width="18" height="18">
+				<alias color="#65183E" font_style="italic" font_color="#65183E" label_angle="357.918" uid="4530" x="52" y="1263" width="18" height="18">
 					<of>Tot_GPPA_with_Res</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="4454" x="3165" y="1580" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="4453" x="3165" y="1580" width="18" height="18">
 					<of>Production_Year_Multiplier</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="#008F44" label_angle="92.7392" uid="4448" x="2207" y="740" width="18" height="18">
+				<alias color="blue" font_style="italic" font_color="#008F44" label_angle="92.7392" uid="4447" x="2207" y="740" width="18" height="18">
 					<of>net_HC_PCPA_by_yr</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" label_angle="175.075" uid="4170" x="3499" y="1681" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" label_angle="175.075" uid="4169" x="3499" y="1681" width="18" height="18">
 					<of>Cropland_PCEC_est</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="4143" x="2062" y="465" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="4142" x="2062" y="465" width="18" height="18">
 					<of>Hay_Pasture_Yield_Factor</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="#008F44" uid="4254" x="3521" y="1172" width="18" height="18">
+				<alias color="blue" font_style="italic" font_color="#008F44" uid="4253" x="3521" y="1172" width="18" height="18">
 					<of>Residue_BCAP_CHST_Subsidy</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="4289" x="1824" y="1747" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="4288" x="1824" y="1747" width="18" height="18">
 					<of>HC_harvest_storage_efficiency_factor</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" label_angle="87.1869" uid="4209" x="1627" y="638" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" label_angle="87.1869" uid="4208" x="1627" y="638" width="18" height="18">
 					<of>HC_HCCPA</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="4177" x="2290" y="1734" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="4176" x="2290" y="1734" width="18" height="18">
 					<of>Pasture_CRP_HC_GPPA_weights</of>
 				</alias>
-				<alias color="#65183E" font_style="italic" font_color="#65183E" label_angle="358.307" uid="4538" x="49" y="1545" width="18" height="18">
+				<alias color="#65183E" font_style="italic" font_color="#65183E" label_angle="358.307" uid="4537" x="49" y="1545" width="18" height="18">
 					<of>Hay_YPA</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="4485" x="1694" y="1497" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="4484" x="1694" y="1497" width="18" height="18">
 					<of>WC_HCCPA</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="#008F44" uid="4309" x="3496" y="1720" width="18" height="18">
+				<alias color="blue" font_style="italic" font_color="#008F44" uid="4308" x="3496" y="1720" width="18" height="18">
 					<of>BCAP_WC_est_subs_by_year</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="#008F44" uid="4313" x="3492" y="1455" width="18" height="18">
+				<alias color="blue" font_style="italic" font_color="#008F44" uid="4312" x="3492" y="1455" width="18" height="18">
 					<of>Pasture_WC_BCAP_CHST_Subsidy</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="4235" x="3589" y="2188" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="4234" x="3589" y="2188" width="18" height="18">
 					<of>Ag_Residue_Cellulose_Producing_Acres</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" label_angle="96.1849" uid="4322" x="3159" y="1991" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" label_angle="96.1849" uid="4321" x="3159" y="1991" width="18" height="18">
 					<of>BCAP_Ann_Payment_Switch</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="4173" x="1710" y="1210" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="4172" x="1710" y="1210" width="18" height="18">
 					<of>WC_HCCPA</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="4471" x="1708" y="1324" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="4470" x="1708" y="1324" width="18" height="18">
 					<of>BAY_WC_YPA_by_yr</of>
 				</alias>
-				<alias color="#65183E" font_style="italic" font_color="#65183E" label_side="right" uid="4532" x="50" y="1370" width="18" height="18">
+				<alias color="#65183E" font_style="italic" font_color="#65183E" label_side="right" uid="4531" x="50" y="1370" width="18" height="18">
 					<of>Ann_Net_PCEC_GPPA</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="#008F44" uid="4438" x="2155" y="89" width="18" height="18">
+				<alias color="blue" font_style="italic" font_color="#008F44" uid="4437" x="2155" y="89" width="18" height="18">
 					<of>Annual_PCPA</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="4215" x="3893" y="1824" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="4214" x="3893" y="1824" width="18" height="18">
 					<of>annual_utilization_factor</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="4371" x="306" y="1611" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="4370" x="306" y="1611" width="18" height="18">
 					<of>W_Pasture_yield_factor</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="#008F44" uid="4468" x="357" y="1419" width="18" height="18">
+				<alias color="blue" font_style="italic" font_color="#008F44" uid="4467" x="357" y="1419" width="18" height="18">
 					<of>WC_YPA_by_yr</of>
 				</alias>
-				<alias color="#65183E" font_style="italic" font_color="#65183E" label_angle="358.653" uid="4539" x="48" y="1620" width="18" height="18">
+				<alias color="#65183E" font_style="italic" font_color="#65183E" label_angle="358.653" uid="4538" x="48" y="1620" width="18" height="18">
 					<of>Residue_YPA</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="4158" x="3527" y="1219" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="4157" x="3527" y="1219" width="18" height="18">
 					<of>Res_Prodn_ag_acres</of>
 				</alias>
-				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="4535" x="540" y="1281" width="18" height="18">
+				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="4534" x="540" y="1281" width="18" height="18">
 					<of>UrbanRes_GP</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="#008F44" uid="4207" x="2550" y="1673" width="18" height="18">
+				<alias color="blue" font_style="italic" font_color="#008F44" uid="4206" x="2550" y="1673" width="18" height="18">
 					<of>Pasture_as_Cellulose_PCPA</of>
 				</alias>
-				<alias color="black" font_style="italic" font_color="black" label_angle="157.262" uid="4187" x="2263" y="1664" width="18" height="18">
+				<alias color="black" font_style="italic" font_color="black" label_angle="157.262" uid="4186" x="2263" y="1664" width="18" height="18">
 					<of>Ann_Net_HC_GPPA_Pasture</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="#008F44" uid="4501" x="2284" y="269" width="18" height="18">
+				<alias color="blue" font_style="italic" font_color="#008F44" uid="4500" x="2284" y="269" width="18" height="18">
 					<of>Residue_Net_PCPA</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" label_angle="299.861" uid="4101" x="3067" y="1761" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" label_angle="299.861" uid="4100" x="3067" y="1761" width="18" height="18">
 					<of>BCAP_CHST_Switch</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="#008F44" uid="4315" x="2528" y="451" width="18" height="18">
+				<alias color="blue" font_style="italic" font_color="#008F44" uid="4314" x="2528" y="451" width="18" height="18">
 					<of>Hay_PCPA</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="4106" x="3443" y="2181" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="4105" x="3443" y="2181" width="18" height="18">
 					<of>annual_residue_rent_factor</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="4352" x="1984" y="179" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="4351" x="1984" y="179" width="18" height="18">
 					<of>harvest_index</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="4267" x="1648" y="179" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="4266" x="1648" y="179" width="18" height="18">
 					<of>conversions_to_tons</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="#008F44" uid="4422" x="3500" y="1402" width="18" height="18">
+				<alias color="blue" font_style="italic" font_color="#008F44" uid="4421" x="3500" y="1402" width="18" height="18">
 					<of>Pasture_HC_BCAP_CHST_Subsidy</of>
 				</alias>
-				<alias color="#65183E" font_style="italic" font_color="#65183E" label_angle="355.274" uid="4533" x="301" y="1287" width="18" height="18">
+				<alias color="#65183E" font_style="italic" font_color="#65183E" label_angle="355.274" uid="4532" x="301" y="1287" width="18" height="18">
 					<of>Net_Annual_YPA_Nom_Units</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="4163" x="1241" y="721" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="4162" x="1241" y="721" width="18" height="18">
 					<of>CHST_Subsidy_PCT</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="4279" x="3660" y="1342" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="4278" x="3660" y="1342" width="18" height="18">
 					<of>Cellulosic_Coeffs</of>
 				</alias>
-				<alias color="#008F44" font_style="italic" font_color="#008F44" uid="4527" x="1975" y="1380" width="18" height="18">
+				<alias color="#008F44" font_style="italic" font_color="#008F44" uid="4526" x="1975" y="1380" width="18" height="18">
 					<of>WC_YPA_by_yr</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="4247" x="3811" y="385" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="4246" x="3811" y="385" width="18" height="18">
 					<of>INITIAL_Hay_PCPA</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="4168" x="2731" y="1124" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="4167" x="2731" y="1124" width="18" height="18">
 					<of>Cellulosic_Coeffs</of>
 				</alias>
-				<alias color="#008F44" font_style="italic" font_color="#008F44" label_side="top" uid="4180" x="4380" y="651" width="18" height="18">
+				<alias color="#008F44" font_style="italic" font_color="#008F44" label_side="top" uid="4179" x="4380" y="651" width="18" height="18">
 					<of>Establishment_Payment_Pct</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="4093" x="583" y="1513" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="4092" x="583" y="1513" width="18" height="18">
 					<of>Cellulosic_Coeffs</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="#008F44" uid="4345" x="336" y="1464" width="18" height="18">
+				<alias color="blue" font_style="italic" font_color="#008F44" uid="4344" x="336" y="1464" width="18" height="18">
 					<of>HC_YPA_by_yr</of>
 				</alias>
-				<alias color="#65183E" font_style="italic" font_color="#65183E" label_angle="357.423" uid="4534" x="52" y="1220" width="18" height="18">
+				<alias color="#65183E" font_style="italic" font_color="#65183E" label_angle="357.423" uid="4533" x="52" y="1220" width="18" height="18">
 					<of>Tot_Annual_GPPA_no_Res</of>
 				</alias>
-				<alias color="#65183E" font_style="italic" font_color="#65183E" label_angle="359.111" uid="4540" x="53" y="1497" width="18" height="18">
+				<alias color="#65183E" font_style="italic" font_color="#65183E" label_angle="359.111" uid="4539" x="53" y="1497" width="18" height="18">
 					<of>Ann_Net_HC_GPPA_CRP</of>
 				</alias>
-				<alias color="black" font_style="italic" font_color="black" label_angle="241.873" uid="4230" x="1951" y="972" width="18" height="18">
+				<alias color="black" font_style="italic" font_color="black" label_angle="241.873" uid="4229" x="1951" y="972" width="18" height="18">
 					<of>Annual_Payment_Subsidy</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" label_angle="205.793" uid="4383" x="1034" y="413" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" label_angle="205.793" uid="4382" x="1034" y="413" width="18" height="18">
 					<of>Hay_Price_Index</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" label_angle="276.585" uid="4112" x="1652" y="853" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" label_angle="276.585" uid="4111" x="1652" y="853" width="18" height="18">
 					<of>Regional_Cellulosic_Crop_Switches</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="4133" x="2143" y="1934" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="4132" x="2143" y="1934" width="18" height="18">
 					<of>Rorest_Res_HCCPT</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="4155" x="1855" y="1984" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="4154" x="1855" y="1984" width="18" height="18">
 					<of>CHST_Subsidy_PCT</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="4249" x="3504" y="1508" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="4248" x="3504" y="1508" width="18" height="18">
 					<of>PCEC_prodn_pasture_acres</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="#008F44" uid="4221" x="3533" y="1564" width="18" height="18">
+				<alias color="blue" font_style="italic" font_color="#008F44" uid="4220" x="3533" y="1564" width="18" height="18">
 					<of>Pasture_Hay_BCAP_CHST_Subsidy</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" label_angle="267.261" uid="4293" x="4153" y="395" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" label_angle="267.261" uid="4292" x="4153" y="395" width="18" height="18">
 					<of>Pasture_as_Pasture_PCPA_Factor</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="#008F44" uid="4334" x="2242" y="172" width="18" height="18">
+				<alias color="blue" font_style="italic" font_color="#008F44" uid="4333" x="2242" y="172" width="18" height="18">
 					<of>Sec_Crop_PCPA</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="#008F44" uid="4147" x="2216" y="1117" width="18" height="18">
+				<alias color="blue" font_style="italic" font_color="#008F44" uid="4146" x="2216" y="1117" width="18" height="18">
 					<of>net_WC_PCPA_by_yr</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="4138" x="3759" y="836" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="4137" x="3759" y="836" width="18" height="18">
 					<of>HC_pasture_PCPA_factor</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" label_angle="98.9764" uid="4343" x="1065" y="483" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" label_angle="98.9764" uid="4342" x="1065" y="483" width="18" height="18">
 					<of>INITIAL_Hay_GP</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="#008F44" uid="4269" x="2559" y="533" width="18" height="18">
+				<alias color="blue" font_style="italic" font_color="#008F44" uid="4268" x="2559" y="533" width="18" height="18">
 					<of>Pasture_as_Pasture_PCPA</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" label_angle="223.505" uid="4336" x="2080" y="142" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" label_angle="223.505" uid="4335" x="2080" y="142" width="18" height="18">
 					<of>Val_Sec_Crop_as_Frac</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="#008F44" uid="4495" x="3525" y="1308" width="18" height="18">
+				<alias color="blue" font_style="italic" font_color="#008F44" uid="4494" x="3525" y="1308" width="18" height="18">
 					<of>WC_BCAP_CHST_Subsidy</of>
 				</alias>
-				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="4398" x="1916" y="1694" width="18" height="18">
+				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="4397" x="1916" y="1694" width="18" height="18">
 					<of>Pasture_YPA</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="4287" x="3888" y="1692" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="4286" x="3888" y="1692" width="18" height="18">
 					<of>establishment_utilization_factor</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" label_angle="289.991" uid="4115" x="1771" y="844" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" label_angle="289.991" uid="4114" x="1771" y="844" width="18" height="18">
 					<of>HC_Pasture_yield_factor</of>
 				</alias>
-				<alias color="#65183E" font_style="italic" font_color="#65183E" label_side="right" uid="4541" x="52" y="1415" width="18" height="18">
+				<alias color="#65183E" font_style="italic" font_color="#65183E" label_side="right" uid="4540" x="52" y="1415" width="18" height="18">
 					<of>Ann_Net_PCEC_GPPA_Pasture</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="4109" x="1836" y="1209" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="4108" x="1836" y="1209" width="18" height="18">
 					<of>WC_harvest_storage_efficiency_factor</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="4091" x="3163" y="2045" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="4090" x="3163" y="2045" width="18" height="18">
 					<of>BCAP_Ann_Payment_Sunset_Time</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" label_angle="174.624" uid="4261" x="3766" y="786" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" label_angle="174.624" uid="4260" x="3766" y="786" width="18" height="18">
 					<of>INITIAL_HC_PCPA_by_yr</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="4363" x="1796" y="1400" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="4362" x="1796" y="1400" width="18" height="18">
 					<of>W_Pasture_yield_factor</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="4377" x="1715" y="813" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="4376" x="1715" y="813" width="18" height="18">
 					<of>climate_factor_PE_crop</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="4285" x="3171" y="1459" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="4284" x="3171" y="1459" width="18" height="18">
 					<of>BCAP_Establishment_Switch</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="4526" x="1149" y="797" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="4525" x="1149" y="797" width="18" height="18">
 					<of>HC_yield_growth_assns</of>
 				</alias>
-				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="4536" x="540" y="1230" width="18" height="18">
+				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="4535" x="540" y="1230" width="18" height="18">
 					<of>ForRes_GP</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="4436" x="1682" y="133" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="4435" x="1682" y="133" width="18" height="18">
 					<of>climate_factor_annual_crop</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" label_angle="181.859" uid="4145" x="1750" y="1368" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" label_angle="181.859" uid="4144" x="1750" y="1368" width="18" height="18">
 					<of>climate_factor_PE_crop</of>
 				</alias>
-				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="4380" x="3980" y="294" width="18" height="18">
+				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="4379" x="3980" y="294" width="18" height="18">
 					<of>Residue_YPA</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="4432" x="3798" y="209" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="4431" x="3798" y="209" width="18" height="18">
 					<of>Initial_Sec_Crop_PCPA</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="4118" x="3069" y="1698" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="4117" x="3069" y="1698" width="18" height="18">
 					<of>Max_CHST_Payment</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="4196" x="1540" y="87" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="4195" x="1540" y="87" width="18" height="18">
 					<of>Initial_Annual_YPA_nominal_units</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="4122" x="857" y="589" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="4121" x="857" y="589" width="18" height="18">
 					<of>FS_Price_Input</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="#008F44" uid="4095" x="3514" y="1884" width="18" height="18">
+				<alias color="blue" font_style="italic" font_color="#008F44" uid="4094" x="3514" y="1884" width="18" height="18">
 					<of>BCAP_WC_est_subs_by_year_pasture</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="4386" x="1396" y="93" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="4385" x="1396" y="93" width="18" height="18">
 					<of>Annual_Subsidy_PCT</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="4444" x="2547" y="1322" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="4443" x="2547" y="1322" width="18" height="18">
 					<of>WC_project_length</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" label_angle="74.9042" uid="4263" x="3167" y="81" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" label_angle="74.9042" uid="4262" x="3167" y="81" width="18" height="18">
 					<of>gasoline_price_input</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" label_angle="4.53372" uid="4199" x="2503" y="812" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" label_angle="4.53372" uid="4198" x="2503" y="812" width="18" height="18">
 					<of>HC_project_length</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="#008F44" uid="4277" x="1232" y="1213" width="18" height="18">
+				<alias color="blue" font_style="italic" font_color="#008F44" uid="4276" x="1232" y="1213" width="18" height="18">
 					<of>Max_CHST_per_Ton_Ceiling</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="4497" x="3895" y="1418" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="4496" x="3895" y="1418" width="18" height="18">
 					<of>CHST_utilization_factor</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" label_angle="205.402" uid="4124" x="3722" y="601" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" label_angle="205.402" uid="4123" x="3722" y="601" width="18" height="18">
 					<of>WC_pasture_PCPA_factor</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" label_angle="251.857" uid="4430" x="1672" y="310" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" label_angle="251.857" uid="4429" x="1672" y="310" width="18" height="18">
 					<of>Ag_Res_HCCPA</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" label_angle="263.815" uid="4458" x="1584" y="839" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" label_angle="263.815" uid="4457" x="1584" y="839" width="18" height="18">
 					<of>Initial_HC_YPA_by_yr</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="4327" x="308" y="1567" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="4326" x="308" y="1567" width="18" height="18">
 					<of>HC_Pasture_yield_factor</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="4347" x="3751" y="141" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="4346" x="3751" y="141" width="18" height="18">
 					<of>INITIAL_Crop_PCPA</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="4403" x="2258" y="2176" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="4402" x="2258" y="2176" width="18" height="18">
 					<of>UrbanRes_HCCPT</of>
 				</alias>
-				<alias color="#65183E" font_style="italic" font_color="#65183E" label_angle="356.824" uid="4542" x="52" y="1454" width="18" height="18">
+				<alias color="#65183E" font_style="italic" font_color="#65183E" label_angle="356.824" uid="4541" x="52" y="1454" width="18" height="18">
 					<of>Ann_Net_Pasture_as_Cellulose_GPPA</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="4275" x="3432" y="2100" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="4274" x="3432" y="2100" width="18" height="18">
 					<of>Cash_Rent_by_Region_Annual_Payment</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="#008F44" uid="4365" x="2160" y="1375" width="18" height="18">
+				<alias color="blue" font_style="italic" font_color="#008F44" uid="4364" x="2160" y="1375" width="18" height="18">
 					<of>net_WC_PCPA_by_yr_pasture</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="#008F44" uid="4098" x="3523" y="1264" width="18" height="18">
+				<alias color="blue" font_style="italic" font_color="#008F44" uid="4097" x="3523" y="1264" width="18" height="18">
 					<of>HC_BCAP_CHST_Subsidy</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="4192" x="1684" y="1040" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="4191" x="1684" y="1040" width="18" height="18">
 					<of>HC_HCCPA</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="4300" x="1575" y="435" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="4299" x="1575" y="435" width="18" height="18">
 					<of>Initial_Hay_YPA</of>
 				</alias>
-				<alias color="#008F44" font_style="italic" font_color="#008F44" uid="4151" x="1854" y="2042" width="18" height="18">
+				<alias color="#008F44" font_style="italic" font_color="#008F44" uid="4150" x="1854" y="2042" width="18" height="18">
 					<of>Max_CHST_per_Ton_Ceiling</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="4194" x="2133" y="266" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="4193" x="2133" y="266" width="18" height="18">
 					<of>residue_harvest_storage_efficiency_factor</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="4304" x="1558" y="1875" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="4303" x="1558" y="1875" width="18" height="18">
 					<of>FS_Price_Input</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="4504" x="3083" y="1831" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="4503" x="3083" y="1831" width="18" height="18">
 					<of>BCAP_CHST_Start_Time</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" label_angle="181.859" uid="4406" x="1716" y="434" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" label_angle="181.859" uid="4405" x="1716" y="434" width="18" height="18">
 					<of>climate_factor_PE_crop</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" label_angle="115.869" uid="4205" x="1758" y="648" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" label_angle="115.869" uid="4204" x="1758" y="648" width="18" height="18">
 					<of>HC_harvest_storage_efficiency_factor</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="4419" x="3476" y="1794" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="4418" x="3476" y="1794" width="18" height="18">
 					<of>Pasture_land_PCEC_est</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="4525" x="1271" y="387" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="4524" x="1271" y="387" width="18" height="18">
 					<of>Hay_Yield_Growth_Assn</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="4415" x="3856" y="1567" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="4414" x="3856" y="1567" width="18" height="18">
 					<of>one_million</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" label_angle="250.705" uid="4141" x="3793" y="288" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" label_angle="250.705" uid="4140" x="3793" y="288" width="18" height="18">
 					<of>Initial_Res_Nutrient_replace_CPT</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="4524" x="1864" y="89" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="4523" x="1864" y="89" width="18" height="18">
 					<of>harvest_frac_annual</of>
 				</alias>
 			</view>

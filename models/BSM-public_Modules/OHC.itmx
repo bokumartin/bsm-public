@@ -5,30 +5,26 @@
 		<name>OHC</name>
 		<uuid>f48cdf44-c0cb-41fc-a5c4-250e64491d3d</uuid>
 		<vendor>isee systems, inc.</vendor>
-		<product version="1.9.4" isee:build_number="1992" isee:saved_by_v1="true" lang="en">Stella Architect</product>
+		<product version="1.8.2" isee:build_number="1691" isee:saved_by_v1="true" lang="en">Stella Architect</product>
 	</header>
-	<sim_specs isee:sim_duration="1.5" isee:simulation_delay="0.125" isee:restore_on_start="false" method="Euler" time_units="Months" isee:instantaneous_flows="false">
+	<sim_specs isee:simulation_delay="0.1" isee:restore_on_start="false" method="Euler" time_units="Months" isee:instantaneous_flows="false">
 		<start>0</start>
 		<stop>12</stop>
 		<dt reciprocal="true">4</dt>
 	</sim_specs>
 	<dimensions>
-		<dim name="AnnualCrop">
-			<elem name="Corn"/>
-			<elem name="Soy"/>
-			<elem name="Wheat"/>
-			<elem name="Other_Grains"/>
-			<elem name="Cotton"/>
-		</dim>
 		<dim name="ConversionPolicy">
 			<elem name="Price"/>
 			<elem name="Feedstock"/>
 			<elem name="FCI"/>
 			<elem name="Loan"/>
 		</dim>
-		<dim name="PECrop">
-			<elem name="Herbaceous"/>
-			<elem name="Woody"/>
+		<dim name="AnnualCrop">
+			<elem name="Corn"/>
+			<elem name="Soy"/>
+			<elem name="Wheat"/>
+			<elem name="Other_Grains"/>
+			<elem name="Cotton"/>
 		</dim>
 		<dim name="TechAttribute">
 			<elem name="ProcessYield"/>
@@ -42,6 +38,10 @@
 			<elem name="TransEster"/>
 			<elem name="HEFA"/>
 			<elem name="Catalytic"/>
+		</dim>
+		<dim name="PECrop">
+			<elem name="Herbaceous"/>
+			<elem name="Woody"/>
 		</dim>
 	</dimensions>
 	<isee:prefs show_module_prefix="true" live_update_on_drag="true" show_restore_buttons="false" layer="model" interface_scale_ui="true" interface_max_page_width="10000" interface_max_page_height="10000" interface_min_page_width="0" interface_min_page_height="0" saved_runs="5" keep="false" rifp="false"/>
@@ -62,10 +62,6 @@
 			<eqn/>
 			<alias>gal</alias>
 			<alias>gallon</alias>
-		</unit>
-		<unit name="Tons">
-			<eqn/>
-			<alias>ton</alias>
 		</unit>
 		<unit name="US Dollars">
 			<eqn/>
@@ -125,6 +121,11 @@
 		</unit>
 		<unit name="TonnesPerGram">
 			<eqn>Tonnes/g</eqn>
+		</unit>
+		<unit name="Tonnes">
+			<eqn/>
+			<alias>tonne</alias>
+			<alias>metric ton</alias>
 		</unit>
 		<unit name="HoursPerProjectPerYr">
 			<eqn>hr/(projects*yr)</eqn>
@@ -5349,21 +5350,21 @@ COMMENTS: </doc>
 				<dimensions>
 					<dim name="OilCropTech"/>
 				</dimensions>
-				<eqn>SUM(pilot_inputs_CHC_to_OHC[OilCropTech, *])</eqn>
+				<eqn>{_l_}SUM(pilot_inputs_CHC_to_OHC[OilCropTech, *])</eqn>
 				<units>per year</units>
 			</aux>
 			<aux name="PC learning inputs OHC" access="input">
 				<dimensions>
 					<dim name="OilCropTech"/>
 				</dimensions>
-				<eqn>SUM(PC_inputs_CHC_to_OHC[OilCropTech, *])</eqn>
+				<eqn>{_l_}SUM(PC_inputs_CHC_to_OHC[OilCropTech, *])</eqn>
 				<units>per year</units>
 			</aux>
 			<aux name="C ilearning inputs OHC" access="input">
 				<dimensions>
 					<dim name="OilCropTech"/>
 				</dimensions>
-				<eqn>SUM(C_inputs_CHC_to_OHC[OilCropTech, *])</eqn>
+				<eqn>{_l_}SUM(C_inputs_CHC_to_OHC[OilCropTech, *])</eqn>
 				<units>per year</units>
 			</aux>
 			<flow name="oilot shared learning">
@@ -5936,7 +5937,6 @@ COMMENTS: </doc>
 				<entity name="Startup_Subs"/>
 				<entity name="Startup_Subs_Vol_Thresh"/>
 				<entity name="Use_Startup_Subs"/>
-				<entity name="Use_Startup_Subs_Module_Volume_Input"/>
 				<entity name="PoP_Price_Subs_Logic"/>
 				<entity name="Policy_time_constraints"/>
 				<entity name="Policy_Start"/>
@@ -5947,6 +5947,7 @@ COMMENTS: </doc>
 				<entity name="FCI_Subs_Logic"/>
 				<entity name="Subsidy_Amt"/>
 				<entity name="Startup_Subs_Volume_Input"/>
+				<entity name="Use_Startup_Subs_Module_Volume_Input"/>
 				<entity name="Policy_End"/>
 				<entity name="Policy_Duration"/>
 				<entity name="Loan_Guarantee_Logic"/>
@@ -6017,11 +6018,11 @@ COMMENTS: </doc>
 				<entity name="Desired_Other_Oilcrop_Oil_Consn"/>
 				<entity name="Other_Oilcrop_Oil_Consn"/>
 				<entity name="Soy_Oil_Consumption"/>
-				<entity name="Feedstock_Constraint_on_Utilization"/>
 				<entity name="fs_demand_at_nominal_utilization"/>
 				<entity name="OilCrop_Oil_Consn"/>
 				<entity name="Oil_Production_from_Commodity_Crops"/>
 				<entity name="Max_OilCrop_Supply"/>
+				<entity name="Feedstock_Constraint_on_Utilization"/>
 			</group>
 			<aux name="Converter 1" access="input">
 				<dimensions>
@@ -6116,8 +6117,8 @@ COMMENTS: </doc>
 				</graph>
 				<table color="black" background="#E0E0E0" text_align="right" font_size="12pt" orientation="vertical" wrap_text="false" isee:auto_fit="true" isee:use_alternate_row_colors="false" isee:unlimited_table_length="false" blank_column_width="80" column_width="160" interval="1" report_balances="beginning" report_flows="instantaneous" header_font_style="normal" header_font_weight="normal" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="12pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 				<button color="black" background="#E0E0E0" font_size="12pt" border_width="thin" border_style="solid" transparent="false" corner_radius="0" isee:flat="false" icon_side="top" isee:highlight_on_hover="false" isee:highlight_color="#959595"/>
-				<isee:annotation color="black" background="#E0E0E0" font_size="12pt" border_width="thin" border_style="solid" transparent="false" corner_radius="0" isee:flat="false" icon_side="top" isee:highlight_on_hover="false" isee:highlight_color="#959595" popup_corner_radius="0" popup_background_color="#FFFECF"/>
-				<slider color="black" background="#E0E0E0" font_size="12pt" num_ticks="3" label_side="top" wrap_title="true" vertical="false" isee:fancy_appearance="false" isee:show_hover_tip="when_deciding" input_expands="true" input_width="100"/>
+				<isee:annotation color="black" background="#E0E0E0" font_size="12pt" border_width="thin" border_style="solid" transparent="false" corner_radius="0" isee:flat="false" icon_side="top" isee:highlight_on_hover="false" isee:highlight_color="#959595" popup_background_color="#FFFECF"/>
+				<slider color="black" background="#E0E0E0" font_size="12pt" num_ticks="3" label_side="top" wrap_title="true" vertical="false" isee:show_hover_tip="when_deciding" input_expands="true" input_width="100"/>
 				<isee:sim_speed_slider color="black" background="white"/>
 				<isee:time_slider color="black" background="white"/>
 				<isee:pie_input color="black" background="white" legend_position="bottom" isee:transparent="false"/>
@@ -6134,10 +6135,8 @@ COMMENTS: </doc>
 				<isee:navigation_widget color="black" background="white" border_color="#999999" border_width="thin" border_style="solid" item_spacing="6" appearance="tabs" corner_radius="4" selected_item_color="black" selected_item_background="white" item_background="#DDDDDD"/>
 				<isee:shape color="black" background="white" opacity="1" transparent_background="true"/>
 				<isee:selector color="black" background="white"/>
-				<isee:iframe color="black" background="white"/>
-				<isee:financial_table color="black" background="white" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="true" background="white" page_width="1024" page_height="784" isee:page_cols="6" isee:page_rows="4" zoom="120" isee:popup_graphs_are_comparative="true" type="stock_flow">
+			<view isee:show_pages="true" page_width="1024" page_height="784" isee:page_cols="6" isee:page_rows="4" zoom="120" isee:popup_graphs_are_comparative="true" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="9pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -6174,2272 +6173,2272 @@ COMMENTS: </doc>
 					</graph>
 					<table color="black" background="#E0E0E0" text_align="right" font_size="12pt" orientation="vertical" wrap_text="false" isee:auto_fit="true" isee:use_alternate_row_colors="false" isee:unlimited_table_length="false" blank_column_width="80" column_width="160" interval="1" report_balances="beginning" report_flows="instantaneous" header_font_style="normal" header_font_weight="normal" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="12pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 				</style>
-				<connector uid="4936" color="white" angle="0">
+				<connector uid="4935" color="white" angle="0">
 					<from>
-						<alias uid="4937"/>
+						<alias uid="4936"/>
 					</from>
 					<to>industry_FS_thruput_tpy</to>
 				</connector>
-				<connector uid="4938" angle="0">
+				<connector uid="4937" angle="0">
 					<from>
-						<alias uid="4939"/>
+						<alias uid="4938"/>
 					</from>
 					<to>Desired_Other_Oilcrop_Oil_Consn</to>
 				</connector>
-				<connector uid="4940" angle="83.6598">
+				<connector uid="4939" angle="83.6598">
 					<from>
-						<alias uid="4941"/>
+						<alias uid="4940"/>
 					</from>
 					<to>NPV_Taxes_3</to>
 				</connector>
-				<connector uid="4942" color="#C8C8C8" angle="282.529">
+				<connector uid="4941" color="#C8C8C8" angle="282.529">
 					<from>Subsidy_Amt</from>
 					<to>FS_Subs_Logic</to>
 				</connector>
-				<connector uid="4943" angle="270">
+				<connector uid="4942" angle="270">
 					<from>completing_D_and_C</from>
 					<to>PY_D_and_C_to_Startup</to>
 				</connector>
-				<connector uid="4944" angle="90">
+				<connector uid="4943" angle="90">
 					<from>Avg_Plant_Output_gal_day</from>
 					<to>Avg_Plant_Output_gal_yr</to>
 				</connector>
-				<connector uid="4945" angle="160.017">
+				<connector uid="4944" angle="160.017">
 					<from>Commercial_Maturity</from>
 					<to>platform_specific_regional_concentration_weighting_factor</to>
 				</connector>
-				<connector uid="4946" angle="270.139">
+				<connector uid="4945" angle="270.139">
 					<from>Actual_Output_gpy</from>
 					<to>Output_gpy_by_Technology</to>
 				</connector>
-				<connector uid="4947" angle="121.348">
+				<connector uid="4946" angle="121.348">
 					<from>
-						<alias uid="4948"/>
+						<alias uid="4947"/>
 					</from>
 					<to>rate_of_doubling_pilot_experience</to>
 				</connector>
-				<connector uid="4949" angle="83.6598">
+				<connector uid="4948" angle="83.6598">
 					<from>
-						<alias uid="4950"/>
+						<alias uid="4949"/>
 					</from>
 					<to>UTIL_by_tech</to>
 				</connector>
-				<connector uid="4951" angle="0">
+				<connector uid="4950" angle="0">
 					<from>Industry_Process_Yield_Gap</from>
 					<to>increase_in_PY_commercial_industry</to>
 				</connector>
-				<connector uid="4952" angle="144.462">
+				<connector uid="4951" angle="144.462">
 					<from>
-						<alias uid="4953"/>
+						<alias uid="4952"/>
 					</from>
 					<to>fs_demand_at_nominal_utilization</to>
 				</connector>
-				<connector uid="4954" angle="12.5288">
+				<connector uid="4953" angle="12.5288">
 					<from>
-						<alias uid="4955"/>
+						<alias uid="4954"/>
 					</from>
 					<to>ROI_USD_per_gal</to>
 				</connector>
-				<connector uid="4956" angle="60.1714">
+				<connector uid="4955" angle="60.1714">
 					<from>
-						<alias uid="4957"/>
+						<alias uid="4956"/>
 					</from>
 					<to>PC_learning_logic</to>
 				</connector>
-				<connector uid="4958" angle="0">
+				<connector uid="4957" angle="0">
 					<from>OilCrop_Demand_incl_nextplant</from>
 					<to>feedstock_price_input_nextplant</to>
 				</connector>
-				<connector uid="4959" angle="90">
+				<connector uid="4958" angle="90">
 					<from>
-						<alias uid="4960"/>
+						<alias uid="4959"/>
 					</from>
 					<to>Expected_Tax_2</to>
 				</connector>
-				<connector uid="4961" angle="0">
+				<connector uid="4960" angle="0">
 					<from>Exp_Other_Coproduct_Sales_Rev</from>
 					<to>NextPlant_Other_Coproduct_Sales_Rev</to>
 				</connector>
-				<connector uid="4962" angle="0">
+				<connector uid="4961" angle="0">
 					<from>Expected_Tax_2</from>
 					<to>NPV_Taxes_2</to>
 				</connector>
-				<connector uid="4963" angle="253.61">
+				<connector uid="4962" angle="253.61">
 					<from>PC_Maturity</from>
 					<to>PC_maturity_gap</to>
 				</connector>
-				<connector uid="4964" angle="308.66">
+				<connector uid="4963" angle="308.66">
 					<from>NPV_Taxes</from>
 					<to>NPV_Investment</to>
 				</connector>
-				<connector uid="4965" angle="0">
+				<connector uid="4964" angle="0">
 					<from>
-						<alias uid="4966"/>
+						<alias uid="4965"/>
 					</from>
 					<to>weighted_distn_new_facilities</to>
 				</connector>
-				<connector uid="4967" angle="315">
+				<connector uid="4966" angle="315">
 					<from>RegionRollup_Attr</from>
 					<to>nominal_regional_distn_new_facilities</to>
 				</connector>
-				<connector uid="4968" angle="333.435">
+				<connector uid="4967" angle="333.435">
 					<from>Impact_soy_oil_supply_constraint_on_price</from>
 					<to>Soy_Oil_Price_Input</to>
 				</connector>
-				<connector uid="4969" angle="0">
+				<connector uid="4968" angle="0">
 					<from>Attr</from>
 					<to>nominal_regional_distn_new_facilities</to>
 				</connector>
-				<connector uid="4970" color="white" angle="93.3665">
+				<connector uid="4969" color="white" angle="93.3665">
 					<from>
-						<alias uid="4971"/>
+						<alias uid="4970"/>
 					</from>
 					<to>Startup_Subs_Volume_Input</to>
 				</connector>
-				<connector uid="4972" angle="246.213">
+				<connector uid="4971" angle="246.213">
 					<from>
-						<alias uid="4973"/>
+						<alias uid="4972"/>
 					</from>
 					<to>FS_thruput_cap_influx</to>
 				</connector>
-				<connector uid="4974" angle="324.462">
+				<connector uid="4973" angle="324.462">
 					<from>
-						<alias uid="4975"/>
+						<alias uid="4974"/>
 					</from>
 					<to>start_schedule_ORNOVOC</to>
 				</connector>
-				<connector uid="4976" angle="318.013">
+				<connector uid="4975" angle="318.013">
 					<from>NPV_Revs_Net_of_Op_Cost</from>
 					<to>NPV_Investment</to>
 				</connector>
-				<connector uid="4977" angle="180">
+				<connector uid="4976" angle="180">
 					<from>
-						<alias uid="4978"/>
+						<alias uid="4977"/>
 					</from>
 					<to>Impact_of_regional_industry_development_on_scale_factor</to>
 				</connector>
-				<connector uid="4979" angle="62.2415">
+				<connector uid="4978" angle="62.2415">
 					<from>In_Design_and_Cons</from>
 					<to>Output_Capacity_Pipeline</to>
 				</connector>
-				<connector uid="4980" angle="339.444">
+				<connector uid="4979" angle="339.444">
 					<from>
-						<alias uid="4981"/>
+						<alias uid="4980"/>
 					</from>
 					<to>Reqd_Rate_of_Return_as_PCT</to>
 				</connector>
-				<connector uid="4982" angle="35.5377">
+				<connector uid="4981" angle="35.5377">
 					<from>
-						<alias uid="4983"/>
+						<alias uid="4982"/>
 					</from>
 					<to>Regional_FS_Cost_USD_per_gal</to>
 				</connector>
-				<connector uid="4984" angle="179.959">
+				<connector uid="4983" angle="179.959">
 					<from>frac_rate_of_growth_in_industry_output</from>
 					<to>rate_of_doubling_industry_output_by_technology</to>
 				</connector>
-				<connector uid="4985" angle="180">
+				<connector uid="4984" angle="180">
 					<from>start_schedule_thruput_capacity</from>
 					<to>start_schedule_scale_factor</to>
 				</connector>
-				<connector uid="4986" angle="273.366">
+				<connector uid="4985" angle="273.366">
 					<from>Cumulative_Pilot_Experience</from>
 					<to>frac_rate_of_growth_pilot_experience</to>
 				</connector>
-				<connector uid="4987" color="white" angle="147.995">
+				<connector uid="4986" color="white" angle="147.995">
 					<from>
-						<alias uid="4988"/>
+						<alias uid="4987"/>
 					</from>
 					<to>Startup_Subs_Volume_Input</to>
 				</connector>
-				<connector uid="4989" angle="90">
+				<connector uid="4988" angle="90">
 					<from>
-						<alias uid="4990"/>
+						<alias uid="4989"/>
 					</from>
 					<to>FCI_subs_by_pathway_and_region</to>
 				</connector>
-				<connector uid="4991" angle="263.66">
+				<connector uid="4990" angle="263.66">
 					<from>
-						<alias uid="4941"/>
+						<alias uid="4940"/>
 					</from>
 					<to>NPV_Taxes_2</to>
 				</connector>
-				<connector uid="4992" angle="0">
+				<connector uid="4991" angle="0">
 					<from>
-						<alias uid="4993"/>
+						<alias uid="4992"/>
 					</from>
 					<to>volume_wtd_FS_cost_USD_per_gall</to>
 				</connector>
-				<connector uid="4994" angle="90">
+				<connector uid="4993" angle="90">
 					<from>
-						<alias uid="4995"/>
+						<alias uid="4994"/>
 					</from>
 					<to>Platform_Attr</to>
 				</connector>
-				<connector uid="4996" angle="90">
+				<connector uid="4995" angle="90">
 					<from>platform_specific_regional_concentration_weighting_factor</from>
 					<to>weighted_distn_new_facilities</to>
 				</connector>
-				<connector uid="4997" angle="212.005">
+				<connector uid="4996" angle="212.005">
 					<from>
-						<alias uid="4998"/>
+						<alias uid="4997"/>
 					</from>
 					<to>discount_factor_DC</to>
 				</connector>
-				<connector uid="4999" angle="153.435">
+				<connector uid="4998" angle="153.435">
 					<from>
-						<alias uid="5000"/>
+						<alias uid="4999"/>
 					</from>
 					<to>Expected_Taxable_Income_2</to>
 				</connector>
-				<connector uid="5001" angle="0">
+				<connector uid="5000" angle="0">
 					<from>NPV_Taxes_2</from>
 					<to>NPV_Taxes</to>
 				</connector>
-				<connector uid="5002" angle="0">
+				<connector uid="5001" angle="0">
 					<from>
-						<alias uid="5003"/>
+						<alias uid="5002"/>
 					</from>
 					<to>frac_rate_of_growth_pilot_experience</to>
 				</connector>
-				<connector uid="5004" angle="272.001">
+				<connector uid="5003" angle="272.001">
 					<from>
-						<alias uid="5005"/>
+						<alias uid="5004"/>
 					</from>
 					<to>FS_Thruput_Cap_to_Startup_C</to>
 				</connector>
-				<connector uid="5006" angle="0">
+				<connector uid="5005" angle="0">
 					<from>NPV_rel_to_a_million</from>
 					<to>nominal_Attr</to>
 				</connector>
-				<connector uid="5007" angle="90">
+				<connector uid="5006" angle="90">
 					<from>
-						<alias uid="5008"/>
+						<alias uid="5007"/>
 					</from>
 					<to>pilot_maturity_gap</to>
 				</connector>
-				<connector uid="5009" angle="339.444">
+				<connector uid="5008" angle="339.444">
 					<from>
-						<alias uid="5010"/>
+						<alias uid="5009"/>
 					</from>
 					<to>Max_OilCrop_Supply</to>
 				</connector>
-				<connector uid="5011" angle="12.5288">
+				<connector uid="5010" angle="12.5288">
 					<from>Loan_Principal</from>
 					<to>Cume_Interest_Payment</to>
 				</connector>
-				<connector uid="5012" angle="0">
+				<connector uid="5011" angle="0">
 					<from>Policy_Start</from>
 					<to>Policy_time_constraints</to>
 				</connector>
-				<connector uid="5013" angle="159.444">
+				<connector uid="5012" angle="159.444">
 					<from>Avg_ORNOVOC</from>
 					<to>ORNOVOC_Retirements</to>
 				</connector>
-				<connector uid="5014" angle="220.601">
+				<connector uid="5013" angle="220.601">
 					<from>NextPlant_FS_Thruput_Cap</from>
 					<to>FS_thruput_Cap_Ratio</to>
 				</connector>
-				<connector uid="5015" color="#C8C8C8" angle="315">
+				<connector uid="5014" color="#C8C8C8" angle="315">
 					<from>Subsidy_Amt</from>
 					<to>FCI_Subs_Logic</to>
 				</connector>
-				<connector uid="5016" angle="135">
+				<connector uid="5015" angle="135">
 					<from>Avg_ORNOVOC</from>
 					<to>Other_rev_net_of_vbl_cost_per_gal</to>
 				</connector>
-				<connector uid="5017" angle="228.695">
+				<connector uid="5016" angle="228.695">
 					<from>logging_PC_experience</from>
 					<to>frac_rate_of_growth_PC_experience</to>
 				</connector>
-				<connector uid="5018" angle="288.435">
+				<connector uid="5017" angle="288.435">
 					<from>length_of_period_2</from>
 					<to>discount_factor_2</to>
 				</connector>
-				<connector uid="5019" angle="0">
+				<connector uid="5018" angle="0">
 					<from>Expected_FCI</from>
 					<to>Expected_FCI_after_Subs</to>
 				</connector>
-				<connector uid="5020" angle="15.9679">
+				<connector uid="5019" angle="15.9679">
 					<from>FCI_subs_by_pathway_and_region</from>
 					<to>yrly_FCI_subs</to>
 				</connector>
-				<connector uid="5021" angle="26.5651">
+				<connector uid="5020" angle="26.5651">
 					<from>
-						<alias uid="5022"/>
+						<alias uid="5021"/>
 					</from>
 					<to>commercial_maturity_gap</to>
 				</connector>
-				<connector uid="5023" angle="40.6013">
+				<connector uid="5022" angle="40.6013">
 					<from>
-						<alias uid="5024"/>
+						<alias uid="5023"/>
 					</from>
 					<to>length_of_period_1</to>
 				</connector>
-				<connector uid="5025" color="#C8C8C8" angle="0">
+				<connector uid="5024" color="#C8C8C8" angle="0">
 					<from>
-						<alias uid="5026"/>
+						<alias uid="5025"/>
 					</from>
 					<to>Avg_Plant_Output_gal_yr</to>
 				</connector>
-				<connector uid="5027" angle="237.995">
+				<connector uid="5026" angle="237.995">
 					<from>Avg_PY</from>
 					<to>Industry_Process_Yield_Gap</to>
 				</connector>
-				<connector uid="5028" angle="0">
+				<connector uid="5027" angle="0">
 					<from>Total_Exp_Revs</from>
 					<to>Exp_Revs_Net_of_Op_Cost</to>
 				</connector>
-				<connector uid="5029" angle="90">
+				<connector uid="5028" angle="90">
 					<from>
-						<alias uid="5030"/>
+						<alias uid="5029"/>
 					</from>
 					<to>Avg_ORNOVOC</to>
 				</connector>
-				<connector uid="5031" angle="206.565">
+				<connector uid="5030" angle="206.565">
 					<from>
-						<alias uid="5032"/>
+						<alias uid="5031"/>
 					</from>
 					<to>ORNOVOC_influx</to>
 				</connector>
-				<connector uid="5033" color="white" angle="0">
+				<connector uid="5032" color="white" angle="0">
 					<from>FOG_price_Input</from>
 					<to>FOG_price_curve_nextplant</to>
 				</connector>
-				<connector uid="5034" angle="69.444">
+				<connector uid="5033" angle="69.444">
 					<from>Soy_Oil_Consumption</from>
 					<to>OilCrop_Oil_Consn</to>
 				</connector>
-				<connector uid="5035" angle="0">
+				<connector uid="5034" angle="0">
 					<from>
-						<alias uid="5036"/>
+						<alias uid="5035"/>
 					</from>
 					<to>endogenous_plant_planning</to>
 				</connector>
-				<connector uid="5037" angle="90">
+				<connector uid="5036" angle="90">
 					<from>Output_Capacity</from>
 					<to>Output_Capacity_incl_Pipeline</to>
 				</connector>
-				<connector uid="5038" color="#787878" angle="333.435">
+				<connector uid="5037" color="#787878" angle="333.435">
 					<from>retirements</from>
 					<to>PY_retirements</to>
 				</connector>
-				<connector uid="5039" angle="270">
+				<connector uid="5038" angle="270">
 					<from>Tot_ORNOVOC_OnLine</from>
 					<to>Avg_ORNOVOC</to>
 				</connector>
-				<connector uid="5040" angle="180">
+				<connector uid="5039" angle="180">
 					<from>Startup_Subs_Vol_Thresh</from>
 					<to>Use_Startup_Subs</to>
 				</connector>
-				<connector uid="5041" angle="20.7769">
+				<connector uid="5040" angle="20.7769">
 					<from>
-						<alias uid="5042"/>
+						<alias uid="5041"/>
 					</from>
 					<to>initiating_Pilot_development</to>
 				</connector>
-				<connector uid="5043" angle="270">
+				<connector uid="5042" angle="270">
 					<from>OilCrop_Demand</from>
 					<to>Impact_soy_oil_supply_constraint_on_price</to>
 				</connector>
-				<connector uid="5044" angle="159.444">
+				<connector uid="5043" angle="159.444">
 					<from>
-						<alias uid="5045"/>
+						<alias uid="5044"/>
 					</from>
 					<to>regional_op_cost_weights</to>
 				</connector>
-				<connector uid="5046" color="white" angle="0">
+				<connector uid="5045" color="white" angle="0">
 					<from>oilcrop_share_to_C</from>
 					<to>OilCrop_Price_Input_nextplant</to>
 				</connector>
-				<connector uid="5047" angle="180">
+				<connector uid="5046" angle="180">
 					<from>
-						<alias uid="5048"/>
+						<alias uid="5047"/>
 					</from>
 					<to>Avg_FS_Thruput_Pipeline_C</to>
 				</connector>
-				<connector uid="5049" angle="12.5288">
+				<connector uid="5048" angle="12.5288">
 					<from>
-						<alias uid="5050"/>
+						<alias uid="5049"/>
 					</from>
 					<to>Feedstock_Constraint_on_Utilization</to>
 				</connector>
-				<connector uid="5051" angle="26.5651">
+				<connector uid="5050" angle="26.5651">
 					<from>Policy_Switch</from>
 					<to>FCI_Subs_Logic</to>
 				</connector>
-				<connector uid="5052" angle="353.66">
+				<connector uid="5051" angle="353.66">
 					<from>NPV_Taxes_3</from>
 					<to>NPV_Taxes</to>
 				</connector>
-				<connector uid="5053" angle="90">
+				<connector uid="5052" angle="90">
 					<from>Tot_FS_Thruput_Cap_Pipeline</from>
 					<to>Avg_FS_Thruput_Cap_Pipeline</to>
 				</connector>
-				<connector uid="5054" angle="153.435">
+				<connector uid="5053" angle="153.435">
 					<from>State_of_the_Industry_Multipliers</from>
 					<to>State_of_Industry_Process_Yield</to>
 				</connector>
-				<connector uid="5055" angle="195.552">
+				<connector uid="5054" angle="195.552">
 					<from>
-						<alias uid="5056"/>
+						<alias uid="5055"/>
 					</from>
 					<to>logging_pilot_experience</to>
 				</connector>
-				<connector uid="5057" angle="63.4349">
+				<connector uid="5056" angle="63.4349">
 					<from>rate_of_doubling_demo_experience</from>
 					<to>PC_learning_logic</to>
 				</connector>
-				<connector uid="5058" angle="0">
+				<connector uid="5057" angle="0">
 					<from>aggregate_average_feedstock_price_input</from>
 					<to>Expected_FS_cost_after_Subs</to>
 				</connector>
-				<connector uid="5059" color="white" angle="90">
+				<connector uid="5058" color="white" angle="90">
 					<from>Exp_Sales_Rev</from>
 					<to>Total_Exp_Revs</to>
 				</connector>
-				<connector uid="5060" angle="87.882">
+				<connector uid="5059" angle="87.882">
 					<from>
-						<alias uid="5061"/>
+						<alias uid="5060"/>
 					</from>
 					<to>ORNOVOC_Retirements</to>
 				</connector>
-				<connector uid="5062" angle="206.565">
+				<connector uid="5061" angle="206.565">
 					<from>
-						<alias uid="5063"/>
+						<alias uid="5062"/>
 					</from>
 					<to>start_schedule_thruput_capacity</to>
 				</connector>
-				<connector uid="5064" color="#C8C8C8" angle="215.538">
+				<connector uid="5063" color="#C8C8C8" angle="215.538">
 					<from>Subsidy_Amt</from>
 					<to>PoP_Price_Subs_Logic</to>
 				</connector>
-				<connector uid="5065" angle="90">
+				<connector uid="5064" angle="90">
 					<from>nominal_Attr</from>
 					<to>Attr</to>
 				</connector>
-				<connector uid="5066" angle="0">
+				<connector uid="5065" angle="0">
 					<from>
-						<alias uid="5067"/>
+						<alias uid="5066"/>
 					</from>
 					<to>FOG_demand_incl_nextplant</to>
 				</connector>
-				<connector uid="5068" angle="186.34">
+				<connector uid="5067" angle="186.34">
 					<from>
-						<alias uid="5069"/>
+						<alias uid="5068"/>
 					</from>
 					<to>FS_thruput_cap_influx</to>
 				</connector>
-				<connector uid="5070" angle="0">
+				<connector uid="5069" angle="0">
 					<from>
-						<alias uid="5071"/>
+						<alias uid="5070"/>
 					</from>
 					<to>Desired_Soy_Oil_Consn</to>
 				</connector>
-				<connector uid="5072" angle="270">
+				<connector uid="5071" angle="270">
 					<from>length_of_period_1</from>
 					<to>discount_factor_1</to>
 				</connector>
-				<connector uid="5073" angle="20.556">
+				<connector uid="5072" angle="20.556">
 					<from>regional_op_cost_weights</from>
 					<to>volume_wtd_FS_cost_USD_per_gall</to>
 				</connector>
-				<connector uid="5074" angle="73.3008">
+				<connector uid="5073" angle="73.3008">
 					<from>Other_Oilcrop_Oil_Consn</from>
 					<to>OilCrop_Oil_Consn</to>
 				</connector>
-				<connector uid="5075" angle="0">
+				<connector uid="5074" angle="0">
 					<from>est_depreciation_expense</from>
 					<to>Expected_Taxable_Income_1</to>
 				</connector>
-				<connector uid="5076" angle="0">
+				<connector uid="5075" angle="0">
 					<from>
-						<alias uid="5077"/>
+						<alias uid="5076"/>
 					</from>
 					<to>Total_Exp_Revs</to>
 				</connector>
-				<connector uid="5078" color="white" angle="172.875">
+				<connector uid="5077" color="white" angle="172.875">
 					<from>OilCrop_Price_Input</from>
 					<to>aggregate_average_feedstock_price_input</to>
 				</connector>
-				<connector uid="5079" angle="180">
+				<connector uid="5078" angle="180">
 					<from>Cumulative_Industry_Output</from>
 					<to>Cumulative_Module_Output</to>
 				</connector>
-				<connector uid="5080" angle="90">
+				<connector uid="5079" angle="90">
 					<from>
-						<alias uid="5081"/>
+						<alias uid="5080"/>
 					</from>
 					<to>Expected_FCI</to>
 				</connector>
-				<connector uid="5082" angle="347.471">
+				<connector uid="5081" angle="347.471">
 					<from>
-						<alias uid="5083"/>
+						<alias uid="5082"/>
 					</from>
 					<to>start_schedule_ORNOVOC</to>
 				</connector>
-				<connector uid="5084" angle="0">
+				<connector uid="5083" angle="0">
 					<from>Avg_Plant_Output_gpd_pipeline_C</from>
 					<to>Pipeline_Potential_Plant_Output_gal_per_yr_C</to>
 				</connector>
-				<connector uid="5085" angle="147.995">
+				<connector uid="5084" angle="147.995">
 					<from>
-						<alias uid="5086"/>
+						<alias uid="5085"/>
 					</from>
 					<to>rate_of_doubling_demo_experience</to>
 				</connector>
-				<connector uid="5087" angle="90">
+				<connector uid="5086" angle="90">
 					<from>RegionRollup_Attr</from>
 					<to>L_Commercial</to>
 				</connector>
-				<connector uid="5088" angle="90">
+				<connector uid="5087" angle="90">
 					<from>
-						<alias uid="5089"/>
+						<alias uid="5088"/>
 					</from>
 					<to>Expected_NextPlant_FS_cost_after_Subs</to>
+				</connector>
+				<connector uid="5089" angle="0">
+					<from>
+						<alias uid="4997"/>
+					</from>
+					<to>total_project_length</to>
 				</connector>
 				<connector uid="5090" angle="0">
 					<from>
-						<alias uid="4998"/>
-					</from>
-					<to>total_project_length</to>
-				</connector>
-				<connector uid="5091" angle="0">
-					<from>
-						<alias uid="5092"/>
+						<alias uid="5091"/>
 					</from>
 					<to>length_of_period_2</to>
 				</connector>
-				<connector uid="5093" color="white" angle="0">
+				<connector uid="5092" color="white" angle="0">
 					<from>total_FS_thruput_Cap</from>
 					<to>total_FS_thruput_Cap_incl_nextplant</to>
 				</connector>
-				<connector uid="5094" color="#C8C8C8" angle="153.435">
+				<connector uid="5093" color="#C8C8C8" angle="153.435">
 					<from>
-						<alias uid="5095"/>
+						<alias uid="5094"/>
 					</from>
 					<to>Output_Capacity_Pipeline</to>
 				</connector>
-				<connector uid="5096" angle="270.157">
+				<connector uid="5095" angle="270.157">
 					<from>frac_rate_of_growth_pilot_experience</from>
 					<to>rate_of_doubling_pilot_experience</to>
 				</connector>
-				<connector uid="5097" color="white" angle="270">
+				<connector uid="5096" color="white" angle="270">
 					<from>total_FS_thruput_Cap_incl_nextplant</from>
 					<to>total_FS_demand_incl_nextplant</to>
 				</connector>
-				<connector uid="5098" angle="0">
+				<connector uid="5097" angle="0">
 					<from>Oil_Production_from_Commodity_Crops</from>
 					<to>Max_OilCrop_Supply</to>
 				</connector>
-				<connector uid="5099" angle="0">
+				<connector uid="5098" angle="0">
 					<from>Expected_Taxable_Income_1</from>
 					<to>Expected_Tax_1</to>
 				</connector>
-				<connector uid="5100" angle="157.355">
+				<connector uid="5099" angle="157.355">
 					<from>
-						<alias uid="5101"/>
+						<alias uid="5100"/>
 					</from>
 					<to>ORNOVOC_influx</to>
 				</connector>
-				<connector uid="5102" angle="90">
+				<connector uid="5101" angle="90">
 					<from>Pipeline_Potential_Plant_Output_gal_per_yr_C</from>
 					<to>Output_Capacity_Pipeline</to>
 				</connector>
-				<connector uid="5103" angle="90">
+				<connector uid="5102" angle="90">
 					<from>exp_net_op_cost_USD_per_gal</from>
 					<to>volume_wtd_net_op_cost_USD_per_gal</to>
 				</connector>
-				<connector uid="5104" angle="69.444">
+				<connector uid="5103" angle="69.444">
 					<from>Expected_Op_Cost</from>
 					<to>Exp_Revs_Net_of_Op_Cost</to>
 				</connector>
-				<connector uid="5105" angle="359.692">
+				<connector uid="5104" angle="359.692">
 					<from>rollup_FS_demand_nominal_util</from>
 					<to>chg_avg_FS_demand</to>
 				</connector>
-				<connector uid="5106" angle="333.435">
+				<connector uid="5105" angle="333.435">
 					<from>Annual_Loan_Payment</from>
 					<to>PV_Loan_Payment</to>
 				</connector>
-				<connector uid="5107" angle="270">
+				<connector uid="5106" angle="270">
 					<from>
-						<alias uid="5108"/>
+						<alias uid="5107"/>
 					</from>
 					<to>Reqd_Rate_of_Return</to>
 				</connector>
-				<connector uid="5109" angle="90">
+				<connector uid="5108" angle="90">
 					<from>Soy_Oil_Price_Input</from>
 					<to>OilCrop_Price_Input</to>
 				</connector>
-				<connector uid="5110" angle="26.5651">
+				<connector uid="5109" angle="26.5651">
 					<from>FCI_scale_factor</from>
 					<to>NextPlant_Expected_FCI</to>
 				</connector>
-				<connector uid="5111" angle="0">
+				<connector uid="5110" angle="0">
 					<from>Reqd_Rate_of_Return_as_PCT</from>
 					<to>Reqd_Rate_of_Return</to>
 				</connector>
-				<connector uid="5112" angle="282.529">
+				<connector uid="5111" angle="282.529">
 					<from>
-						<alias uid="5113"/>
+						<alias uid="5112"/>
 					</from>
 					<to>NPV_Taxes_1</to>
 				</connector>
-				<connector uid="5114" angle="32.0054">
+				<connector uid="5113" angle="32.0054">
 					<from>
-						<alias uid="5115"/>
+						<alias uid="5114"/>
 					</from>
 					<to>Feedstock_Constraint_on_Utilization</to>
 				</connector>
-				<connector uid="5116" angle="90">
+				<connector uid="5115" angle="90">
 					<from>PC_Maturity</from>
 					<to>Demo_Multipliers</to>
 				</connector>
-				<connector uid="5117" angle="135">
+				<connector uid="5116" angle="135">
 					<from>
-						<alias uid="5118"/>
+						<alias uid="5117"/>
 					</from>
 					<to>nominal_Attr</to>
 				</connector>
-				<connector uid="5119" angle="2.38594">
+				<connector uid="5118" angle="2.38594">
 					<from>Cume_FCI_Subs</from>
 					<to>rollup_cumulative_subsidies</to>
 				</connector>
-				<connector uid="5120" angle="35.5377">
+				<connector uid="5119" angle="35.5377">
 					<from>Soy_Oil_Price_Input</from>
 					<to>oilcrop_share_to_C</to>
 				</connector>
-				<connector uid="5121" color="white" angle="234.462">
+				<connector uid="5120" color="white" angle="234.462">
 					<from>FOG_price_Input</from>
 					<to>aggregate_average_feedstock_price_input</to>
 				</connector>
-				<connector uid="5122" angle="69.444">
+				<connector uid="5121" angle="69.444">
 					<from>Rough_Estimate_Annual_Interest</from>
 					<to>Expected_Taxable_Income_2</to>
 				</connector>
-				<connector uid="5123" angle="146.764">
+				<connector uid="5122" angle="146.764">
 					<from>
-						<alias uid="5124"/>
+						<alias uid="5123"/>
 					</from>
 					<to>logging_PC_experience</to>
 				</connector>
-				<connector uid="5125" angle="349.947">
+				<connector uid="5124" angle="349.947">
 					<from>
-						<alias uid="5126"/>
+						<alias uid="5125"/>
 					</from>
 					<to>yrly_prodn_subs</to>
 				</connector>
-				<connector uid="5127" angle="0">
+				<connector uid="5126" angle="0">
 					<from>
-						<alias uid="5128"/>
+						<alias uid="5127"/>
 					</from>
 					<to>RegionRollup_Attr</to>
 				</connector>
-				<connector uid="5129" angle="341.565">
+				<connector uid="5128" angle="341.565">
 					<from>
-						<alias uid="5130"/>
+						<alias uid="5129"/>
 					</from>
 					<to>initiating_Pilot_development</to>
 				</connector>
-				<connector uid="5131" angle="145.176">
+				<connector uid="5130" angle="145.176">
 					<from>Avg_ORNOVOC_D_and_C_C</from>
 					<to>ORNOVOC_to_Startup_C</to>
 				</connector>
-				<connector uid="5132" angle="220.815">
+				<connector uid="5131" angle="220.815">
 					<from>Pilot_Scale_Operations</from>
 					<to>logging_pilot_experience</to>
 				</connector>
-				<connector uid="5133" angle="270">
+				<connector uid="5132" angle="270">
 					<from>Output_gpy_by_Technology</from>
 					<to>output_bb_gpy_by_tech</to>
 				</connector>
-				<connector uid="5134" angle="206.565">
+				<connector uid="5133" angle="206.565">
 					<from>Use_Startup_Subs</from>
 					<to>Subsidy_Amt</to>
 				</connector>
-				<connector uid="5135" angle="316.769">
+				<connector uid="5134" angle="316.769">
 					<from>
-						<alias uid="5136"/>
+						<alias uid="5135"/>
 					</from>
 					<to>initiating_PC_development</to>
 				</connector>
-				<connector uid="5137" angle="19.9831">
+				<connector uid="5136" angle="19.9831">
 					<from>OnLine</from>
 					<to>Output_Capacity</to>
 				</connector>
-				<connector uid="5138" angle="270">
+				<connector uid="5137" angle="270">
 					<from>
-						<alias uid="5139"/>
+						<alias uid="5138"/>
 					</from>
 					<to>discount_factor_Loan_Payment</to>
 				</connector>
-				<connector uid="5140" angle="180">
+				<connector uid="5139" angle="180">
 					<from>
-						<alias uid="5141"/>
+						<alias uid="5140"/>
 					</from>
 					<to>exp_net_op_cost_USD_per_yr</to>
 				</connector>
-				<connector uid="5142" color="#787878" angle="310.921">
+				<connector uid="5141" color="#787878" angle="310.921">
 					<from>Avg_PY</from>
 					<to>PY_retirements</to>
 				</connector>
-				<connector uid="5143" color="white" angle="18.4349">
+				<connector uid="5142" color="white" angle="18.4349">
 					<from>
-						<alias uid="5144"/>
+						<alias uid="5143"/>
 					</from>
 					<to>per_plant_L_G_exposure_C</to>
 				</connector>
-				<connector uid="5145" angle="20.556">
+				<connector uid="5144" angle="20.556">
 					<from>OilCrop_Oil_Consn</from>
 					<to>fs_demand_at_nominal_utilization</to>
 				</connector>
-				<connector uid="5146" angle="90">
+				<connector uid="5145" angle="90">
 					<from>Expected_FCI_after_Subs</from>
 					<to>est_depreciation_expense</to>
 				</connector>
-				<connector uid="5147" angle="90">
+				<connector uid="5146" angle="90">
 					<from>
-						<alias uid="5148"/>
+						<alias uid="5147"/>
 					</from>
 					<to>Expected_Price_after_Subs</to>
 				</connector>
-				<connector uid="5149" angle="0">
+				<connector uid="5148" angle="0">
 					<from>Desired_Soy_Oil_Consn</from>
 					<to>Soy_Oil_Consumption</to>
 				</connector>
-				<connector uid="5150" angle="0">
+				<connector uid="5149" angle="0">
 					<from>
-						<alias uid="5151"/>
+						<alias uid="5150"/>
 					</from>
 					<to>Regional_FS_Cost_USD_per_gal</to>
 				</connector>
-				<connector uid="5152" angle="0">
+				<connector uid="5151" angle="0">
 					<from>
-						<alias uid="5153"/>
+						<alias uid="5152"/>
 					</from>
 					<to>Attr</to>
 				</connector>
-				<connector uid="5154" angle="347.471">
+				<connector uid="5153" angle="347.471">
 					<from>
-						<alias uid="5155"/>
+						<alias uid="5154"/>
 					</from>
 					<to>Soy_Oil_Price_Input</to>
 				</connector>
-				<connector uid="5156" angle="310.601">
+				<connector uid="5155" angle="310.601">
 					<from>
-						<alias uid="5157"/>
+						<alias uid="5156"/>
 					</from>
 					<to>L_G_exposure_by_pathway_and_region</to>
 				</connector>
-				<connector uid="5158" angle="270">
+				<connector uid="5157" angle="270">
 					<from>Tot_ORNOVOC_in_Pipeline</from>
 					<to>Avg_ORNOVOC_D_and_C_C</to>
 				</connector>
-				<connector uid="5159" angle="90">
+				<connector uid="5158" angle="90">
 					<from>
-						<alias uid="5139"/>
+						<alias uid="5138"/>
 					</from>
 					<to>Expected_Taxable_Income_2</to>
 				</connector>
-				<connector uid="5160" color="white" angle="25.8444">
+				<connector uid="5159" color="white" angle="25.8444">
 					<from>OilCrop_Demand</from>
 					<to>aggregate_average_feedstock_price_input</to>
 				</connector>
-				<connector uid="5161" angle="90">
+				<connector uid="5160" angle="90">
 					<from>weighted_distn_new_facilities</from>
 					<to>distn_new_facilities</to>
 				</connector>
-				<connector uid="5162" angle="38.5412">
+				<connector uid="5161" angle="38.5412">
 					<from>
-						<alias uid="5163"/>
+						<alias uid="5162"/>
 					</from>
 					<to>increase_in_PY_commercial_industry</to>
 				</connector>
-				<connector uid="5164" angle="40.6013">
+				<connector uid="5163" angle="40.6013">
 					<from>NextPlant_Other_Coproduct_Sales_Rev</from>
 					<to>NextPlant_ORNOVOC</to>
 				</connector>
-				<connector uid="5165" angle="0">
+				<connector uid="5164" angle="0">
 					<from>est_depreciation_exp_USD_per_gal</from>
 					<to>fixed_cost_USD_per_gal</to>
 				</connector>
-				<connector uid="5166" angle="6.34019">
+				<connector uid="5165" angle="6.34019">
 					<from>
-						<alias uid="5167"/>
+						<alias uid="5166"/>
 					</from>
 					<to>total_FS_thruput_Cap_incl_nextplant</to>
 				</connector>
-				<connector uid="5168" angle="90">
+				<connector uid="5167" angle="90">
 					<from>
-						<alias uid="5113"/>
+						<alias uid="5112"/>
 					</from>
 					<to>NPV_Taxes_2</to>
 				</connector>
-				<connector uid="5169" angle="40.6013">
+				<connector uid="5168" angle="40.6013">
 					<from>Taxes_USD_per_gal</from>
 					<to>fixed_cost_USD_per_gal</to>
 				</connector>
-				<connector uid="5170" angle="283.241">
+				<connector uid="5169" angle="283.241">
 					<from>Cumulative_PC_Experience</from>
 					<to>frac_rate_of_growth_PC_experience</to>
 				</connector>
-				<connector uid="5171" angle="270">
+				<connector uid="5170" angle="270">
 					<from>OilCrop_Demand_incl_nextplant</from>
 					<to>C_price_curve_incl_nextplant</to>
 				</connector>
-				<connector uid="5172" angle="12.5288">
+				<connector uid="5171" angle="12.5288">
 					<from>FOG_price_curve_nextplant</from>
 					<to>feedstock_price_input_nextplant</to>
 				</connector>
-				<connector uid="5173" angle="90">
+				<connector uid="5172" angle="90">
 					<from>Policy_End</from>
 					<to>Policy_time_constraints</to>
 				</connector>
-				<connector uid="5174" angle="28.5164">
+				<connector uid="5173" angle="28.5164">
 					<from>number_of_plants_to_start</from>
 					<to>initiating</to>
 				</connector>
-				<connector uid="5175" angle="0">
+				<connector uid="5174" angle="0">
 					<from>
-						<alias uid="5176"/>
+						<alias uid="5175"/>
 					</from>
 					<to>Exp_Sales_Rev</to>
 				</connector>
-				<connector uid="5177" angle="180">
+				<connector uid="5176" angle="180">
 					<from>
-						<alias uid="5178"/>
+						<alias uid="5177"/>
 					</from>
 					<to>State_of_Industry_Process_Yield</to>
 				</connector>
-				<connector uid="5179" angle="91.9152">
+				<connector uid="5178" angle="91.9152">
 					<from>
-						<alias uid="5180"/>
+						<alias uid="5179"/>
 					</from>
 					<to>ORNOVOC_influx</to>
 				</connector>
-				<connector uid="5181" color="white" angle="270">
+				<connector uid="5180" color="white" angle="270">
 					<from>FOG_consn</from>
 					<to>aggregate_average_feedstock_price_input</to>
 				</connector>
-				<connector uid="5182" angle="167.471">
+				<connector uid="5181" angle="167.471">
 					<from>Avg_FS_Thruput_Cap</from>
 					<to>Avg_FS_throughput</to>
 				</connector>
-				<connector uid="5183" angle="206.565">
+				<connector uid="5182" angle="206.565">
 					<from>
-						<alias uid="5139"/>
+						<alias uid="5138"/>
 					</from>
 					<to>Cume_Loan_Payment</to>
 				</connector>
-				<connector uid="5184" angle="270.241">
+				<connector uid="5183" angle="270.241">
 					<from>frac_rate_of_growth_PC_experience</from>
 					<to>rate_of_doubling_demo_experience</to>
 				</connector>
-				<connector uid="5185" color="white" angle="353.66">
+				<connector uid="5184" color="white" angle="353.66">
 					<from>
-						<alias uid="5186"/>
+						<alias uid="5185"/>
 					</from>
 					<to>per_plant_L_G_exposure_C</to>
 				</connector>
-				<connector uid="5187" angle="0">
+				<connector uid="5186" angle="0">
 					<from>Expected_Fixed_Op_Cost</from>
 					<to>NextPlant_Expected_Fixed_Op_Cost</to>
 				</connector>
-				<connector uid="5188" angle="180">
+				<connector uid="5187" angle="180">
 					<from>
-						<alias uid="5024"/>
+						<alias uid="5023"/>
 					</from>
 					<to>discount_factor_loan</to>
 				</connector>
-				<connector uid="5189" angle="30.6225">
+				<connector uid="5188" angle="30.6225">
 					<from>
-						<alias uid="5190"/>
+						<alias uid="5189"/>
 					</from>
 					<to>chg_avg_FS_demand</to>
 				</connector>
-				<connector uid="5191" angle="26.5651">
+				<connector uid="5190" angle="26.5651">
 					<from>Plant_Utilization_Factors</from>
 					<to>Actual_Output_gpy</to>
 				</connector>
-				<connector uid="5192" angle="349.695">
+				<connector uid="5191" angle="349.695">
 					<from>
-						<alias uid="5024"/>
+						<alias uid="5023"/>
 					</from>
 					<to>length_of_period_2</to>
 				</connector>
-				<connector uid="5193" angle="180">
+				<connector uid="5192" angle="180">
 					<from>
-						<alias uid="5194"/>
+						<alias uid="5193"/>
 					</from>
 					<to>maturity_weight_factor</to>
 				</connector>
-				<connector uid="5195" angle="45">
+				<connector uid="5194" angle="45">
 					<from>NPV_Taxes_1</from>
 					<to>NPV_Taxes</to>
 				</connector>
-				<connector uid="5196" angle="270">
+				<connector uid="5195" angle="270">
 					<from>
-						<alias uid="5197"/>
+						<alias uid="5196"/>
 					</from>
 					<to>total_project_length</to>
 				</connector>
-				<connector uid="5198" angle="270">
+				<connector uid="5197" angle="270">
 					<from>
-						<alias uid="5194"/>
+						<alias uid="5193"/>
 					</from>
 					<to>incremental_scale_factor_from_industry_maturity</to>
 				</connector>
-				<connector uid="5199" angle="0">
+				<connector uid="5198" angle="0">
 					<from>
-						<alias uid="5200"/>
+						<alias uid="5199"/>
 					</from>
 					<to>Expected_Plant_Output_Gal_Day_C</to>
 				</connector>
-				<connector uid="5201" angle="0">
+				<connector uid="5200" angle="0">
 					<from>
-						<alias uid="5202"/>
+						<alias uid="5201"/>
 					</from>
 					<to>learning_logic</to>
 				</connector>
-				<connector uid="5203" angle="0">
+				<connector uid="5202" angle="0">
 					<from>PoP_Price</from>
 					<to>Expected_Price_after_Subs</to>
 				</connector>
-				<connector uid="5204" color="#C8C8C8" angle="35.5377">
+				<connector uid="5203" color="#C8C8C8" angle="35.5377">
 					<from>Policy_time_constraints</from>
 					<to>FCI_Subs_Logic</to>
 				</connector>
-				<connector uid="5205" color="white" angle="0">
+				<connector uid="5204" color="white" angle="0">
 					<from>
-						<alias uid="5206"/>
+						<alias uid="5205"/>
 					</from>
 					<to>total_FS_demand_nominal_util</to>
 				</connector>
-				<connector uid="5207" color="#C8C8C8" angle="341.565">
+				<connector uid="5206" color="#C8C8C8" angle="341.565">
 					<from>Policy_time_constraints</from>
 					<to>Loan_Guarantee_Logic</to>
 				</connector>
-				<connector uid="5208" color="white" angle="180">
+				<connector uid="5207" color="white" angle="180">
 					<from>Use_Startup_Subs_Module_Volume_Input</from>
 					<to>Startup_Subs_Volume_Input</to>
 				</connector>
-				<connector uid="5209" angle="167.829">
+				<connector uid="5208" angle="167.829">
 					<from>
-						<alias uid="5210"/>
+						<alias uid="5209"/>
 					</from>
 					<to>Cost_to_Price_Ratio</to>
 				</connector>
-				<connector uid="5211" color="white" angle="155.564">
+				<connector uid="5210" color="white" angle="155.564">
 					<from>
-						<alias uid="5212"/>
+						<alias uid="5211"/>
 					</from>
 					<to>c_shared_learning</to>
 				</connector>
-				<connector uid="5213" angle="6.34019">
+				<connector uid="5212" angle="6.34019">
 					<from>Reqd_Rate_of_Return</from>
 					<to>discount_factor_1</to>
 				</connector>
-				<connector uid="5214" angle="0">
+				<connector uid="5213" angle="0">
 					<from>
-						<alias uid="5215"/>
+						<alias uid="5214"/>
 					</from>
 					<to>FCI_after_USD_per_gal</to>
 				</connector>
-				<connector uid="5216" angle="270">
+				<connector uid="5215" angle="270">
 					<from>FOG_demand_incl_nextplant</from>
 					<to>FOG_price_curve_nextplant</to>
 				</connector>
-				<connector uid="5217" angle="273.788">
+				<connector uid="5216" angle="273.788">
 					<from>
-						<alias uid="5061"/>
+						<alias uid="5060"/>
 					</from>
 					<to>FS_Thruput_Cap_Retirements</to>
 				</connector>
-				<connector uid="5218" color="white" angle="270">
+				<connector uid="5217" color="white" angle="270">
 					<from>Camelina_price_input</from>
 					<to>OilCrop_Price_Input</to>
 				</connector>
-				<connector uid="5219" angle="9.97922">
+				<connector uid="5218" angle="9.97922">
 					<from>industry_FS_thruput_tpy</from>
 					<to>yrly_fs_subs</to>
 				</connector>
-				<connector uid="5220" angle="90">
+				<connector uid="5219" angle="90">
 					<from>
-						<alias uid="5108"/>
+						<alias uid="5107"/>
 					</from>
 					<to>debt_interest_rate_as_frac</to>
 				</connector>
-				<connector uid="5221" angle="0">
+				<connector uid="5220" angle="0">
 					<from>
-						<alias uid="5081"/>
+						<alias uid="5080"/>
 					</from>
 					<to>Reqd_Rate_of_Return_as_PCT</to>
 				</connector>
-				<connector uid="5222" angle="0">
+				<connector uid="5221" angle="0">
 					<from>Initial_Equity_Investment</from>
 					<to>NPV_Investment</to>
 				</connector>
-				<connector uid="5223" angle="90">
+				<connector uid="5222" angle="90">
 					<from>MFSP_net_op_cost_per_gal</from>
 					<to>MFSP_USD_per_gal</to>
 				</connector>
-				<connector uid="5224" angle="20.556">
+				<connector uid="5223" angle="20.556">
 					<from>ROI_USD_per_gal</from>
 					<to>fixed_cost_USD_per_gal</to>
 				</connector>
-				<connector uid="5225" color="#C8C8C8" angle="292.997">
+				<connector uid="5224" color="#C8C8C8" angle="292.997">
 					<from>
-						<alias uid="5095"/>
+						<alias uid="5094"/>
 					</from>
 					<to>Output_Capacity</to>
 				</connector>
-				<connector uid="5226" angle="0">
+				<connector uid="5225" angle="0">
 					<from>Regional_FS_Cost_USD_yr</from>
 					<to>Expected_Op_Cost</to>
 				</connector>
-				<connector uid="5227" angle="130.601">
+				<connector uid="5226" angle="130.601">
 					<from>
-						<alias uid="4960"/>
+						<alias uid="4959"/>
 					</from>
 					<to>Expected_Tax_3</to>
 				</connector>
-				<connector uid="5228" angle="0">
+				<connector uid="5227" angle="0">
 					<from>
-						<alias uid="5229"/>
+						<alias uid="5228"/>
 					</from>
 					<to>Pilot_Multipliers</to>
+				</connector>
+				<connector uid="5229" angle="270">
+					<from>
+						<alias uid="4989"/>
+					</from>
+					<to>L_G_exposure_by_pathway_and_region</to>
 				</connector>
 				<connector uid="5230" angle="270">
 					<from>
-						<alias uid="4990"/>
-					</from>
-					<to>L_G_exposure_by_pathway_and_region</to>
-				</connector>
-				<connector uid="5231" angle="270">
-					<from>
-						<alias uid="5232"/>
+						<alias uid="5231"/>
 					</from>
 					<to>Expected_FCI</to>
 				</connector>
-				<connector uid="5233" angle="0">
+				<connector uid="5232" angle="0">
 					<from>
-						<alias uid="5234"/>
+						<alias uid="5233"/>
 					</from>
 					<to>Feedstock_Constraint_on_Utilization</to>
 				</connector>
-				<connector uid="5235" angle="32.0054">
+				<connector uid="5234" angle="32.0054">
 					<from>Regional_FS_Cost_USD_per_gal</from>
 					<to>Regional_FS_Cost_USD_yr</to>
 				</connector>
-				<connector uid="5236" angle="90">
+				<connector uid="5235" angle="90">
 					<from>
-						<alias uid="5237"/>
+						<alias uid="5236"/>
 					</from>
 					<to>Plant_Utilization_Factors</to>
 				</connector>
-				<connector uid="5238" angle="0">
+				<connector uid="5237" angle="0">
 					<from>Mature_FS_Thruput_Capacity</from>
 					<to>NextPlant_FS_Thruput_Cap</to>
 				</connector>
-				<connector uid="5239" angle="224.726">
+				<connector uid="5238" angle="224.726">
 					<from>output_bb_gpy_by_tech</from>
 					<to>frac_rate_of_growth_in_industry_output</to>
 				</connector>
-				<connector uid="5240" angle="200.556">
+				<connector uid="5239" angle="200.556">
 					<from>
-						<alias uid="5241"/>
+						<alias uid="5240"/>
 					</from>
 					<to>start_schedule_nameplate_output_gpd</to>
 				</connector>
-				<connector uid="5242" angle="90">
+				<connector uid="5241" angle="90">
 					<from>Annual_Loan_Payment</from>
 					<to>Cume_Loan_Payment</to>
 				</connector>
-				<connector uid="5243" color="#C8C8C8" angle="69.444">
+				<connector uid="5242" color="#C8C8C8" angle="69.444">
 					<from>Policy_time_constraints</from>
 					<to>FS_Subs_Logic</to>
 				</connector>
-				<connector uid="5244" angle="26.5651">
+				<connector uid="5243" angle="26.5651">
 					<from>State_of_Industry_Process_Yield</from>
 					<to>Industry_Process_Yield_Gap</to>
 				</connector>
-				<connector uid="5245" angle="90">
+				<connector uid="5244" angle="90">
 					<from>
-						<alias uid="5246"/>
+						<alias uid="5245"/>
 					</from>
 					<to>Expected_Equity_Fraction</to>
 				</connector>
-				<connector uid="5247" angle="54.4623">
+				<connector uid="5246" angle="54.4623">
 					<from>FCI_after_USD_per_gal</from>
 					<to>fixed_cost_USD_per_gal</to>
 				</connector>
-				<connector uid="5248" color="#C8C8C8" angle="302.005">
+				<connector uid="5247" color="#C8C8C8" angle="302.005">
 					<from>one_dollar_per_gal</from>
 					<to>PoP_Price_Subs_Logic</to>
 				</connector>
-				<connector uid="5249" angle="90">
+				<connector uid="5248" angle="90">
 					<from>
-						<alias uid="5250"/>
+						<alias uid="5249"/>
 					</from>
 					<to>PV_Loan_Payment</to>
 				</connector>
-				<connector uid="5251" angle="327.995">
+				<connector uid="5250" angle="327.995">
 					<from>Expected_FCI_after_Subs</from>
 					<to>Initial_Equity_Investment</to>
 				</connector>
-				<connector uid="5252" angle="30.5792">
+				<connector uid="5251" angle="30.5792">
 					<from>
-						<alias uid="5253"/>
+						<alias uid="5252"/>
 					</from>
 					<to>total_FS_thruput_Cap</to>
 				</connector>
-				<connector uid="5254" angle="26.5651">
+				<connector uid="5253" angle="26.5651">
 					<from>
-						<alias uid="5255"/>
+						<alias uid="5254"/>
 					</from>
 					<to>Oil_Production_from_Commodity_Crops</to>
 				</connector>
-				<connector uid="5256" angle="221.068">
+				<connector uid="5255" angle="221.068">
 					<from>Avg_FS_Thruput_Cap_Pipeline</from>
 					<to>FS_Thruput_Cap_to_Startup_C</to>
 				</connector>
-				<connector uid="5257" angle="0">
+				<connector uid="5256" angle="0">
 					<from>fixed_cost_USD_per_gal</from>
 					<to>volume_wtd_fixed_cost_USD_per_gal</to>
 				</connector>
-				<connector uid="5258" angle="310.601">
+				<connector uid="5257" angle="310.601">
 					<from>Policy_Switch</from>
 					<to>Loan_Guarantee_Logic</to>
 				</connector>
-				<connector uid="5259" color="white" angle="180">
+				<connector uid="5258" color="white" angle="180">
 					<from>
-						<alias uid="5260"/>
+						<alias uid="5259"/>
 					</from>
 					<to>Plant_Utilization_Factors</to>
 				</connector>
-				<connector uid="5261" angle="251.565">
+				<connector uid="5260" angle="251.565">
 					<from>FS_thruput_Cap_Ratio</from>
 					<to>NextPlant_Other_Coproduct_Sales_Rev</to>
 				</connector>
-				<connector uid="5262" angle="20.7769">
+				<connector uid="5261" angle="20.7769">
 					<from>
-						<alias uid="5263"/>
+						<alias uid="5262"/>
 					</from>
 					<to>initiating_PC_development</to>
 				</connector>
-				<connector uid="5264" angle="63.4349">
+				<connector uid="5263" angle="63.4349">
 					<from>incremental_scale_up_level</from>
 					<to>Feedstock_Thruput_Incremental_Scale_Factor</to>
 				</connector>
-				<connector uid="5265" angle="335.556">
+				<connector uid="5264" angle="335.556">
 					<from>OnLine</from>
 					<to>retirements</to>
 				</connector>
-				<connector uid="5266" angle="63.4349">
+				<connector uid="5265" angle="63.4349">
 					<from>
-						<alias uid="5081"/>
+						<alias uid="5080"/>
 					</from>
 					<to>Expected_Equity_Fraction</to>
 				</connector>
-				<connector uid="5267" angle="180">
+				<connector uid="5266" angle="180">
 					<from>exp_net_op_cost_USD_per_yr</from>
 					<to>exp_net_op_cost_USD_per_gal</to>
 				</connector>
-				<connector uid="5268" angle="90">
+				<connector uid="5267" angle="90">
 					<from>
-						<alias uid="5269"/>
+						<alias uid="5268"/>
 					</from>
 					<to>regional_op_cost_weights</to>
 				</connector>
-				<connector uid="5270" angle="0">
+				<connector uid="5269" angle="0">
 					<from>Demo_Multipliers</from>
 					<to>State_of_the_Industry_Multipliers</to>
 				</connector>
-				<connector uid="5271" angle="32.0054">
+				<connector uid="5270" angle="32.0054">
 					<from>
-						<alias uid="5272"/>
+						<alias uid="5271"/>
 					</from>
 					<to>Demo_Multipliers</to>
 				</connector>
-				<connector uid="5273" angle="0">
+				<connector uid="5272" angle="0">
 					<from>Desired_Other_Oilcrop_Oil_Consn</from>
 					<to>Other_Oilcrop_Oil_Consn</to>
 				</connector>
-				<connector uid="5274" angle="18.4349">
+				<connector uid="5273" angle="18.4349">
 					<from>L_Commercial</from>
 					<to>Platform_Attr</to>
 				</connector>
-				<connector uid="5275" angle="51.6148">
+				<connector uid="5274" angle="51.6148">
 					<from>
-						<alias uid="5276"/>
+						<alias uid="5275"/>
 					</from>
 					<to>pilot_learning_logic</to>
 				</connector>
-				<connector uid="5277" angle="18.4349">
+				<connector uid="5276" angle="18.4349">
 					<from>op_cost_scale_factor</from>
 					<to>NextPlant_Expected_Fixed_Op_Cost</to>
 				</connector>
-				<connector uid="5278" angle="180">
+				<connector uid="5277" angle="180">
 					<from>maturity_weight_factor</from>
 					<to>maturing_industry_scale_factor</to>
 				</connector>
-				<connector uid="5279" angle="20.1411">
+				<connector uid="5278" angle="20.1411">
 					<from>
-						<alias uid="5280"/>
+						<alias uid="5279"/>
 					</from>
 					<to>yrly_fs_subs</to>
 				</connector>
-				<connector uid="5281" angle="180">
+				<connector uid="5280" angle="180">
 					<from>Doubling</from>
 					<to>doubling_factor</to>
 				</connector>
-				<connector uid="5282" angle="347.471">
+				<connector uid="5281" angle="347.471">
 					<from>Mature_FS_Thruput_Capacity</from>
 					<to>FS_thruput_Cap_Ratio</to>
 				</connector>
-				<connector uid="5283" angle="299.745">
+				<connector uid="5282" angle="299.745">
 					<from>total_project_length</from>
 					<to>discount_factor</to>
 				</connector>
-				<connector uid="5284" angle="0">
+				<connector uid="5283" angle="0">
 					<from>
-						<alias uid="5285"/>
+						<alias uid="5284"/>
 					</from>
 					<to>Avg_FS_Thruput_Pipeline_C</to>
 				</connector>
-				<connector uid="5286" angle="180">
+				<connector uid="5285" angle="180">
 					<from>
-						<alias uid="5287"/>
+						<alias uid="5286"/>
 					</from>
 					<to>P_Success</to>
 				</connector>
-				<connector uid="5288" angle="110.556">
+				<connector uid="5287" angle="110.556">
 					<from>fraction_of_Commercial_cost_growth_anticipated</from>
 					<to>Expected_FCI</to>
 				</connector>
-				<connector uid="5289" angle="54.4623">
+				<connector uid="5288" angle="54.4623">
 					<from>
-						<alias uid="5290"/>
+						<alias uid="5289"/>
 					</from>
 					<to>total_FS_thruput_Cap</to>
 				</connector>
-				<connector uid="5291" angle="270">
+				<connector uid="5290" angle="270">
 					<from>
-						<alias uid="5030"/>
+						<alias uid="5029"/>
 					</from>
 					<to>Avg_FS_Thruput_Cap</to>
 				</connector>
-				<connector uid="5292" angle="270">
+				<connector uid="5291" angle="270">
 					<from>Feedstock_Cost_USD_per_gal</from>
 					<to>Cost_to_Price_Ratio</to>
 				</connector>
-				<connector uid="5293" color="#C8C8C8" angle="288.435">
+				<connector uid="5292" color="#C8C8C8" angle="288.435">
 					<from>scheduled_plant_initiation</from>
 					<to>PY_influx</to>
 				</connector>
-				<connector uid="5294" angle="206.565">
+				<connector uid="5293" angle="206.565">
 					<from>
-						<alias uid="5295"/>
+						<alias uid="5294"/>
 					</from>
 					<to>exp_net_op_cost_USD_per_yr</to>
 				</connector>
-				<connector uid="5296" color="white" angle="270">
+				<connector uid="5295" color="white" angle="270">
 					<from>Avg_FS_demand_nominal_util</from>
 					<to>OilCrop_Demand</to>
 				</connector>
-				<connector uid="5297" angle="0">
+				<connector uid="5296" angle="0">
 					<from>Cume_Loan_Guarantee_Exposure</from>
 					<to>Rollup_Loan_Expsure</to>
 				</connector>
-				<connector uid="5298" angle="180">
+				<connector uid="5297" angle="180">
 					<from>
-						<alias uid="5299"/>
+						<alias uid="5298"/>
 					</from>
 					<to>FCI_Subs_Logic</to>
 				</connector>
-				<connector uid="5300" angle="147.995">
+				<connector uid="5299" angle="147.995">
 					<from>
-						<alias uid="5139"/>
+						<alias uid="5138"/>
 					</from>
 					<to>Rough_Estimate_Annual_Interest</to>
 				</connector>
-				<connector uid="5301" angle="90">
+				<connector uid="5300" angle="90">
 					<from>Rough_Estimate_Annual_Interest</from>
 					<to>Expected_Taxable_Income_1</to>
 				</connector>
-				<connector uid="5302" angle="319.399">
+				<connector uid="5301" angle="319.399">
 					<from>Exp_Revs_Net_of_Op_Cost</from>
 					<to>Expected_Taxable_Income_3</to>
 				</connector>
-				<connector uid="5303" angle="0">
+				<connector uid="5302" angle="0">
 					<from>volume_wtd_FS_cost_USD_per_gall</from>
 					<to>MFSP_fs_cost_per_gal</to>
 				</connector>
-				<connector uid="5304" angle="0">
+				<connector uid="5303" angle="0">
 					<from>Expected_Tax_1</from>
 					<to>NPV_Taxes_1</to>
 				</connector>
-				<connector uid="5305" angle="243.435">
+				<connector uid="5304" angle="243.435">
 					<from>FS_thruput_Cap_Ratio</from>
 					<to>NextPlant_Expected_Power_Sales_Rev</to>
 				</connector>
-				<connector uid="5306" angle="128.098">
+				<connector uid="5305" angle="128.098">
 					<from>State_of_Industry_Process_Yield</from>
 					<to>PY_influx</to>
 				</connector>
-				<connector uid="5307" angle="118.852">
+				<connector uid="5306" angle="118.852">
 					<from>
-						<alias uid="4973"/>
+						<alias uid="4972"/>
 					</from>
 					<to>ORNOVOC_influx</to>
 				</connector>
-				<connector uid="5308" angle="219.577">
+				<connector uid="5307" angle="219.577">
 					<from>
-						<alias uid="5309"/>
+						<alias uid="5308"/>
 					</from>
 					<to>logging_pilot_experience</to>
 				</connector>
-				<connector uid="5310" angle="319.02">
+				<connector uid="5309" angle="319.02">
 					<from>PC_Scale_Operations</from>
 					<to>logging_PC_experience</to>
 				</connector>
-				<connector uid="5311" angle="0">
+				<connector uid="5310" angle="0">
 					<from>feedstock_price_input_nextplant</from>
 					<to>Expected_NextPlant_FS_cost_after_Subs</to>
 				</connector>
-				<connector uid="5312" angle="324.462">
+				<connector uid="5311" angle="324.462">
 					<from>Background_Subs</from>
 					<to>Subsidy_Amt</to>
 				</connector>
-				<connector uid="5313" angle="327.995">
+				<connector uid="5312" angle="327.995">
 					<from>Reqd_Rate_of_Return</from>
 					<to>discount_factor</to>
 				</connector>
-				<connector uid="5314" color="#787878" angle="90">
+				<connector uid="5313" color="#787878" angle="90">
 					<from>PY_OnLine</from>
 					<to>Avg_PY</to>
 				</connector>
-				<connector uid="5315" angle="116.565">
+				<connector uid="5314" angle="116.565">
 					<from>Reqd_Rate_of_Return</from>
 					<to>discount_factor_DC</to>
 				</connector>
-				<connector uid="5316" angle="180">
+				<connector uid="5315" angle="180">
 					<from>start_schedule_nameplate_output_gpd</from>
 					<to>start_schedule_thruput_capacity</to>
 				</connector>
-				<connector uid="5317" angle="221.676">
+				<connector uid="5316" angle="221.676">
 					<from>
-						<alias uid="5318"/>
+						<alias uid="5317"/>
 					</from>
 					<to>logging_PC_experience</to>
 				</connector>
-				<connector uid="5319" angle="0">
+				<connector uid="5318" angle="0">
 					<from>Exp_Revs_Net_of_Op_Cost</from>
 					<to>NPV_Revs_Net_of_Op_Cost</to>
 				</connector>
-				<connector uid="5320" angle="248.749">
+				<connector uid="5319" angle="248.749">
 					<from>logging_pilot_experience</from>
 					<to>frac_rate_of_growth_pilot_experience</to>
 				</connector>
-				<connector uid="5321" angle="20.556">
+				<connector uid="5320" angle="20.556">
 					<from>Expected_Plant_Output_Gal_Day_C</from>
 					<to>Expected_Plant_Output</to>
 				</connector>
-				<connector uid="5322" angle="270">
+				<connector uid="5321" angle="270">
 					<from>
-						<alias uid="5323"/>
+						<alias uid="5322"/>
 					</from>
 					<to>NPV_Taxes_1</to>
 				</connector>
-				<connector uid="5324" angle="153.435">
+				<connector uid="5323" angle="153.435">
 					<from>
-						<alias uid="5325"/>
+						<alias uid="5324"/>
 					</from>
 					<to>exp_net_op_cost_USD_per_yr</to>
 				</connector>
-				<connector uid="5326" angle="270">
+				<connector uid="5325" angle="270">
 					<from>Plant_Start_Accumulator</from>
 					<to>number_of_plants_to_start</to>
 				</connector>
-				<connector uid="5327" angle="0">
+				<connector uid="5326" angle="0">
 					<from>Expected_FCI_after_Subs</from>
 					<to>Loan_Principal</to>
 				</connector>
-				<connector uid="5328" angle="26.5651">
+				<connector uid="5327" angle="26.5651">
 					<from>other_rev_scale_factor</from>
 					<to>NextPlant_Expected_Power_Sales_Rev</to>
 				</connector>
-				<connector uid="5329" angle="63.4349">
+				<connector uid="5328" angle="63.4349">
 					<from>OilCrop_Price_Input_nextplant</from>
 					<to>feedstock_price_input_nextplant</to>
 				</connector>
-				<connector uid="5330" angle="228.03">
+				<connector uid="5329" angle="228.03">
 					<from>Avg_FS_Thruput_Cap</from>
 					<to>FS_Thruput_Cap_Retirements</to>
 				</connector>
-				<connector uid="5331" angle="180">
+				<connector uid="5330" angle="180">
 					<from>
-						<alias uid="5332"/>
+						<alias uid="5331"/>
 					</from>
 					<to>Feedstock_Cost_USD_per_gal</to>
 				</connector>
-				<connector uid="5333" angle="333.435">
+				<connector uid="5332" angle="333.435">
 					<from>
-						<alias uid="5071"/>
+						<alias uid="5070"/>
 					</from>
 					<to>Desired_Other_Oilcrop_Oil_Consn</to>
 				</connector>
-				<connector uid="5334" angle="90">
+				<connector uid="5333" angle="90">
 					<from>Pilot_Maturity</from>
 					<to>Pilot_Multipliers</to>
 				</connector>
-				<connector uid="5335" angle="116.736">
+				<connector uid="5334" angle="116.736">
 					<from>
-						<alias uid="5336"/>
+						<alias uid="5335"/>
 					</from>
 					<to>oilot_shared_learning</to>
 				</connector>
-				<connector uid="5337" color="white" angle="270">
+				<connector uid="5336" color="white" angle="270">
 					<from>total_FS_thruput_Cap</from>
 					<to>total_FS_demand_nominal_util</to>
 				</connector>
-				<connector uid="5338" angle="180">
+				<connector uid="5337" angle="180">
 					<from>start_schedule_scale_factor</from>
 					<to>start_schedule_ORNOVOC</to>
 				</connector>
-				<connector uid="5339" angle="0">
+				<connector uid="5338" angle="0">
 					<from>Reqd_Rate_of_Return</from>
 					<to>discount_factor_2</to>
 				</connector>
-				<connector uid="5340" angle="0">
+				<connector uid="5339" angle="0">
 					<from>
-						<alias uid="5341"/>
+						<alias uid="5340"/>
 					</from>
 					<to>start_schedule_ORNOVOC</to>
 				</connector>
-				<connector uid="5342" angle="180">
+				<connector uid="5341" angle="180">
 					<from>incremental_scale_factor_from_industry_maturity</from>
 					<to>Feedstock_Thruput_Incremental_Scale_Factor</to>
 				</connector>
-				<connector uid="5343" angle="20.556">
+				<connector uid="5342" angle="20.556">
 					<from>Avg_PY</from>
 					<to>Feedstock_Cost_USD_per_gal</to>
 				</connector>
-				<connector uid="5344" angle="75.9638">
+				<connector uid="5343" angle="75.9638">
 					<from>Avg_PY_Pipeline</from>
 					<to>Avg_Plant_Output_gpd_pipeline_C</to>
 				</connector>
-				<connector uid="5345" angle="6.34019">
+				<connector uid="5344" angle="6.34019">
 					<from>
-						<alias uid="4998"/>
+						<alias uid="4997"/>
 					</from>
 					<to>length_of_period_2</to>
 				</connector>
-				<connector uid="5346" angle="40.6013">
+				<connector uid="5345" angle="40.6013">
 					<from>
-						<alias uid="5347"/>
+						<alias uid="5346"/>
 					</from>
 					<to>frac_rate_of_growth_in_industry_output</to>
 				</connector>
-				<connector uid="5348" angle="0">
+				<connector uid="5347" angle="0">
 					<from>pioneer_capacity_scale_factor</from>
 					<to>maturing_industry_scale_factor</to>
 				</connector>
-				<connector uid="5349" angle="45">
+				<connector uid="5348" angle="45">
 					<from>
-						<alias uid="5323"/>
+						<alias uid="5322"/>
 					</from>
 					<to>NPV_Revs_Net_of_Op_Cost</to>
 				</connector>
-				<connector uid="5350" angle="352.875">
+				<connector uid="5349" angle="352.875">
 					<from>State_of_the_Industry_Multipliers</from>
 					<to>P_Success</to>
 				</connector>
-				<connector uid="5351" angle="153.435">
+				<connector uid="5350" angle="153.435">
 					<from>
-						<alias uid="5167"/>
+						<alias uid="5166"/>
 					</from>
 					<to>total_FS_thruput_Cap</to>
+				</connector>
+				<connector uid="5351" angle="0">
+					<from>
+						<alias uid="5156"/>
+					</from>
+					<to>FCI_subs_by_pathway_and_region</to>
 				</connector>
 				<connector uid="5352" angle="0">
 					<from>
-						<alias uid="5157"/>
-					</from>
-					<to>FCI_subs_by_pathway_and_region</to>
-				</connector>
-				<connector uid="5353" angle="0">
-					<from>
-						<alias uid="4998"/>
+						<alias uid="4997"/>
 					</from>
 					<to>length_of_period_1</to>
 				</connector>
-				<connector uid="5354" angle="353.66">
+				<connector uid="5353" angle="353.66">
 					<from>Expected_Equity_Fraction</from>
 					<to>Equity_Fraction</to>
 				</connector>
-				<connector uid="5355" angle="20.556">
+				<connector uid="5354" angle="20.556">
 					<from>est_depreciation_expense</from>
 					<to>Expected_Taxable_Income_2</to>
 				</connector>
-				<connector uid="5356" angle="54.4623">
+				<connector uid="5355" angle="54.4623">
 					<from>
-						<alias uid="5357"/>
+						<alias uid="5356"/>
 					</from>
 					<to>PC_maturity_gap</to>
 				</connector>
-				<connector uid="5358" angle="180">
+				<connector uid="5357" angle="180">
 					<from>
-						<alias uid="5359"/>
+						<alias uid="5358"/>
 					</from>
 					<to>FS_thruput_cap_influx</to>
 				</connector>
-				<connector uid="5360" angle="180">
+				<connector uid="5359" angle="180">
 					<from>
-						<alias uid="5361"/>
+						<alias uid="5360"/>
 					</from>
 					<to>output_bb_gpy_by_tech</to>
 				</connector>
-				<connector uid="5362" angle="270">
+				<connector uid="5361" angle="270">
 					<from>OnLine</from>
 					<to>Avg_PY</to>
 				</connector>
-				<connector uid="5363" angle="0">
+				<connector uid="5362" angle="0">
 					<from>FOG_demand_incl_nextplant</from>
 					<to>OilCrop_Demand_incl_nextplant</to>
 				</connector>
-				<connector uid="5364" angle="90">
+				<connector uid="5363" angle="90">
 					<from>Avg_FS_Thruput_Pipeline_C</from>
 					<to>Avg_Plant_Output_gpd_pipeline_C</to>
 				</connector>
-				<connector uid="5365" angle="32.0054">
+				<connector uid="5364" angle="32.0054">
 					<from>
-						<alias uid="5151"/>
+						<alias uid="5150"/>
 					</from>
 					<to>Expected_Plant_Output_Gal_Day_C</to>
 				</connector>
-				<connector uid="5366" angle="270">
+				<connector uid="5365" angle="270">
 					<from>
-						<alias uid="5067"/>
+						<alias uid="5066"/>
 					</from>
 					<to>FOG_consn</to>
 				</connector>
-				<connector uid="5367" angle="215.538">
+				<connector uid="5366" angle="215.538">
 					<from>
-						<alias uid="5368"/>
+						<alias uid="5367"/>
 					</from>
 					<to>start_schedule_scale_factor</to>
 				</connector>
-				<connector uid="5369" angle="0">
+				<connector uid="5368" angle="0">
 					<from>
-						<alias uid="5370"/>
+						<alias uid="5369"/>
 					</from>
 					<to>Taxes_USD_per_gal</to>
 				</connector>
-				<connector uid="5371" angle="26.5651">
+				<connector uid="5370" angle="26.5651">
 					<from>
-						<alias uid="5372"/>
+						<alias uid="5371"/>
 					</from>
 					<to>Attr</to>
 				</connector>
-				<connector uid="5373" angle="263.29">
+				<connector uid="5372" angle="263.29">
 					<from>Cumulative_Industry_Output</from>
 					<to>frac_rate_of_growth_in_industry_output</to>
 				</connector>
-				<connector uid="5374" angle="80.5377">
+				<connector uid="5373" angle="80.5377">
 					<from>rate_of_doubling_industry_output_by_technology</from>
 					<to>learning_logic</to>
 				</connector>
-				<connector uid="5375" angle="26.5651">
+				<connector uid="5374" angle="26.5651">
 					<from>Expected_Plant_Output</from>
 					<to>Exp_Sales_Rev</to>
 				</connector>
-				<connector uid="5376" angle="90">
+				<connector uid="5375" angle="90">
 					<from>
-						<alias uid="5377"/>
+						<alias uid="5376"/>
 					</from>
 					<to>Equity_Fraction</to>
 				</connector>
-				<connector uid="5378" angle="135.611">
+				<connector uid="5377" angle="135.611">
 					<from>
-						<alias uid="5379"/>
+						<alias uid="5378"/>
 					</from>
 					<to>pc_shared_learning</to>
 				</connector>
-				<connector uid="5380" angle="0">
+				<connector uid="5379" angle="0">
 					<from>Cost_to_Price_Ratio</from>
 					<to>Nominal_Plant_Utilization_Factors</to>
 				</connector>
-				<connector uid="5381" angle="315">
+				<connector uid="5380" angle="315">
 					<from>maturing_industry_scale_factor</from>
 					<to>NextPlant_FS_Thruput_Cap</to>
 				</connector>
-				<connector uid="5382" angle="90">
+				<connector uid="5381" angle="90">
 					<from>Attr</from>
 					<to>RegionRollup_Attr</to>
 				</connector>
-				<connector uid="5383" angle="0">
+				<connector uid="5382" angle="0">
 					<from>Soy_Oil_Price_Input</from>
 					<to>OilCrop_Price_Input_nextplant</to>
 				</connector>
-				<connector uid="5384" angle="0">
+				<connector uid="5383" angle="0">
 					<from>
-						<alias uid="5385"/>
+						<alias uid="5384"/>
 					</from>
 					<to>frac_rate_of_growth_PC_experience</to>
 				</connector>
-				<connector uid="5386" angle="90">
+				<connector uid="5385" angle="90">
 					<from>Max_OilCrop_Supply</from>
 					<to>Other_Oilcrop_Oil_Consn</to>
 				</connector>
-				<connector uid="5387" angle="270.073">
+				<connector uid="5386" angle="270.073">
 					<from>
-						<alias uid="5180"/>
+						<alias uid="5179"/>
 					</from>
 					<to>FS_thruput_cap_influx</to>
 				</connector>
-				<connector uid="5388" angle="100.731">
+				<connector uid="5387" angle="100.731">
 					<from>
-						<alias uid="5389"/>
+						<alias uid="5388"/>
 					</from>
 					<to>retirements</to>
 				</connector>
-				<connector uid="5390" angle="0">
+				<connector uid="5389" angle="0">
 					<from>Avg_Plant_Output_gal_yr</from>
 					<to>Other_rev_net_of_vbl_cost_per_gal</to>
 				</connector>
-				<connector uid="5391" angle="0">
+				<connector uid="5390" angle="0">
 					<from>volume_wtd_net_op_cost_USD_per_gal</from>
 					<to>MFSP_net_op_cost_per_gal</to>
 				</connector>
-				<connector uid="5392" angle="40.6013">
+				<connector uid="5391" angle="40.6013">
 					<from>
-						<alias uid="5393"/>
+						<alias uid="5392"/>
 					</from>
 					<to>Expected_Op_Cost</to>
 				</connector>
-				<connector uid="5394" angle="0">
+				<connector uid="5393" angle="0">
 					<from>regional_op_cost_weights</from>
 					<to>volume_wtd_net_op_cost_USD_per_gal</to>
 				</connector>
-				<connector uid="5395" angle="32.4211">
+				<connector uid="5394" angle="32.4211">
 					<from>
-						<alias uid="5396"/>
+						<alias uid="5395"/>
 					</from>
 					<to>fs_demand_at_nominal_utilization</to>
 				</connector>
-				<connector uid="5397" angle="259.992">
+				<connector uid="5396" angle="259.992">
 					<from>Pilot_Maturity</from>
 					<to>pilot_maturity_gap</to>
 				</connector>
-				<connector uid="5398" angle="0">
+				<connector uid="5397" angle="0">
 					<from>
-						<alias uid="5399"/>
+						<alias uid="5398"/>
 					</from>
 					<to>est_depreciation_exp_USD_per_gal</to>
 				</connector>
-				<connector uid="5400" angle="310.601">
+				<connector uid="5399" angle="310.601">
 					<from>
-						<alias uid="5401"/>
+						<alias uid="5400"/>
 					</from>
 					<to>start_schedule_ORNOVOC</to>
 				</connector>
-				<connector uid="5402" color="#C8C8C8" angle="321.953">
+				<connector uid="5401" color="#C8C8C8" angle="321.953">
 					<from>OnLine</from>
 					<to>increase_in_PY_commercial_industry</to>
 				</connector>
-				<connector uid="5403" angle="5.19443">
+				<connector uid="5402" angle="5.19443">
 					<from>
-						<alias uid="5404"/>
+						<alias uid="5403"/>
 					</from>
 					<to>total_FS_thruput_Cap</to>
 				</connector>
-				<connector uid="5405" angle="0">
+				<connector uid="5404" angle="0">
 					<from>NextPlant_Expected_Power_Sales_Rev</from>
 					<to>NextPlant_ORNOVOC</to>
 				</connector>
-				<connector uid="5406" angle="220.601">
+				<connector uid="5405" angle="220.601">
 					<from>FS_thruput_Cap_Ratio</from>
 					<to>NextPlant_Expected_Fixed_Op_Cost</to>
 				</connector>
-				<connector uid="5407" angle="57.9946">
+				<connector uid="5406" angle="57.9946">
 					<from>
-						<alias uid="5408"/>
+						<alias uid="5407"/>
 					</from>
 					<to>NPV_Revs_Net_of_Op_Cost</to>
 				</connector>
-				<connector uid="5409" angle="0">
+				<connector uid="5408" angle="0">
 					<from>Exp_Power_Sales_Rev</from>
 					<to>NextPlant_Expected_Power_Sales_Rev</to>
 				</connector>
-				<connector uid="5410" angle="20.556">
+				<connector uid="5409" angle="20.556">
 					<from>
-						<alias uid="5411"/>
+						<alias uid="5410"/>
 					</from>
 					<to>Pilot_Multipliers</to>
 				</connector>
-				<connector uid="5412" angle="0">
+				<connector uid="5411" angle="0">
 					<from>MFSP_fixed_cost_per_gal</from>
 					<to>MFSP_USD_per_gal</to>
 				</connector>
-				<connector uid="5413" angle="90">
+				<connector uid="5412" angle="90">
 					<from>Frac_Plant_Debt_Financed</from>
 					<to>Loan_Principal</to>
 				</connector>
-				<connector uid="5414" angle="0">
+				<connector uid="5413" angle="0">
 					<from>NPV_Investment</from>
 					<to>NPV_rel_to_a_million</to>
 				</connector>
-				<connector uid="5415" color="white" angle="180">
+				<connector uid="5414" color="white" angle="180">
 					<from>
-						<alias uid="5416"/>
+						<alias uid="5415"/>
 					</from>
 					<to>total_FS_thruput_Cap_incl_nextplant</to>
 				</connector>
-				<connector uid="5417" angle="327.995">
+				<connector uid="5416" angle="327.995">
 					<from>NextPlant_Expected_Other_VBL_Op_Cost</from>
 					<to>NextPlant_ORNOVOC</to>
 				</connector>
-				<connector uid="5418" angle="353.66">
+				<connector uid="5417" angle="353.66">
 					<from>
-						<alias uid="5419"/>
+						<alias uid="5418"/>
 					</from>
 					<to>Oil_Production_from_Commodity_Crops</to>
 				</connector>
-				<connector uid="5420" color="white" angle="90">
+				<connector uid="5419" color="white" angle="90">
 					<from>Startup_Subs_Volume_Input</from>
 					<to>Use_Startup_Subs</to>
 				</connector>
-				<connector uid="5421" angle="180">
+				<connector uid="5420" angle="180">
 					<from>FS_thruput_Cap_Ratio</from>
 					<to>NextPlant_Expected_FCI</to>
 				</connector>
-				<connector uid="5422" angle="0">
+				<connector uid="5421" angle="0">
 					<from>
-						<alias uid="5423"/>
+						<alias uid="5422"/>
 					</from>
 					<to>Soy_Oil_Price_Input</to>
 				</connector>
-				<connector uid="5424" angle="0">
+				<connector uid="5423" angle="0">
 					<from>PV_Loan_Payment</from>
 					<to>NPV_Investment</to>
 				</connector>
-				<connector uid="5425" angle="348.69">
+				<connector uid="5424" angle="348.69">
 					<from>
-						<alias uid="5426"/>
+						<alias uid="5425"/>
 					</from>
 					<to>State_of_the_Industry_Multipliers</to>
 				</connector>
-				<connector uid="5427" angle="20.556">
+				<connector uid="5426" angle="20.556">
 					<from>
-						<alias uid="5428"/>
+						<alias uid="5427"/>
 					</from>
 					<to>Total_Exp_Revs</to>
 				</connector>
-				<connector uid="5429" angle="270">
+				<connector uid="5428" angle="270">
 					<from>Expected_Plant_Output</from>
 					<to>Regional_FS_Cost_USD_yr</to>
 				</connector>
-				<connector uid="5430" color="white" angle="319.399">
+				<connector uid="5429" color="white" angle="319.399">
 					<from>frac_contracted_capacity</from>
 					<to>Plant_Utilization_Factors</to>
 				</connector>
-				<connector uid="5431" angle="270">
+				<connector uid="5430" angle="270">
 					<from>ROI_USD_per_gal</from>
 					<to>Taxes_USD_per_gal</to>
 				</connector>
-				<connector uid="5432" angle="90">
+				<connector uid="5431" angle="90">
 					<from>Cume_Interest_Payment</from>
 					<to>Rough_Estimate_Annual_Interest</to>
 				</connector>
-				<connector uid="5433" angle="38.6598">
+				<connector uid="5432" angle="38.6598">
 					<from>rate_of_doubling_pilot_experience</from>
 					<to>pilot_learning_logic</to>
 				</connector>
-				<connector uid="5434" angle="234.462">
+				<connector uid="5433" angle="234.462">
 					<from>FS_thruput_Cap_Ratio</from>
 					<to>NextPlant_Expected_Other_VBL_Op_Cost</to>
 				</connector>
-				<connector uid="5435" color="white" angle="0">
+				<connector uid="5434" color="white" angle="0">
 					<from>OilCrop_Demand</from>
 					<to>Camelina_price_input</to>
 				</connector>
-				<connector uid="5436" color="#C8C8C8" angle="135">
+				<connector uid="5435" color="#C8C8C8" angle="135">
 					<from>
-						<alias uid="5437"/>
+						<alias uid="5436"/>
 					</from>
 					<to>Pipeline_Potential_Plant_Output_gal_per_yr_C</to>
 				</connector>
-				<connector uid="5438" angle="270">
+				<connector uid="5437" angle="270">
 					<from>
-						<alias uid="5089"/>
+						<alias uid="5088"/>
 					</from>
 					<to>Expected_FS_cost_after_Subs</to>
 				</connector>
-				<connector uid="5439" angle="333.435">
+				<connector uid="5438" angle="333.435">
 					<from>Loan_Principal</from>
 					<to>Annual_Loan_Payment</to>
 				</connector>
-				<connector uid="5440" angle="90">
+				<connector uid="5439" angle="90">
 					<from>
-						<alias uid="5441"/>
+						<alias uid="5440"/>
 					</from>
 					<to>Expected_FCI_after_Subs</to>
 				</connector>
-				<connector uid="5442" angle="333.435">
+				<connector uid="5441" angle="333.435">
 					<from>Price_Increase_Due_to_RINs</from>
 					<to>Expected_Price_after_Subs</to>
 				</connector>
-				<connector uid="5443" color="white" angle="324.462">
+				<connector uid="5442" color="white" angle="324.462">
 					<from>Camelina_price_input</from>
 					<to>oilcrop_share_to_C</to>
 				</connector>
-				<connector uid="5444" angle="270">
+				<connector uid="5443" angle="270">
 					<from>C_price_curve_incl_nextplant</from>
 					<to>OilCrop_Price_Input_nextplant</to>
 				</connector>
-				<connector uid="5445" angle="333.435">
+				<connector uid="5444" angle="333.435">
 					<from>
-						<alias uid="5446"/>
+						<alias uid="5445"/>
 					</from>
 					<to>Subsidy_Amt</to>
 				</connector>
-				<connector uid="5447" angle="347.471">
+				<connector uid="5446" angle="347.471">
 					<from>
-						<alias uid="5448"/>
+						<alias uid="5447"/>
 					</from>
 					<to>PV_Loan_Payment</to>
 				</connector>
-				<connector uid="5449" angle="305.538">
+				<connector uid="5448" angle="305.538">
 					<from>Exp_Revs_Net_of_Op_Cost</from>
 					<to>Expected_Taxable_Income_2</to>
 				</connector>
-				<connector uid="5450" angle="339.444">
+				<connector uid="5449" angle="339.444">
 					<from>other_rev_scale_factor</from>
 					<to>NextPlant_Other_Coproduct_Sales_Rev</to>
 				</connector>
-				<connector uid="5451" color="white" angle="180">
+				<connector uid="5450" color="white" angle="180">
 					<from>oilcrop_share_to_C</from>
 					<to>OilCrop_Price_Input</to>
 				</connector>
-				<connector uid="5452" color="white" angle="0">
+				<connector uid="5451" color="white" angle="0">
 					<from>FOG_consn</from>
 					<to>FOG_price_Input</to>
 				</connector>
-				<connector uid="5453" color="white" angle="0">
+				<connector uid="5452" color="white" angle="0">
 					<from>Camelina_price_input</from>
 					<to>C_price_curve_incl_nextplant</to>
 				</connector>
-				<connector uid="5454" angle="90">
+				<connector uid="5453" angle="90">
 					<from>Policy_Switch</from>
 					<to>FS_Subs_Logic</to>
 				</connector>
-				<connector uid="5455" angle="90">
+				<connector uid="5454" angle="90">
 					<from>PY_in_In_Design_and_Cons</from>
 					<to>Avg_PY_Pipeline</to>
 				</connector>
-				<connector uid="5456" color="#C8C8C8" angle="319.399">
+				<connector uid="5455" color="#C8C8C8" angle="319.399">
 					<from>one_dollar_per_ton</from>
 					<to>FS_Subs_Logic</to>
 				</connector>
-				<connector uid="5457" angle="180">
+				<connector uid="5456" angle="180">
 					<from>
-						<alias uid="4995"/>
+						<alias uid="4994"/>
 					</from>
 					<to>nominal_Attr</to>
 				</connector>
-				<connector uid="5458" color="white" angle="270">
+				<connector uid="5457" color="white" angle="270">
 					<from>
-						<alias uid="4960"/>
+						<alias uid="4959"/>
 					</from>
 					<to>Expected_Tax_1</to>
 				</connector>
-				<connector uid="5459" angle="159.444">
+				<connector uid="5458" angle="159.444">
 					<from>PC_maturity_gap</from>
 					<to>PC_learning_logic</to>
 				</connector>
-				<connector uid="5460" angle="180">
+				<connector uid="5459" angle="180">
 					<from>
-						<alias uid="5461"/>
+						<alias uid="5460"/>
 					</from>
 					<to>FCI_after_USD_per_gal</to>
 				</connector>
-				<connector uid="5462" color="white" angle="39.8056">
+				<connector uid="5461" color="white" angle="39.8056">
 					<from>Output_Capacity</from>
 					<to>Actual_Output_gpy</to>
 				</connector>
-				<connector uid="5463" angle="270">
+				<connector uid="5462" angle="270">
 					<from>Commercial_Maturity</from>
 					<to>commercial_maturity_gap</to>
 				</connector>
-				<connector uid="5464" angle="270">
+				<connector uid="5463" angle="270">
 					<from>
-						<alias uid="4998"/>
+						<alias uid="4997"/>
 					</from>
 					<to>discount_factor_loan</to>
 				</connector>
-				<connector uid="5465" angle="35.5377">
+				<connector uid="5464" angle="35.5377">
 					<from>
-						<alias uid="4939"/>
+						<alias uid="4938"/>
 					</from>
 					<to>Desired_Soy_Oil_Consn</to>
 				</connector>
-				<connector uid="5466" angle="270">
+				<connector uid="5465" angle="270">
 					<from>
-						<alias uid="5467"/>
+						<alias uid="5466"/>
 					</from>
 					<to>debt_interest_rate_as_frac</to>
 				</connector>
-				<connector uid="5468" angle="147.995">
+				<connector uid="5467" angle="147.995">
 					<from>pilot_maturity_gap</from>
 					<to>pilot_learning_logic</to>
 				</connector>
-				<connector uid="5469" color="#C8C8C8" angle="282.529">
+				<connector uid="5468" color="#C8C8C8" angle="282.529">
 					<from>Subsidy_Amt</from>
 					<to>Loan_Guarantee_Logic</to>
 				</connector>
-				<connector uid="5470" angle="240.255">
+				<connector uid="5469" angle="240.255">
 					<from>
-						<alias uid="5408"/>
+						<alias uid="5407"/>
 					</from>
 					<to>NPV_Taxes_3</to>
 				</connector>
-				<connector uid="5471" angle="89.8295">
+				<connector uid="5470" angle="89.8295">
 					<from>
-						<alias uid="5005"/>
+						<alias uid="5004"/>
 					</from>
 					<to>ORNOVOC_to_Startup_C</to>
 				</connector>
-				<connector uid="5472" angle="90">
+				<connector uid="5471" angle="90">
 					<from>Avg_Plant_Output_gal_yr</from>
 					<to>Output_Capacity</to>
 				</connector>
-				<connector uid="5473" angle="270">
+				<connector uid="5472" angle="270">
 					<from>
-						<alias uid="5474"/>
+						<alias uid="5473"/>
 					</from>
 					<to>Avg_FS_Thruput_Cap_Pipeline</to>
 				</connector>
-				<connector uid="5475" angle="0">
+				<connector uid="5474" angle="0">
 					<from>Expected_Taxable_Income_3</from>
 					<to>Expected_Tax_3</to>
 				</connector>
-				<connector uid="5476" angle="0">
+				<connector uid="5475" angle="0">
 					<from>Cume_FS_Subs</from>
 					<to>rollup_cumulative_subsidies</to>
 				</connector>
-				<connector uid="5477" angle="0">
+				<connector uid="5476" angle="0">
 					<from>
-						<alias uid="5478"/>
+						<alias uid="5477"/>
 					</from>
 					<to>Expected_Plant_Output</to>
 				</connector>
-				<connector uid="5479" angle="0">
+				<connector uid="5478" angle="0">
 					<from>
-						<alias uid="5461"/>
+						<alias uid="5460"/>
 					</from>
 					<to>exp_net_op_cost_USD_per_gal</to>
 				</connector>
-				<connector uid="5480" angle="6.34019">
+				<connector uid="5479" angle="6.34019">
 					<from>
-						<alias uid="5481"/>
+						<alias uid="5480"/>
 					</from>
 					<to>Expected_Op_Cost</to>
 				</connector>
-				<connector uid="5482" color="white" angle="0.447614">
+				<connector uid="5481" color="white" angle="0.447614">
 					<from>Avg_FS_demand_nominal_util</from>
 					<to>FOG_consn</to>
 				</connector>
-				<connector uid="5483" angle="180">
+				<connector uid="5482" angle="180">
 					<from>debt_interest_rate_as_frac</from>
 					<to>discount_factor_Loan_Payment</to>
 				</connector>
-				<connector uid="5484" angle="0">
+				<connector uid="5483" angle="0">
 					<from>
-						<alias uid="5485"/>
+						<alias uid="5484"/>
 					</from>
 					<to>est_depreciation_expense</to>
 				</connector>
-				<connector uid="5486" angle="234.162">
+				<connector uid="5485" angle="234.162">
 					<from>initiating</from>
 					<to>PY_influx</to>
 				</connector>
-				<connector uid="5487" angle="125.538">
+				<connector uid="5486" angle="125.538">
 					<from>
-						<alias uid="5461"/>
+						<alias uid="5460"/>
 					</from>
 					<to>est_depreciation_exp_USD_per_gal</to>
 				</connector>
-				<connector uid="5488" angle="153.435">
+				<connector uid="5487" angle="153.435">
 					<from>Policy_Switch</from>
 					<to>PoP_Price_Subs_Logic</to>
 				</connector>
-				<connector uid="5489" angle="0">
+				<connector uid="5488" angle="0">
 					<from>Expected_Tax_3</from>
 					<to>NPV_Taxes_3</to>
 				</connector>
-				<connector uid="5490" angle="180">
+				<connector uid="5489" angle="180">
 					<from>Feedstock_Thruput_Incremental_Scale_Factor</from>
 					<to>NextPlant_FS_Thruput_Cap</to>
 				</connector>
-				<connector uid="5491" angle="153.435">
+				<connector uid="5490" angle="153.435">
 					<from>
-						<alias uid="5269"/>
+						<alias uid="5268"/>
 					</from>
 					<to>UTIL_by_tech</to>
 				</connector>
-				<connector uid="5492" angle="90">
+				<connector uid="5491" angle="90">
 					<from>regional_op_cost_weights</from>
 					<to>volume_wtd_fixed_cost_USD_per_gal</to>
 				</connector>
-				<connector uid="5493" angle="20.556">
+				<connector uid="5492" angle="20.556">
 					<from>
-						<alias uid="5494"/>
+						<alias uid="5493"/>
 					</from>
 					<to>Feedstock_Constraint_on_Utilization</to>
 				</connector>
-				<connector uid="5495" angle="0">
+				<connector uid="5494" angle="0">
 					<from>Expected_Taxable_Income_2</from>
 					<to>Expected_Tax_2</to>
 				</connector>
-				<connector uid="5496" color="white" angle="214.287">
+				<connector uid="5495" color="white" angle="214.287">
 					<from>Avg_FS_demand_nominal_util</from>
 					<to>chg_avg_FS_demand</to>
 				</connector>
-				<connector uid="5497" angle="0">
+				<connector uid="5496" angle="0">
 					<from>Equity_Fraction</from>
 					<to>Initial_Equity_Investment</to>
 				</connector>
-				<connector uid="5498" angle="102.529">
+				<connector uid="5497" angle="102.529">
 					<from>
-						<alias uid="5499"/>
+						<alias uid="5498"/>
 					</from>
 					<to>nominal_Attr</to>
 				</connector>
-				<connector uid="5500" color="white" angle="18.4349">
+				<connector uid="5499" color="white" angle="18.4349">
 					<from>
-						<alias uid="5501"/>
+						<alias uid="5500"/>
 					</from>
 					<to>industry_FS_thruput_tpy</to>
 				</connector>
-				<connector uid="5502" angle="347.471">
+				<connector uid="5501" angle="347.471">
 					<from>op_cost_scale_factor</from>
 					<to>NextPlant_Expected_Other_VBL_Op_Cost</to>
 				</connector>
-				<connector uid="5503" angle="0">
+				<connector uid="5502" angle="0">
 					<from>
-						<alias uid="5504"/>
+						<alias uid="5503"/>
 					</from>
 					<to>yrly_prodn_subs</to>
 				</connector>
-				<connector uid="5505" angle="0">
+				<connector uid="5504" angle="0">
 					<from>Pilot_Multipliers</from>
 					<to>Demo_Multipliers</to>
 				</connector>
-				<connector uid="5506" angle="0">
+				<connector uid="5505" angle="0">
 					<from>total_FS_demand_nominal_util</from>
 					<to>rollup_FS_demand_nominal_util</to>
 				</connector>
-				<connector uid="5507" angle="90">
+				<connector uid="5506" angle="90">
 					<from>Commercial_Maturity</from>
 					<to>State_of_the_Industry_Multipliers</to>
 				</connector>
-				<connector uid="5508" angle="270">
+				<connector uid="5507" angle="270">
 					<from>In_Design_and_Cons</from>
 					<to>Avg_PY_Pipeline</to>
 				</connector>
-				<connector uid="5509" angle="90">
+				<connector uid="5508" angle="90">
 					<from>Equity_Fraction</from>
 					<to>Frac_Plant_Debt_Financed</to>
 				</connector>
-				<connector uid="5510" angle="324.806">
+				<connector uid="5509" angle="324.806">
 					<from>Avg_PY_Pipeline</from>
 					<to>PY_D_and_C_to_Startup</to>
 				</connector>
-				<connector uid="5511" angle="135">
+				<connector uid="5510" angle="135">
 					<from>
-						<alias uid="5512"/>
+						<alias uid="5511"/>
 					</from>
 					<to>rate_of_doubling_industry_output_by_technology</to>
 				</connector>
-				<connector uid="5513" angle="0">
+				<connector uid="5512" angle="0">
 					<from>per_plant_L_G_exposure_C</from>
 					<to>L_G_exposure_by_pathway_and_region</to>
 				</connector>
-				<connector uid="5514" angle="270">
+				<connector uid="5513" angle="270">
 					<from>Exp_Revs_Net_of_Op_Cost</from>
 					<to>Expected_Taxable_Income_1</to>
 				</connector>
-				<connector uid="5515" angle="0">
+				<connector uid="5514" angle="0">
 					<from>Output_Capacity_Pipeline</from>
 					<to>Output_Capacity_incl_Pipeline</to>
 				</connector>
-				<connector uid="5516" angle="135">
+				<connector uid="5515" angle="135">
 					<from>
-						<alias uid="5461"/>
+						<alias uid="5460"/>
 					</from>
 					<to>ROI_USD_per_gal</to>
 				</connector>
-				<connector uid="5517" angle="0">
+				<connector uid="5516" angle="0">
 					<from>
-						<alias uid="5518"/>
+						<alias uid="5517"/>
 					</from>
 					<to>Impact_soy_oil_supply_constraint_on_price</to>
 				</connector>
-				<connector uid="5519" angle="40.6013">
+				<connector uid="5518" angle="40.6013">
 					<from>
-						<alias uid="5520"/>
+						<alias uid="5519"/>
 					</from>
 					<to>FCI_subs_by_pathway_and_region</to>
 				</connector>
-				<connector uid="5521" angle="90">
+				<connector uid="5520" angle="90">
 					<from>Tot_FS_Thruput_Cap_OnLine</from>
 					<to>Avg_FS_Thruput_Cap</to>
 				</connector>
-				<connector uid="5522" angle="90">
+				<connector uid="5521" angle="90">
 					<from>
-						<alias uid="5474"/>
+						<alias uid="5473"/>
 					</from>
 					<to>Avg_ORNOVOC_D_and_C_C</to>
 				</connector>
-				<connector uid="5523" angle="270">
+				<connector uid="5522" angle="270">
 					<from>Startup_Subs</from>
 					<to>Subsidy_Amt</to>
 				</connector>
-				<connector uid="5524" angle="180">
+				<connector uid="5523" angle="180">
 					<from>
-						<alias uid="5525"/>
+						<alias uid="5524"/>
 					</from>
 					<to>start_schedule_nameplate_output_gpd</to>
 				</connector>
-				<connector uid="5526" angle="35.5377">
+				<connector uid="5525" angle="35.5377">
 					<from>Reqd_Rate_of_Return</from>
 					<to>discount_factor_loan</to>
 				</connector>
-				<connector uid="5527" color="white" angle="0.254082">
+				<connector uid="5526" color="white" angle="0.254082">
 					<from>Output_Capacity</from>
 					<to>frac_contracted_capacity</to>
 				</connector>
-				<connector uid="5528" angle="0">
+				<connector uid="5527" angle="0">
 					<from>
-						<alias uid="5529"/>
+						<alias uid="5528"/>
 					</from>
 					<to>Platform_Attr</to>
 				</connector>
-				<connector uid="5530" angle="180">
+				<connector uid="5529" angle="180">
 					<from>discount_factor_Loan_Payment</from>
 					<to>Annual_Loan_Payment</to>
 				</connector>
-				<connector uid="5531" angle="0">
+				<connector uid="5530" angle="0">
 					<from>Cume_Prodn_Subs</from>
 					<to>rollup_cumulative_subsidies</to>
 				</connector>
-				<connector uid="5532" color="white" angle="231.514">
+				<connector uid="5531" color="white" angle="231.514">
 					<from>FOG_consn</from>
 					<to>OilCrop_Demand</to>
 				</connector>
-				<connector uid="5533" angle="90">
+				<connector uid="5532" angle="90">
 					<from>Other_rev_net_of_vbl_cost_per_gal</from>
 					<to>Cost_to_Price_Ratio</to>
 				</connector>
-				<connector uid="5534" angle="0">
+				<connector uid="5533" angle="0">
 					<from>rollup_cumulative_subsidies</from>
 					<to>rollup_annual_subsidies</to>
 				</connector>
-				<connector uid="5535" angle="90">
+				<connector uid="5534" angle="90">
 					<from>Cume_Loan_Payment</from>
 					<to>Cume_Interest_Payment</to>
 				</connector>
-				<connector uid="5536" color="#C8C8C8" angle="130.601">
+				<connector uid="5535" color="#C8C8C8" angle="130.601">
 					<from>Policy_time_constraints</from>
 					<to>PoP_Price_Subs_Logic</to>
 				</connector>
-				<connector uid="5537" color="white" angle="319.399">
+				<connector uid="5536" color="white" angle="319.399">
 					<from>
-						<alias uid="5538"/>
+						<alias uid="5537"/>
 					</from>
 					<to>frac_contracted_capacity</to>
 				</connector>
-				<connector uid="5539" angle="333.435">
+				<connector uid="5538" angle="333.435">
 					<from>
-						<alias uid="5540"/>
+						<alias uid="5539"/>
 					</from>
 					<to>start_schedule_ORNOVOC</to>
 				</connector>
-				<connector uid="5541" angle="0">
+				<connector uid="5540" angle="0">
 					<from>Mature_Industry_FCI</from>
 					<to>NextPlant_Expected_FCI</to>
 				</connector>
-				<connector uid="5542" angle="0">
+				<connector uid="5541" angle="0">
 					<from>
-						<alias uid="5543"/>
+						<alias uid="5542"/>
 					</from>
 					<to>FOG_consumption</to>
 				</connector>
-				<connector uid="5544" angle="7.12502">
+				<connector uid="5543" angle="7.12502">
 					<from>
-						<alias uid="5545"/>
+						<alias uid="5544"/>
 					</from>
 					<to>scheduled_plant_initiation</to>
 				</connector>
-				<connector uid="5546" angle="90">
+				<connector uid="5545" angle="90">
 					<from>Avg_FS_throughput</from>
 					<to>Avg_Plant_Output_gal_day</to>
 				</connector>
-				<connector uid="5547" angle="153.435">
+				<connector uid="5546" angle="153.435">
 					<from>commercial_maturity_gap</from>
 					<to>learning_logic</to>
 				</connector>
-				<connector uid="5548" angle="60.2551">
+				<connector uid="5547" angle="60.2551">
 					<from>Max_OilCrop_Supply</from>
 					<to>Soy_Oil_Consumption</to>
 				</connector>
-				<connector uid="5549" angle="0">
+				<connector uid="5548" angle="0">
 					<from>State_of_the_Industry_Multipliers</from>
 					<to>Avg_FS_throughput</to>
 				</connector>
-				<connector uid="5550" angle="89.9181">
+				<connector uid="5549" angle="89.9181">
 					<from>endogenous_plant_planning</from>
 					<to>plant_planning</to>
 				</connector>
-				<connector uid="5551" angle="0">
+				<connector uid="5550" angle="0">
 					<from>
-						<alias uid="5552"/>
+						<alias uid="5551"/>
 					</from>
 					<to>ROI_USD_per_gal</to>
 				</connector>
-				<connector uid="5553" angle="0">
+				<connector uid="5552" angle="0">
 					<from>Nominal_Plant_Utilization_Factors</from>
 					<to>Plant_Utilization_Factors</to>
 				</connector>
-				<connector uid="5554" angle="180">
+				<connector uid="5553" angle="180">
 					<from>
-						<alias uid="5092"/>
+						<alias uid="5091"/>
 					</from>
 					<to>length_of_period_1</to>
 				</connector>
-				<connector uid="5555" angle="0">
+				<connector uid="5554" angle="0">
 					<from>Expected_Other_VBL_Op_Cost</from>
 					<to>NextPlant_Expected_Other_VBL_Op_Cost</to>
 				</connector>
-				<connector uid="5556" angle="339.444">
+				<connector uid="5555" angle="339.444">
 					<from>Avg_PY</from>
 					<to>Avg_Plant_Output_gal_day</to>
 				</connector>
-				<connector uid="5557" angle="23.7322">
+				<connector uid="5556" angle="23.7322">
 					<from>L_G_exposure_by_pathway_and_region</from>
 					<to>yrly_Loan_guarantee_flux</to>
 				</connector>
-				<connector uid="5558" angle="12.5288">
+				<connector uid="5557" angle="12.5288">
 					<from>volume_wtd_fixed_cost_USD_per_gal</from>
 					<to>MFSP_fixed_cost_per_gal</to>
 				</connector>
-				<connector uid="5559" angle="90">
+				<connector uid="5558" angle="90">
 					<from>SCALE_UP_Switch</from>
 					<to>Feedstock_Thruput_Incremental_Scale_Factor</to>
 				</connector>
-				<text_box color="black" padding="5" border_width="thin" border_style="solid" appearance="transparent" uid="5560" x="5399" y="854" width="256" height="32">Discount Factor Calculations</text_box>
-				<text_box color="black" padding="5" border_width="thin" border_style="solid" appearance="transparent" uid="5561" x="189" y="1480" width="277" height="120"/>
+				<text_box color="black" padding="5" border_width="thin" border_style="solid" appearance="transparent" uid="5559" x="5399" y="854" width="256" height="32">Discount Factor Calculations</text_box>
+				<text_box color="black" padding="5" border_width="thin" border_style="solid" appearance="transparent" uid="5560" x="189" y="1480" width="277" height="120"/>
 				<aux color="#65183E" font_color="#65183E" label_angle="72.3046" x="3177" y="384" name="Output Capacity"/>
 				<aux color="black" font_color="black" label_side="top" x="3783" y="519" name="Plant Utilization Factors"/>
 				<aux color="red" font_color="red" x="175" y="1953" name="Op Experience Per Year"/>
@@ -8967,69 +8966,70 @@ COMMENTS: </doc>
 				<aux color="black" font_color="black" label_angle="278.976" x="2506" y="1861" name="OilCrop Oil Consn"/>
 				<aux color="black" font_color="black" x="2565" y="2767" name="Impact soy oil supply constraint on price"/>
 				<group isee:name_image="true" locked="false" color="black" font_color="black" x="4263" y="36" width="1783" height="1110" name="Pro Forma Financials and NPV and Attractiveness">
-					<item uid="5077"/>
-					<item uid="5478"/>
-					<item uid="5200"/>
-					<item uid="5176"/>
-					<item uid="5428"/>
-					<item uid="5151"/>
-					<item uid="5481"/>
-					<item uid="4941"/>
-					<item uid="5323"/>
-					<item uid="5000"/>
-					<item uid="5408"/>
-					<item uid="5529"/>
-					<item uid="4983"/>
-					<item uid="5232"/>
-					<item uid="5485"/>
-					<item uid="5393"/>
-					<item uid="5467"/>
-					<item uid="5448"/>
-					<item uid="5139"/>
-					<item uid="4960"/>
-					<item uid="5113"/>
-					<item uid="5118"/>
-					<item uid="5372"/>
-					<item uid="5128"/>
-					<item uid="5153"/>
-					<item uid="4995"/>
-					<item uid="5246"/>
-					<item uid="4981"/>
-					<item uid="5441"/>
-					<item uid="5377"/>
-					<item uid="5108"/>
-					<item uid="4998"/>
-					<item uid="5250"/>
-					<item uid="5024"/>
-					<item uid="5560"/>
-					<item uid="5092"/>
+					<item uid="5076"/>
+					<item uid="5477"/>
+					<item uid="5199"/>
+					<item uid="5175"/>
+					<item uid="5427"/>
+					<item uid="5150"/>
+					<item uid="5480"/>
+					<item uid="4940"/>
+					<item uid="5322"/>
+					<item uid="4999"/>
+					<item uid="5407"/>
+					<item uid="5528"/>
+					<item uid="4982"/>
+					<item uid="5231"/>
+					<item uid="5484"/>
+					<item uid="5392"/>
+					<item uid="5466"/>
+					<item uid="5447"/>
+					<item uid="5138"/>
+					<item uid="4959"/>
+					<item uid="5112"/>
+					<item uid="5117"/>
+					<item uid="5371"/>
+					<item uid="5127"/>
+					<item uid="5152"/>
+					<item uid="4994"/>
+					<item uid="5245"/>
+					<item uid="4980"/>
+					<item uid="5440"/>
+					<item uid="5376"/>
+					<item uid="5107"/>
+					<item uid="4997"/>
+					<item uid="5249"/>
+					<item uid="5023"/>
+					<item uid="5559"/>
+					<item uid="5091"/>
+					<item uid="5561"/>
+					<item uid="5196"/>
 					<item uid="5562"/>
-					<item uid="5197"/>
-					<item uid="5563"/>
-					<item uid="5499"/>
-					<item uid="5081"/>
+					<item uid="5498"/>
+					<item uid="5080"/>
 				</group>
 				<group isee:name_image="true" locked="false" color="black" font_color="black" x="4942" y="1442" width="1064" height="870" name="Cumulative Govt Spend">
-					<item uid="5126"/>
-					<item uid="5504"/>
-					<item uid="4937"/>
-					<item uid="5501"/>
-					<item uid="4990"/>
-					<item uid="5520"/>
-					<item uid="5157"/>
-					<item uid="5280"/>
-					<item uid="5186"/>
-					<item uid="5144"/>
+					<item uid="5125"/>
+					<item uid="5503"/>
+					<item uid="4936"/>
+					<item uid="5500"/>
+					<item uid="4989"/>
+					<item uid="5519"/>
+					<item uid="5156"/>
+					<item uid="5279"/>
+					<item uid="5185"/>
+					<item uid="5143"/>
 				</group>
 				<group locked="false" color="black" font_color="black" x="19" y="1248" width="730" height="361" name="Module Interfaces">
+					<item uid="5563"/>
 					<item uid="5564"/>
 					<item uid="5565"/>
 					<item uid="5566"/>
 					<item uid="5567"/>
 					<item uid="5568"/>
+					<item uid="5147"/>
+					<item uid="5560"/>
 					<item uid="5569"/>
-					<item uid="5148"/>
-					<item uid="5561"/>
 					<item uid="5570"/>
 					<item uid="5571"/>
 					<item uid="5572"/>
@@ -9040,706 +9040,705 @@ COMMENTS: </doc>
 					<item uid="5577"/>
 					<item uid="5578"/>
 					<item uid="5579"/>
-					<item uid="5580"/>
 				</group>
 				<group locked="false" color="black" font_color="black" x="9" y="1789" width="723" height="215" name="Plant Physical Parameters 1"/>
 				<group locked="false" color="black" font_color="black" x="18" y="1672" width="715" height="69" name="Physical conversions and Constants 1"/>
 				<group locked="false" color="black" font_color="black" x="10" y="2040" width="726" height="292" name="Learning Curve Parameters and Start scenarios"/>
 				<group isee:name_image="true" locked="false" color="black" font_color="black" x="804" y="61" width="3396" height="1351" name="Industry Development and Utilization and Learning Curves">
-					<item uid="5130"/>
-					<item uid="5545"/>
-					<item uid="5285"/>
-					<item uid="5095"/>
-					<item uid="5437"/>
-					<item uid="5048"/>
-					<item uid="5538"/>
-					<item uid="5042"/>
+					<item uid="5129"/>
+					<item uid="5544"/>
+					<item uid="5284"/>
+					<item uid="5094"/>
+					<item uid="5436"/>
+					<item uid="5047"/>
+					<item uid="5537"/>
+					<item uid="5041"/>
+					<item uid="5580"/>
 					<item uid="5581"/>
+					<item uid="5135"/>
+					<item uid="4965"/>
+					<item uid="5035"/>
 					<item uid="5582"/>
-					<item uid="5136"/>
-					<item uid="4966"/>
-					<item uid="5036"/>
+					<item uid="5388"/>
+					<item uid="5025"/>
+					<item uid="5209"/>
+					<item uid="5331"/>
+					<item uid="5236"/>
+					<item uid="5259"/>
+					<item uid="5002"/>
+					<item uid="5262"/>
+					<item uid="5308"/>
+					<item uid="5055"/>
+					<item uid="5228"/>
+					<item uid="5410"/>
 					<item uid="5583"/>
-					<item uid="5389"/>
-					<item uid="5026"/>
-					<item uid="5210"/>
-					<item uid="5332"/>
-					<item uid="5237"/>
-					<item uid="5260"/>
-					<item uid="5003"/>
-					<item uid="5263"/>
-					<item uid="5309"/>
-					<item uid="5056"/>
-					<item uid="5229"/>
-					<item uid="5411"/>
+					<item uid="5384"/>
 					<item uid="5584"/>
-					<item uid="5385"/>
+					<item uid="5317"/>
+					<item uid="5123"/>
+					<item uid="5177"/>
+					<item uid="5425"/>
+					<item uid="5286"/>
+					<item uid="5162"/>
+					<item uid="5060"/>
+					<item uid="5029"/>
+					<item uid="5004"/>
+					<item uid="5031"/>
+					<item uid="5100"/>
+					<item uid="5473"/>
+					<item uid="4972"/>
+					<item uid="5179"/>
+					<item uid="4947"/>
+					<item uid="5275"/>
+					<item uid="5007"/>
 					<item uid="5585"/>
-					<item uid="5318"/>
-					<item uid="5124"/>
-					<item uid="5178"/>
-					<item uid="5426"/>
-					<item uid="5287"/>
-					<item uid="5163"/>
-					<item uid="5061"/>
-					<item uid="5030"/>
-					<item uid="5005"/>
-					<item uid="5032"/>
-					<item uid="5101"/>
-					<item uid="5474"/>
-					<item uid="4973"/>
-					<item uid="5180"/>
-					<item uid="4948"/>
-					<item uid="5276"/>
-					<item uid="5008"/>
+					<item uid="5335"/>
+					<item uid="5356"/>
+					<item uid="5085"/>
+					<item uid="5271"/>
+					<item uid="4956"/>
+					<item uid="5201"/>
 					<item uid="5586"/>
-					<item uid="5336"/>
-					<item uid="5357"/>
-					<item uid="5086"/>
-					<item uid="5272"/>
-					<item uid="4957"/>
-					<item uid="5202"/>
+					<item uid="5378"/>
+					<item uid="5511"/>
+					<item uid="5021"/>
 					<item uid="5587"/>
-					<item uid="5379"/>
-					<item uid="5512"/>
-					<item uid="5022"/>
-					<item uid="5588"/>
-					<item uid="5212"/>
-					<item uid="5359"/>
-					<item uid="5069"/>
-					<item uid="5347"/>
-					<item uid="5361"/>
+					<item uid="5211"/>
+					<item uid="5358"/>
+					<item uid="5068"/>
+					<item uid="5346"/>
+					<item uid="5360"/>
 				</group>
 				<group isee:name_image="true" locked="false" color="black" font_color="black" x="9" y="618" width="743" height="538" name="GOVT POLICIES LOGIC">
-					<item uid="5446"/>
-					<item uid="4971"/>
-					<item uid="5299"/>
-					<item uid="4988"/>
+					<item uid="5445"/>
+					<item uid="4970"/>
+					<item uid="5298"/>
+					<item uid="4987"/>
 				</group>
 				<group locked="false" color="black" font_color="black" x="3304" y="1825" width="1288" height="495" name="MFSP and Utilization">
-					<item uid="5552"/>
-					<item uid="5399"/>
-					<item uid="4955"/>
-					<item uid="5370"/>
-					<item uid="5269"/>
-					<item uid="4993"/>
-					<item uid="5045"/>
-					<item uid="5295"/>
-					<item uid="5215"/>
-					<item uid="4950"/>
-					<item uid="5461"/>
-					<item uid="5325"/>
-					<item uid="5141"/>
+					<item uid="5551"/>
+					<item uid="5398"/>
+					<item uid="4954"/>
+					<item uid="5369"/>
+					<item uid="5268"/>
+					<item uid="4992"/>
+					<item uid="5044"/>
+					<item uid="5294"/>
+					<item uid="5214"/>
+					<item uid="4949"/>
+					<item uid="5460"/>
+					<item uid="5324"/>
+					<item uid="5140"/>
 				</group>
 				<group locked="false" color="black" font_color="black" x="789" y="1657" width="1142" height="683" name="Plant Financial and Operational and Scale factors and Logit input">
-					<item uid="5194"/>
-					<item uid="4978"/>
+					<item uid="5193"/>
+					<item uid="4977"/>
 				</group>
 				<group locked="false" color="black" font_color="black" x="1984" y="1783" width="1053" height="552" name="Feedstock Cost Demand and Constraint on Utilization">
-					<item uid="4939"/>
-					<item uid="5071"/>
-					<item uid="5010"/>
-					<item uid="4953"/>
-					<item uid="5396"/>
-					<item uid="5419"/>
-					<item uid="5255"/>
-					<item uid="5050"/>
-					<item uid="5494"/>
-					<item uid="5234"/>
-					<item uid="5115"/>
+					<item uid="4938"/>
+					<item uid="5070"/>
+					<item uid="5009"/>
+					<item uid="4952"/>
+					<item uid="5395"/>
+					<item uid="5418"/>
+					<item uid="5254"/>
+					<item uid="5049"/>
+					<item uid="5493"/>
+					<item uid="5233"/>
+					<item uid="5114"/>
 				</group>
 				<aux color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" x="550.5" y="1369" name="Converter 1"/>
-				<connector uid="5589" angle="30.7841">
+				<connector uid="5588" angle="30.7841">
 					<from>Converter_1</from>
 					<to>Expected_Price_after_Subs</to>
 				</connector>
 				<aux color="black" font_color="black" label_angle="165.72" x="2877" y="2445" name="total FS demand incl nextplant"/>
-				<connector uid="5590" angle="270">
+				<connector uid="5589" angle="270">
 					<from>total_FS_demand_incl_nextplant</from>
 					<to>FOG_demand_incl_nextplant</to>
 				</connector>
-				<connector uid="5591" angle="339.978">
+				<connector uid="5590" angle="339.978">
 					<from>total_FS_demand_incl_nextplant</from>
 					<to>OilCrop_Demand_incl_nextplant</to>
 				</connector>
 				<aux color="red" font_color="red" x="216" y="1107" name="Policy Duration"/>
-				<connector uid="5592" angle="350.538">
+				<connector uid="5591" angle="350.538">
 					<from>Policy_Duration</from>
 					<to>Policy_End</to>
 				</connector>
-				<connector uid="5593" angle="331.26">
+				<connector uid="5592" angle="331.26">
 					<from>Policy_Start</from>
 					<to>Policy_End</to>
 				</connector>
-				<connector uid="5594" angle="93.2705">
+				<connector uid="5593" angle="93.2705">
 					<from>
-						<alias uid="5563"/>
+						<alias uid="5562"/>
 					</from>
 					<to>NPV_rel_to_a_million</to>
 				</connector>
-				<text_box color="black" font_size="24pt" padding="5" appearance="transparent" uid="5595" x="8" y="18" width="701" height="51">Biomass Scenario Model Oilcrops to Hydrocarbons Module</text_box>
-				<text_box color="red" vertical_text_align="center" font_color="red" padding="5" border_color="red" border_width="2" border_style="solid" appearance="transparent" uid="5596" x="12" y="255" width="350" height="36">RED:  Data Input (Constant, Ass&apos;n, Scenario, SSheet)</text_box>
-				<text_box color="#008F44" vertical_text_align="center" font_color="#008F44" padding="5" border_color="#008F44" border_width="2" border_style="solid" appearance="transparent" uid="5597" x="385" y="208" width="350" height="36">GREEN:  Output from this Sector to another Sector</text_box>
-				<text_box color="blue" vertical_text_align="center" font_color="blue" padding="5" border_color="blue" border_width="2" border_style="solid" appearance="transparent" uid="5598" x="12" y="207" width="350" height="36">BLUE:  Input to this Sector from another Sector</text_box>
-				<text_box color="black" vertical_text_align="center" padding="5" border_width="2" border_style="solid" appearance="transparent" uid="5599" x="385" y="255" width="350" height="36">BLACK:  Internal Calculation Within This Sector</text_box>
-				<text_box color="#7F00FF" vertical_text_align="center" font_color="#7F00FF" padding="5" border_color="#7F00FF" border_width="2" border_style="solid" appearance="transparent" uid="5600" x="12" y="160" width="350" height="36">Purple:  Input to this MODULE from another MODULE</text_box>
-				<text_box color="#65183E" vertical_text_align="center" font_color="#65183E" padding="5" border_color="#65183E" border_width="2" border_style="solid" appearance="transparent" uid="5601" x="385" y="160" width="350" height="36">Brown:  Output from this MODULE from another MODULE</text_box>
-				<alias color="red" font_style="italic" font_color="red" uid="5586" x="1443" y="1286" width="18" height="18">
+				<text_box color="black" font_size="24pt" padding="5" appearance="transparent" uid="5594" x="8" y="18" width="701" height="51">Biomass Scenario Model Oilcrops to Hydrocarbons Module</text_box>
+				<text_box color="red" vertical_text_align="center" font_color="red" padding="5" border_color="red" border_width="2" border_style="solid" appearance="transparent" uid="5595" x="12" y="255" width="350" height="36">RED:  Data Input (Constant, Ass&apos;n, Scenario, SSheet)</text_box>
+				<text_box color="#008F44" vertical_text_align="center" font_color="#008F44" padding="5" border_color="#008F44" border_width="2" border_style="solid" appearance="transparent" uid="5596" x="385" y="208" width="350" height="36">GREEN:  Output from this Sector to another Sector</text_box>
+				<text_box color="blue" vertical_text_align="center" font_color="blue" padding="5" border_color="blue" border_width="2" border_style="solid" appearance="transparent" uid="5597" x="12" y="207" width="350" height="36">BLUE:  Input to this Sector from another Sector</text_box>
+				<text_box color="black" vertical_text_align="center" padding="5" border_width="2" border_style="solid" appearance="transparent" uid="5598" x="385" y="255" width="350" height="36">BLACK:  Internal Calculation Within This Sector</text_box>
+				<text_box color="#7F00FF" vertical_text_align="center" font_color="#7F00FF" padding="5" border_color="#7F00FF" border_width="2" border_style="solid" appearance="transparent" uid="5599" x="12" y="160" width="350" height="36">Purple:  Input to this MODULE from another MODULE</text_box>
+				<text_box color="#65183E" vertical_text_align="center" font_color="#65183E" padding="5" border_color="#65183E" border_width="2" border_style="solid" appearance="transparent" uid="5600" x="385" y="160" width="350" height="36">Brown:  Output from this MODULE from another MODULE</text_box>
+				<alias color="red" font_style="italic" font_color="red" uid="5585" x="1443" y="1286" width="18" height="18">
 					<of>Initial_Indices_of_Pilot_Maturity</of>
 				</alias>
-				<alias color="white" font_style="italic" font_color="white" uid="5050" x="2571" y="2182" width="18" height="18">
+				<alias color="white" font_style="italic" font_color="white" uid="5049" x="2571" y="2182" width="18" height="18">
 					<of>FOG_consn</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" label_angle="101.815" uid="5467" x="5038" y="653" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" label_angle="101.815" uid="5466" x="5038" y="653" width="18" height="18">
 					<of>Debt_Interest_Rate_as_Pct</of>
 				</alias>
-				<alias color="white" font_style="italic" font_color="white" uid="5543" x="1655" y="2444" width="18" height="18">
+				<alias color="white" font_style="italic" font_color="white" uid="5542" x="1655" y="2444" width="18" height="18">
 					<of>FOG_consn</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="5255" x="2155" y="2217" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="5254" x="2155" y="2217" width="18" height="18">
 					<of>Expected_Regional_Cellulosic_FS_cost_USD_ton_1</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="5092" x="5429" y="990" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="5091" x="5429" y="990" width="18" height="18">
 					<of>depreciation_period</of>
 				</alias>
-				<alias color="#008F44" font_style="italic" font_color="#008F44" label_angle="96.1849" uid="5269" x="3981" y="2097" width="18" height="18">
+				<alias color="#008F44" font_style="italic" font_color="#008F44" label_angle="96.1849" uid="5268" x="3981" y="2097" width="18" height="18">
 					<of>Actual_Output_gpy</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" label_angle="72.3046" uid="5287" x="3035" y="1047" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" label_angle="72.3046" uid="5286" x="3035" y="1047" width="18" height="18">
 					<of>Mature_Industry_P_Success</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="#008F44" uid="4983" x="4376" y="397" width="18" height="18">
+				<alias color="blue" font_style="italic" font_color="#008F44" uid="4982" x="4376" y="397" width="18" height="18">
 					<of>Expected_NextPlant_FS_cost_after_Subs</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="#008F44" label_angle="139.67" uid="5081" x="4357" y="1097" width="18" height="18">
+				<alias color="blue" font_style="italic" font_color="#008F44" label_angle="139.67" uid="5080" x="4357" y="1097" width="18" height="18">
 					<of>State_of_the_Industry_Multipliers</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="5584" x="1637" y="722" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="5583" x="1637" y="722" width="18" height="18">
 					<of>PC_op_time</of>
 				</alias>
-				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="5564" x="225" y="1264" width="18" height="18">
+				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="5563" x="225" y="1264" width="18" height="18">
 					<of>rollup_cumulative_subsidies</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="5263" x="1217" y="723" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="5262" x="1217" y="723" width="18" height="18">
 					<of>technology_switches</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="#008F44" uid="5077" x="4379" y="56" width="18" height="18">
+				<alias color="blue" font_style="italic" font_color="#008F44" uid="5076" x="4379" y="56" width="18" height="18">
 					<of>NextPlant_Expected_Power_Sales_Rev</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="5190" x="2358" y="2574" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="5189" x="2358" y="2574" width="18" height="18">
 					<of>FS_demand_adj_time</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="#008F44" uid="5089" x="3261" y="2556" width="18" height="18">
+				<alias color="blue" font_style="italic" font_color="#008F44" uid="5088" x="3261" y="2556" width="18" height="18">
 					<of>FS_Subs_Logic</of>
 				</alias>
-				<alias color="black" font_style="italic" font_color="black" label_angle="36.6747" uid="5552" x="3406" y="1955" width="18" height="18">
+				<alias color="black" font_style="italic" font_color="black" label_angle="36.6747" uid="5551" x="3406" y="1955" width="18" height="18">
 					<of>Initial_Equity_Investment</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="5588" x="2948" y="1235" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="5587" x="2948" y="1235" width="18" height="18">
 					<of>Initial_Indices_of_Commercial_Maturity</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="5581" x="1278" y="470" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="5580" x="1278" y="470" width="18" height="18">
 					<of>Pilot_op_time</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="5582" x="1075" y="469" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="5581" x="1075" y="469" width="18" height="18">
 					<of>Pilot_dev_time</of>
 				</alias>
-				<alias color="black" font_style="italic" font_color="black" uid="5494" x="2569" y="2233" width="18" height="18">
+				<alias color="black" font_style="italic" font_color="black" uid="5493" x="2569" y="2233" width="18" height="18">
 					<of>Soy_Oil_Consumption</of>
 				</alias>
-				<alias color="#008F44" font_style="italic" font_color="#008F44" uid="5501" x="4974" y="1774" width="18" height="18">
+				<alias color="#008F44" font_style="italic" font_color="#008F44" uid="5500" x="4974" y="1774" width="18" height="18">
 					<of>Actual_Output_gpy</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" label_angle="328.185" uid="5246" x="4446" y="983" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" label_angle="328.185" uid="5245" x="4446" y="983" width="18" height="18">
 					<of>Mature_Industry_Equity_Fraction</of>
 				</alias>
-				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="5565" x="97" y="1354" width="18" height="18">
+				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="5564" x="97" y="1354" width="18" height="18">
 					<of>Output_Capacity_incl_Pipeline</of>
 				</alias>
-				<alias color="black" font_style="italic" font_color="black" uid="5602" x="1395" y="2632" width="18" height="18">
+				<alias color="black" font_style="italic" font_color="black" uid="5601" x="1395" y="2632" width="18" height="18">
 					<of>Camelina_price_input</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="5118" x="5873" y="702" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="5117" x="5873" y="702" width="18" height="18">
 					<of>k</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="5336" x="1560" y="1252" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="5335" x="1560" y="1252" width="18" height="18">
 					<of>pilot_learning_inputs_OHC</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" label_angle="133.281" uid="5108" x="5038" y="1020" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" label_angle="133.281" uid="5107" x="5038" y="1020" width="18" height="18">
 					<of>one_hundred_PCT</of>
 				</alias>
-				<alias color="#65183E" font_style="italic" font_color="#65183E" label_angle="68.0872" uid="5194" x="1440.5" y="1721.5" width="45" height="35">
+				<alias color="#65183E" font_style="italic" font_color="#65183E" label_angle="68.0872" uid="5193" x="1440.5" y="1721.5" width="45" height="35">
 					<of>Commercial_Maturity</of>
 				</alias>
-				<alias color="black" font_style="italic" font_color="black" uid="5215" x="3467" y="2158" width="18" height="18">
+				<alias color="black" font_style="italic" font_color="black" uid="5214" x="3467" y="2158" width="18" height="18">
 					<of>Annual_Loan_Payment</of>
 				</alias>
-				<alias color="black" font_style="italic" font_color="black" label_angle="8.13277" uid="5448" x="5147" y="628" width="18" height="18">
+				<alias color="black" font_style="italic" font_color="black" label_angle="8.13277" uid="5447" x="5147" y="628" width="18" height="18">
 					<of>discount_factor_loan</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="#008F44" uid="5393" x="4620" y="367" width="18" height="18">
+				<alias color="blue" font_style="italic" font_color="#008F44" uid="5392" x="4620" y="367" width="18" height="18">
 					<of>NextPlant_Expected_Fixed_Op_Cost</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="black" uid="5186" x="4984" y="2116" width="18" height="18">
+				<alias color="blue" font_style="italic" font_color="black" uid="5185" x="4984" y="2116" width="18" height="18">
 					<of>Cume_Loan_Payment</of>
 				</alias>
-				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="5574" x="646" y="1476" width="18" height="18">
+				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="5573" x="646" y="1476" width="18" height="18">
 					<of>Feedstock_Constraint_on_Utilization</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" label_angle="115.599" uid="5478" x="4341" y="217" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" label_angle="115.599" uid="5477" x="4341" y="217" width="18" height="18">
 					<of>Days_per_Year_Online</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="5499" x="5811" y="724" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="5498" x="5811" y="724" width="18" height="18">
 					<of>invest_attractiveness_weighting</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="5063" x="725" y="2691" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="5062" x="725" y="2691" width="18" height="18">
 					<of>Mature_Industry_Process_Yield</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" label_angle="341.354" uid="5178" x="2688" y="878" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" label_angle="341.354" uid="5177" x="2688" y="878" width="18" height="18">
 					<of>Mature_Industry_Process_Yield</of>
 				</alias>
-				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="5575" x="547" y="1479" width="18" height="18">
+				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="5574" x="547" y="1479" width="18" height="18">
 					<of>Other_rev_net_of_vbl_cost_per_gal</of>
 				</alias>
-				<alias color="black" font_style="italic" font_color="black" label_angle="215.483" uid="4941" x="5275" y="240" width="18" height="18">
+				<alias color="black" font_style="italic" font_color="black" label_angle="215.483" uid="4940" x="5275" y="240" width="18" height="18">
 					<of>discount_factor_2</of>
 				</alias>
-				<alias color="black" font_style="italic" font_color="black" uid="5061" x="3288" y="947" width="18" height="18">
+				<alias color="black" font_style="italic" font_color="black" uid="5060" x="3288" y="947" width="18" height="18">
 					<of>retirements</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="5512" x="2612" y="1337" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="5511" x="2612" y="1337" width="18" height="18">
 					<of>doubling_factor</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="#008F44" uid="5200" x="4326" y="260" width="18" height="18">
+				<alias color="blue" font_style="italic" font_color="#008F44" uid="5199" x="4326" y="260" width="18" height="18">
 					<of>NextPlant_FS_Thruput_Cap</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="5529" x="5701" y="238" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="5528" x="5701" y="238" width="18" height="18">
 					<of>W</of>
 				</alias>
-				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="5237" x="3774" y="575" width="18" height="18">
+				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="5236" x="3774" y="575" width="18" height="18">
 					<of>Feedstock_Constraint_on_Utilization</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" label_angle="87.2608" uid="5309" x="1217" y="804" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" label_angle="87.2608" uid="5308" x="1217" y="804" width="18" height="18">
 					<of>pilot_op_experience_per_year</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="4975" x="109" y="2611" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="4974" x="109" y="2611" width="18" height="18">
 					<of>op_cost_scale_factor</of>
 				</alias>
-				<alias color="#651818" font_style="italic" font_color="#651818" uid="5570" x="97" y="1481" width="18" height="18">
+				<alias color="#651818" font_style="italic" font_color="#651818" uid="5569" x="97" y="1481" width="18" height="18">
 					<of>Output_gpy_by_Technology</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="5155" x="2419" y="2814" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="5154" x="2419" y="2814" width="18" height="18">
 					<of>Oil_to_Crop_Price_Ratio</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="5426" x="2703" y="1028" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="5425" x="2703" y="1028" width="18" height="18">
 					<of>Mature_Commercial_Multipliers</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="4990" x="5223" y="2036" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="4989" x="5223" y="2036" width="18" height="18">
 					<of>one_project</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="5167" x="2172" y="2450" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="5166" x="2172" y="2450" width="18" height="18">
 					<of>Days_per_Year_Online</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_color="#7F00FF" uid="4978" x="1601" y="1924" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_color="#7F00FF" uid="4977" x="1601" y="1924" width="18" height="18">
 					<of>FLM_frac_supply_system_advanced</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="5401" x="113" y="2558" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="5400" x="113" y="2558" width="18" height="18">
 					<of>Expected_Other_VBL_Op_Cost</of>
 				</alias>
-				<alias color="black" font_style="italic" font_color="black" label_angle="72.309" uid="5404" x="1938.5" y="2380.5" width="45" height="35">
+				<alias color="black" font_style="italic" font_color="black" label_angle="72.309" uid="5403" x="1938.5" y="2380.5" width="45" height="35">
 					<of>Tot_FS_Thruput_Cap_OnLine</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="#008F44" uid="5325" x="4484" y="2232" width="18" height="18">
+				<alias color="blue" font_style="italic" font_color="#008F44" uid="5324" x="4484" y="2232" width="18" height="18">
 					<of>Expected_Op_Cost</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="5095" x="3095" y="203" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="5094" x="3095" y="203" width="18" height="18">
 					<of>one_project</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="5202" x="2484" y="1138" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="5201" x="2484" y="1138" width="18" height="18">
 					<of>Progress_Ratios_Commercial</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" label_angle="78.185" uid="5545" x="2219" y="132" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" label_angle="78.185" uid="5544" x="2219" y="132" width="18" height="18">
 					<of>Start_Schedule</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="5389" x="2928" y="437" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="5388" x="2928" y="437" width="18" height="18">
 					<of>Retirement_Fraction</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="#008F44" uid="5520" x="5152" y="1991" width="18" height="18">
+				<alias color="blue" font_style="italic" font_color="#008F44" uid="5519" x="5152" y="1991" width="18" height="18">
 					<of>FCI_Subs_Logic</of>
 				</alias>
-				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="5571" x="95" y="1445" width="18" height="18">
+				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="5570" x="95" y="1445" width="18" height="18">
 					<of>Avg_PY</of>
 				</alias>
-				<alias color="#65183E" font_style="italic" font_color="#65183E" label_angle="323.325" uid="5210" x="3454" y="543" width="18" height="18">
+				<alias color="#65183E" font_style="italic" font_color="#65183E" label_angle="323.325" uid="5209" x="3454" y="543" width="18" height="18">
 					<of>Expected_Price_after_Subs</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="5003" x="949" y="973" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="5002" x="949" y="973" width="18" height="18">
 					<of>Min_Pilot_Experience_for_Learning</of>
 				</alias>
-				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="5176" x="4471" y="165" width="18" height="18">
+				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="5175" x="4471" y="165" width="18" height="18">
 					<of>Expected_Price_after_Subs</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="5372" x="5690" y="562" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="5371" x="5690" y="562" width="18" height="18">
 					<of>technology_switches</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="5357" x="2100" y="1241" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="5356" x="2100" y="1241" width="18" height="18">
 					<of>one</of>
 				</alias>
-				<alias color="#651818" font_style="italic" font_color="#651818" uid="5126" x="5096" y="1484" width="18" height="18">
+				<alias color="#651818" font_style="italic" font_color="#651818" uid="5125" x="5096" y="1484" width="18" height="18">
 					<of>Output_gpy_by_Technology</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="5419" x="2154" y="2171" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="5418" x="2154" y="2171" width="18" height="18">
 					<of>oil_to_seed_ratio</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="#008F44" uid="5359" x="3877" y="1135" width="18" height="18">
+				<alias color="blue" font_style="italic" font_color="#008F44" uid="5358" x="3877" y="1135" width="18" height="18">
 					<of>NextPlant_FS_Thruput_Cap</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="5026" x="3086" y="635" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="5025" x="3086" y="635" width="18" height="18">
 					<of>Days_per_Year_Online</of>
 				</alias>
-				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="5576" x="496.5" y="1419.5" width="45" height="35">
+				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="5575" x="496.5" y="1419.5" width="45" height="35">
 					<of>Pilot_Maturity</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="5163" x="2845" y="830" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="5162" x="2845" y="830" width="18" height="18">
 					<of>rate_of_industry_process_yield_adjustment</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="#008F44" uid="4993" x="4031" y="1943" width="18" height="18">
+				<alias color="blue" font_style="italic" font_color="#008F44" uid="4992" x="4031" y="1943" width="18" height="18">
 					<of>Regional_FS_Cost_USD_per_gal</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" label_angle="178.881" uid="4998" x="5201" y="939" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" label_angle="178.881" uid="4997" x="5201" y="939" width="18" height="18">
 					<of>Years_in_D_and_C</of>
 				</alias>
-				<alias color="#008F44" font_style="italic" font_color="#008F44" label_angle="186.663" uid="5416" x="3036" y="2388" width="18" height="18">
+				<alias color="#008F44" font_style="italic" font_color="#008F44" label_angle="186.663" uid="5415" x="3036" y="2388" width="18" height="18">
 					<of>NextPlant_FS_Thruput_Cap</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="5036" x="2018" y="435" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="5035" x="2018" y="435" width="18" height="18">
 					<of>Des_C_to_EtOH_yrly_starts</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="5562" x="5569" y="735" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="5561" x="5569" y="735" width="18" height="18">
 					<of>one_million</of>
 				</alias>
-				<alias color="black" font_style="italic" font_color="black" uid="5030" x="3369.5" y="958.5" width="45" height="35">
+				<alias color="black" font_style="italic" font_color="black" uid="5029" x="3369.5" y="958.5" width="45" height="35">
 					<of>OnLine</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="5538" x="3510" y="273" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="5537" x="3510" y="273" width="18" height="18">
 					<of>Contracted_Output_Capacity</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="5056" x="1295" y="840" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="5055" x="1295" y="840" width="18" height="18">
 					<of>IBR_Pilot_experience</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="4981" x="4569" y="1045" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="4980" x="4569" y="1045" width="18" height="18">
 					<of>Mature_Industry_Rate_of_Return_as_PCT</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="5341" x="105" y="2760" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="5340" x="105" y="2760" width="18" height="18">
 					<of>other_rev_scale_factor</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="5318" x="1961" y="817" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="5317" x="1961" y="817" width="18" height="18">
 					<of>IBR_PC_experience</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="5260" x="3897" y="510" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="5259" x="3897" y="510" width="18" height="18">
 					<of>contracted_utilization</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" label_angle="81.0236" uid="5587" x="2176" y="1302" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" label_angle="81.0236" uid="5586" x="2176" y="1302" width="18" height="18">
 					<of>Initial_Indices_of_PC_Maturity</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="5128" x="5684" y="397" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="5127" x="5684" y="397" width="18" height="18">
 					<of>threshold_for_total_attr_calc</of>
 				</alias>
-				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="5572" x="74.5" y="1547.5" width="45" height="35">
+				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="5571" x="74.5" y="1547.5" width="45" height="35">
 					<of>OnLine</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="5525" x="884" y="2760" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="5524" x="884" y="2760" width="18" height="18">
 					<of>start_schedule_nameplate_output_gpy</of>
 				</alias>
-				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="5577" x="589.5" y="1426.5" width="45" height="35">
+				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="5576" x="589.5" y="1426.5" width="45" height="35">
 					<of>PC_Maturity</of>
 				</alias>
-				<alias color="black" font_style="italic" font_color="black" label_angle="222.405" uid="5399" x="3420" y="1869" width="18" height="18">
+				<alias color="black" font_style="italic" font_color="black" label_angle="222.405" uid="5398" x="3420" y="1869" width="18" height="18">
 					<of>est_depreciation_expense</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="5086" x="1880" y="1321" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="5085" x="1880" y="1321" width="18" height="18">
 					<of>doubling_factor</of>
 				</alias>
-				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="5566" x="232" y="1355" width="18" height="18">
+				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="5565" x="232" y="1355" width="18" height="18">
 					<of>Cost_to_Price_Ratio</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="#008F44" uid="5032" x="3802" y="720" width="18" height="18">
+				<alias color="blue" font_style="italic" font_color="#008F44" uid="5031" x="3802" y="720" width="18" height="18">
 					<of>NextPlant_ORNOVOC</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="5067" x="2625" y="2479" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="5066" x="2625" y="2479" width="18" height="18">
 					<of>Max_FOG_supply</of>
 				</alias>
-				<alias color="black" font_style="italic" font_color="black" label_angle="326.947" uid="5113" x="5298" y="385" width="18" height="18">
+				<alias color="black" font_style="italic" font_color="black" label_angle="326.947" uid="5112" x="5298" y="385" width="18" height="18">
 					<of>discount_factor_1</of>
 				</alias>
-				<alias color="black" font_style="italic" font_color="black" label_angle="312.239" uid="5250" x="5206" y="706" width="18" height="18">
+				<alias color="black" font_style="italic" font_color="black" label_angle="312.239" uid="5249" x="5206" y="706" width="18" height="18">
 					<of>discount_factor_DC</of>
 				</alias>
-				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="5567" x="94" y="1401" width="18" height="18">
+				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="5566" x="94" y="1401" width="18" height="18">
 					<of>Output_Capacity</of>
 				</alias>
-				<alias color="black" font_style="italic" font_color="black" uid="5408" x="5305" y="119" width="18" height="18">
+				<alias color="black" font_style="italic" font_color="black" uid="5407" x="5305" y="119" width="18" height="18">
 					<of>discount_factor</of>
 				</alias>
-				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="4950" x="3872" y="2119" width="18" height="18">
+				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="4949" x="3872" y="2119" width="18" height="18">
 					<of>Output_Capacity</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="#008F44" uid="5101" x="3836" y="834" width="18" height="18">
+				<alias color="blue" font_style="italic" font_color="#008F44" uid="5100" x="3836" y="834" width="18" height="18">
 					<of>start_schedule_ORNOVOC</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" label_angle="227.761" uid="5583" x="2503" y="431" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" label_angle="227.761" uid="5582" x="2503" y="431" width="18" height="18">
 					<of>Years_in_D_and_C</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="#008F44" uid="5377" x="4634" y="987" width="18" height="18">
+				<alias color="blue" font_style="italic" font_color="#008F44" uid="5376" x="4634" y="987" width="18" height="18">
 					<of>Loan_Guarantee_Logic</of>
 				</alias>
-				<alias color="black" font_style="italic" font_color="black" label_angle="154.598" uid="5323" x="5185" y="145" width="18" height="18">
+				<alias color="black" font_style="italic" font_color="black" label_angle="154.598" uid="5322" x="5185" y="145" width="18" height="18">
 					<of>discount_factor_DC</of>
 				</alias>
-				<alias color="black" font_style="italic" font_color="black" uid="5603" x="1392" y="2721" width="18" height="18">
+				<alias color="black" font_style="italic" font_color="black" uid="5602" x="1392" y="2721" width="18" height="18">
 					<of>Camelina_price_input</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="#008F44" uid="5481" x="4624" y="303" width="18" height="18">
+				<alias color="blue" font_style="italic" font_color="#008F44" uid="5480" x="4624" y="303" width="18" height="18">
 					<of>NextPlant_Expected_Other_VBL_Op_Cost</of>
 				</alias>
-				<alias color="#651818" font_style="italic" font_color="#651818" uid="5045" x="4083" y="2046" width="18" height="18">
+				<alias color="#651818" font_style="italic" font_color="#651818" uid="5044" x="4083" y="2046" width="18" height="18">
 					<of>Output_gpy_by_Technology</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="#008F44" uid="5428" x="4385" y="119" width="18" height="18">
+				<alias color="blue" font_style="italic" font_color="#008F44" uid="5427" x="4385" y="119" width="18" height="18">
 					<of>NextPlant_Other_Coproduct_Sales_Rev</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" label_angle="216.675" uid="5024" x="5289" y="1031" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" label_angle="216.675" uid="5023" x="5289" y="1031" width="18" height="18">
 					<of>term_of_loan</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" label_angle="164.14" uid="5272" x="2065" y="1066" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" label_angle="164.14" uid="5271" x="2065" y="1066" width="18" height="18">
 					<of>Mature_PC_Multipliers</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" label_angle="83.8151" uid="5241" x="879" y="2698" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" label_angle="83.8151" uid="5240" x="879" y="2698" width="18" height="18">
 					<of>Days_per_Year_Online</of>
 				</alias>
-				<alias color="black" font_style="italic" font_color="black" uid="5474" x="3622.5" y="958.5" width="45" height="35">
+				<alias color="black" font_style="italic" font_color="black" uid="5473" x="3622.5" y="958.5" width="45" height="35">
 					<of>In_Design_and_Cons</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="5437" x="3008" y="246" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="5436" x="3008" y="246" width="18" height="18">
 					<of>Days_per_Year_Online</of>
 				</alias>
-				<alias color="#008F44" font_style="italic" font_color="#008F44" uid="5285" x="2674" y="293" width="18" height="18">
+				<alias color="#008F44" font_style="italic" font_color="#008F44" uid="5284" x="2674" y="293" width="18" height="18">
 					<of>State_of_the_Industry_Multipliers</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="5083" x="105" y="2705" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="5082" x="105" y="2705" width="18" height="18">
 					<of>Exp_Power_Sales_Rev</of>
 				</alias>
-				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="5578" x="548" y="1531" width="18" height="18">
+				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="5577" x="548" y="1531" width="18" height="18">
 					<of>Output_Capacity</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="5361" x="4098" y="1259" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="5360" x="4098" y="1259" width="18" height="18">
 					<of>one_billion</of>
 				</alias>
-				<alias color="white" font_style="italic" font_color="white" uid="5234" x="2552.5" y="2122.5" width="45" height="35">
+				<alias color="white" font_style="italic" font_color="white" uid="5233" x="2552.5" y="2122.5" width="45" height="35">
 					<of>Avg_FS_demand_nominal_util</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="#008F44" uid="4973" x="3803" y="945" width="18" height="18">
+				<alias color="blue" font_style="italic" font_color="#008F44" uid="4972" x="3803" y="945" width="18" height="18">
 					<of>scheduled_plant_initiation</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="5212" x="3077" y="1198" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="5211" x="3077" y="1198" width="18" height="18">
 					<of>C_ilearning_inputs_OHC</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="4948" x="1111" y="1318" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="4947" x="1111" y="1318" width="18" height="18">
 					<of>doubling_factor</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="#008F44" uid="5441" x="4520" y="765" width="18" height="18">
+				<alias color="blue" font_style="italic" font_color="#008F44" uid="5440" x="4520" y="765" width="18" height="18">
 					<of>FCI_Subs_Logic</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="5276" x="1272" y="1269" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="5275" x="1272" y="1269" width="18" height="18">
 					<of>Pilot_Progress_Ratios</of>
 				</alias>
-				<alias color="black" font_style="italic" font_color="black" label_angle="255.613" uid="5253" x="1938.5" y="2462.5" width="45" height="35">
+				<alias color="black" font_style="italic" font_color="black" label_angle="255.613" uid="5252" x="1938.5" y="2462.5" width="45" height="35">
 					<of>Tot_FS_Thruput_Cap_Pipeline</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="#008F44" uid="5504" x="5100" y="1532" width="18" height="18">
+				<alias color="blue" font_style="italic" font_color="#008F44" uid="5503" x="5100" y="1532" width="18" height="18">
 					<of>PoP_Price_Subs_Logic</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="5000" x="5010" y="339" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="4999" x="5010" y="339" width="18" height="18">
 					<of>depreciation_period</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="5022" x="2760" y="1222" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="5021" x="2760" y="1222" width="18" height="18">
 					<of>one</of>
 				</alias>
-				<alias color="#008F44" font_style="italic" font_color="#008F44" uid="5206" x="1981" y="2540" width="18" height="18">
+				<alias color="#008F44" font_style="italic" font_color="#008F44" uid="5205" x="1981" y="2540" width="18" height="18">
 					<of>Nominal_Plant_Utilization_Factors</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="#008F44" label_side="top" uid="5232" x="4357" y="602" width="18" height="18">
+				<alias color="blue" font_style="italic" font_color="#008F44" label_side="top" uid="5231" x="4357" y="602" width="18" height="18">
 					<of>NextPlant_Expected_FCI</of>
 				</alias>
-				<alias color="black" font_style="italic" font_color="black" uid="4971" x="495.5" y="807.5" width="45" height="35">
+				<alias color="black" font_style="italic" font_color="black" uid="4970" x="495.5" y="807.5" width="45" height="35">
 					<of>Cumulative_Industry_Output</of>
 				</alias>
-				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="4937" x="4968" y="1723" width="18" height="18">
+				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="4936" x="4968" y="1723" width="18" height="18">
 					<of>Avg_PY</of>
 				</alias>
-				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="5579" x="642.5" y="1430.5" width="45" height="35">
+				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="5578" x="642.5" y="1430.5" width="45" height="35">
 					<of>Commercial_Maturity</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="5153" x="5694" y="496" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="5152" x="5694" y="496" width="18" height="18">
 					<of>Regional_coeffs</of>
 				</alias>
-				<alias color="black" font_style="italic" font_color="black" uid="4939" x="2081" y="2028" width="18" height="18">
+				<alias color="black" font_style="italic" font_color="black" uid="4938" x="2081" y="2028" width="18" height="18">
 					<of>oilcrop_share_to_C</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="black" uid="5299" x="647" y="892" width="18" height="18">
+				<alias color="blue" font_style="italic" font_color="black" uid="5298" x="647" y="892" width="18" height="18">
 					<of>Expected_FCI</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="5139" x="4936" y="647" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="5138" x="4936" y="647" width="18" height="18">
 					<of>term_of_loan</of>
 				</alias>
-				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="5568" x="95" y="1266" width="18" height="18">
+				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="5567" x="95" y="1266" width="18" height="18">
 					<of>fs_demand_at_nominal_utilization</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="#008F44" uid="5295" x="4471" y="2096" width="18" height="18">
+				<alias color="blue" font_style="italic" font_color="#008F44" uid="5294" x="4471" y="2096" width="18" height="18">
 					<of>NextPlant_Expected_Power_Sales_Rev</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" label_angle="237.461" uid="5485" x="4401" y="473" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" label_angle="237.461" uid="5484" x="4401" y="473" width="18" height="18">
 					<of>depreciation_period</of>
 				</alias>
-				<alias color="black" font_style="italic" font_color="black" uid="5461" x="3793" y="2158" width="18" height="18">
+				<alias color="black" font_style="italic" font_color="black" uid="5460" x="3793" y="2158" width="18" height="18">
 					<of>Expected_Plant_Output</of>
 				</alias>
-				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="5580" x="647" y="1535" width="18" height="18">
+				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="5579" x="647" y="1535" width="18" height="18">
 					<of>Avg_PY</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="5008" x="1365" y="1288" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="5007" x="1365" y="1288" width="18" height="18">
 					<of>one</of>
 				</alias>
-				<alias color="black" font_style="italic" font_color="black" uid="5071" x="2081" y="1969" width="18" height="18">
+				<alias color="black" font_style="italic" font_color="black" uid="5070" x="2081" y="1969" width="18" height="18">
 					<of>OilCrop_Demand</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="black" uid="5180" x="3719" y="940" width="18" height="18">
+				<alias color="blue" font_style="italic" font_color="black" uid="5179" x="3719" y="940" width="18" height="18">
 					<of>initiating</of>
 				</alias>
-				<alias color="black" font_style="italic" font_color="black" label_angle="104.716" uid="5048" x="2888" y="293" width="18" height="18">
+				<alias color="black" font_style="italic" font_color="black" label_angle="104.716" uid="5047" x="2888" y="293" width="18" height="18">
 					<of>Avg_FS_Thruput_Cap_Pipeline</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="#008F44" uid="5144" x="4993" y="2174" width="18" height="18">
+				<alias color="blue" font_style="italic" font_color="#008F44" uid="5143" x="4993" y="2174" width="18" height="18">
 					<of>Loan_Guarantee_Logic</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="#008F44" label_angle="39.0125" uid="5151" x="4315" y="346" width="18" height="18">
+				<alias color="blue" font_style="italic" font_color="#008F44" label_angle="39.0125" uid="5150" x="4315" y="346" width="18" height="18">
 					<of>State_of_Industry_Process_Yield</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="5423" x="2413" y="2877" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="5422" x="2413" y="2877" width="18" height="18">
 					<of>Expected_Regional_Cellulosic_FS_cost_USD_ton</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="black" uid="4966" x="2035" y="579" width="18" height="18">
+				<alias color="blue" font_style="italic" font_color="black" uid="4965" x="2035" y="579" width="18" height="18">
 					<of>nominal_regional_distn_new_facilities</of>
 				</alias>
-				<alias color="black" font_style="italic" font_color="black" uid="5518" x="2413.75" y="2758" width="18" height="18">
+				<alias color="black" font_style="italic" font_color="black" uid="5517" x="2413.75" y="2758" width="18" height="18">
 					<of>Max_OilCrop_Supply</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="#008F44" uid="5148" x="659" y="1357" width="18" height="18">
+				<alias color="blue" font_style="italic" font_color="#008F44" uid="5147" x="659" y="1357" width="18" height="18">
 					<of>PoP_Price_Subs_Logic</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="5368" x="575" y="2640" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="5367" x="575" y="2640" width="18" height="18">
 					<of>Mature_FS_Thruput_Capacity</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="4953" x="2768" y="1943" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="4952" x="2768" y="1943" width="18" height="18">
 					<of>one_million</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="5379" x="2306" y="1196" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="5378" x="2306" y="1196" width="18" height="18">
 					<of>PC_learning_inputs_OHC</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="5540" x="107" y="2660" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="5539" x="107" y="2660" width="18" height="18">
 					<of>Exp_Other_Coproduct_Sales_Rev</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="5197" x="5656" y="880" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="5196" x="5656" y="880" width="18" height="18">
 					<of>Plant_Economic_Lifetime</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="#008F44" uid="5141" x="4474" y="2158" width="18" height="18">
+				<alias color="blue" font_style="italic" font_color="#008F44" uid="5140" x="4474" y="2158" width="18" height="18">
 					<of>NextPlant_Other_Coproduct_Sales_Rev</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="#008F44" uid="5332" x="3467" y="430" width="18" height="18">
+				<alias color="blue" font_style="italic" font_color="#008F44" uid="5331" x="3467" y="430" width="18" height="18">
 					<of>Expected_FS_cost_after_Subs</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="5385" x="1670" y="960" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="5384" x="1670" y="960" width="18" height="18">
 					<of>Min_PC_Experience_for_Learning</of>
 				</alias>
-				<alias color="black" font_style="italic" font_color="black" uid="5604" x="1396" y="2764" width="18" height="18">
+				<alias color="black" font_style="italic" font_color="black" uid="5603" x="1396" y="2764" width="18" height="18">
 					<of>oilcrop_share_to_C</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="4960" x="5117" y="368" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="4959" x="5117" y="368" width="18" height="18">
 					<of>Expected_Tax_Rate</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="4957" x="2014" y="1224" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="4956" x="2014" y="1224" width="18" height="18">
 					<of>PC_Progress_Ratios</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="5396" x="2631" y="1943" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="5395" x="2631" y="1943" width="18" height="18">
 					<of>oil_to_seed_ratio</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="5130" x="897" y="342" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="5129" x="897" y="342" width="18" height="18">
 					<of>Pilot_start</of>
 				</alias>
-				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="5573" x="254" y="1518" width="18" height="18">
+				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="5572" x="254" y="1518" width="18" height="18">
 					<of>fs_demand_at_nominal_utilization</of>
 				</alias>
-				<alias color="#008F44" font_style="italic" font_color="#008F44" uid="4955" x="3411" y="2003" width="18" height="18">
+				<alias color="#008F44" font_style="italic" font_color="#008F44" uid="4954" x="3411" y="2003" width="18" height="18">
 					<of>Reqd_Rate_of_Return</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="#008F44" uid="5069" x="3854" y="1068" width="18" height="18">
+				<alias color="blue" font_style="italic" font_color="#008F44" uid="5068" x="3854" y="1068" width="18" height="18">
 					<of>start_schedule_thruput_capacity</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" label_side="left" uid="5010" x="2215" y="2103" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" label_side="left" uid="5009" x="2215" y="2103" width="18" height="18">
 					<of>max_frac_oil_prodn_to_biofuel</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="5136" x="1255" y="637" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="5135" x="1255" y="637" width="18" height="18">
 					<of>PC_start</of>
 				</alias>
-				<alias color="black" font_style="italic" font_color="black" uid="5005" x="3509" y="950" width="18" height="18">
+				<alias color="black" font_style="italic" font_color="black" uid="5004" x="3509" y="950" width="18" height="18">
 					<of>completing_D_and_C</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="black" uid="5157" x="5054" y="1929" width="18" height="18">
+				<alias color="blue" font_style="italic" font_color="black" uid="5156" x="5054" y="1929" width="18" height="18">
 					<of>initiating</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="5229" x="1259" y="996" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="5228" x="1259" y="996" width="18" height="18">
 					<of>Early_Pilot_Multipliers</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="#008F44" label_angle="51.7939" uid="4988" x="606" y="811" width="18" height="18">
+				<alias color="blue" font_style="italic" font_color="#008F44" label_angle="51.7939" uid="4987" x="606" y="811" width="18" height="18">
 					<of>Cumulative_Module_Output</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="5370" x="3420" y="2065" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="5369" x="3420" y="2065" width="18" height="18">
 					<of>Expected_Tax_Rate</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="5042" x="865" y="445" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="5041" x="865" y="445" width="18" height="18">
 					<of>technology_switches</of>
 				</alias>
-				<alias color="black" font_style="italic" font_color="black" uid="5115" x="2571" y="2280" width="18" height="18">
+				<alias color="black" font_style="italic" font_color="black" uid="5114" x="2571" y="2280" width="18" height="18">
 					<of>Other_Oilcrop_Oil_Consn</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="4995" x="5975" y="658" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="4994" x="5975" y="658" width="18" height="18">
 					<of>lambda</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="5347" x="3876" y="1340" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="5346" x="3876" y="1340" width="18" height="18">
 					<of>Min_Cume_Industry_Output_For_Learning</of>
 				</alias>
-				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="5569" x="224" y="1309" width="18" height="18">
+				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="5568" x="224" y="1309" width="18" height="18">
 					<of>Platform_Attr</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="5446" x="138" y="661" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="5445" x="138" y="661" width="18" height="18">
 					<of>startup_spend_constraint</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="#008F44" uid="5280" x="5118" y="1774" width="18" height="18">
+				<alias color="blue" font_style="italic" font_color="#008F44" uid="5279" x="5118" y="1774" width="18" height="18">
 					<of>FS_Subs_Logic</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" label_angle="341.354" uid="5124" x="1950" y="940" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" label_angle="341.354" uid="5123" x="1950" y="940" width="18" height="18">
 					<of>Op_Experience_Per_Year</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="5411" x="1334" y="1042" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="5410" x="1334" y="1042" width="18" height="18">
 					<of>Mature_Pilot_Multipliers</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="5585" x="1428" y="729" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="5584" x="1428" y="729" width="18" height="18">
 					<of>PC_dev_time</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="5290" x="2037" y="2466" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="5289" x="2037" y="2466" width="18" height="18">
 					<of>one_project</of>
 				</alias>
-				<alias color="black" font_style="italic" font_color="black" uid="5563" x="5666" y="712" width="18" height="18">
+				<alias color="black" font_style="italic" font_color="black" uid="5562" x="5666" y="712" width="18" height="18">
 					<of>Expected_Plant_Output</of>
 				</alias>
 			</view>

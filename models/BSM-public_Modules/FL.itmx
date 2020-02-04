@@ -5,30 +5,17 @@
 		<name>FL</name>
 		<uuid>f48cdf44-c0cb-41fc-a5c4-250e64491d3d</uuid>
 		<vendor>isee systems, inc.</vendor>
-		<product version="1.9.4" isee:build_number="1992" isee:saved_by_v1="true" lang="en">Stella Architect</product>
+		<product version="1.8.2" isee:build_number="1691" isee:saved_by_v1="true" lang="en">Stella Architect</product>
 	</header>
-	<sim_specs isee:sim_duration="1.5" isee:simulation_delay="0.125" isee:restore_on_start="false" method="Euler" time_units="Months" isee:instantaneous_flows="false">
+	<sim_specs isee:simulation_delay="0.1" isee:restore_on_start="false" method="Euler" time_units="Months" isee:instantaneous_flows="false">
 		<start>0</start>
 		<stop>12</stop>
 		<dt reciprocal="true">4</dt>
 	</sim_specs>
 	<dimensions>
-		<dim name="AnnualCrop">
-			<elem name="Corn"/>
-			<elem name="Soy"/>
-			<elem name="Wheat"/>
-			<elem name="Other_Grains"/>
-			<elem name="Cotton"/>
-		</dim>
-		<dim name="FLPostHarvest">
-			<elem name="StoreQ"/>
-			<elem name="PreproReceive"/>
-			<elem name="XportHandling"/>
-			<elem name="Dockage"/>
-		</dim>
-		<dim name="PECrop">
-			<elem name="Herbaceous"/>
-			<elem name="Woody"/>
+		<dim name="CtoATech">
+			<elem name="BC"/>
+			<elem name="TC"/>
 		</dim>
 		<dim name="CtoRRTech">
 			<elem name="FP"/>
@@ -38,9 +25,12 @@
 			<elem name="F"/>
 			<elem name="APR"/>
 		</dim>
-		<dim name="CtoATech">
-			<elem name="BC"/>
-			<elem name="TC"/>
+		<dim name="AnnualCrop">
+			<elem name="Corn"/>
+			<elem name="Soy"/>
+			<elem name="Wheat"/>
+			<elem name="Other_Grains"/>
+			<elem name="Cotton"/>
 		</dim>
 		<dim name="ProdnYear" size="10"/>
 		<dim name="Region">
@@ -54,6 +44,16 @@
 			<elem name="SP"/>
 			<elem name="M"/>
 			<elem name="P"/>
+		</dim>
+		<dim name="PECrop">
+			<elem name="Herbaceous"/>
+			<elem name="Woody"/>
+		</dim>
+		<dim name="FLPostHarvest">
+			<elem name="StoreQ"/>
+			<elem name="PreproReceive"/>
+			<elem name="XportHandling"/>
+			<elem name="Dockage"/>
 		</dim>
 	</dimensions>
 	<isee:prefs show_module_prefix="true" live_update_on_drag="true" show_restore_buttons="false" layer="model" interface_scale_ui="true" interface_max_page_width="10000" interface_max_page_height="10000" interface_min_page_width="0" interface_min_page_height="0" saved_runs="5" keep="false" rifp="false"/>
@@ -73,10 +73,6 @@
 		<unit name="Acres">
 			<eqn/>
 			<alias>acre</alias>
-		</unit>
-		<unit name="Tons">
-			<eqn/>
-			<alias>ton</alias>
 		</unit>
 		<unit name="US Dollars">
 			<eqn/>
@@ -123,6 +119,11 @@
 		</unit>
 		<unit name="TonnesPerGram">
 			<eqn>Tonnes/g</eqn>
+		</unit>
+		<unit name="Tonnes">
+			<eqn/>
+			<alias>tonne</alias>
+			<alias>metric ton</alias>
 		</unit>
 		<unit name="HoursPerProjectPerYr">
 			<eqn>hr/(projects*yr)</eqn>
@@ -1647,32 +1648,32 @@ COMMENTS: </doc>
 				<entity name="forest_residue_transport_storage_efficiency_factor"/>
 			</group>
 			<group name="Feedstock logistics params" run="false">
-				<entity name="Advanced_W_PostHarvest_Cost"/>
-				<entity name="adv_storage_loss_factor_WC"/>
-				<entity name="Conventional_HC_HCCPT"/>
-				<entity name="conv_harvest_efficiency_WC"/>
-				<entity name="Conventional_W_PostHarvest_Cost"/>
-				<entity name="conv_storage_loss_factor_HC"/>
-				<entity name="adv_harvest_efficiency_HC"/>
-				<entity name="adv_harv_efficiency_residue"/>
-				<entity name="Advanced_ForRes_HCCPT"/>
-				<entity name="Advanced_UrbanRes_HCCPT"/>
-				<entity name="conv_storage_loss_factor_WC"/>
-				<entity name="conv_harves_efficiency_HC"/>
-				<entity name="Advanced_H_PostHarvest_Cost"/>
-				<entity name="Advanced_Ag_Res_HCCPT"/>
-				<entity name="conv_storage_loss_factor_residue"/>
-				<entity name="Conventional_UrbanRes_HCCPT"/>
-				<entity name="Advanced_HC_HCCPT"/>
-				<entity name="conv_harv_efficiency_residue"/>
-				<entity name="adv_storage_loss_factor_HC"/>
-				<entity name="Conventional_H_PostHarvest_Cost"/>
-				<entity name="adv_storage_loss_factor_residue"/>
-				<entity name="adv_harvest_efficiency_WC"/>
-				<entity name="Conventional_Ag_Res_HCCPT"/>
-				<entity name="Advanced_WC_HCCPT"/>
 				<entity name="Conventional_WC_HCCPT"/>
+				<entity name="adv_storage_loss_factor_HC"/>
 				<entity name="Conventional_ForRes_HCCPT"/>
+				<entity name="Advanced_HC_HCCPT"/>
+				<entity name="conv_storage_loss_factor_residue"/>
+				<entity name="adv_storage_loss_factor_residue"/>
+				<entity name="conv_harv_efficiency_residue"/>
+				<entity name="Advanced_Ag_Res_HCCPT"/>
+				<entity name="conv_storage_loss_factor_WC"/>
+				<entity name="Advanced_WC_HCCPT"/>
+				<entity name="Advanced_UrbanRes_HCCPT"/>
+				<entity name="adv_harvest_efficiency_WC"/>
+				<entity name="Advanced_ForRes_HCCPT"/>
+				<entity name="adv_harvest_efficiency_HC"/>
+				<entity name="Conventional_UrbanRes_HCCPT"/>
+				<entity name="Advanced_H_PostHarvest_Cost"/>
+				<entity name="Conventional_H_PostHarvest_Cost"/>
+				<entity name="conv_storage_loss_factor_HC"/>
+				<entity name="Conventional_W_PostHarvest_Cost"/>
+				<entity name="conv_harves_efficiency_HC"/>
+				<entity name="adv_harv_efficiency_residue"/>
+				<entity name="conv_harvest_efficiency_WC"/>
+				<entity name="Conventional_HC_HCCPT"/>
+				<entity name="Conventional_Ag_Res_HCCPT"/>
+				<entity name="adv_storage_loss_factor_WC"/>
+				<entity name="Advanced_W_PostHarvest_Cost"/>
 			</group>
 			<group name="Feedstock Logistics" run="false">
 				<entity name="plants_with_conventional_logistics"/>
@@ -1697,8 +1698,8 @@ COMMENTS: </doc>
 				<entity name="Use_Static_Advanced_System"/>
 				<entity name="avg_time_for_est_plants"/>
 				<entity name="fraction_Supply_System_advanced"/>
-				<entity name="H_PostHarvest_Cost"/>
 				<entity name="frac_max_push_rate_from_supply_system"/>
+				<entity name="H_PostHarvest_Cost"/>
 				<entity name="C_to_RR_PreProcess_Cost"/>
 				<entity name="max_push_rate_producer_adv_fs"/>
 				<entity name="push_rate"/>
@@ -1939,8 +1940,8 @@ COMMENTS: </doc>
 				</graph>
 				<table color="black" background="#E0E0E0" text_align="right" font_size="12pt" orientation="vertical" wrap_text="false" isee:auto_fit="true" isee:use_alternate_row_colors="false" isee:unlimited_table_length="false" blank_column_width="80" column_width="160" interval="1" report_balances="beginning" report_flows="instantaneous" header_font_style="normal" header_font_weight="normal" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="12pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 				<button color="black" background="#E0E0E0" font_size="12pt" border_width="thin" border_style="solid" transparent="false" corner_radius="0" isee:flat="false" icon_side="top" isee:highlight_on_hover="false" isee:highlight_color="#959595"/>
-				<isee:annotation color="black" background="#E0E0E0" font_size="12pt" border_width="thin" border_style="solid" transparent="false" corner_radius="0" isee:flat="false" icon_side="top" isee:highlight_on_hover="false" isee:highlight_color="#959595" popup_corner_radius="0" popup_background_color="#FFFECF"/>
-				<slider color="black" background="#E0E0E0" font_size="12pt" num_ticks="3" label_side="top" wrap_title="true" vertical="false" isee:fancy_appearance="false" isee:show_hover_tip="when_deciding" input_expands="true" input_width="100"/>
+				<isee:annotation color="black" background="#E0E0E0" font_size="12pt" border_width="thin" border_style="solid" transparent="false" corner_radius="0" isee:flat="false" icon_side="top" isee:highlight_on_hover="false" isee:highlight_color="#959595" popup_background_color="#FFFECF"/>
+				<slider color="black" background="#E0E0E0" font_size="12pt" num_ticks="3" label_side="top" wrap_title="true" vertical="false" isee:show_hover_tip="when_deciding" input_expands="true" input_width="100"/>
 				<isee:sim_speed_slider color="black" background="white"/>
 				<isee:time_slider color="black" background="white"/>
 				<isee:pie_input color="black" background="white" legend_position="bottom" isee:transparent="false"/>
@@ -1957,10 +1958,8 @@ COMMENTS: </doc>
 				<isee:navigation_widget color="black" background="white" border_color="#999999" border_width="thin" border_style="solid" item_spacing="6" appearance="tabs" corner_radius="4" selected_item_color="black" selected_item_background="white" item_background="#DDDDDD"/>
 				<isee:shape color="black" background="white" opacity="1" transparent_background="true"/>
 				<isee:selector color="black" background="white"/>
-				<isee:iframe color="black" background="white"/>
-				<isee:financial_table color="black" background="white" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="true" background="white" page_width="1024" page_height="784" isee:page_cols="3" isee:page_rows="4" isee:popup_graphs_are_comparative="true" type="stock_flow">
+			<view isee:show_pages="true" page_width="983" page_height="694" isee:page_cols="3" isee:page_rows="4" isee:scroll_x="1063" isee:scroll_y="1020" isee:popup_graphs_are_comparative="true" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="9pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -1997,313 +1996,313 @@ COMMENTS: </doc>
 					</graph>
 					<table color="black" background="#E0E0E0" text_align="right" font_size="12pt" orientation="vertical" wrap_text="false" isee:auto_fit="true" isee:use_alternate_row_colors="false" isee:unlimited_table_length="false" blank_column_width="80" column_width="160" interval="1" report_balances="beginning" report_flows="instantaneous" header_font_style="normal" header_font_weight="normal" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="12pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 				</style>
-				<connector uid="2918" angle="159.444">
+				<connector uid="2917" angle="159.444">
 					<from>
-						<alias uid="2919"/>
+						<alias uid="2918"/>
 					</from>
 					<to>storage_loss_HC_by_region</to>
 				</connector>
-				<connector uid="2920" angle="0">
+				<connector uid="2919" angle="0">
 					<from>harvest_eff_WC_by_region</from>
 					<to>WC_harvest_storage_efficiency_factor</to>
 				</connector>
-				<connector uid="2921" angle="0">
+				<connector uid="2920" angle="0">
 					<from>Use_Dynamic_FS_Logistics_System</from>
 					<to>fraction_Supply_System_advanced</to>
 				</connector>
-				<connector uid="2922" angle="35.5377">
+				<connector uid="2921" angle="35.5377">
 					<from>
-						<alias uid="2923"/>
+						<alias uid="2922"/>
 					</from>
 					<to>storage_loss_HC_by_region</to>
 				</connector>
-				<connector uid="2924" color="#5E5E5E" angle="344.745">
+				<connector uid="2923" color="#5E5E5E" angle="344.745">
 					<from>Fraction_Producers_Using_Advanced_FS</from>
 					<to>UrbanRes_HCCPT</to>
 				</connector>
-				<connector uid="2925" angle="96.3402">
+				<connector uid="2924" angle="96.3402">
 					<from>
-						<alias uid="2926"/>
+						<alias uid="2925"/>
 					</from>
 					<to>Ag_Res_HCCPT</to>
 				</connector>
-				<connector uid="2927" angle="0">
+				<connector uid="2926" angle="0">
 					<from>frac_max_push_rate_from_supply_system</from>
 					<to>push_rate</to>
 				</connector>
-				<connector uid="2928" angle="327.896">
+				<connector uid="2927" angle="327.896">
 					<from>fraction_Supply_System_advanced</from>
 					<to>W_PostHarvest_Cost</to>
 				</connector>
-				<connector uid="2929" color="#5E5E5E" angle="335.556">
+				<connector uid="2928" color="#5E5E5E" angle="335.556">
 					<from>Fraction_Producers_Using_Advanced_FS</from>
 					<to>WC_HCCPT</to>
 				</connector>
-				<connector uid="2930" angle="18.4349">
+				<connector uid="2929" angle="18.4349">
 					<from>
-						<alias uid="2931"/>
+						<alias uid="2930"/>
 					</from>
 					<to>storage_loss_WC_by_region</to>
 				</connector>
-				<connector uid="2932" angle="0">
+				<connector uid="2931" angle="0">
 					<from>
-						<alias uid="2933"/>
+						<alias uid="2932"/>
 					</from>
 					<to>UrbanRes_HCCPT</to>
 				</connector>
-				<connector uid="2934" angle="32.0054">
+				<connector uid="2933" angle="32.0054">
 					<from>
-						<alias uid="2935"/>
+						<alias uid="2934"/>
 					</from>
 					<to>storage_loss_residue_by_region</to>
 				</connector>
-				<connector uid="2936" angle="173.66">
+				<connector uid="2935" angle="173.66">
 					<from>
-						<alias uid="2937"/>
+						<alias uid="2936"/>
 					</from>
 					<to>harvest_eff_HC_by_region</to>
 				</connector>
-				<connector uid="2938" angle="180">
+				<connector uid="2937" angle="180">
 					<from>
-						<alias uid="2939"/>
+						<alias uid="2938"/>
 					</from>
 					<to>WC_HCCPT</to>
 				</connector>
-				<connector uid="2940" angle="0">
+				<connector uid="2939" angle="0">
 					<from>harvest_eff_HC_by_region</from>
 					<to>HC_harvest_storage_efficiency_factor</to>
 				</connector>
-				<connector uid="2941" angle="212.005">
+				<connector uid="2940" angle="212.005">
 					<from>
-						<alias uid="2942"/>
+						<alias uid="2941"/>
 					</from>
 					<to>storage_loss_residue_by_region</to>
 				</connector>
-				<connector uid="2943" angle="208.61">
+				<connector uid="2942" angle="208.61">
 					<from>Est_Total_Cellulosic_Plants</from>
 					<to>chg_est_total_cellulosic_plants</to>
 				</connector>
-				<connector uid="2944" angle="180">
+				<connector uid="2943" angle="180">
 					<from>plant_threshold_for_advanced_logistics</from>
 					<to>plants_with_advanced_logistics</to>
 				</connector>
-				<connector uid="2945" angle="341.565">
+				<connector uid="2944" angle="341.565">
 					<from>Use_Static_Advanced_System</from>
 					<to>fraction_Supply_System_advanced</to>
 				</connector>
-				<connector uid="2946" angle="180">
+				<connector uid="2945" angle="180">
 					<from>
-						<alias uid="2947"/>
+						<alias uid="2946"/>
 					</from>
 					<to>UrbanRes_HCCPT</to>
 				</connector>
-				<connector uid="2948" angle="90">
+				<connector uid="2947" angle="90">
 					<from>storage_loss_WC_by_region</from>
 					<to>WC_harvest_storage_efficiency_factor</to>
 				</connector>
-				<connector uid="2949" angle="0">
+				<connector uid="2948" angle="0">
 					<from>total_cellulosic_plants</from>
 					<to>plants_with_advanced_logistics</to>
 				</connector>
-				<connector uid="2950" angle="153.435">
+				<connector uid="2949" angle="153.435">
 					<from>
-						<alias uid="2951"/>
+						<alias uid="2950"/>
 					</from>
 					<to>harvest_eff_WC_by_region</to>
 				</connector>
-				<connector uid="2952" angle="153.435">
+				<connector uid="2951" angle="153.435">
 					<from>
-						<alias uid="2953"/>
+						<alias uid="2952"/>
 					</from>
 					<to>harvest_eff_HC_by_region</to>
 				</connector>
-				<connector uid="2954" angle="300.466">
+				<connector uid="2953" angle="300.466">
 					<from>Fraction_Producers_using_Conventional_FS</from>
 					<to>conventional_producer_constraint</to>
 				</connector>
-				<connector uid="2955" angle="90">
+				<connector uid="2954" angle="90">
 					<from>
-						<alias uid="2935"/>
+						<alias uid="2934"/>
 					</from>
 					<to>storage_loss_HC_by_region</to>
 				</connector>
-				<connector uid="2956" angle="186.34">
+				<connector uid="2955" angle="186.34">
 					<from>
-						<alias uid="2957"/>
+						<alias uid="2956"/>
 					</from>
 					<to>ForRes_HCCPT</to>
 				</connector>
-				<connector uid="2958" angle="220.601">
+				<connector uid="2957" angle="220.601">
 					<from>
-						<alias uid="2935"/>
+						<alias uid="2934"/>
 					</from>
 					<to>storage_loss_WC_by_region</to>
 				</connector>
-				<connector uid="2959" angle="90">
+				<connector uid="2958" angle="90">
 					<from>storage_loss_HC_by_region</from>
 					<to>HC_harvest_storage_efficiency_factor</to>
 				</connector>
-				<connector uid="2960" angle="234.782">
+				<connector uid="2959" angle="234.782">
 					<from>Fraction_Producers_using_Conventional_FS</from>
 					<to>conversion_push_transition_to_adv_FS</to>
 				</connector>
-				<connector uid="2961" angle="226.736">
+				<connector uid="2960" angle="226.736">
 					<from>Fraction_Producers_Using_Advanced_FS</from>
 					<to>WOM_transition_to_adv_FS</to>
 				</connector>
-				<connector uid="2962" angle="220.601">
+				<connector uid="2961" angle="220.601">
 					<from>plants_with_advanced_logistics</from>
 					<to>plants_with_conventional_logistics</to>
 				</connector>
-				<connector uid="2963" angle="270">
+				<connector uid="2962" angle="270">
 					<from>dynamic_frac_logistics_advanced</from>
 					<to>fraction_Supply_System_advanced</to>
 				</connector>
-				<connector uid="2964" angle="106.39">
+				<connector uid="2963" angle="106.39">
 					<from>Est_Total_Cellulosic_Plants</from>
 					<to>total_cellulosic_plants</to>
 				</connector>
-				<connector uid="2965" angle="90">
+				<connector uid="2964" angle="90">
 					<from>storage_loss_residue_by_region</from>
 					<to>residue_harvest_storage_efficiency_factor</to>
 				</connector>
-				<connector uid="2966" angle="276.34">
+				<connector uid="2965" angle="276.34">
 					<from>total_cellulosic_plants</from>
 					<to>dynamic_frac_logistics_advanced</to>
 				</connector>
-				<connector uid="2967" angle="173.66">
+				<connector uid="2966" angle="173.66">
 					<from>
-						<alias uid="2968"/>
+						<alias uid="2967"/>
 					</from>
 					<to>harvest_eff_residue_by_region</to>
 				</connector>
-				<connector uid="2969" angle="220.601">
+				<connector uid="2968" angle="220.601">
 					<from>
-						<alias uid="2970"/>
+						<alias uid="2969"/>
 					</from>
 					<to>storage_loss_residue_by_region</to>
 				</connector>
-				<connector uid="2971" angle="180">
+				<connector uid="2970" angle="180">
 					<from>max_push_rate_producer_adv_fs</from>
 					<to>push_rate</to>
 				</connector>
-				<connector uid="2972" angle="324.462">
+				<connector uid="2971" angle="324.462">
 					<from>total_cellulosic_plants</from>
 					<to>plants_with_conventional_logistics</to>
 				</connector>
-				<connector uid="2973" angle="0.168517">
+				<connector uid="2972" angle="0.168517">
 					<from>fraction_Supply_System_advanced</from>
 					<to>H_PostHarvest_Cost</to>
 				</connector>
-				<connector uid="2974" angle="153.435">
+				<connector uid="2973" angle="153.435">
 					<from>
-						<alias uid="2975"/>
+						<alias uid="2974"/>
 					</from>
 					<to>chg_est_total_cellulosic_plants</to>
 				</connector>
-				<connector uid="2976" angle="90">
+				<connector uid="2975" angle="90">
 					<from>push_rate</from>
 					<to>conversion_push_transition_to_adv_FS</to>
 				</connector>
-				<connector uid="2977" angle="315">
+				<connector uid="2976" angle="315">
 					<from>conventional_producer_constraint</from>
 					<to>WOM_rate</to>
 				</connector>
-				<connector uid="2978" angle="180">
+				<connector uid="2977" angle="180">
 					<from>
-						<alias uid="2979"/>
+						<alias uid="2978"/>
 					</from>
 					<to>HC_HCCPT</to>
 				</connector>
-				<connector uid="2980" angle="180">
+				<connector uid="2979" angle="180">
 					<from>
-						<alias uid="2981"/>
+						<alias uid="2980"/>
 					</from>
 					<to>Ag_Res_HCCPT</to>
 				</connector>
-				<connector uid="2982" angle="0">
+				<connector uid="2981" angle="0">
 					<from>harvest_eff_residue_by_region</from>
 					<to>residue_harvest_storage_efficiency_factor</to>
 				</connector>
-				<connector uid="2983" angle="325.713">
+				<connector uid="2982" angle="325.713">
 					<from>Fraction_Producers_Using_Advanced_FS</from>
 					<to>harvest_eff_residue_by_region</to>
 				</connector>
-				<connector uid="2984" angle="18.4349">
+				<connector uid="2983" angle="18.4349">
 					<from>
-						<alias uid="2985"/>
+						<alias uid="2984"/>
 					</from>
 					<to>ForRes_HCCPT</to>
 				</connector>
-				<connector uid="2986" angle="122.005">
+				<connector uid="2985" angle="122.005">
 					<from>
-						<alias uid="2987"/>
+						<alias uid="2986"/>
 					</from>
 					<to>chg_est_total_cellulosic_plants</to>
 				</connector>
-				<connector uid="2988" angle="311.424">
+				<connector uid="2987" angle="311.424">
 					<from>Fraction_Producers_Using_Advanced_FS</from>
 					<to>harvest_eff_HC_by_region</to>
 				</connector>
-				<connector uid="2989" angle="339.444">
+				<connector uid="2988" angle="339.444">
 					<from>
-						<alias uid="2990"/>
+						<alias uid="2989"/>
 					</from>
 					<to>storage_loss_WC_by_region</to>
 				</connector>
-				<connector uid="2991" angle="71.5651">
+				<connector uid="2990" angle="71.5651">
 					<from>base_WOM_producer_adv_FS</from>
 					<to>WOM_rate</to>
 				</connector>
-				<connector uid="2992" angle="32.0054">
+				<connector uid="2991" angle="32.0054">
 					<from>fraction_Supply_System_advanced</from>
 					<to>frac_max_push_rate_from_supply_system</to>
 				</connector>
-				<connector uid="2993" angle="173.66">
+				<connector uid="2992" angle="173.66">
 					<from>
-						<alias uid="2994"/>
+						<alias uid="2993"/>
 					</from>
 					<to>harvest_eff_residue_by_region</to>
 				</connector>
-				<connector uid="2995" angle="270">
+				<connector uid="2994" angle="270">
 					<from>plants_with_advanced_logistics</from>
 					<to>dynamic_frac_logistics_advanced</to>
 				</connector>
-				<connector uid="2996" color="#5E5E5E" angle="354.806">
+				<connector uid="2995" color="#5E5E5E" angle="354.806">
 					<from>Fraction_Producers_Using_Advanced_FS</from>
 					<to>ForRes_HCCPT</to>
 				</connector>
-				<connector uid="2997" color="#5E5E5E" angle="7.76517">
+				<connector uid="2996" color="#5E5E5E" angle="7.76517">
 					<from>Fraction_Producers_Using_Advanced_FS</from>
 					<to>HC_HCCPT</to>
 				</connector>
-				<connector uid="2998" angle="90">
+				<connector uid="2997" angle="90">
 					<from>WOM_rate</from>
 					<to>WOM_transition_to_adv_FS</to>
 				</connector>
-				<connector uid="2999" color="#5E5E5E" angle="12.8043">
+				<connector uid="2998" color="#5E5E5E" angle="12.8043">
 					<from>Fraction_Producers_Using_Advanced_FS</from>
 					<to>Ag_Res_HCCPT</to>
 				</connector>
-				<connector uid="3000" angle="0">
+				<connector uid="2999" angle="0">
 					<from>
-						<alias uid="3001"/>
+						<alias uid="3000"/>
 					</from>
 					<to>WC_HCCPT</to>
 				</connector>
-				<connector uid="3002" angle="173.66">
+				<connector uid="3001" angle="173.66">
 					<from>
-						<alias uid="3003"/>
+						<alias uid="3002"/>
 					</from>
 					<to>harvest_eff_WC_by_region</to>
 				</connector>
-				<connector uid="3004" angle="297.897">
+				<connector uid="3003" angle="297.897">
 					<from>Fraction_Producers_Using_Advanced_FS</from>
 					<to>harvest_eff_WC_by_region</to>
 				</connector>
-				<text_box color="black" padding="5" border_width="thin" border_style="solid" appearance="transparent" uid="3005" x="1485" y="1989" width="363" height="56">Conventional and AdvancedBLM-ish inputs for Storage, Q+H, Preprocessing cost.  Inputs to C to RR and C to EtOH</text_box>
-				<text_box color="black" padding="5" border_width="thin" border_style="solid" appearance="transparent" uid="3006" x="1102" y="1973" width="360" height="52">Conventional and Advanced harvest and collection costs per acre</text_box>
-				<text_box color="black" padding="5" border_width="thin" border_style="solid" appearance="transparent" uid="3007" x="1095" y="2220" width="360" height="36">Harvest efficiency and storage loss factors</text_box>
+				<text_box color="black" padding="5" border_width="thin" border_style="solid" appearance="transparent" uid="3004" x="1485" y="1989" width="363" height="56">Conventional and AdvancedBLM-ish inputs for Storage, Q+H, Preprocessing cost.  Inputs to C to RR and C to EtOH</text_box>
+				<text_box color="black" padding="5" border_width="thin" border_style="solid" appearance="transparent" uid="3005" x="1102" y="1973" width="360" height="52">Conventional and Advanced harvest and collection costs per acre</text_box>
+				<text_box color="black" padding="5" border_width="thin" border_style="solid" appearance="transparent" uid="3006" x="1095" y="2220" width="360" height="36">Harvest efficiency and storage loss factors</text_box>
 				<aux color="#65183E" font_color="#65183E" label_angle="35.6067" x="1992" y="145" name="HC HCCPT"/>
 				<aux color="#65183E" font_color="#65183E" label_angle="27.6086" x="2588" y="488" name="residue harvest storage efficiency factor"/>
 				<stock color="black" font_color="black" label_angle="84.9098" x="1671" y="186" name="Fraction Producers Using Advanced FS"/>
@@ -2388,6 +2387,7 @@ COMMENTS: </doc>
 				<aux color="#7F00FF" font_color="#7F00FF" label_angle="359.171" x="550" y="1632" name="urban residue transport storage efficiency factor"/>
 				<aux color="#7F00FF" font_color="#7F00FF" label_side="right" x="549" y="1592" name="forest residue transport storage efficiency factor"/>
 				<group locked="false" color="#65183E" font_color="#65183E" x="4" y="1168" width="734" height="523" name="Outputs to Other Modules">
+					<item uid="3007"/>
 					<item uid="3008"/>
 					<item uid="3009"/>
 					<item uid="3010"/>
@@ -2397,246 +2397,245 @@ COMMENTS: </doc>
 					<item uid="3014"/>
 					<item uid="3015"/>
 					<item uid="3016"/>
-					<item uid="3017"/>
 				</group>
 				<group locked="true" x="1080" y="1969" width="1499" height="519" name="Feedstock logistics params"/>
 				<group locked="false" color="black" font_color="black" x="756" y="31" width="2008" height="1853" name="Feedstock Logistics">
-					<item uid="2975"/>
-					<item uid="2987"/>
-					<item uid="2933"/>
-					<item uid="2985"/>
-					<item uid="2979"/>
-					<item uid="2926"/>
+					<item uid="2974"/>
+					<item uid="2986"/>
+					<item uid="2932"/>
+					<item uid="2984"/>
+					<item uid="2978"/>
+					<item uid="2925"/>
+					<item uid="3017"/>
+					<item uid="2946"/>
+					<item uid="2956"/>
+					<item uid="2980"/>
 					<item uid="3018"/>
-					<item uid="2947"/>
-					<item uid="2957"/>
-					<item uid="2981"/>
 					<item uid="3019"/>
+					<item uid="3000"/>
 					<item uid="3020"/>
-					<item uid="3001"/>
+					<item uid="2967"/>
+					<item uid="2993"/>
+					<item uid="2952"/>
+					<item uid="3002"/>
+					<item uid="2936"/>
+					<item uid="2938"/>
+					<item uid="2969"/>
+					<item uid="2941"/>
 					<item uid="3021"/>
-					<item uid="2968"/>
-					<item uid="2994"/>
-					<item uid="2953"/>
-					<item uid="3003"/>
-					<item uid="2937"/>
-					<item uid="2939"/>
-					<item uid="2970"/>
-					<item uid="2942"/>
 					<item uid="3022"/>
 					<item uid="3023"/>
-					<item uid="3024"/>
-					<item uid="2935"/>
-					<item uid="2923"/>
-					<item uid="2919"/>
-					<item uid="2951"/>
-					<item uid="2931"/>
-					<item uid="2990"/>
+					<item uid="2934"/>
+					<item uid="2922"/>
+					<item uid="2918"/>
+					<item uid="2950"/>
+					<item uid="2930"/>
+					<item uid="2989"/>
 				</group>
 				<group locked="false" color="#7F00FF" font_color="#7F00FF" x="2" y="602" width="733" height="521" name="Inputs from other modules"/>
-				<text_box color="black" font_size="24pt" padding="5" appearance="transparent" uid="3025" x="8.33333" y="19.6667" width="638" height="51">Biomass Scenario Model Feedstock Logistics Module</text_box>
-				<text_box color="red" vertical_text_align="center" font_color="red" padding="5" border_color="red" border_width="2" border_style="solid" appearance="transparent" uid="3026" x="12.3333" y="256.667" width="350" height="36">RED:  Data Input (Constant, Ass&apos;n, Scenario, SSheet)</text_box>
-				<text_box color="#008F44" vertical_text_align="center" font_color="#008F44" padding="5" border_color="#008F44" border_width="2" border_style="solid" appearance="transparent" uid="3027" x="385.333" y="209.667" width="350" height="36">GREEN:  Output from this Sector to another Sector</text_box>
-				<text_box color="blue" vertical_text_align="center" font_color="blue" padding="5" border_color="blue" border_width="2" border_style="solid" appearance="transparent" uid="3028" x="12.3333" y="208.667" width="350" height="36">BLUE:  Input to this Sector from another Sector</text_box>
-				<text_box color="black" vertical_text_align="center" padding="5" border_width="2" border_style="solid" appearance="transparent" uid="3029" x="385.333" y="256.667" width="350" height="36">BLACK:  Internal Calculation Within This Sector</text_box>
-				<text_box color="#7F00FF" vertical_text_align="center" font_color="#7F00FF" padding="5" border_color="#7F00FF" border_width="2" border_style="solid" appearance="transparent" uid="3030" x="12.3333" y="161.667" width="350" height="36">Purple:  Input to this MODULE from another MODULE</text_box>
-				<text_box color="#65183E" vertical_text_align="center" font_color="#65183E" padding="5" border_color="#65183E" border_width="2" border_style="solid" appearance="transparent" uid="3031" x="385.333" y="161.667" width="350" height="36">Brown:  Output from this MODULE from another MODULE</text_box>
+				<text_box color="black" font_size="24pt" padding="5" appearance="transparent" uid="3024" x="8.33333" y="19.6667" width="638" height="51">Biomass Scenario Model Feedstock Logistics Module</text_box>
+				<text_box color="red" vertical_text_align="center" font_color="red" padding="5" border_color="red" border_width="2" border_style="solid" appearance="transparent" uid="3025" x="12.3333" y="256.667" width="350" height="36">RED:  Data Input (Constant, Ass&apos;n, Scenario, SSheet)</text_box>
+				<text_box color="#008F44" vertical_text_align="center" font_color="#008F44" padding="5" border_color="#008F44" border_width="2" border_style="solid" appearance="transparent" uid="3026" x="385.333" y="209.667" width="350" height="36">GREEN:  Output from this Sector to another Sector</text_box>
+				<text_box color="blue" vertical_text_align="center" font_color="blue" padding="5" border_color="blue" border_width="2" border_style="solid" appearance="transparent" uid="3027" x="12.3333" y="208.667" width="350" height="36">BLUE:  Input to this Sector from another Sector</text_box>
+				<text_box color="black" vertical_text_align="center" padding="5" border_width="2" border_style="solid" appearance="transparent" uid="3028" x="385.333" y="256.667" width="350" height="36">BLACK:  Internal Calculation Within This Sector</text_box>
+				<text_box color="#7F00FF" vertical_text_align="center" font_color="#7F00FF" padding="5" border_color="#7F00FF" border_width="2" border_style="solid" appearance="transparent" uid="3029" x="12.3333" y="161.667" width="350" height="36">Purple:  Input to this MODULE from another MODULE</text_box>
+				<text_box color="#65183E" vertical_text_align="center" font_color="#65183E" padding="5" border_color="#65183E" border_width="2" border_style="solid" appearance="transparent" uid="3030" x="385.333" y="161.667" width="350" height="36">Brown:  Output from this MODULE from another MODULE</text_box>
 				<aux color="#AA0000" font_color="#AA0000" x="1592" y="2098" name="Conventional H PostHarvest Cost"/>
 				<aux color="#AA0000" font_color="#AA0000" x="1757" y="2100" name="Advanced H PostHarvest Cost"/>
 				<aux color="red" font_color="red" label_angle="359.097" x="1340" y="2076" name="Advanced HC HCCPT"/>
-				<connector uid="3032" angle="90">
+				<connector uid="3031" angle="90">
 					<from>
-						<alias uid="3018"/>
+						<alias uid="3017"/>
 					</from>
 					<to>HC_HCCPT</to>
 				</connector>
 				<aux color="#AA0000" font_color="#AA0000" x="1593" y="2157" name="Conventional W\nPostHarvest Cost"/>
 				<aux color="#AA0000" font_color="#AA0000" x="1757" y="2163" name="Advanced W PostHarvest Cost"/>
-				<connector uid="3033" angle="330.461">
+				<connector uid="3032" angle="330.461">
+					<from>
+						<alias uid="3018"/>
+					</from>
+					<to>H_PostHarvest_Cost</to>
+				</connector>
+				<connector uid="3033" angle="25.1278">
 					<from>
 						<alias uid="3019"/>
 					</from>
 					<to>H_PostHarvest_Cost</to>
 				</connector>
-				<connector uid="3034" angle="25.1278">
+				<connector uid="3034" angle="356.682">
 					<from>
-						<alias uid="3020"/>
+						<alias uid="3021"/>
 					</from>
-					<to>H_PostHarvest_Cost</to>
+					<to>W_PostHarvest_Cost</to>
 				</connector>
-				<connector uid="3035" angle="356.682">
+				<connector uid="3035" angle="25.1148">
 					<from>
 						<alias uid="3022"/>
 					</from>
 					<to>W_PostHarvest_Cost</to>
 				</connector>
-				<connector uid="3036" angle="25.1148">
-					<from>
-						<alias uid="3023"/>
-					</from>
-					<to>W_PostHarvest_Cost</to>
-				</connector>
 				<aux color="black" font_color="black" label_side="left" label_angle="225" x="1648" y="541" name="Rollup H PostHarvest Cost"/>
 				<aux color="black" font_color="black" label_angle="278.976" x="1666" y="738" name="Rollup W PostHarvest Cost"/>
-				<connector uid="3037" angle="359.61">
+				<connector uid="3036" angle="359.61">
 					<from>H_PostHarvest_Cost</from>
 					<to>Rollup_H_PostHarvest_Cost</to>
 				</connector>
-				<connector uid="3038" angle="356.055">
+				<connector uid="3037" angle="356.055">
 					<from>W_PostHarvest_Cost</from>
 					<to>Rollup_W_PostHarvest_Cost</to>
 				</connector>
 				<aux color="#AA0000" font_color="#AA0000" x="1333" y="984" name="C to EtOH Herbaceous"/>
-				<connector uid="3039" angle="356.987">
+				<connector uid="3038" angle="356.987">
 					<from>Rollup_W_PostHarvest_Cost</from>
 					<to>C_to_EtOH_PreProcess_Cost</to>
 				</connector>
-				<connector uid="3040" angle="303.824">
+				<connector uid="3039" angle="303.824">
 					<from>Rollup_H_PostHarvest_Cost</from>
 					<to>C_to_EtOH_PreProcess_Cost</to>
 				</connector>
-				<connector uid="3041" angle="58.7816">
+				<connector uid="3040" angle="58.7816">
 					<from>
-						<alias uid="3024"/>
+						<alias uid="3023"/>
 					</from>
 					<to>C_to_EtOH_PreProcess_Cost</to>
 				</connector>
 				<aux color="#AA0000" font_color="#AA0000" x="1498" y="979" name="C to RR Herbaceous"/>
-				<connector uid="3042" angle="0">
+				<connector uid="3041" angle="0">
 					<from>Rollup_H_PostHarvest_Cost</from>
 					<to>C_to_RR_PreProcess_Cost</to>
 				</connector>
-				<connector uid="3043" angle="62.5924">
+				<connector uid="3042" angle="62.5924">
 					<from>Rollup_W_PostHarvest_Cost</from>
 					<to>C_to_RR_PreProcess_Cost</to>
 				</connector>
-				<connector uid="3044" angle="116.565">
+				<connector uid="3043" angle="116.565">
 					<from>
-						<alias uid="3021"/>
+						<alias uid="3020"/>
 					</from>
 					<to>C_to_RR_PreProcess_Cost</to>
 				</connector>
-				<alias color="red" font_style="italic" font_color="red" label_angle="329.438" uid="2947" x="2270" y="305" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" label_angle="329.438" uid="2946" x="2270" y="305" width="18" height="18">
 					<of>Conventional_UrbanRes_HCCPT</of>
 				</alias>
-				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="3016" x="563" y="1445" width="18" height="18">
+				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="3015" x="563" y="1445" width="18" height="18">
 					<of>residue_harvest_storage_efficiency_factor</of>
 				</alias>
-				<alias color="#65183E" font_style="italic" font_color="#65183E" label_angle="287.695" uid="2935" x="2439" y="826" width="18" height="18">
+				<alias color="#65183E" font_style="italic" font_color="#65183E" label_angle="287.695" uid="2934" x="2439" y="826" width="18" height="18">
 					<of>fraction_Supply_System_advanced</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="2987" x="836" y="320" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="2986" x="836" y="320" width="18" height="18">
 					<of>Est_Ag_Cellulosic_plants_incl_pipeline</of>
 				</alias>
-				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="3012" x="550" y="1231" width="18" height="18">
+				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="3011" x="550" y="1231" width="18" height="18">
 					<of>C_to_RR_PreProcess_Cost</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="2957" x="2246" y="216" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="2956" x="2246" y="216" width="18" height="18">
 					<of>Conventional_ForRes_HCCPT</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="2970" x="2660" y="612" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="2969" x="2660" y="612" width="18" height="18">
 					<of>adv_storage_loss_factor_residue</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="2923" x="2391" y="755" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="2922" x="2391" y="755" width="18" height="18">
 					<of>conv_storage_loss_factor_HC</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="2942" x="2658" y="660" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="2941" x="2658" y="660" width="18" height="18">
 					<of>conv_storage_loss_factor_residue</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="2968" x="2295" y="507" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="2967" x="2295" y="507" width="18" height="18">
 					<of>conv_harv_efficiency_residue</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" label_angle="164.361" uid="2933" x="2066" y="319" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" label_angle="164.361" uid="2932" x="2066" y="319" width="18" height="18">
 					<of>Advanced_UrbanRes_HCCPT</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="2919" x="2482" y="728" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="2918" x="2482" y="728" width="18" height="18">
 					<of>adv_storage_loss_factor_HC</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="2994" x="2168" y="504" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="2993" x="2168" y="504" width="18" height="18">
 					<of>adv_harv_efficiency_residue</of>
 				</alias>
-				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="3008" x="226" y="1386" width="18" height="18">
+				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="3007" x="226" y="1386" width="18" height="18">
 					<of>ForRes_HCCPT</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="2951" x="2166" y="736" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="2950" x="2166" y="736" width="18" height="18">
 					<of>adv_harvest_efficiency_WC</of>
 				</alias>
-				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="3013" x="552" y="1293" width="18" height="18">
+				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="3012" x="552" y="1293" width="18" height="18">
 					<of>C_to_EtOH_PreProcess_Cost</of>
 				</alias>
-				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="3017" x="566" y="1522" width="18" height="18">
+				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="3016" x="566" y="1522" width="18" height="18">
 					<of>HC_harvest_storage_efficiency_factor</of>
 				</alias>
-				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="3009" x="231" y="1337" width="18" height="18">
+				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="3008" x="231" y="1337" width="18" height="18">
 					<of>WC_HCCPT</of>
 				</alias>
-				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="3015" x="230" y="1443" width="18" height="18">
+				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="3014" x="230" y="1443" width="18" height="18">
 					<of>UrbanRes_HCCPT</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="2985" x="2059" y="232" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="2984" x="2059" y="232" width="18" height="18">
 					<of>Advanced_ForRes_HCCPT</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="2979" x="2068" y="136" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="2978" x="2068" y="136" width="18" height="18">
 					<of>Conventional_HC_HCCPT</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" label_angle="223.505" uid="2926" x="2142" y="94" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" label_angle="223.505" uid="2925" x="2142" y="94" width="18" height="18">
 					<of>Advanced_Ag_Res_HCCPT</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="2931" x="2251" y="952" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="2930" x="2251" y="952" width="18" height="18">
 					<of>adv_storage_loss_factor_WC</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="2953" x="2198" y="612" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="2952" x="2198" y="612" width="18" height="18">
 					<of>adv_harvest_efficiency_HC</of>
 				</alias>
-				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="3014" x="561" y="1379" width="18" height="18">
+				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="3013" x="561" y="1379" width="18" height="18">
 					<of>WC_harvest_storage_efficiency_factor</of>
 				</alias>
-				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="3010" x="221" y="1225" width="18" height="18">
+				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="3009" x="221" y="1225" width="18" height="18">
 					<of>Ag_Res_HCCPT</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="2975" x="888" y="254" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="2974" x="888" y="254" width="18" height="18">
 					<of>avg_time_for_est_plants</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="2990" x="2246" y="870" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="2989" x="2246" y="870" width="18" height="18">
 					<of>conv_storage_loss_factor_WC</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="3003" x="2257" y="703" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="3002" x="2257" y="703" width="18" height="18">
 					<of>conv_harvest_efficiency_WC</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="2937" x="2298" y="598" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="2936" x="2298" y="598" width="18" height="18">
 					<of>conv_harves_efficiency_HC</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="2981" x="2241" y="61" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="2980" x="2241" y="61" width="18" height="18">
 					<of>Conventional_Ag_Res_HCCPT</of>
 				</alias>
-				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="3011" x="228" y="1285" width="18" height="18">
+				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="3010" x="228" y="1285" width="18" height="18">
 					<of>HC_HCCPT</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="2939" x="2285" y="396" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="2938" x="2285" y="396" width="18" height="18">
 					<of>Conventional_WC_HCCPT</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="3001" x="2084" y="396" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="3000" x="2084" y="396" width="18" height="18">
 					<of>Advanced_WC_HCCPT</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" label_angle="181.906" uid="3018" x="1983" y="177" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" label_angle="181.906" uid="3017" x="1983" y="177" width="18" height="18">
 					<of>Advanced_HC_HCCPT</of>
 				</alias>
-				<alias color="#AA0000" font_style="italic" font_color="#AA0000" uid="3019" x="1379" y="478" width="18" height="18">
+				<alias color="#AA0000" font_style="italic" font_color="#AA0000" uid="3018" x="1379" y="478" width="18" height="18">
 					<of>Conventional_H_PostHarvest_Cost</of>
 				</alias>
-				<alias color="#AA0000" font_style="italic" font_color="#AA0000" uid="3020" x="1379" y="584" width="18" height="18">
+				<alias color="#AA0000" font_style="italic" font_color="#AA0000" uid="3019" x="1379" y="584" width="18" height="18">
 					<of>Advanced_H_PostHarvest_Cost</of>
 				</alias>
-				<alias color="#AA0000" font_style="italic" font_color="#AA0000" uid="3022" x="1328" y="721" width="18" height="18">
+				<alias color="#AA0000" font_style="italic" font_color="#AA0000" uid="3021" x="1328" y="721" width="18" height="18">
 					<of>Conventional_W_PostHarvest_Cost</of>
 				</alias>
-				<alias color="#AA0000" font_style="italic" font_color="#AA0000" uid="3023" x="1383" y="791" width="18" height="18">
+				<alias color="#AA0000" font_style="italic" font_color="#AA0000" uid="3022" x="1383" y="791" width="18" height="18">
 					<of>Advanced_W_PostHarvest_Cost</of>
 				</alias>
-				<alias color="#AA0000" font_style="italic" font_color="#AA0000" uid="3024" x="1718" y="801" width="18" height="18">
+				<alias color="#AA0000" font_style="italic" font_color="#AA0000" uid="3023" x="1718" y="801" width="18" height="18">
 					<of>C_to_EtOH_Herbaceous</of>
 				</alias>
-				<alias color="#AA0000" font_style="italic" font_color="#AA0000" uid="3021" x="1808" y="610" width="18" height="18">
+				<alias color="#AA0000" font_style="italic" font_color="#AA0000" uid="3020" x="1808" y="610" width="18" height="18">
 					<of>C_to_RR_Herbaceous</of>
 				</alias>
 			</view>

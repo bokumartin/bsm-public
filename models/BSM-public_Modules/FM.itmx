@@ -5,29 +5,17 @@
 		<name>FM</name>
 		<uuid>f48cdf44-c0cb-41fc-a5c4-250e64491d3d</uuid>
 		<vendor>isee systems, inc.</vendor>
-		<product version="1.9.4" isee:build_number="1992" isee:saved_by_v1="true" lang="en">Stella Architect</product>
+		<product version="1.8.2" isee:build_number="1691" isee:saved_by_v1="true" lang="en">Stella Architect</product>
 	</header>
-	<sim_specs isee:sim_duration="1.5" isee:simulation_delay="0.125" isee:restore_on_start="false" method="Euler" time_units="Months" isee:instantaneous_flows="false">
+	<sim_specs isee:simulation_delay="0.1" isee:restore_on_start="false" method="Euler" time_units="Months" isee:instantaneous_flows="false">
 		<start>0</start>
 		<stop>12</stop>
 		<dt reciprocal="true">4</dt>
 	</sim_specs>
 	<dimensions>
-		<dim name="AnnualCrop">
-			<elem name="Corn"/>
-			<elem name="Soy"/>
-			<elem name="Wheat"/>
-			<elem name="Other_Grains"/>
-			<elem name="Cotton"/>
-		</dim>
-		<dim name="PECrop">
-			<elem name="Herbaceous"/>
-			<elem name="Woody"/>
-		</dim>
-		<dim name="Product">
-			<elem name="Primary"/>
-			<elem name="Co1"/>
-			<elem name="Co2"/>
+		<dim name="CtoATech">
+			<elem name="BC"/>
+			<elem name="TC"/>
 		</dim>
 		<dim name="CtoRRTech">
 			<elem name="FP"/>
@@ -37,9 +25,12 @@
 			<elem name="F"/>
 			<elem name="APR"/>
 		</dim>
-		<dim name="CtoATech">
-			<elem name="BC"/>
-			<elem name="TC"/>
+		<dim name="AnnualCrop">
+			<elem name="Corn"/>
+			<elem name="Soy"/>
+			<elem name="Wheat"/>
+			<elem name="Other_Grains"/>
+			<elem name="Cotton"/>
 		</dim>
 		<dim name="Region">
 			<elem name="NE"/>
@@ -52,6 +43,15 @@
 			<elem name="SP"/>
 			<elem name="M"/>
 			<elem name="P"/>
+		</dim>
+		<dim name="PECrop">
+			<elem name="Herbaceous"/>
+			<elem name="Woody"/>
+		</dim>
+		<dim name="Product">
+			<elem name="Primary"/>
+			<elem name="Co1"/>
+			<elem name="Co2"/>
 		</dim>
 	</dimensions>
 	<isee:prefs show_module_prefix="true" live_update_on_drag="true" show_restore_buttons="false" layer="model" interface_scale_ui="true" interface_max_page_width="10000" interface_max_page_height="10000" interface_min_page_width="0" interface_min_page_height="0" saved_runs="5" keep="false" rifp="false"/>
@@ -81,10 +81,6 @@
 			<eqn/>
 			<alias>mi</alias>
 			<alias>mile</alias>
-		</unit>
-		<unit name="Tons">
-			<eqn/>
-			<alias>ton</alias>
 		</unit>
 		<unit name="US Dollars">
 			<eqn/>
@@ -135,6 +131,11 @@
 		</unit>
 		<unit name="TonnesPerGram">
 			<eqn>Tonnes/g</eqn>
+		</unit>
+		<unit name="Tonnes">
+			<eqn/>
+			<alias>tonne</alias>
+			<alias>metric ton</alias>
 		</unit>
 		<unit name="HoursPerProjectPerYr">
 			<eqn>hr/(projects*yr)</eqn>
@@ -4465,55 +4466,55 @@ COMMENTS: </doc>
 				<units>ton/year</units>
 			</aux>
 			<group name="Comparison Against Baseline" run="false">
-				<entity name="a_prodn_model"/>
-				<entity name="price_payoff_metric"/>
-				<entity name="weight_factor_for_prodn_payoff"/>
-				<entity name="demand_vs_outflow"/>
-				<entity name="Inventory_rel_to_Input"/>
-				<entity name="Inventory_Input_In_Nominal_Units"/>
-				<entity name="a_price_model_rel_to_USDA"/>
-				<entity name="a_price_USDA"/>
-				<entity name="a_prodn_model_rel_to_USDA"/>
-				<entity name="squared_error_demand_metric"/>
+				<entity name="rollup_prodn_payoff_metric"/>
+				<entity name="squared_error"/>
+				<entity name="rollup_price_payoff_metric"/>
+				<entity name="rollup_inv_payoff_metric"/>
+				<entity name="weight_factor_for_inventory_payoff"/>
+				<entity name="prodn_payoff_metric"/>
+				<entity name="a_prodn_USDA"/>
 				<entity name="inv_payoff_metric"/>
+				<entity name="squared_error_demand_metric"/>
+				<entity name="a_prodn_model_rel_to_USDA"/>
+				<entity name="a_price_USDA"/>
+				<entity name="a_price_model_rel_to_USDA"/>
+				<entity name="a_price_model"/>
+				<entity name="Inventory_rel_to_Input"/>
 				<entity name="weight_factor_for_price_payoff"/>
 				<entity name="demand_deviation_payoff"/>
-				<entity name="a_prodn_USDA"/>
-				<entity name="prodn_payoff_metric"/>
-				<entity name="a_price_model"/>
-				<entity name="weight_factor_for_inventory_payoff"/>
-				<entity name="rollup_inv_payoff_metric"/>
-				<entity name="rollup_price_payoff_metric"/>
-				<entity name="squared_error"/>
-				<entity name="rollup_prodn_payoff_metric"/>
+				<entity name="weight_factor_for_prodn_payoff"/>
+				<entity name="price_payoff_metric"/>
+				<entity name="a_prodn_model"/>
+				<entity name="demand_vs_outflow"/>
+				<entity name="Inventory_Input_In_Nominal_Units"/>
 			</group>
 			<group name="Commodity Crop Market" run="false">
-				<entity name="crop_price_input_from_stock_use"/>
-				<entity name="chg_crop_price_index"/>
-				<entity name="crop_availability_constraint"/>
-				<entity name="long_term_stock_use_ratio"/>
-				<entity name="price_impact_on_demand"/>
-				<entity name="Crop_Price_Index"/>
-				<entity name="indicated_crop_demand"/>
-				<entity name="offset_in_frac_chg_from_crop_stock_use"/>
-				<entity name="prodn_rel_to_perlack"/>
-				<entity name="offset_in_frac_chg_from_crop_prodn_consn"/>
-				<entity name="LT_crop_demand"/>
-				<entity name="crop_price_input_from_prodn_consn"/>
-				<entity name="crop_stock_use_ratio"/>
-				<entity name="crop_logistic_price_response_curve_from_prodn_consn"/>
-				<entity name="crop_prodn_consn_index"/>
-				<entity name="normalized_crop_stock_use_ratio"/>
-				<entity name="Crop_Inventories"/>
-				<entity name="frac_chg_crop_price_prodn_consn"/>
-				<entity name="relative_price_impact_on_sm_gr_demand"/>
-				<entity name="total_frac_chg_price"/>
-				<entity name="indic_frac_chg_crop_price"/>
-				<entity name="frac_chg_crop_price_stock_to_use"/>
-				<entity name="crop_prodn_mm"/>
 				<entity name="Crop_Consn_mm"/>
+				<entity name="crop_prodn_mm"/>
+				<entity name="frac_chg_crop_price_stock_to_use"/>
+				<entity name="total_frac_chg_price"/>
+				<entity name="relative_price_impact_on_sm_gr_demand"/>
+				<entity name="frac_chg_crop_price_prodn_consn"/>
 				<entity name="perlack_demand_switch"/>
+				<entity name="normalized_crop_stock_use_ratio"/>
+				<entity name="crop_logistic_price_response_curve_from_prodn_consn"/>
+				<entity name="LT_crop_demand"/>
+				<entity name="indic_frac_chg_crop_price"/>
+				<entity name="offset_in_frac_chg_from_crop_prodn_consn"/>
+				<entity name="prodn_rel_to_perlack"/>
+				<entity name="offset_in_frac_chg_from_crop_stock_use"/>
+				<entity name="indicated_crop_demand"/>
+				<entity name="Crop_Price_Index"/>
+				<entity name="crop_price_input_from_prodn_consn"/>
+				<entity name="crop_prodn_consn_index"/>
+				<entity name="price_impact_on_demand"/>
+				<entity name="long_term_stock_use_ratio"/>
+				<entity name="crop_availability_constraint"/>
+				<entity name="crop_stock_use_ratio"/>
+				<entity name="chg_crop_price_index"/>
 				<entity name="crop_logistic_price_response_curve_from_stock_use"/>
+				<entity name="Crop_Inventories"/>
+				<entity name="crop_price_input_from_stock_use"/>
 			</group>
 			<group name="Pricing Inputs" run="false">
 				<entity name="spread_in_frac_chg_from_crop_prodn_consn"/>
@@ -4585,13 +4586,12 @@ COMMENTS: </doc>
 				<entity name="cellulosic_price_rel_to_max"/>
 				<entity name="cellulosic_price_relative_to_max_from_conversion"/>
 				<entity name="agg_avg_cost_to_price_ratio_cellulosics"/>
-				<entity name="C_to_EtOH_cap_wtd_cost_to_price_ratio_C"/>
-				<entity name="offset_in_frac_chg_from_FS_prodn_consn"/>
 				<entity name="plant_wtd_spread_from_FS_prodn_consn"/>
 				<entity name="impact_of_market_on_prodn_consn_spread"/>
 				<entity name="frac_chg_FS_price"/>
 				<entity name="indic_chg_FS_price"/>
 				<entity name="change_in_FS_price"/>
+				<entity name="offset_in_frac_chg_from_FS_prodn_consn"/>
 				<entity name="frac_chg_FS_price_prodn_consn"/>
 				<entity name="FS_logistic_price_response_curve_from_prodn_consn"/>
 				<entity name="impact_of_market_on_inventory_spread"/>
@@ -4606,6 +4606,7 @@ COMMENTS: </doc>
 				<entity name="Is_Market_Required"/>
 				<entity name="reqd_annual_feedstock_supply"/>
 				<entity name="Internally_Generated_Reqd_annual_feedstock_supply"/>
+				<entity name="C_to_EtOH_cap_wtd_cost_to_price_ratio_C"/>
 				<entity name="C_to_B_cap_wtd_cost_to_price_ratio_C"/>
 				<entity name="C_to_RR_cap_wtd_cost_to_price_ratio_C"/>
 				<entity name="C_to_EtOH_cap_wtg_factor_C"/>
@@ -4653,11 +4654,11 @@ COMMENTS: </doc>
 				<entity name="Xport_Dmand"/>
 			</group>
 			<group name="Module Interface with Demand Supply Curves" run="false">
-				<entity name="period_count"/>
-				<entity name="Run_Number"/>
-				<entity name="Year"/>
-				<entity name="Couple_with_ReEDS"/>
 				<entity name="Price_from_ReEDS"/>
+				<entity name="Couple_with_ReEDS"/>
+				<entity name="Year"/>
+				<entity name="Run_Number"/>
+				<entity name="period_count"/>
 			</group>
 			<group name="Module Interface with Conversion Modules" run="false">
 				<entity name="FS_Price_Input_to_CM"/>
@@ -5015,8 +5016,8 @@ COMMENTS: </doc>
 				</graph>
 				<table color="black" background="#E0E0E0" text_align="right" font_size="12pt" orientation="vertical" wrap_text="false" isee:auto_fit="true" isee:use_alternate_row_colors="false" isee:unlimited_table_length="false" blank_column_width="80" column_width="160" interval="1" report_balances="beginning" report_flows="instantaneous" header_font_style="normal" header_font_weight="normal" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="12pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 				<button color="black" background="#E0E0E0" font_size="12pt" border_width="thin" border_style="solid" transparent="false" corner_radius="0" isee:flat="false" icon_side="top" isee:highlight_on_hover="false" isee:highlight_color="#959595"/>
-				<isee:annotation color="black" background="#E0E0E0" font_size="12pt" border_width="thin" border_style="solid" transparent="false" corner_radius="0" isee:flat="false" icon_side="top" isee:highlight_on_hover="false" isee:highlight_color="#959595" popup_corner_radius="0" popup_background_color="#FFFECF"/>
-				<slider color="black" background="#E0E0E0" font_size="12pt" num_ticks="3" label_side="top" wrap_title="true" vertical="false" isee:fancy_appearance="false" isee:show_hover_tip="when_deciding" input_expands="true" input_width="100"/>
+				<isee:annotation color="black" background="#E0E0E0" font_size="12pt" border_width="thin" border_style="solid" transparent="false" corner_radius="0" isee:flat="false" icon_side="top" isee:highlight_on_hover="false" isee:highlight_color="#959595" popup_background_color="#FFFECF"/>
+				<slider color="black" background="#E0E0E0" font_size="12pt" num_ticks="3" label_side="top" wrap_title="true" vertical="false" isee:show_hover_tip="when_deciding" input_expands="true" input_width="100"/>
 				<isee:sim_speed_slider color="black" background="white"/>
 				<isee:time_slider color="black" background="white"/>
 				<isee:pie_input color="black" background="white" legend_position="bottom" isee:transparent="false"/>
@@ -5033,10 +5034,8 @@ COMMENTS: </doc>
 				<isee:navigation_widget color="black" background="white" border_color="#999999" border_width="thin" border_style="solid" item_spacing="6" appearance="tabs" corner_radius="4" selected_item_color="black" selected_item_background="white" item_background="#DDDDDD"/>
 				<isee:shape color="black" background="white" opacity="1" transparent_background="true"/>
 				<isee:selector color="black" background="white"/>
-				<isee:iframe color="black" background="white"/>
-				<isee:financial_table color="black" background="white" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="true" background="white" page_width="1024" page_height="784" isee:page_cols="6" isee:page_rows="4" isee:scroll_x="1761" isee:popup_graphs_are_comparative="true" type="stock_flow">
+			<view isee:show_pages="true" page_width="1024" page_height="784" isee:page_cols="6" isee:page_rows="4" isee:scroll_x="1761" isee:popup_graphs_are_comparative="true" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="9pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -5073,1131 +5072,1131 @@ COMMENTS: </doc>
 					</graph>
 					<table color="black" background="#E0E0E0" text_align="right" font_size="12pt" orientation="vertical" wrap_text="false" isee:auto_fit="true" isee:use_alternate_row_colors="false" isee:unlimited_table_length="false" blank_column_width="80" column_width="160" interval="1" report_balances="beginning" report_flows="instantaneous" header_font_style="normal" header_font_weight="normal" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="12pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 				</style>
-				<connector uid="3045" angle="270">
+				<connector uid="3044" angle="270">
 					<from>CM_Reqd_Corn_FS_supply_baseline_units</from>
 					<to>Corn_demand_EtOH</to>
 				</connector>
-				<connector uid="3046" angle="338.174">
+				<connector uid="3045" angle="338.174">
 					<from>
-						<alias uid="3047"/>
+						<alias uid="3046"/>
 					</from>
 					<to>Feedstock_prodn</to>
 				</connector>
-				<connector uid="3048" angle="239.534">
+				<connector uid="3047" angle="239.534">
 					<from>FS_Price_PlantGate</from>
 					<to>indic_chg_FS_price</to>
 				</connector>
-				<connector uid="3049" angle="26.5651">
+				<connector uid="3048" angle="26.5651">
 					<from>
-						<alias uid="3050"/>
+						<alias uid="3049"/>
 					</from>
 					<to>frac_chg_crop_price_prodn_consn</to>
 				</connector>
-				<connector uid="3051" angle="8.88066">
+				<connector uid="3050" angle="8.88066">
 					<from>non_PCEC_GP_regional_adjustments</from>
 					<to>Regionalized_Annual_Regional_Price_Input</to>
 				</connector>
-				<connector uid="3052" angle="180">
+				<connector uid="3051" angle="180">
 					<from>
-						<alias uid="3053"/>
+						<alias uid="3052"/>
 					</from>
 					<to>C_to_B_cap_wtg_factor_C</to>
 				</connector>
-				<connector uid="3054" angle="19.4731">
+				<connector uid="3053" angle="19.4731">
 					<from>
-						<alias uid="3055"/>
+						<alias uid="3054"/>
 					</from>
 					<to>a_prodn_model</to>
 				</connector>
-				<connector uid="3056" angle="198.435">
+				<connector uid="3055" angle="198.435">
 					<from>
-						<alias uid="3057"/>
+						<alias uid="3056"/>
 					</from>
 					<to>Target_for_FS_Inv</to>
 				</connector>
-				<connector uid="3058" angle="90">
+				<connector uid="3057" angle="90">
 					<from>FS_Supply_Demand_Index</from>
 					<to>FS_price_input_from_prodn_consn</to>
 				</connector>
-				<connector uid="3059" angle="206.565">
+				<connector uid="3058" angle="206.565">
 					<from>inv_impact_on_feedstock_consn</from>
 					<to>feedstock_export</to>
 				</connector>
-				<connector uid="3060" angle="270">
+				<connector uid="3059" angle="270">
 					<from>
-						<alias uid="3061"/>
+						<alias uid="3060"/>
 					</from>
 					<to>Internally_Generated_Reqd_annual_feedstock_supply</to>
 				</connector>
-				<connector uid="3062" angle="341.524">
+				<connector uid="3061" angle="341.524">
 					<from>feedstock_export</from>
 					<to>total_feedstock_export</to>
 				</connector>
-				<connector uid="3063" angle="167.471">
+				<connector uid="3062" angle="167.471">
 					<from>
-						<alias uid="3064"/>
+						<alias uid="3063"/>
 					</from>
 					<to>amount_to_seed_FS_price</to>
 				</connector>
-				<connector uid="3065" angle="122.905">
+				<connector uid="3064" angle="122.905">
 					<from>Hay_Price_Index</from>
 					<to>price_impact_on_Hay_and_Forage_Demand</to>
 				</connector>
-				<connector uid="3066" angle="162.525">
+				<connector uid="3065" angle="162.525">
 					<from>Xport_Dmand</from>
 					<to>Total_Nominal_Crop_Demand_mm</to>
 				</connector>
-				<connector uid="3067" angle="45">
+				<connector uid="3066" angle="45">
 					<from>
-						<alias uid="3068"/>
+						<alias uid="3067"/>
 					</from>
 					<to>S_to_EtOH_Reqd_Corn_FS_supply_nominal_units</to>
 				</connector>
-				<connector uid="3069" angle="180">
+				<connector uid="3068" angle="180">
 					<from>
-						<alias uid="3070"/>
+						<alias uid="3069"/>
 					</from>
 					<to>crop_production</to>
 				</connector>
-				<connector uid="3071" angle="0">
+				<connector uid="3070" angle="0">
 					<from>
-						<alias uid="3072"/>
+						<alias uid="3071"/>
 					</from>
 					<to>Crop_Price</to>
 				</connector>
-				<connector uid="3073" angle="0">
+				<connector uid="3072" angle="0">
 					<from>a_prodn_model</from>
 					<to>a_prodn_model_rel_to_USDA</to>
 				</connector>
-				<connector uid="3074" angle="270">
+				<connector uid="3073" angle="270">
 					<from>crop_price_input_from_stock_use</from>
 					<to>crop_logistic_price_response_curve_from_stock_use</to>
 				</connector>
-				<connector uid="3075" angle="90">
+				<connector uid="3074" angle="90">
 					<from>
-						<alias uid="3076"/>
+						<alias uid="3075"/>
 					</from>
 					<to>initial_forage_demand</to>
 				</connector>
-				<connector uid="3077" angle="213.69">
+				<connector uid="3076" angle="213.69">
 					<from>Total_Nominal_Crop_Demand_mm</from>
 					<to>LT_crop_demand</to>
 				</connector>
-				<connector uid="3078" angle="270">
+				<connector uid="3077" angle="270">
 					<from>crop_prodn_consn_index</from>
 					<to>crop_price_input_from_prodn_consn</to>
 				</connector>
-				<connector uid="3079" angle="191.407">
+				<connector uid="3078" angle="191.407">
 					<from>indicated_crop_demand</from>
 					<to>crop_prodn_consn_index</to>
 				</connector>
-				<connector uid="3080" angle="26.5651">
+				<connector uid="3079" angle="26.5651">
 					<from>
-						<alias uid="3081"/>
+						<alias uid="3080"/>
 					</from>
 					<to>FS_prodn_by_FS_and_region</to>
 				</connector>
-				<connector uid="3082" angle="189.27">
+				<connector uid="3081" angle="189.27">
 					<from>Rollup_C_to_Capacity_by_Region</from>
 					<to>C_to_EtOH_cap_wtg_factor_C</to>
 				</connector>
-				<connector uid="3083" angle="266.175">
+				<connector uid="3082" angle="266.175">
 					<from>inv_impact_on_feedstock_consn</from>
 					<to>C_to_EtOH_Feedstock_Consn</to>
 				</connector>
-				<connector uid="3084" angle="0">
+				<connector uid="3083" angle="0">
 					<from>total_cellulosic_prodn</from>
 					<to>lt_regional_distn_fs_export</to>
 				</connector>
-				<connector uid="3085" angle="296.565">
+				<connector uid="3084" angle="296.565">
 					<from>total_cellulosic_prodn</from>
 					<to>regional_distn_export_weight_factor</to>
 				</connector>
-				<connector uid="3086" angle="135">
+				<connector uid="3085" angle="135">
 					<from>
-						<alias uid="3087"/>
+						<alias uid="3086"/>
 					</from>
 					<to>crop_production</to>
 				</connector>
-				<connector uid="3088" angle="180">
+				<connector uid="3087" angle="180">
 					<from>
-						<alias uid="3087"/>
+						<alias uid="3086"/>
 					</from>
 					<to>Annual_Price_input_USD_per_ton</to>
 				</connector>
-				<connector uid="3089" angle="270">
+				<connector uid="3088" angle="270">
 					<from>FS_prodn_by_FS_and_region</from>
 					<to>total_cellulosic_prodn</to>
 				</connector>
-				<connector uid="3090" angle="45">
+				<connector uid="3089" angle="45">
 					<from>
-						<alias uid="3091"/>
+						<alias uid="3090"/>
 					</from>
 					<to>FS_prodn_by_FS_and_region</to>
 				</connector>
-				<connector uid="3092" angle="89.7245">
+				<connector uid="3091" angle="89.7245">
 					<from>FS_agnostic_prodn_input</from>
 					<to>Feedstock_prodn</to>
 				</connector>
-				<connector uid="3093" angle="26.5651">
+				<connector uid="3092" angle="26.5651">
 					<from>one_project</from>
 					<to>Reqd_feedstock_shed_area</to>
 				</connector>
-				<connector uid="3094" angle="270">
+				<connector uid="3093" angle="270">
 					<from>FS_Inventory_Index</from>
 					<to>inv_impact_on_feedstock_consn</to>
 				</connector>
-				<connector uid="3095" angle="227.016">
+				<connector uid="3094" angle="227.016">
 					<from>
-						<alias uid="3096"/>
+						<alias uid="3095"/>
 					</from>
 					<to>C_to_EtOH_Feedstock_Consn</to>
 				</connector>
-				<connector uid="3097" angle="102.529">
+				<connector uid="3096" angle="102.529">
 					<from>
-						<alias uid="3098"/>
+						<alias uid="3097"/>
 					</from>
 					<to>reqd_annual_feedstock_supply</to>
 				</connector>
-				<connector uid="3099" angle="0">
+				<connector uid="3098" angle="0">
 					<from>
-						<alias uid="3100"/>
+						<alias uid="3099"/>
 					</from>
 					<to>reqd_feedstock_production_ag_system</to>
 				</connector>
-				<connector uid="3101" angle="214.588">
+				<connector uid="3100" angle="214.588">
 					<from>
-						<alias uid="3102"/>
+						<alias uid="3101"/>
 					</from>
 					<to>C_to_RR_Feedstock_Consn</to>
 				</connector>
-				<connector uid="3103" angle="63.4349">
+				<connector uid="3102" angle="63.4349">
 					<from>
-						<alias uid="3104"/>
+						<alias uid="3103"/>
 					</from>
 					<to>reqd_annual_feedstock_supply</to>
 				</connector>
-				<connector uid="3105" angle="46.9749">
+				<connector uid="3104" angle="46.9749">
 					<from>Regionalized_Annual_Regional_Price_Input</from>
 					<to>Regionalized_Annual_Price_input_USD_per_ton</to>
 				</connector>
-				<connector uid="3106" angle="270">
+				<connector uid="3105" angle="270">
 					<from>unit_feedstockshed_area</from>
 					<to>Reqd_feedstock_shed_area</to>
 				</connector>
-				<connector uid="3107" angle="12.5288">
+				<connector uid="3106" angle="12.5288">
 					<from>
-						<alias uid="3108"/>
+						<alias uid="3107"/>
 					</from>
 					<to>plant_input_capacity_tpy</to>
 				</connector>
-				<connector uid="3109" angle="180">
+				<connector uid="3108" angle="180">
 					<from>
-						<alias uid="3110"/>
+						<alias uid="3109"/>
 					</from>
 					<to>cellulosic_price_rel_to_max</to>
 				</connector>
-				<connector uid="3111" angle="270">
+				<connector uid="3110" angle="270">
 					<from>
-						<alias uid="3112"/>
+						<alias uid="3111"/>
 					</from>
 					<to>plant_wtd_spread_from_FS_prodn_consn</to>
 				</connector>
-				<connector uid="3113" angle="220.57">
+				<connector uid="3112" angle="220.57">
 					<from>Rollup_C_to_Capacity_by_Region</from>
 					<to>C_to_B_cap_wtg_factor_C</to>
 				</connector>
-				<connector uid="3114" angle="18.4349">
+				<connector uid="3113" angle="18.4349">
 					<from>
-						<alias uid="3115"/>
+						<alias uid="3114"/>
 					</from>
 					<to>Crop_Price</to>
 				</connector>
-				<connector uid="3116" angle="161.338">
+				<connector uid="3115" angle="161.338">
 					<from>perlack_demand_switch</from>
 					<to>LT_crop_demand</to>
 				</connector>
-				<connector uid="3117" angle="0">
+				<connector uid="3116" angle="0">
 					<from>plant_input_capacity_tpy</from>
 					<to>reqd_annual_feedstock_supply_tpy</to>
 				</connector>
-				<connector uid="3118" angle="241.489">
+				<connector uid="3117" angle="241.489">
 					<from>
-						<alias uid="3087"/>
+						<alias uid="3086"/>
 					</from>
 					<to>Regionalized_Annual_Price_input_USD_per_ton</to>
 				</connector>
-				<connector uid="3119" angle="0">
+				<connector uid="3118" angle="0">
 					<from>
-						<alias uid="3120"/>
+						<alias uid="3119"/>
 					</from>
 					<to>a_prodn_USDA</to>
 				</connector>
-				<connector uid="3121" color="white" angle="90">
+				<connector uid="3120" color="white" angle="90">
 					<from>period_count</from>
 					<to>Run_Number</to>
 				</connector>
-				<connector uid="3122" angle="0">
+				<connector uid="3121" angle="0">
 					<from>regional_distn_export_threshold</from>
 					<to>regional_distn_export_weight_factor</to>
 				</connector>
-				<connector uid="3123" angle="270">
+				<connector uid="3122" angle="270">
 					<from>crop_logistic_price_response_curve_from_stock_use</from>
 					<to>frac_chg_crop_price_stock_to_use</to>
 				</connector>
-				<connector uid="3124" angle="7.12502">
+				<connector uid="3123" angle="7.12502">
 					<from>
-						<alias uid="3125"/>
+						<alias uid="3124"/>
 					</from>
 					<to>S_to_EtOH_Reqd_Corn_FS_supply_nominal_units</to>
 				</connector>
-				<connector uid="3126" angle="199.983">
+				<connector uid="3125" angle="199.983">
 					<from>Crop_Price_Index</from>
 					<to>chg_crop_price_index</to>
 				</connector>
-				<connector uid="3127" angle="18.4349">
+				<connector uid="3126" angle="18.4349">
 					<from>
-						<alias uid="3128"/>
+						<alias uid="3127"/>
 					</from>
 					<to>FS_supply_input</to>
 				</connector>
-				<connector uid="3129" angle="159.444">
+				<connector uid="3128" angle="159.444">
 					<from>C_to_EtOH_cap_wtd_cost_to_price_ratio_C</from>
 					<to>agg_avg_cost_to_price_ratio_cellulosics</to>
 				</connector>
-				<connector uid="3130" angle="167.471">
+				<connector uid="3129" angle="167.471">
 					<from>
-						<alias uid="3131"/>
+						<alias uid="3130"/>
 					</from>
 					<to>FS_Price_Input</to>
 				</connector>
-				<connector uid="3132" angle="35.5377">
+				<connector uid="3131" angle="35.5377">
 					<from>
-						<alias uid="3133"/>
+						<alias uid="3132"/>
 					</from>
 					<to>prodn_rel_to_perlack</to>
 				</connector>
-				<connector uid="3134" angle="173.66">
+				<connector uid="3133" angle="173.66">
 					<from>
-						<alias uid="3135"/>
+						<alias uid="3134"/>
 					</from>
 					<to>C_to_EtOH_cap_wtd_cost_to_price_ratio_C</to>
 				</connector>
-				<connector uid="3136" angle="90">
+				<connector uid="3135" angle="90">
 					<from>FS_price_input_from_prodn_consn</from>
 					<to>FS_logistic_price_response_curve_from_prodn_consn</to>
 				</connector>
-				<connector uid="3137" angle="270">
+				<connector uid="3136" angle="270">
 					<from>crop_logistic_price_response_curve_from_prodn_consn</from>
 					<to>frac_chg_crop_price_prodn_consn</to>
 				</connector>
-				<connector uid="3138" angle="180">
+				<connector uid="3137" angle="180">
 					<from>
-						<alias uid="3139"/>
+						<alias uid="3138"/>
 					</from>
 					<to>C_to_RR_cap_wtg_factor_C</to>
 				</connector>
-				<connector uid="3140" angle="84.5904">
+				<connector uid="3139" angle="84.5904">
 					<from>indic_chg_FS_price</from>
 					<to>change_in_FS_price</to>
 				</connector>
-				<connector uid="3141" angle="90">
+				<connector uid="3140" angle="90">
 					<from>FS_supply_input</from>
 					<to>FS_Supply_Demand_Index</to>
 				</connector>
-				<connector uid="3142" angle="40.6013">
+				<connector uid="3141" angle="40.6013">
 					<from>Crop_Price</from>
 					<to>Annual_Price_input_USD_per_ton</to>
 				</connector>
-				<connector uid="3143" angle="270">
+				<connector uid="3142" angle="270">
 					<from>total_reqd_hay_prodn_from_ag_land</from>
 					<to>Hay_Prodn_Rel_to_Reqd</to>
 				</connector>
-				<connector uid="3144" angle="315">
+				<connector uid="3143" angle="315">
 					<from>regional_distn_fs_export</from>
 					<to>desired_feedstock_exports_by_region</to>
 				</connector>
-				<connector uid="3145" angle="26.5651">
+				<connector uid="3144" angle="26.5651">
 					<from>
-						<alias uid="3146"/>
+						<alias uid="3145"/>
 					</from>
 					<to>reqd_feedstock_production_ag_system</to>
 				</connector>
-				<connector uid="3147" angle="0">
+				<connector uid="3146" angle="0">
 					<from>
-						<alias uid="3148"/>
+						<alias uid="3147"/>
 					</from>
 					<to>crop_prodn_mm</to>
 				</connector>
-				<connector uid="3149" angle="353.66">
+				<connector uid="3148" angle="353.66">
 					<from>
-						<alias uid="3150"/>
+						<alias uid="3149"/>
 					</from>
 					<to>unit_feedstockshed_area</to>
 				</connector>
-				<connector uid="3151" angle="135.321">
+				<connector uid="3150" angle="135.321">
 					<from>
-						<alias uid="3152"/>
+						<alias uid="3151"/>
 					</from>
 					<to>CM_Reqd_Corn_FS_supply_baseline_units</to>
 				</connector>
-				<connector uid="3153" angle="90">
+				<connector uid="3152" angle="90">
 					<from>impact_of_market_on_prodn_consn_spread</from>
 					<to>plant_wtd_spread_from_FS_prodn_consn</to>
 				</connector>
-				<connector uid="3154" angle="180">
+				<connector uid="3153" angle="180">
 					<from>
-						<alias uid="3155"/>
+						<alias uid="3154"/>
 					</from>
 					<to>FS_agnostic_prodn_input</to>
 				</connector>
-				<connector uid="3156" angle="180">
+				<connector uid="3155" angle="180">
 					<from>
-						<alias uid="3157"/>
+						<alias uid="3156"/>
 					</from>
 					<to>frac_chg_hay_price</to>
 				</connector>
-				<connector uid="3158" angle="111.938">
+				<connector uid="3157" angle="111.938">
 					<from>
-						<alias uid="3159"/>
+						<alias uid="3158"/>
 					</from>
 					<to>Target_for_FS_Inv</to>
 				</connector>
-				<connector uid="3160" angle="90">
+				<connector uid="3159" angle="90">
 					<from>
-						<alias uid="3161"/>
+						<alias uid="3160"/>
 					</from>
 					<to>reqd_annual_feedstock_supply</to>
 				</connector>
-				<connector uid="3162" angle="270">
+				<connector uid="3161" angle="270">
 					<from>
-						<alias uid="3163"/>
+						<alias uid="3162"/>
 					</from>
 					<to>offset_in_frac_chg_from_crop_stock_use</to>
 				</connector>
-				<connector uid="3164" angle="333.435">
+				<connector uid="3163" angle="333.435">
 					<from>
-						<alias uid="3165"/>
+						<alias uid="3164"/>
 					</from>
 					<to>reqd_feedstock_production_ag_system</to>
 				</connector>
-				<connector uid="3166" angle="215.538">
+				<connector uid="3165" angle="215.538">
 					<from>long_term_stock_use_ratio</from>
 					<to>normalized_crop_stock_use_ratio</to>
 				</connector>
-				<connector uid="3167" angle="20.556">
+				<connector uid="3166" angle="20.556">
 					<from>
-						<alias uid="3168"/>
+						<alias uid="3167"/>
 					</from>
 					<to>reqd_annual_feedstock_supply_tpy</to>
 				</connector>
-				<connector uid="3169" angle="257.242">
+				<connector uid="3168" angle="257.242">
 					<from>Nom_Domestic_Crop_demand_mm</from>
 					<to>Total_Nominal_Crop_Demand_mm</to>
 				</connector>
-				<connector uid="3170" angle="0">
+				<connector uid="3169" angle="0">
 					<from>FS_prodn_by_FS_and_region</from>
 					<to>FS_agnostic_prodn_input</to>
 				</connector>
-				<connector uid="3171" angle="0">
+				<connector uid="3170" angle="0">
 					<from>
-						<alias uid="3172"/>
+						<alias uid="3171"/>
 					</from>
 					<to>a_price_USDA</to>
 				</connector>
-				<connector uid="3173" angle="0">
+				<connector uid="3172" angle="0">
 					<from>plant_wtd_spread_from_FS_inventory</from>
 					<to>offset_in_frac_chg_from_FS_inv</to>
 				</connector>
-				<connector uid="3174" angle="0">
+				<connector uid="3173" angle="0">
 					<from>FS_Price_Input_to_FarmGate</from>
 					<to>FS_Price_Input_to_CM</to>
 				</connector>
-				<connector uid="3175" angle="130.601">
+				<connector uid="3174" angle="130.601">
 					<from>
-						<alias uid="3102"/>
+						<alias uid="3101"/>
 					</from>
 					<to>Target_for_FS_Inv</to>
 				</connector>
-				<connector uid="3176" angle="270">
+				<connector uid="3175" angle="270">
 					<from>normalized_crop_stock_use_ratio</from>
 					<to>crop_price_input_from_stock_use</to>
 				</connector>
-				<connector uid="3177" angle="270">
+				<connector uid="3176" angle="270">
 					<from>indic_frac_chg_crop_price</from>
 					<to>total_frac_chg_price</to>
 				</connector>
-				<connector uid="3178" angle="180">
+				<connector uid="3177" angle="180">
 					<from>agg_avg_cost_to_price_ratio_cellulosics</from>
 					<to>cellulosic_price_relative_to_max_from_conversion</to>
 				</connector>
-				<connector uid="3179" angle="130.601">
+				<connector uid="3178" angle="130.601">
 					<from>
-						<alias uid="3180"/>
+						<alias uid="3179"/>
 					</from>
 					<to>reqd_annual_feedstock_supply</to>
 				</connector>
-				<connector uid="3181" angle="212.005">
+				<connector uid="3180" angle="212.005">
 					<from>
-						<alias uid="3157"/>
+						<alias uid="3156"/>
 					</from>
 					<to>offset_in_frac_chg_from_Hay_prodn_consn</to>
 				</connector>
-				<connector uid="3182" angle="180">
+				<connector uid="3181" angle="180">
 					<from>
-						<alias uid="3183"/>
+						<alias uid="3182"/>
 					</from>
 					<to>C_to_B_cap_wtd_cost_to_price_ratio_C</to>
 				</connector>
-				<connector uid="3184" angle="97.125">
+				<connector uid="3183" angle="97.125">
 					<from>FS_logistic_price_response_curve_from_inventory</from>
 					<to>frac_chg_FS_price_inv</to>
 				</connector>
-				<connector uid="3185" angle="265.382">
+				<connector uid="3184" angle="265.382">
 					<from>amount_to_de_seed_FS_price</from>
 					<to>FS_price_seeding</to>
 				</connector>
-				<connector uid="3186" angle="0">
+				<connector uid="3185" angle="0">
 					<from>
-						<alias uid="3110"/>
+						<alias uid="3109"/>
 					</from>
 					<to>reqd_annual_feedstock_supply</to>
 				</connector>
-				<connector uid="3187" angle="63.4349">
+				<connector uid="3186" angle="63.4349">
 					<from>Feedstock_Inventory</from>
 					<to>FS_Inventory_Index</to>
 				</connector>
-				<connector uid="3188" angle="255.964">
+				<connector uid="3187" angle="255.964">
 					<from>crop_prodn_mm</from>
 					<to>prodn_rel_to_perlack</to>
 				</connector>
-				<connector uid="3189" angle="90">
+				<connector uid="3188" angle="90">
 					<from>
-						<alias uid="3050"/>
+						<alias uid="3049"/>
 					</from>
 					<to>offset_in_frac_chg_from_crop_prodn_consn</to>
 				</connector>
-				<connector uid="3190" angle="90">
+				<connector uid="3189" angle="90">
 					<from>frac_chg_FS_price</from>
 					<to>indic_chg_FS_price</to>
 				</connector>
-				<connector uid="3191" angle="122.005">
+				<connector uid="3190" angle="122.005">
 					<from>normalized_crop_stock_use_ratio</from>
 					<to>crop_availability_constraint</to>
 				</connector>
-				<connector uid="3192" angle="194.521">
+				<connector uid="3191" angle="194.521">
 					<from>
-						<alias uid="3152"/>
+						<alias uid="3151"/>
 					</from>
 					<to>Total_Nominal_Crop_Demand_mm</to>
 				</connector>
-				<connector uid="3193" angle="90">
+				<connector uid="3192" angle="90">
 					<from>
-						<alias uid="3194"/>
+						<alias uid="3193"/>
 					</from>
 					<to>FS_Price_Input_to_CM</to>
 				</connector>
-				<connector uid="3195" angle="0.184082">
+				<connector uid="3194" angle="0.184082">
 					<from>desired_feedstock_exports_by_region</from>
 					<to>feedstock_export</to>
 				</connector>
-				<connector uid="3196" angle="180">
+				<connector uid="3195" angle="180">
 					<from>cellulosic_price_rel_to_max</from>
 					<to>Max_offer_price_constraint_on_price_increase</to>
 				</connector>
-				<connector uid="3197" angle="36.1932">
+				<connector uid="3196" angle="36.1932">
 					<from>Inventory_Input_In_Nominal_Units</from>
 					<to>Inventory_rel_to_Input</to>
 				</connector>
-				<connector uid="3198" angle="36.8699">
+				<connector uid="3197" angle="36.8699">
 					<from>Crop_Price_Index</from>
 					<to>relative_price_impact_on_sm_gr_demand</to>
 				</connector>
-				<connector uid="3199" angle="159.444">
+				<connector uid="3198" angle="159.444">
 					<from>C_to_B_cap_wtg_factor_C</from>
 					<to>C_to_B_cap_wtd_cost_to_price_ratio_C</to>
 				</connector>
-				<connector uid="3200" angle="39.2894">
+				<connector uid="3199" angle="39.2894">
 					<from>Feedstock_Inventory</from>
 					<to>FS_Inventory_Gap</to>
 				</connector>
-				<connector uid="3201" angle="25.4532">
+				<connector uid="3200" angle="25.4532">
 					<from>FS_prodn_by_FS_and_region</from>
 					<to>Feedstock_prodn</to>
 				</connector>
-				<connector uid="3202" angle="159.444">
+				<connector uid="3201" angle="159.444">
 					<from>C_to_RR_cap_wtd_cost_to_price_ratio_C</from>
 					<to>agg_avg_cost_to_price_ratio_cellulosics</to>
 				</connector>
-				<connector uid="3203" angle="61.2366">
+				<connector uid="3202" angle="61.2366">
 					<from>a_prodn_USDA</from>
 					<to>a_prodn_model_rel_to_USDA</to>
 				</connector>
-				<connector uid="3204" angle="301.43">
+				<connector uid="3203" angle="301.43">
 					<from>crop_prodn_mm</from>
 					<to>crop_prodn_consn_index</to>
 				</connector>
-				<connector uid="3205" angle="322.306">
+				<connector uid="3204" angle="322.306">
 					<from>Crop_Inventories</from>
 					<to>crop_stock_use_ratio</to>
 				</connector>
-				<connector uid="3206" angle="270">
+				<connector uid="3205" angle="270">
 					<from>crop_stock_use_ratio</from>
 					<to>normalized_crop_stock_use_ratio</to>
 				</connector>
-				<connector uid="3207" angle="57.9946">
+				<connector uid="3206" angle="57.9946">
 					<from>
-						<alias uid="3208"/>
+						<alias uid="3207"/>
 					</from>
 					<to>nominal_hay_and_forage_demand</to>
 				</connector>
-				<connector uid="3209" angle="270">
+				<connector uid="3208" angle="270">
 					<from>FS_Price_Input</from>
 					<to>FS_Price_Input_to_FarmGate</to>
 				</connector>
-				<connector uid="3210" angle="0">
+				<connector uid="3209" angle="0">
 					<from>initial_regional_distn_fs_export</from>
 					<to>regional_distn_fs_export</to>
 				</connector>
-				<connector uid="3211" angle="35.5377">
+				<connector uid="3210" angle="35.5377">
 					<from>plant_wtd_spread_from_FS_prodn_consn</from>
 					<to>offset_in_frac_chg_from_FS_prodn_consn</to>
 				</connector>
-				<connector uid="3212" angle="198.435">
+				<connector uid="3211" angle="198.435">
 					<from>
-						<alias uid="3213"/>
+						<alias uid="3212"/>
 					</from>
 					<to>unit_feedstockshed_area</to>
 				</connector>
-				<connector uid="3214" angle="167.471">
+				<connector uid="3213" angle="167.471">
 					<from>C_to_EtOH_cap_wtg_factor_C</from>
 					<to>C_to_EtOH_cap_wtd_cost_to_price_ratio_C</to>
 				</connector>
-				<connector uid="3215" angle="0">
+				<connector uid="3214" angle="0">
 					<from>FLM_C_to_EtOH_preprocess_costs</from>
 					<to>C_to_EtOH_preprocess_cost</to>
 				</connector>
-				<connector uid="3216" angle="200.556">
+				<connector uid="3215" angle="200.556">
 					<from>cellulosic_price_relative_to_max_from_conversion</from>
 					<to>cellulosic_price_rel_to_max</to>
 				</connector>
-				<connector uid="3217" angle="0">
+				<connector uid="3216" angle="0">
 					<from>frac_chg_FS_price_prodn_consn</from>
 					<to>frac_chg_FS_price</to>
 				</connector>
-				<connector uid="3218" angle="0">
+				<connector uid="3217" angle="0">
 					<from>
-						<alias uid="3076"/>
+						<alias uid="3075"/>
 					</from>
 					<to>total_reqd_hay_prodn_from_ag_land</to>
 				</connector>
-				<connector uid="3219" angle="153.435">
+				<connector uid="3218" angle="153.435">
 					<from>one_project</from>
 					<to>Est_Ag_Cellulosic_plants_incl_pipeline</to>
 				</connector>
-				<connector uid="3220" angle="270">
+				<connector uid="3219" angle="270">
 					<from>
-						<alias uid="3221"/>
+						<alias uid="3220"/>
 					</from>
 					<to>cellulosic_price_rel_to_max</to>
 				</connector>
-				<connector uid="3222" angle="90">
+				<connector uid="3221" angle="90">
 					<from>FS_logistic_price_response_curve_from_prodn_consn</from>
 					<to>frac_chg_FS_price_prodn_consn</to>
 				</connector>
-				<connector uid="3223" angle="339.444">
+				<connector uid="3222" angle="339.444">
 					<from>
-						<alias uid="3224"/>
+						<alias uid="3223"/>
 					</from>
 					<to>Est_Ag_Cellulosic_plants_incl_pipeline</to>
 				</connector>
-				<connector uid="3225" angle="270">
+				<connector uid="3224" angle="270">
 					<from>
-						<alias uid="3226"/>
+						<alias uid="3225"/>
 					</from>
 					<to>desired_feedstock_exports_by_region</to>
 				</connector>
-				<connector uid="3227" angle="94.6895">
+				<connector uid="3226" angle="94.6895">
 					<from>amount_to_seed_FS_price</from>
 					<to>FS_price_seeding</to>
 				</connector>
-				<connector uid="3228" angle="345.261">
+				<connector uid="3227" angle="345.261">
 					<from>total_frac_chg_price</from>
 					<to>chg_crop_price_index</to>
 				</connector>
-				<connector uid="3229" angle="90">
+				<connector uid="3228" angle="90">
 					<from>Price_from_ReEDS</from>
 					<to>FS_Price_Input_to_FarmGate</to>
 				</connector>
-				<connector uid="3230" angle="214.287">
+				<connector uid="3229" angle="214.287">
 					<from>Hay_Price_Index</from>
 					<to>chg_hay_price_index</to>
 				</connector>
-				<connector uid="3231" angle="12.5288">
+				<connector uid="3230" angle="12.5288">
 					<from>crop_availability_constraint</from>
 					<to>Crop_Consn_mm</to>
 				</connector>
-				<connector uid="3232" angle="90">
+				<connector uid="3231" angle="90">
 					<from>Hay_price_input_from_prodn_consn</from>
 					<to>Hay_logistic_price_response_curve_from_prodn_consn</to>
 				</connector>
-				<connector uid="3233" angle="357.468">
+				<connector uid="3232" angle="357.468">
 					<from>FLM_C_to_RR_preprocess_costs_1</from>
 					<to>C_to_RRpreprocess_cost</to>
 				</connector>
-				<connector uid="3234" angle="181.45">
+				<connector uid="3233" angle="181.45">
 					<from>IMPORTS</from>
 					<to>Total_Nominal_Crop_Demand_mm</to>
 				</connector>
-				<connector uid="3235" angle="212.005">
+				<connector uid="3234" angle="212.005">
 					<from>Internally_Generated_Reqd_annual_feedstock_supply</from>
 					<to>reqd_annual_feedstock_supply</to>
 				</connector>
-				<connector uid="3236" angle="216.87">
+				<connector uid="3235" angle="216.87">
 					<from>Target_for_FS_Inv</from>
 					<to>FS_Inventory_Gap</to>
 				</connector>
-				<connector uid="3237" angle="0">
+				<connector uid="3236" angle="0">
 					<from>fraction_of_supply_system_advanced</from>
 					<to>frac_supply_system_advanced</to>
 				</connector>
-				<connector uid="3238" angle="122.005">
+				<connector uid="3237" angle="122.005">
 					<from>Couple_with_ReEDS</from>
 					<to>FS_Price_Input_to_FarmGate</to>
 				</connector>
-				<connector uid="3239" angle="241.459">
+				<connector uid="3238" angle="241.459">
 					<from>Rollup_C_to_Capacity_by_Region</from>
 					<to>C_to_RR_cap_wtg_factor_C</to>
 				</connector>
-				<connector uid="3240" angle="90">
+				<connector uid="3239" angle="90">
 					<from>
-						<alias uid="3096"/>
+						<alias uid="3095"/>
 					</from>
 					<to>Target_for_FS_Inv</to>
 				</connector>
-				<connector uid="3241" angle="0">
+				<connector uid="3240" angle="0">
 					<from>
-						<alias uid="3242"/>
+						<alias uid="3241"/>
 					</from>
 					<to>FS_prodn_by_FS_and_region</to>
 				</connector>
-				<connector uid="3243" angle="0">
+				<connector uid="3242" angle="0">
 					<from>nominal_hay_and_forage_demand</from>
 					<to>Total_Hay_and_Forage_Reqd_per_yr</to>
 				</connector>
-				<connector uid="3244" angle="0">
+				<connector uid="3243" angle="0">
 					<from>
-						<alias uid="3245"/>
+						<alias uid="3244"/>
 					</from>
 					<to>plant_input_capacity_tpy</to>
 				</connector>
-				<connector uid="3246" angle="12.5288">
+				<connector uid="3245" angle="12.5288">
 					<from>impact_of_market_on_inventory_spread</from>
 					<to>plant_wtd_spread_from_FS_inventory</to>
 				</connector>
-				<connector uid="3247" angle="270">
+				<connector uid="3246" angle="270">
 					<from>Total_Hay_and_Forage_Reqd_per_yr</from>
 					<to>total_reqd_hay_prodn_from_ag_land</to>
 				</connector>
-				<connector uid="3248" angle="135">
+				<connector uid="3247" angle="135">
 					<from>
-						<alias uid="3249"/>
+						<alias uid="3248"/>
 					</from>
 					<to>long_term_stock_use_ratio</to>
 				</connector>
-				<connector uid="3250" angle="180">
+				<connector uid="3249" angle="180">
 					<from>offset_in_frac_chg_from_crop_stock_use</from>
 					<to>frac_chg_crop_price_stock_to_use</to>
 				</connector>
-				<connector uid="3251" angle="180">
+				<connector uid="3250" angle="180">
 					<from>
-						<alias uid="3252"/>
+						<alias uid="3251"/>
 					</from>
 					<to>C_to_EtOH_cap_wtg_factor_C</to>
 				</connector>
-				<connector uid="3253" angle="32.0054">
+				<connector uid="3252" angle="32.0054">
 					<from>
-						<alias uid="3254"/>
+						<alias uid="3253"/>
 					</from>
 					<to>impact_of_market_on_prodn_consn_spread</to>
 				</connector>
-				<connector uid="3255" angle="180">
+				<connector uid="3254" angle="180">
 					<from>Dom_Dmand</from>
 					<to>Nom_Domestic_Crop_demand_mm</to>
 				</connector>
-				<connector uid="3256" angle="0">
+				<connector uid="3255" angle="0">
 					<from>offset_in_frac_chg_from_crop_prodn_consn</from>
 					<to>frac_chg_crop_price_prodn_consn</to>
 				</connector>
-				<connector uid="3257" angle="312.851">
+				<connector uid="3256" angle="312.851">
 					<from>
-						<alias uid="3258"/>
+						<alias uid="3257"/>
 					</from>
 					<to>Inventory_Input_In_Nominal_Units</to>
 				</connector>
-				<connector uid="3259" angle="32.0054">
+				<connector uid="3258" angle="32.0054">
 					<from>a_price_USDA</from>
 					<to>a_price_model_rel_to_USDA</to>
 				</connector>
-				<connector uid="3260" angle="100.158">
+				<connector uid="3259" angle="100.158">
 					<from>feedstock_shrinkage_rate</from>
 					<to>Feedstock_Shrinkage</to>
 				</connector>
-				<connector uid="3261" angle="180">
+				<connector uid="3260" angle="180">
 					<from>frac_chg_crop_price_stock_to_use</from>
 					<to>indic_frac_chg_crop_price</to>
 				</connector>
-				<connector uid="3262" angle="0">
+				<connector uid="3261" angle="0">
 					<from>crop_stock_use_ratio</from>
 					<to>long_term_stock_use_ratio</to>
 				</connector>
-				<connector uid="3263" angle="272.933">
+				<connector uid="3262" angle="272.933">
 					<from>Max_offer_price_constraint_on_price_increase</from>
 					<to>change_in_FS_price</to>
 				</connector>
-				<connector uid="3264" angle="296.565">
+				<connector uid="3263" angle="296.565">
 					<from>lt_regional_distn_fs_export</from>
 					<to>regional_distn_fs_export</to>
 				</connector>
-				<connector uid="3265" angle="159.444">
+				<connector uid="3264" angle="159.444">
 					<from>C_to_RR_cap_wtg_factor_C</from>
 					<to>C_to_RR_cap_wtd_cost_to_price_ratio_C</to>
 				</connector>
-				<connector uid="3266" angle="180">
+				<connector uid="3265" angle="180">
 					<from>LT_crop_demand</from>
 					<to>indicated_crop_demand</to>
 				</connector>
-				<connector uid="3267" angle="26.5651">
+				<connector uid="3266" angle="26.5651">
 					<from>
-						<alias uid="3268"/>
+						<alias uid="3267"/>
 					</from>
 					<to>total_frac_chg_price</to>
 				</connector>
-				<connector uid="3269" angle="180">
+				<connector uid="3268" angle="180">
 					<from>
-						<alias uid="3270"/>
+						<alias uid="3269"/>
 					</from>
 					<to>LT_crop_demand</to>
 				</connector>
-				<connector uid="3271" angle="90">
+				<connector uid="3270" angle="90">
 					<from>
-						<alias uid="3272"/>
+						<alias uid="3271"/>
 					</from>
 					<to>initial_hay_demand</to>
 				</connector>
-				<connector uid="3273" angle="90">
+				<connector uid="3272" angle="90">
 					<from>Hay_logistic_price_response_curve_from_prodn_consn</from>
 					<to>frac_chg_hay_price</to>
 				</connector>
-				<connector uid="3274" angle="307.875">
+				<connector uid="3273" angle="307.875">
 					<from>FS_Price_PlantGate</from>
 					<to>amount_to_seed_FS_price</to>
 				</connector>
-				<connector uid="3275" angle="0">
+				<connector uid="3274" angle="0">
 					<from>a_price_model</from>
 					<to>a_price_model_rel_to_USDA</to>
 				</connector>
-				<connector uid="3276" angle="130.601">
+				<connector uid="3275" angle="130.601">
 					<from>
-						<alias uid="3277"/>
+						<alias uid="3276"/>
 					</from>
 					<to>C_to_RR_cap_wtd_cost_to_price_ratio_C</to>
 				</connector>
-				<connector uid="3278" angle="0">
+				<connector uid="3277" angle="0">
 					<from>reqd_feedstock_production_ag_system</from>
 					<to>Est_Ag_Cellulosic_plants_incl_pipeline</to>
 				</connector>
-				<connector uid="3279" angle="144.462">
+				<connector uid="3278" angle="144.462">
 					<from>offset_in_frac_chg_from_Hay_prodn_consn</from>
 					<to>frac_chg_hay_price</to>
 				</connector>
-				<connector uid="3280" angle="90">
+				<connector uid="3279" angle="90">
 					<from>offset_in_frac_chg_from_FS_inv</from>
 					<to>frac_chg_FS_price_inv</to>
 				</connector>
-				<connector uid="3281" angle="180">
+				<connector uid="3280" angle="180">
 					<from>frac_chg_FS_price_inv</from>
 					<to>frac_chg_FS_price</to>
 				</connector>
-				<connector uid="3282" angle="319.399">
+				<connector uid="3281" angle="319.399">
 					<from>regional_distn_export_weight_factor</from>
 					<to>regional_distn_fs_export</to>
 				</connector>
-				<connector uid="3283" angle="90">
+				<connector uid="3282" angle="90">
 					<from>reqd_annual_feedstock_supply_tpy</from>
 					<to>Est_Ag_Cellulosic_plants_incl_pipeline</to>
 				</connector>
-				<connector uid="3284" angle="180">
+				<connector uid="3283" angle="180">
 					<from>Is_Market_Required</from>
 					<to>amount_to_seed_FS_price</to>
 				</connector>
-				<connector uid="3285" angle="39.5597">
+				<connector uid="3284" angle="39.5597">
 					<from>Crop_Price_Index</from>
 					<to>price_impact_on_demand</to>
 				</connector>
-				<connector uid="3286" angle="192.529">
+				<connector uid="3285" angle="192.529">
 					<from>reqd_annual_feedstock_supply</from>
 					<to>FS_Supply_Demand_Index</to>
 				</connector>
-				<connector uid="3287" angle="161.565">
+				<connector uid="3286" angle="161.565">
 					<from>Is_Market_Required</from>
 					<to>amount_to_de_seed_FS_price</to>
 				</connector>
-				<connector uid="3288" angle="258.92">
+				<connector uid="3287" angle="258.92">
 					<from>FS_Inventory_Gap</from>
 					<to>Feedstock_Shrinkage</to>
 				</connector>
-				<connector uid="3289" angle="319.399">
+				<connector uid="3288" angle="319.399">
 					<from>FS_prodn_by_FS_and_region</from>
 					<to>lt_regional_distn_fs_export</to>
 				</connector>
-				<connector uid="3290" angle="270">
+				<connector uid="3289" angle="270">
 					<from>Raw_Price_Input_From_Baseline</from>
 					<to>Initial_Crop_Price</to>
 				</connector>
-				<connector uid="3291" angle="341.565">
+				<connector uid="3290" angle="341.565">
 					<from>
-						<alias uid="3292"/>
+						<alias uid="3291"/>
 					</from>
 					<to>unit_feedstockshed_area</to>
 				</connector>
-				<connector uid="3293" angle="270">
+				<connector uid="3292" angle="270">
 					<from>crop_price_input_from_prodn_consn</from>
 					<to>crop_logistic_price_response_curve_from_prodn_consn</to>
 				</connector>
-				<connector uid="3294" angle="142.989">
+				<connector uid="3293" angle="142.989">
 					<from>
-						<alias uid="3053"/>
+						<alias uid="3052"/>
 					</from>
 					<to>Rollup_C_to_Capacity_by_Region</to>
 				</connector>
-				<connector uid="3295" angle="0">
+				<connector uid="3294" angle="0">
 					<from>plant_wtd_spread_from_FS_prodn_consn</from>
 					<to>frac_chg_FS_price_prodn_consn</to>
 				</connector>
-				<connector uid="3296" angle="0">
+				<connector uid="3295" angle="0">
 					<from>
-						<alias uid="3297"/>
+						<alias uid="3296"/>
 					</from>
 					<to>a_prodn_model</to>
 				</connector>
-				<connector uid="3298" angle="110.556">
+				<connector uid="3297" angle="110.556">
 					<from>Run_Number</from>
 					<to>FS_Price_Input_to_FarmGate</to>
 				</connector>
-				<connector uid="3299" angle="0">
+				<connector uid="3298" angle="0">
 					<from>frac_chg_crop_price_prodn_consn</from>
 					<to>indic_frac_chg_crop_price</to>
 				</connector>
-				<connector uid="3300" angle="0">
+				<connector uid="3299" angle="0">
 					<from>Est_Ag_Cellulosic_plants_incl_pipeline</from>
 					<to>Reqd_feedstock_shed_area</to>
 				</connector>
-				<connector uid="3301" angle="346.621">
+				<connector uid="3300" angle="346.621">
 					<from>S_to_EtOH_Reqd_Corn_FS_supply_nominal_units</from>
 					<to>CM_Reqd_Corn_FS_supply_baseline_units</to>
 				</connector>
-				<connector uid="3302" angle="243.435">
+				<connector uid="3301" angle="243.435">
 					<from>inv_impact_on_feedstock_consn</from>
 					<to>C_to_B_Feedstock_Consn</to>
 				</connector>
-				<connector uid="3303" color="#9F9F9F" angle="1.21399">
+				<connector uid="3302" color="#9F9F9F" angle="1.21399">
 					<from>
-						<alias uid="3304"/>
+						<alias uid="3303"/>
 					</from>
 					<to>Inventory_rel_to_Input</to>
 				</connector>
-				<connector uid="3305" angle="63.4349">
+				<connector uid="3304" angle="63.4349">
 					<from>relative_price_impact_on_sm_gr_demand</from>
 					<to>indicated_crop_demand</to>
 				</connector>
-				<connector uid="3306" angle="0">
+				<connector uid="3305" angle="0">
 					<from>initial_hay_and_forage_demand</from>
 					<to>nominal_hay_and_forage_demand</to>
 				</connector>
-				<connector uid="3307" angle="177.707">
+				<connector uid="3306" angle="177.707">
 					<from>indicated_crop_demand</from>
 					<to>Crop_Consn_mm</to>
 				</connector>
-				<connector uid="3308" angle="0">
+				<connector uid="3307" angle="0">
 					<from>initial_hay_demand</from>
 					<to>initial_hay_and_forage_demand</to>
 				</connector>
-				<connector uid="3309" angle="341.565">
+				<connector uid="3308" angle="341.565">
 					<from>
-						<alias uid="3310"/>
+						<alias uid="3309"/>
 					</from>
 					<to>plant_wtd_spread_from_FS_inventory</to>
 				</connector>
-				<connector uid="3311" angle="0">
+				<connector uid="3310" angle="0">
 					<from>
-						<alias uid="3272"/>
+						<alias uid="3271"/>
 					</from>
 					<to>Hay_Prodn_Rel_to_Reqd</to>
 				</connector>
-				<connector uid="3312" angle="327.995">
+				<connector uid="3311" angle="327.995">
 					<from>Crop_Price</from>
 					<to>Regionalized_Annual_Regional_Price_Input</to>
 				</connector>
-				<connector uid="3313" angle="0">
+				<connector uid="3312" angle="0">
 					<from>
-						<alias uid="3254"/>
+						<alias uid="3253"/>
 					</from>
 					<to>impact_of_market_on_inventory_spread</to>
 				</connector>
-				<connector uid="3314" angle="90">
+				<connector uid="3313" angle="90">
 					<from>FS_Price_PlantGate</from>
 					<to>cellulosic_price_rel_to_max</to>
 				</connector>
-				<connector uid="3315" angle="0">
+				<connector uid="3314" angle="0">
 					<from>
-						<alias uid="3316"/>
+						<alias uid="3315"/>
 					</from>
 					<to>a_price_model</to>
 				</connector>
-				<connector uid="3317" angle="207.273">
+				<connector uid="3316" angle="207.273">
 					<from>
-						<alias uid="3318"/>
+						<alias uid="3317"/>
 					</from>
 					<to>Corn_demand_EtOH</to>
 				</connector>
-				<connector uid="3319" angle="180">
+				<connector uid="3318" angle="180">
 					<from>
-						<alias uid="3320"/>
+						<alias uid="3319"/>
 					</from>
 					<to>Target_for_FS_Inv</to>
 				</connector>
-				<connector uid="3321" angle="310.601">
+				<connector uid="3320" angle="310.601">
 					<from>offset_in_frac_chg_from_FS_prodn_consn</from>
 					<to>frac_chg_FS_price_prodn_consn</to>
 				</connector>
-				<connector uid="3322" angle="180">
+				<connector uid="3321" angle="180">
 					<from>Target_for_FS_Inv</from>
 					<to>FS_Inventory_Index</to>
 				</connector>
-				<connector uid="3323" angle="45">
+				<connector uid="3322" angle="45">
 					<from>plant_wtd_spread_from_FS_inventory</from>
 					<to>frac_chg_FS_price_inv</to>
 				</connector>
-				<connector uid="3324" angle="20.556">
+				<connector uid="3323" angle="20.556">
 					<from>Hay_Prodn_Rel_to_Reqd</from>
 					<to>Hay_price_input_from_prodn_consn</to>
 				</connector>
-				<connector uid="3325" angle="54.7824">
+				<connector uid="3324" angle="54.7824">
 					<from>FS_Price_PlantGate</from>
 					<to>amount_to_de_seed_FS_price</to>
 				</connector>
-				<connector uid="3326" angle="90">
+				<connector uid="3325" angle="90">
 					<from>FS_price_input_from_inventory_index</from>
 					<to>FS_logistic_price_response_curve_from_inventory</to>
 				</connector>
-				<connector uid="3327" angle="171.158">
+				<connector uid="3326" angle="171.158">
 					<from>
-						<alias uid="3252"/>
+						<alias uid="3251"/>
 					</from>
 					<to>Rollup_C_to_Capacity_by_Region</to>
 				</connector>
-				<connector uid="3328" angle="347.471">
+				<connector uid="3327" angle="347.471">
 					<from>
-						<alias uid="3329"/>
+						<alias uid="3328"/>
 					</from>
 					<to>FS_supply_input</to>
 				</connector>
-				<connector uid="3330" angle="218.362">
+				<connector uid="3329" angle="218.362">
 					<from>
-						<alias uid="3159"/>
+						<alias uid="3158"/>
 					</from>
 					<to>C_to_B_Feedstock_Consn</to>
 				</connector>
-				<connector uid="3331" angle="225">
+				<connector uid="3330" angle="225">
 					<from>inv_impact_on_feedstock_consn</from>
 					<to>C_to_RR_Feedstock_Consn</to>
 				</connector>
-				<connector uid="3332" angle="90">
+				<connector uid="3331" angle="90">
 					<from>initial_forage_demand</from>
 					<to>initial_hay_and_forage_demand</to>
 				</connector>
-				<connector uid="3333" angle="0">
+				<connector uid="3332" angle="0">
 					<from>
-						<alias uid="3334"/>
+						<alias uid="3333"/>
 					</from>
 					<to>crop_production</to>
 				</connector>
-				<connector uid="3335" angle="58.5704">
+				<connector uid="3334" angle="58.5704">
 					<from>Feedstock_prodn</from>
 					<to>FS_supply_input</to>
 				</connector>
-				<connector uid="3336" angle="203.604">
+				<connector uid="3335" angle="203.604">
 					<from>indicated_crop_demand</from>
 					<to>crop_stock_use_ratio</to>
 				</connector>
-				<connector uid="3337" angle="206.565">
+				<connector uid="3336" angle="206.565">
 					<from>
-						<alias uid="3163"/>
+						<alias uid="3162"/>
 					</from>
 					<to>frac_chg_crop_price_stock_to_use</to>
 				</connector>
-				<connector uid="3338" color="white" angle="180">
+				<connector uid="3337" color="white" angle="180">
 					<from>Couple_with_ReEDS</from>
 					<to>Run_Number</to>
 				</connector>
-				<connector uid="3339" angle="0">
+				<connector uid="3338" angle="0">
 					<from>
-						<alias uid="3340"/>
+						<alias uid="3339"/>
 					</from>
 					<to>Inventory_Input_In_Nominal_Units</to>
 				</connector>
-				<connector uid="3341" angle="126.917">
+				<connector uid="3340" angle="126.917">
 					<from>
-						<alias uid="3139"/>
+						<alias uid="3138"/>
 					</from>
 					<to>Rollup_C_to_Capacity_by_Region</to>
 				</connector>
-				<connector uid="3342" angle="90">
+				<connector uid="3341" angle="90">
 					<from>
-						<alias uid="3057"/>
+						<alias uid="3056"/>
 					</from>
 					<to>Is_Market_Required</to>
 				</connector>
-				<connector uid="3343" angle="130.601">
+				<connector uid="3342" angle="130.601">
 					<from>reqd_annual_feedstock_supply</from>
 					<to>Is_Market_Required</to>
 				</connector>
-				<connector uid="3344" angle="180">
+				<connector uid="3343" angle="180">
 					<from>
-						<alias uid="3057"/>
+						<alias uid="3056"/>
 					</from>
 					<to>FS_Supply_Demand_Index</to>
 				</connector>
-				<connector uid="3345" angle="90">
+				<connector uid="3344" angle="90">
 					<from>FS_Inventory_Index</from>
 					<to>FS_price_input_from_inventory_index</to>
 				</connector>
-				<connector uid="3346" angle="180">
+				<connector uid="3345" angle="180">
 					<from>
-						<alias uid="3347"/>
+						<alias uid="3346"/>
 					</from>
 					<to>FS_Price_Input</to>
 				</connector>
-				<connector uid="3348" angle="167.471">
+				<connector uid="3347" angle="167.471">
 					<from>C_to_B_cap_wtd_cost_to_price_ratio_C</from>
 					<to>agg_avg_cost_to_price_ratio_cellulosics</to>
 				</connector>
-				<connector uid="3349" angle="116.565">
+				<connector uid="3348" angle="116.565">
 					<from>
-						<alias uid="3350"/>
+						<alias uid="3349"/>
 					</from>
 					<to>Internally_Generated_Reqd_annual_feedstock_supply</to>
 				</connector>
-				<connector uid="3351" angle="243.435">
+				<connector uid="3350" angle="243.435">
 					<from>
-						<alias uid="3352"/>
+						<alias uid="3351"/>
 					</from>
 					<to>unit_feedstockshed_area</to>
 				</connector>
-				<text_box color="black" padding="5" border_width="thin" border_style="solid" appearance="transparent" uid="3353" x="1318" y="629" width="162" height="280">needed?</text_box>
-				<text_box color="black" padding="5" border_width="thin" border_style="solid" appearance="transparent" uid="3354" x="385" y="1937" width="310" height="148">These variables are tied to the Conversion Module in the E2E -- but are not relevant if &quot;Is CM connected?&quot; is set to 0.</text_box>
-				<text_box color="black" padding="5" border_width="thin" border_style="solid" appearance="transparent" uid="3355" x="1320" y="918" width="164" height="82"/>
+				<text_box color="black" padding="5" border_width="thin" border_style="solid" appearance="transparent" uid="3352" x="1318" y="629" width="162" height="280">needed?</text_box>
+				<text_box color="black" padding="5" border_width="thin" border_style="solid" appearance="transparent" uid="3353" x="385" y="1937" width="310" height="148">These variables are tied to the Conversion Module in the E2E -- but are not relevant if &quot;Is CM connected?&quot; is set to 0.</text_box>
+				<text_box color="black" padding="5" border_width="thin" border_style="solid" appearance="transparent" uid="3354" x="1320" y="918" width="164" height="82"/>
 				<aux color="#65183E" font_color="#65183E" label_angle="354.063" x="232" y="835" name="Regionalized Annual Regional Price Input"/>
 				<stock color="black" font_color="black" label_angle="132.245" x="2042" y="2076" name="Feedstock Inventory"/>
 				<aux color="red" font_color="red" x="1216" y="682" name="Cellulosic Coeffs"/>
@@ -6459,429 +6458,429 @@ COMMENTS: </doc>
 				<aux color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" x="565" y="1250" name="SJ fs demand at nominal utilization"/>
 				<aux color="#65183E" font_color="#65183E" label_angle="49.8045" x="225" y="661" name="crop production"/>
 				<group locked="true" color="black" font_color="black" x="3854.71" y="32.1429" width="721.286" height="556.857" name="Comparison Against Baseline">
-					<item uid="3340"/>
-					<item uid="3304"/>
-					<item uid="3258"/>
-					<item uid="3316"/>
+					<item uid="3355"/>
 					<item uid="3356"/>
-					<item uid="3055"/>
-					<item uid="3297"/>
-					<item uid="3172"/>
-					<item uid="3120"/>
+					<item uid="3119"/>
+					<item uid="3171"/>
+					<item uid="3296"/>
+					<item uid="3054"/>
 					<item uid="3357"/>
-					<item uid="3358"/>
+					<item uid="3315"/>
+					<item uid="3257"/>
+					<item uid="3303"/>
+					<item uid="3339"/>
 				</group>
 				<group locked="true" color="black" font_color="black" x="1549" y="29" width="1503" height="547" name="Commodity Crop Market">
-					<item uid="3133"/>
-					<item uid="3268"/>
-					<item uid="3270"/>
-					<item uid="3050"/>
-					<item uid="3163"/>
-					<item uid="3148"/>
-					<item uid="3249"/>
+					<item uid="3162"/>
+					<item uid="3049"/>
+					<item uid="3269"/>
+					<item uid="3147"/>
+					<item uid="3267"/>
+					<item uid="3248"/>
+					<item uid="3132"/>
 				</group>
 				<group locked="false" x="778" y="1196" width="714" height="216" name="Pricing Inputs"/>
 				<group locked="false" color="black" font_color="black" x="1564" y="625" width="1485" height="519" name="Hay and Forage Market">
-					<item uid="3272"/>
-					<item uid="3076"/>
-					<item uid="3208"/>
-					<item uid="3157"/>
+					<item uid="3271"/>
+					<item uid="3075"/>
+					<item uid="3207"/>
+					<item uid="3156"/>
 				</group>
 				<group locked="false" x="804" y="625" width="688" height="511" name="Conversions and Misc Coefficients">
-					<item uid="3353"/>
+					<item uid="3352"/>
+					<item uid="3358"/>
+					<item uid="3354"/>
 					<item uid="3359"/>
-					<item uid="3355"/>
 					<item uid="3360"/>
-					<item uid="3361"/>
 				</group>
 				<group locked="false" color="black" font_color="black" x="5" y="628" width="738" height="509" name="Outputs to Other Modules">
-					<item uid="3334"/>
-					<item uid="3070"/>
-					<item uid="3087"/>
+					<item uid="3333"/>
+					<item uid="3069"/>
+					<item uid="3086"/>
+					<item uid="3361"/>
 					<item uid="3362"/>
+					<item uid="3164"/>
 					<item uid="3363"/>
-					<item uid="3165"/>
+					<item uid="3114"/>
+					<item uid="3071"/>
+					<item uid="3099"/>
+					<item uid="3145"/>
+					<item uid="3149"/>
 					<item uid="3364"/>
-					<item uid="3115"/>
-					<item uid="3245"/>
-					<item uid="3072"/>
-					<item uid="3100"/>
-					<item uid="3146"/>
-					<item uid="3150"/>
 					<item uid="3365"/>
+					<item uid="3291"/>
 					<item uid="3366"/>
-					<item uid="3292"/>
+					<item uid="3351"/>
 					<item uid="3367"/>
-					<item uid="3352"/>
-					<item uid="3368"/>
-					<item uid="3213"/>
-					<item uid="3224"/>
-					<item uid="3108"/>
-					<item uid="3168"/>
+					<item uid="3212"/>
+					<item uid="3223"/>
+					<item uid="3107"/>
+					<item uid="3244"/>
+					<item uid="3167"/>
 				</group>
 				<group locked="false" color="black" font_color="black" x="1552" y="1229" width="2104" height="1315" name="Feedstock Production and Market at PlantGate">
-					<item uid="3221"/>
-					<item uid="3110"/>
-					<item uid="3112"/>
-					<item uid="3254"/>
-					<item uid="3310"/>
-					<item uid="3064"/>
-					<item uid="3104"/>
-					<item uid="3350"/>
-					<item uid="3061"/>
-					<item uid="3180"/>
-					<item uid="3183"/>
-					<item uid="3277"/>
-					<item uid="3135"/>
-					<item uid="3252"/>
-					<item uid="3053"/>
-					<item uid="3139"/>
-					<item uid="3047"/>
-					<item uid="3329"/>
-					<item uid="3128"/>
-					<item uid="3096"/>
-					<item uid="3057"/>
-					<item uid="3320"/>
-					<item uid="3098"/>
-					<item uid="3161"/>
-					<item uid="3242"/>
-					<item uid="3081"/>
-					<item uid="3091"/>
-					<item uid="3155"/>
-					<item uid="3226"/>
-					<item uid="3159"/>
-					<item uid="3102"/>
+					<item uid="3220"/>
+					<item uid="3109"/>
+					<item uid="3111"/>
+					<item uid="3253"/>
+					<item uid="3309"/>
+					<item uid="3063"/>
+					<item uid="3103"/>
+					<item uid="3349"/>
+					<item uid="3060"/>
+					<item uid="3179"/>
+					<item uid="3276"/>
+					<item uid="3134"/>
+					<item uid="3182"/>
+					<item uid="3251"/>
+					<item uid="3052"/>
+					<item uid="3138"/>
+					<item uid="3046"/>
+					<item uid="3328"/>
+					<item uid="3127"/>
+					<item uid="3095"/>
+					<item uid="3056"/>
+					<item uid="3319"/>
+					<item uid="3097"/>
+					<item uid="3160"/>
+					<item uid="3241"/>
+					<item uid="3080"/>
+					<item uid="3090"/>
+					<item uid="3154"/>
+					<item uid="3225"/>
+					<item uid="3158"/>
+					<item uid="3101"/>
 				</group>
 				<group locked="false" color="black" font_color="black" x="3084" y="30" width="752" height="556" name="Commodity Crop Demand">
+					<item uid="3368"/>
+					<item uid="3067"/>
+					<item uid="3124"/>
 					<item uid="3369"/>
-					<item uid="3068"/>
-					<item uid="3125"/>
 					<item uid="3370"/>
-					<item uid="3371"/>
-					<item uid="3318"/>
-					<item uid="3152"/>
+					<item uid="3317"/>
+					<item uid="3151"/>
 				</group>
 				<group locked="true" x="9" y="2121" width="408" height="208" name="Module Interface with Demand Supply Curves"/>
 				<group locked="false" color="black" font_color="black" x="12" y="1728" width="687" height="367" name="Module Interface with Conversion Modules">
-					<item uid="3194"/>
-					<item uid="3131"/>
-					<item uid="3347"/>
-					<item uid="3354"/>
+					<item uid="3193"/>
+					<item uid="3130"/>
+					<item uid="3346"/>
+					<item uid="3353"/>
+					<item uid="3371"/>
 					<item uid="3372"/>
-					<item uid="3373"/>
 				</group>
 				<group locked="false" color="#7F00FF" font_color="#7F00FF" x="6" y="1165" width="738" height="517" name="Inputs from Other Modules"/>
-				<connector uid="3374" angle="179.42">
+				<connector uid="3373" angle="179.42">
 					<from>USDA_corn_EtOH_mm</from>
 					<to>Corn_demand_EtOH</to>
 				</connector>
-				<connector uid="3375" angle="341.834">
+				<connector uid="3374" angle="341.834">
 					<from>
-						<alias uid="3115"/>
+						<alias uid="3114"/>
 					</from>
 					<to>non_PCEC_GP_regional_adjustments</to>
 				</connector>
-				<connector uid="3376" angle="6.65443">
+				<connector uid="3375" angle="6.65443">
 					<from>
-						<alias uid="3364"/>
+						<alias uid="3363"/>
 					</from>
 					<to>non_PCEC_GP_regional_adjustments</to>
 				</connector>
-				<connector uid="3377" angle="180">
+				<connector uid="3376" angle="180">
 					<from>price_impact_on_Hay_and_Forage_Demand</from>
 					<to>Total_Hay_and_Forage_Reqd_per_yr</to>
 				</connector>
-				<connector uid="3378" angle="86.3827">
+				<connector uid="3377" angle="86.3827">
 					<from>frac_chg_hay_price</from>
 					<to>chg_hay_price_index</to>
 				</connector>
-				<connector uid="3379" angle="95.1944">
+				<connector uid="3378" angle="95.1944">
 					<from>price_impact_on_demand</from>
 					<to>indicated_crop_demand</to>
 				</connector>
 				<aux color="black" font_color="black" x="3438" y="278" name="Corn demand EtOH array"/>
-				<connector uid="3380" angle="265.236">
+				<connector uid="3379" angle="265.236">
 					<from>Corn_demand_EtOH</from>
 					<to>Corn_demand_EtOH_array</to>
 				</connector>
-				<connector uid="3381" angle="265.236">
+				<connector uid="3380" angle="265.236">
 					<from>Corn_demand_EtOH_array</from>
 					<to>Nom_Domestic_Crop_demand_mm</to>
 				</connector>
 				<aux color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" label_angle="2.88127" x="284" y="1470" name="OC reqd FS Supply"/>
-				<text_box color="black" font_size="24pt" padding="5" appearance="transparent" uid="3382" x="8" y="17" width="638" height="51">Biomass Scenario Model Feedstock Market Module</text_box>
-				<text_box color="red" vertical_text_align="center" font_color="red" padding="5" border_color="red" border_width="2" border_style="solid" appearance="transparent" uid="3383" x="12" y="254" width="350" height="36">RED:  Data Input (Constant, Ass&apos;n, Scenario, SSheet)</text_box>
-				<text_box color="#008F44" vertical_text_align="center" font_color="#008F44" padding="5" border_color="#008F44" border_width="2" border_style="solid" appearance="transparent" uid="3384" x="385" y="207" width="350" height="36">GREEN:  Output from this Sector to another Sector</text_box>
-				<text_box color="blue" vertical_text_align="center" font_color="blue" padding="5" border_color="blue" border_width="2" border_style="solid" appearance="transparent" uid="3385" x="12" y="206" width="350" height="36">BLUE:  Input to this Sector from another Sector</text_box>
-				<text_box color="black" vertical_text_align="center" padding="5" border_width="2" border_style="solid" appearance="transparent" uid="3386" x="385" y="254" width="350" height="36">BLACK:  Internal Calculation Within This Sector</text_box>
-				<text_box color="#7F00FF" vertical_text_align="center" font_color="#7F00FF" padding="5" border_color="#7F00FF" border_width="2" border_style="solid" appearance="transparent" uid="3387" x="12" y="159" width="350" height="36">Purple:  Input to this MODULE from another MODULE</text_box>
-				<text_box color="#65183E" vertical_text_align="center" font_color="#65183E" padding="5" border_color="#65183E" border_width="2" border_style="solid" appearance="transparent" uid="3388" x="385" y="159" width="350" height="36">Brown:  Output from this MODULE from another MODULE</text_box>
+				<text_box color="black" font_size="24pt" padding="5" appearance="transparent" uid="3381" x="8" y="17" width="638" height="51">Biomass Scenario Model Feedstock Market Module</text_box>
+				<text_box color="red" vertical_text_align="center" font_color="red" padding="5" border_color="red" border_width="2" border_style="solid" appearance="transparent" uid="3382" x="12" y="254" width="350" height="36">RED:  Data Input (Constant, Ass&apos;n, Scenario, SSheet)</text_box>
+				<text_box color="#008F44" vertical_text_align="center" font_color="#008F44" padding="5" border_color="#008F44" border_width="2" border_style="solid" appearance="transparent" uid="3383" x="385" y="207" width="350" height="36">GREEN:  Output from this Sector to another Sector</text_box>
+				<text_box color="blue" vertical_text_align="center" font_color="blue" padding="5" border_color="blue" border_width="2" border_style="solid" appearance="transparent" uid="3384" x="12" y="206" width="350" height="36">BLUE:  Input to this Sector from another Sector</text_box>
+				<text_box color="black" vertical_text_align="center" padding="5" border_width="2" border_style="solid" appearance="transparent" uid="3385" x="385" y="254" width="350" height="36">BLACK:  Internal Calculation Within This Sector</text_box>
+				<text_box color="#7F00FF" vertical_text_align="center" font_color="#7F00FF" padding="5" border_color="#7F00FF" border_width="2" border_style="solid" appearance="transparent" uid="3386" x="12" y="159" width="350" height="36">Purple:  Input to this MODULE from another MODULE</text_box>
+				<text_box color="#65183E" vertical_text_align="center" font_color="#65183E" padding="5" border_color="#65183E" border_width="2" border_style="solid" appearance="transparent" uid="3387" x="385" y="159" width="350" height="36">Brown:  Output from this MODULE from another MODULE</text_box>
 				<aux color="red" font_color="red" x="1098" y="700" name="dry ton factors"/>
 				<aux color="#00AA00" font_color="#00AA00" label_angle="293.149" x="1032.29" y="650" name="conversions to Dry Tons"/>
-				<connector uid="3389" angle="46.9749">
+				<connector uid="3388" angle="46.9749">
 					<from>conversions_to_tons</from>
 					<to>conversions_to_Dry_Tons</to>
 				</connector>
-				<connector uid="3390" angle="141.163">
+				<connector uid="3389" angle="141.163">
 					<from>dry_ton_factors</from>
 					<to>conversions_to_Dry_Tons</to>
 				</connector>
-				<connector uid="3391" angle="85.4784">
+				<connector uid="3390" angle="85.4784">
 					<from>
-						<alias uid="3371"/>
+						<alias uid="3370"/>
 					</from>
 					<to>S_to_EtOH_Reqd_Corn_FS_supply_nominal_units</to>
 				</connector>
-				<stacked_container uid="3392" x="4600.84" y="21.4157" width="350" height="481.667" minimized="true">
-					<graph isee:graph_area_color="white" width="350" height="481.667" type="time_series" isee:points_only="false" show_grid="false" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" right_axis_multi_scale="false" right_axis_auto_scale="true">
-						<plot color="blue" isee:keep_zero_visible="false" pen_width="1" index="0" show_y_axis="true">
+				<stacked_container uid="3391" x="4600.84" y="21.4157" width="350" height="481.667" minimized="true">
+					<graph isee:graph_area_color="white" x="4600.84" y="21.4157" width="350" height="481.667" type="time_series" isee:points_only="false" show_grid="false" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" left_axis_multi_scale="false" left_axis_auto_scale="true" right_axis_multi_scale="false" right_axis_auto_scale="true">
+						<plot color="blue" pen_width="1" index="0" show_y_axis="true">
 							<entity name="a_prodn_model[Corn]"/>
 							<scale max="30000"/>
 						</plot>
-						<plot color="red" pen_style="dot_dashed" isee:keep_zero_visible="false" pen_width="1" index="1" show_y_axis="true">
+						<plot color="red" pen_style="dot_dashed" pen_width="1" index="1" show_y_axis="true">
 							<entity name="a_prodn_model[Soy]"/>
 						</plot>
-						<plot color="fuchsia" pen_style="dotted" isee:keep_zero_visible="false" pen_width="1" index="2" show_y_axis="true">
+						<plot color="fuchsia" pen_style="dotted" pen_width="1" index="2" show_y_axis="true">
 							<entity name="a_prodn_model[Wheat]"/>
 						</plot>
-						<plot color="#008F44" pen_style="dashed" isee:keep_zero_visible="false" pen_width="1" index="3" show_y_axis="true">
+						<plot color="#008F44" pen_style="dashed" pen_width="1" index="3" show_y_axis="true">
 							<entity name="a_prodn_model[Other_Grains]"/>
 						</plot>
 					</graph>
 				</stacked_container>
-				<stacked_container uid="3393" x="4959.17" y="20.4165" width="350" height="481.667" minimized="true">
-					<graph isee:graph_area_color="white" width="350" height="481.667" type="time_series" isee:points_only="false" show_grid="false" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" right_axis_multi_scale="false" right_axis_auto_scale="true">
-						<plot color="blue" isee:keep_zero_visible="false" pen_width="1" index="0" show_y_axis="true">
+				<stacked_container uid="3392" x="4959.17" y="20.4165" width="350" height="481.667" minimized="true">
+					<graph isee:graph_area_color="white" x="4959.17" y="20.4165" width="350" height="481.667" type="time_series" isee:points_only="false" show_grid="false" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" left_axis_multi_scale="false" left_axis_auto_scale="true" right_axis_multi_scale="false" right_axis_auto_scale="true">
+						<plot color="blue" pen_width="1" index="0" show_y_axis="true">
 							<entity name="a_prodn_USDA[Corn]"/>
 							<scale max="30000"/>
 						</plot>
-						<plot color="red" pen_style="dot_dashed" isee:keep_zero_visible="false" pen_width="1" index="1" show_y_axis="true">
+						<plot color="red" pen_style="dot_dashed" pen_width="1" index="1" show_y_axis="true">
 							<entity name="a_prodn_USDA[Soy]"/>
 						</plot>
-						<plot color="fuchsia" pen_style="dotted" isee:keep_zero_visible="false" pen_width="1" index="2" show_y_axis="true">
+						<plot color="fuchsia" pen_style="dotted" pen_width="1" index="2" show_y_axis="true">
 							<entity name="a_prodn_USDA[Wheat]"/>
 						</plot>
-						<plot color="#008F44" pen_style="dashed" isee:keep_zero_visible="false" pen_width="1" index="3" show_y_axis="true">
+						<plot color="#008F44" pen_style="dashed" pen_width="1" index="3" show_y_axis="true">
 							<entity name="a_prodn_USDA[Other_Grains]"/>
 						</plot>
 					</graph>
 				</stacked_container>
-				<stacked_container uid="3394" x="4607.17" y="503.083" width="350" height="481.667" minimized="true">
-					<graph isee:graph_area_color="white" width="350" height="481.667" type="time_series" isee:points_only="false" show_grid="false" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" right_axis_multi_scale="false" right_axis_auto_scale="true">
+				<stacked_container uid="3393" x="4607.17" y="503.083" width="350" height="481.667" minimized="true">
+					<graph isee:graph_area_color="white" x="4607.17" y="503.083" width="350" height="481.667" type="time_series" isee:points_only="false" show_grid="false" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" left_axis_multi_scale="false" left_axis_auto_scale="true" right_axis_multi_scale="false" right_axis_auto_scale="true">
 						<plot color="blue" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
 							<entity name="a_price_model[Corn]"/>
 							<scale max="20"/>
 						</plot>
-						<plot color="red" isee:keep_zero_visible="false" pen_width="1" index="1" show_y_axis="true">
+						<plot color="red" pen_width="1" index="1" show_y_axis="true">
 							<entity name="a_price_model[Soy]"/>
 							<scale max="12"/>
 						</plot>
-						<plot color="fuchsia" pen_style="dotted" isee:keep_zero_visible="false" pen_width="1" index="2" show_y_axis="true">
+						<plot color="fuchsia" pen_style="dotted" pen_width="1" index="2" show_y_axis="true">
 							<entity name="a_price_model[Wheat]"/>
 						</plot>
-						<plot color="#008F44" pen_style="dashed" isee:keep_zero_visible="false" pen_width="1" index="3" show_y_axis="true">
+						<plot color="#008F44" pen_style="dashed" pen_width="1" index="3" show_y_axis="true">
 							<entity name="a_price_model[Other_Grains]"/>
 						</plot>
-						<plot color="#FF7F00" isee:keep_zero_visible="false" pen_width="1" index="4" show_y_axis="true">
+						<plot color="#FF7F00" pen_width="1" index="4" show_y_axis="true">
 							<entity name="a_price_model[Cotton]"/>
 						</plot>
 					</graph>
 				</stacked_container>
-				<stacked_container uid="3395" x="4959.17" y="503.083" width="350" height="481.667" minimized="true">
-					<graph isee:graph_area_color="white" width="350" height="481.667" type="time_series" isee:points_only="false" show_grid="false" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" right_axis_multi_scale="false" right_axis_auto_scale="true">
+				<stacked_container uid="3394" x="4959.17" y="503.083" width="350" height="481.667" minimized="true">
+					<graph isee:graph_area_color="white" x="4959.17" y="503.083" width="350" height="481.667" type="time_series" isee:points_only="false" show_grid="false" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" left_axis_multi_scale="false" left_axis_auto_scale="true" right_axis_multi_scale="false" right_axis_auto_scale="true">
 						<plot color="blue" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
 							<entity name="a_price_USDA[Corn]"/>
 							<scale max="20"/>
 						</plot>
-						<plot color="red" pen_style="dot_dashed" isee:keep_zero_visible="false" pen_width="1" index="1" show_y_axis="true">
+						<plot color="red" pen_style="dot_dashed" pen_width="1" index="1" show_y_axis="true">
 							<entity name="a_price_USDA[Soy]"/>
 						</plot>
-						<plot color="fuchsia" pen_style="dotted" isee:keep_zero_visible="false" pen_width="1" index="2" show_y_axis="true">
+						<plot color="fuchsia" pen_style="dotted" pen_width="1" index="2" show_y_axis="true">
 							<entity name="a_price_USDA[Wheat]"/>
 						</plot>
-						<plot color="#008F44" pen_style="dashed" isee:keep_zero_visible="false" pen_width="1" index="3" show_y_axis="true">
+						<plot color="#008F44" pen_style="dashed" pen_width="1" index="3" show_y_axis="true">
 							<entity name="a_price_USDA[Other_Grains]"/>
 						</plot>
-						<plot color="#FF7F00" isee:keep_zero_visible="false" pen_width="1" index="4" show_y_axis="true">
+						<plot color="#FF7F00" pen_width="1" index="4" show_y_axis="true">
 							<entity name="a_price_USDA[Cotton]"/>
 						</plot>
 					</graph>
 				</stacked_container>
-				<stacked_container uid="3396" x="3902.43" y="618.453" width="350" height="250" minimized="true">
-					<graph isee:graph_area_color="white" width="350" height="250" type="time_series" isee:points_only="false" show_grid="false" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" title="Corn" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" right_axis_multi_scale="false" right_axis_auto_scale="true">
-						<plot color="blue" isee:keep_zero_visible="false" pen_width="1" index="0" show_y_axis="true">
+				<stacked_container uid="3395" x="3902.43" y="618.453" width="350" height="250" minimized="true">
+					<graph isee:graph_area_color="white" x="3902.43" y="618.453" width="350" height="250" type="time_series" isee:points_only="false" show_grid="false" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" title="Corn" isee:fill_intensity="0.1" left_axis_multi_scale="false" left_axis_auto_scale="true" right_axis_multi_scale="false" right_axis_auto_scale="true">
+						<plot color="blue" pen_width="1" index="0" show_y_axis="true">
 							<entity name="a_prodn_model[Corn]"/>
 							<scale min="10000" max="20000"/>
 						</plot>
-						<plot color="red" pen_style="dot_dashed" isee:keep_zero_visible="false" pen_width="1" index="1" show_y_axis="true">
+						<plot color="red" pen_style="dot_dashed" pen_width="1" index="1" show_y_axis="true">
 							<entity name="a_prodn_USDA[Corn]"/>
 						</plot>
 					</graph>
 				</stacked_container>
-				<stacked_container uid="3397" x="4012.43" y="618.453" width="350" height="250" minimized="true">
-					<graph isee:graph_area_color="white" width="350" height="250" type="time_series" isee:points_only="false" show_grid="false" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" title="Soy " isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" right_axis_multi_scale="false" right_axis_auto_scale="true">
-						<plot color="blue" isee:keep_zero_visible="false" pen_width="1" index="0" show_y_axis="true">
+				<stacked_container uid="3396" x="4012.43" y="618.453" width="350" height="250" minimized="true">
+					<graph isee:graph_area_color="white" x="4012.43" y="618.453" width="350" height="250" type="time_series" isee:points_only="false" show_grid="false" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" title="Soy " isee:fill_intensity="0.1" left_axis_multi_scale="false" left_axis_auto_scale="true" right_axis_multi_scale="false" right_axis_auto_scale="true">
+						<plot color="blue" pen_width="1" index="0" show_y_axis="true">
 							<entity name="a_prodn_model[Soy]"/>
 						</plot>
-						<plot color="red" pen_style="dot_dashed" isee:keep_zero_visible="false" pen_width="1" index="1" show_y_axis="true">
+						<plot color="red" pen_style="dot_dashed" pen_width="1" index="1" show_y_axis="true">
 							<entity name="a_prodn_USDA[Soy]"/>
 						</plot>
 					</graph>
 				</stacked_container>
-				<stacked_container uid="3398" x="4288.14" y="743.453" minimized="true">
-					<graph isee:graph_area_color="white" width="350" height="250" type="time_series" isee:points_only="false" show_grid="false" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" title="Wheat" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" right_axis_multi_scale="false" right_axis_auto_scale="true">
-						<plot color="blue" isee:keep_zero_visible="false" pen_width="1" index="0" show_y_axis="true">
+				<stacked_container uid="3397" x="4288.14" y="743.453" minimized="true">
+					<graph isee:graph_area_color="white" x="4113.14" y="618.453" width="350" height="250" type="time_series" isee:points_only="false" show_grid="false" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" title="Wheat" isee:fill_intensity="0.1" left_axis_multi_scale="false" left_axis_auto_scale="true" right_axis_multi_scale="false" right_axis_auto_scale="true">
+						<plot color="blue" pen_width="1" index="0" show_y_axis="true">
 							<entity name="a_prodn_model[Wheat]"/>
 						</plot>
-						<plot color="red" pen_style="dot_dashed" isee:keep_zero_visible="false" pen_width="1" index="1" show_y_axis="true">
+						<plot color="red" pen_style="dot_dashed" pen_width="1" index="1" show_y_axis="true">
 							<entity name="a_prodn_USDA[Wheat]"/>
 						</plot>
 					</graph>
 				</stacked_container>
-				<stacked_container uid="3399" x="4417.43" y="743.453" minimized="true">
-					<graph isee:graph_area_color="white" width="350" height="250" type="time_series" isee:points_only="false" show_grid="false" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" title="Other Grain" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" right_axis_multi_scale="false" right_axis_auto_scale="true">
-						<plot color="blue" isee:keep_zero_visible="false" pen_width="1" index="0" show_y_axis="true">
+				<stacked_container uid="3398" x="4417.43" y="743.453" minimized="true">
+					<graph isee:graph_area_color="white" x="4242.43" y="618.453" width="350" height="250" type="time_series" isee:points_only="false" show_grid="false" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" title="Other Grain" isee:fill_intensity="0.1" left_axis_multi_scale="false" left_axis_auto_scale="true" right_axis_multi_scale="false" right_axis_auto_scale="true">
+						<plot color="blue" pen_width="1" index="0" show_y_axis="true">
 							<entity name="a_prodn_model[Other_Grains]"/>
 						</plot>
-						<plot color="red" pen_style="dot_dashed" isee:keep_zero_visible="false" pen_width="1" index="1" show_y_axis="true">
+						<plot color="red" pen_style="dot_dashed" pen_width="1" index="1" show_y_axis="true">
 							<entity name="a_prodn_USDA[Other_Grains]"/>
 						</plot>
 					</graph>
 				</stacked_container>
-				<stacked_container uid="3400" x="4540.39" y="743.453" minimized="true">
-					<graph isee:graph_area_color="white" width="350" height="250" type="time_series" isee:points_only="false" show_grid="false" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" title="Cotton" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" right_axis_multi_scale="false" right_axis_auto_scale="true">
-						<plot color="blue" isee:keep_zero_visible="false" pen_width="1" index="0" show_y_axis="true">
+				<stacked_container uid="3399" x="4540.39" y="743.453" minimized="true">
+					<graph isee:graph_area_color="white" x="4365.39" y="618.453" width="350" height="250" type="time_series" isee:points_only="false" show_grid="false" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" title="Cotton" isee:fill_intensity="0.1" left_axis_multi_scale="false" left_axis_auto_scale="true" right_axis_multi_scale="false" right_axis_auto_scale="true">
+						<plot color="blue" pen_width="1" index="0" show_y_axis="true">
 							<entity name="a_prodn_model[Cotton]"/>
 						</plot>
-						<plot color="red" pen_style="dot_dashed" isee:keep_zero_visible="false" pen_width="1" index="1" show_y_axis="true">
+						<plot color="red" pen_style="dot_dashed" pen_width="1" index="1" show_y_axis="true">
 							<entity name="a_prodn_USDA[Cotton]"/>
 						</plot>
 					</graph>
 				</stacked_container>
 				<aux color="blue" label_angle="310.195" x="4193.43" y="209.286" name="prodn payoff metric"/>
-				<connector uid="3401" angle="0">
+				<connector uid="3400" angle="0">
 					<from>a_prodn_USDA</from>
 					<to>prodn_payoff_metric</to>
 				</connector>
-				<connector uid="3402" angle="299.064">
+				<connector uid="3401" angle="299.064">
 					<from>a_prodn_model</from>
 					<to>prodn_payoff_metric</to>
 				</connector>
 				<aux background="#FFAAFF" label_side="top" x="4321.31" y="209.286" name="rollup prodn payoff metric"/>
-				<connector uid="3403" angle="0">
+				<connector uid="3402" angle="0">
 					<from>prodn_payoff_metric</from>
 					<to>rollup_prodn_payoff_metric</to>
 				</connector>
 				<aux color="blue" label_angle="310.195" x="4203.29" y="352.381" name="price payoff metric"/>
 				<aux background="#FFAAFF" x="4332.5" y="352.381" name="rollup price payoff metric"/>
-				<connector uid="3404" angle="0">
+				<connector uid="3403" angle="0">
 					<from>price_payoff_metric</from>
 					<to>rollup_price_payoff_metric</to>
 				</connector>
-				<connector uid="3405" angle="334.944">
+				<connector uid="3404" angle="334.944">
 					<from>a_price_model</from>
 					<to>price_payoff_metric</to>
 				</connector>
-				<connector uid="3406" angle="359.702">
+				<connector uid="3405" angle="359.702">
 					<from>a_price_USDA</from>
 					<to>price_payoff_metric</to>
 				</connector>
 				<aux color="blue" label_angle="310.195" x="4179.14" y="526.429" name="inv payoff metric"/>
 				<aux background="#FFAAFF" x="4325.03" y="526.429" name="rollup inv payoff metric"/>
-				<connector uid="3407" angle="0">
+				<connector uid="3406" angle="0">
 					<from>inv_payoff_metric</from>
 					<to>rollup_inv_payoff_metric</to>
 				</connector>
-				<connector uid="3408" angle="340.014">
+				<connector uid="3407" angle="340.014">
 					<from>
-						<alias uid="3304"/>
+						<alias uid="3303"/>
 					</from>
 					<to>inv_payoff_metric</to>
 				</connector>
 				<aux color="black" background="#FFAAFF" font_color="black" label_side="right" x="4445.71" y="295.571" name="demand vs outflow"/>
-				<stacked_container uid="3409" x="3928.43" y="675.893" width="350" height="250" visible_index="3" minimized="true">
-					<graph isee:graph_area_color="white" width="350" height="250" type="time_series" isee:points_only="false" show_grid="false" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" right_axis_multi_scale="false" right_axis_auto_scale="true">
-						<plot color="blue" isee:keep_zero_visible="false" pen_width="1" index="0" show_y_axis="true">
+				<stacked_container uid="3408" x="3928.43" y="675.893" width="350" height="250" visible_index="3" minimized="true">
+					<graph isee:graph_area_color="white" x="3928.43" y="675.893" width="350" height="250" type="time_series" isee:points_only="false" show_grid="false" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" left_axis_multi_scale="false" left_axis_auto_scale="true" right_axis_multi_scale="false" right_axis_auto_scale="true">
+						<plot color="blue" pen_width="1" index="0" show_y_axis="true">
 							<entity name="LT_crop_demand[Corn]"/>
 							<scale min="0" max="20000"/>
 						</plot>
-						<plot color="red" pen_style="dot_dashed" isee:keep_zero_visible="false" pen_width="1" index="1" show_y_axis="true">
+						<plot color="red" pen_style="dot_dashed" pen_width="1" index="1" show_y_axis="true">
 							<entity name="indicated_crop_demand[Corn]"/>
 						</plot>
 					</graph>
-					<graph isee:graph_area_color="white" width="350" height="250" type="time_series" isee:points_only="false" show_grid="false" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" right_axis_multi_scale="false" right_axis_auto_scale="true">
-						<plot color="blue" isee:keep_zero_visible="false" pen_width="1" index="0" show_y_axis="true">
+					<graph isee:graph_area_color="white" x="3928.43" y="675.893" width="350" height="250" type="time_series" isee:points_only="false" show_grid="false" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" left_axis_multi_scale="false" left_axis_auto_scale="true" right_axis_multi_scale="false" right_axis_auto_scale="true">
+						<plot color="blue" pen_width="1" index="0" show_y_axis="true">
 							<entity name="LT_crop_demand[Soy]"/>
 							<scale min="0"/>
 						</plot>
-						<plot color="red" pen_style="dot_dashed" isee:keep_zero_visible="false" pen_width="1" index="1" show_y_axis="true">
+						<plot color="red" pen_style="dot_dashed" pen_width="1" index="1" show_y_axis="true">
 							<entity name="indicated_crop_demand[Soy]"/>
 						</plot>
 					</graph>
-					<graph isee:graph_area_color="white" width="350" height="250" type="time_series" isee:points_only="false" show_grid="false" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" right_axis_multi_scale="false" right_axis_auto_scale="true">
-						<plot color="blue" isee:keep_zero_visible="false" pen_width="1" index="0" show_y_axis="true">
+					<graph isee:graph_area_color="white" x="3928.43" y="675.893" width="350" height="250" type="time_series" isee:points_only="false" show_grid="false" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" left_axis_multi_scale="false" left_axis_auto_scale="true" right_axis_multi_scale="false" right_axis_auto_scale="true">
+						<plot color="blue" pen_width="1" index="0" show_y_axis="true">
 							<entity name="LT_crop_demand[Wheat]"/>
 							<scale min="0" max="5000"/>
 						</plot>
-						<plot color="red" pen_style="dot_dashed" isee:keep_zero_visible="false" pen_width="1" index="1" show_y_axis="true">
+						<plot color="red" pen_style="dot_dashed" pen_width="1" index="1" show_y_axis="true">
 							<entity name="indicated_crop_demand[Wheat]"/>
 						</plot>
 					</graph>
-					<graph isee:graph_area_color="white" width="350" height="250" type="time_series" isee:points_only="false" show_grid="false" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" right_axis_multi_scale="false" right_axis_auto_scale="true">
-						<plot color="blue" isee:keep_zero_visible="false" pen_width="1" index="0" show_y_axis="true">
+					<graph isee:graph_area_color="white" x="3928.43" y="675.893" width="350" height="250" type="time_series" isee:points_only="false" show_grid="false" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" left_axis_multi_scale="false" left_axis_auto_scale="true" right_axis_multi_scale="false" right_axis_auto_scale="true">
+						<plot color="blue" pen_width="1" index="0" show_y_axis="true">
 							<entity name="LT_crop_demand[Other_Grains]"/>
 							<scale min="0" max="1000"/>
 						</plot>
-						<plot color="red" pen_style="dot_dashed" isee:keep_zero_visible="false" pen_width="1" index="1" show_y_axis="true">
+						<plot color="red" pen_style="dot_dashed" pen_width="1" index="1" show_y_axis="true">
 							<entity name="indicated_crop_demand[Other_Grains]"/>
 						</plot>
 					</graph>
-					<graph isee:graph_area_color="white" width="350" height="250" type="time_series" isee:points_only="false" show_grid="false" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" right_axis_multi_scale="false" right_axis_auto_scale="true">
-						<plot color="blue" isee:keep_zero_visible="false" pen_width="1" index="0" show_y_axis="true">
+					<graph isee:graph_area_color="white" x="3928.43" y="675.893" width="350" height="250" type="time_series" isee:points_only="false" show_grid="false" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" left_axis_multi_scale="false" left_axis_auto_scale="true" right_axis_multi_scale="false" right_axis_auto_scale="true">
+						<plot color="blue" pen_width="1" index="0" show_y_axis="true">
 							<entity name="LT_crop_demand[Cotton]"/>
 							<scale min="0" max="10000"/>
 						</plot>
-						<plot color="red" pen_style="dot_dashed" isee:keep_zero_visible="false" pen_width="1" index="1" show_y_axis="true">
+						<plot color="red" pen_style="dot_dashed" pen_width="1" index="1" show_y_axis="true">
 							<entity name="indicated_crop_demand[Cotton]"/>
 						</plot>
 					</graph>
 				</stacked_container>
-				<stacked_container uid="3410" x="5315.67" y="20.4167" width="350" height="481.667" minimized="true">
-					<graph isee:graph_area_color="white" width="350" height="481.667" type="time_series" isee:points_only="false" show_grid="false" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" right_axis_multi_scale="false" right_axis_auto_scale="true">
-						<plot color="blue" isee:keep_zero_visible="false" pen_width="1" index="0" show_y_axis="true">
+				<stacked_container uid="3409" x="5315.67" y="20.4167" width="350" height="481.667" minimized="true">
+					<graph isee:graph_area_color="white" x="5315.67" y="20.4167" width="350" height="481.667" type="time_series" isee:points_only="false" show_grid="false" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" left_axis_multi_scale="false" left_axis_auto_scale="true" right_axis_multi_scale="false" right_axis_auto_scale="true">
+						<plot color="blue" pen_width="1" index="0" show_y_axis="true">
 							<entity name="Crop_Inventories[Corn]"/>
 							<scale max="9000"/>
 						</plot>
-						<plot color="red" pen_style="dot_dashed" isee:keep_zero_visible="false" pen_width="1" index="1" show_y_axis="true">
+						<plot color="red" pen_style="dot_dashed" pen_width="1" index="1" show_y_axis="true">
 							<entity name="Crop_Inventories[Soy]"/>
 						</plot>
-						<plot color="fuchsia" pen_style="dotted" isee:keep_zero_visible="false" pen_width="1" index="2" show_y_axis="true">
+						<plot color="fuchsia" pen_style="dotted" pen_width="1" index="2" show_y_axis="true">
 							<entity name="Crop_Inventories[Wheat]"/>
 						</plot>
-						<plot color="#008F44" pen_style="dashed" isee:keep_zero_visible="false" pen_width="1" index="3" show_y_axis="true">
+						<plot color="#008F44" pen_style="dashed" pen_width="1" index="3" show_y_axis="true">
 							<entity name="Crop_Inventories[Other_Grains]"/>
 						</plot>
-						<plot color="#FF7F00" isee:keep_zero_visible="false" pen_width="1" index="4" show_y_axis="true">
+						<plot color="#FF7F00" pen_width="1" index="4" show_y_axis="true">
 							<entity name="Crop_Inventories[Cotton]"/>
 						</plot>
 					</graph>
 				</stacked_container>
-				<stacked_container uid="3411" x="5670.67" y="21.4157" width="350" height="481.667" minimized="true">
-					<graph isee:graph_area_color="white" width="350" height="481.667" type="time_series" isee:points_only="false" show_grid="false" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" right_axis_multi_scale="false" right_axis_auto_scale="true">
-						<plot color="blue" isee:keep_zero_visible="false" pen_width="1" index="0" show_y_axis="true">
+				<stacked_container uid="3410" x="5670.67" y="21.4157" width="350" height="481.667" minimized="true">
+					<graph isee:graph_area_color="white" x="5670.67" y="21.4157" width="350" height="481.667" type="time_series" isee:points_only="false" show_grid="false" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" left_axis_multi_scale="false" left_axis_auto_scale="true" right_axis_multi_scale="false" right_axis_auto_scale="true">
+						<plot color="blue" pen_width="1" index="0" show_y_axis="true">
 							<entity name="Raw_Inventory_Input_From_Baseline[Corn]"/>
 							<scale max="7000"/>
 						</plot>
-						<plot color="red" pen_style="dot_dashed" isee:keep_zero_visible="false" pen_width="1" index="1" show_y_axis="true">
+						<plot color="red" pen_style="dot_dashed" pen_width="1" index="1" show_y_axis="true">
 							<entity name="Raw_Inventory_Input_From_Baseline[Soy]"/>
 						</plot>
-						<plot color="fuchsia" pen_style="dotted" isee:keep_zero_visible="false" pen_width="1" index="2" show_y_axis="true">
+						<plot color="fuchsia" pen_style="dotted" pen_width="1" index="2" show_y_axis="true">
 							<entity name="Raw_Inventory_Input_From_Baseline[Wheat]"/>
 						</plot>
-						<plot color="#008F44" pen_style="dashed" isee:keep_zero_visible="false" pen_width="1" index="3" show_y_axis="true">
+						<plot color="#008F44" pen_style="dashed" pen_width="1" index="3" show_y_axis="true">
 							<entity name="Raw_Inventory_Input_From_Baseline[Other_Grains]"/>
 						</plot>
-						<plot color="#FF7F00" isee:keep_zero_visible="false" pen_width="1" index="4" show_y_axis="true">
+						<plot color="#FF7F00" pen_width="1" index="4" show_y_axis="true">
 							<entity name="Raw_Inventory_Input_From_Baseline[Cotton]"/>
 						</plot>
 					</graph>
@@ -6894,356 +6893,356 @@ COMMENTS: </doc>
 					</pts>
 				</flow>
 				<aux background="#FFAAFF" label_side="left" label_angle="225" x="4522.86" y="145.286" name="demand deviation payoff"/>
-				<connector uid="3412" angle="90">
+				<connector uid="3411" angle="90">
 					<from>squared_error_demand_metric</from>
 					<to>demand_deviation_payoff</to>
 				</connector>
-				<stacked_container uid="3413" x="4027.86" y="681.607" width="378.75" height="432.5" minimized="true">
-					<graph isee:graph_area_color="white" width="378.75" height="432.5" type="time_series" isee:points_only="false" show_grid="false" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" right_axis_multi_scale="false" right_axis_auto_scale="true">
-						<plot color="blue" isee:keep_zero_visible="false" pen_width="1" index="0" show_y_axis="true">
+				<stacked_container uid="3412" x="4027.86" y="681.607" width="378.75" height="432.5" minimized="true">
+					<graph isee:graph_area_color="white" x="4027.86" y="681.607" width="378.75" height="432.5" type="time_series" isee:points_only="false" show_grid="false" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" left_axis_multi_scale="false" left_axis_auto_scale="true" right_axis_multi_scale="false" right_axis_auto_scale="true">
+						<plot color="blue" pen_width="1" index="0" show_y_axis="true">
 							<entity name="Hay_Price_Index[NE]"/>
 						</plot>
-						<plot color="red" pen_style="dot_dashed" isee:keep_zero_visible="false" pen_width="1" index="1" show_y_axis="true">
+						<plot color="red" pen_style="dot_dashed" pen_width="1" index="1" show_y_axis="true">
 							<entity name="Hay_Price_Index[A]"/>
 						</plot>
-						<plot color="fuchsia" pen_style="dotted" isee:keep_zero_visible="false" pen_width="1" index="2" show_y_axis="true">
+						<plot color="fuchsia" pen_style="dotted" pen_width="1" index="2" show_y_axis="true">
 							<entity name="Hay_Price_Index[SE]"/>
 						</plot>
-						<plot color="#008F44" pen_style="dashed" isee:keep_zero_visible="false" pen_width="1" index="3" show_y_axis="true">
+						<plot color="#008F44" pen_style="dashed" pen_width="1" index="3" show_y_axis="true">
 							<entity name="Hay_Price_Index[DS]"/>
 						</plot>
-						<plot color="#FF7F00" isee:keep_zero_visible="false" pen_width="1" index="4" show_y_axis="true">
+						<plot color="#FF7F00" pen_width="1" index="4" show_y_axis="true">
 							<entity name="Hay_Price_Index[CB]"/>
 						</plot>
-						<plot color="#7F00FF" pen_style="dot_dashed" isee:keep_zero_visible="false" pen_width="1" index="5" show_y_axis="true">
+						<plot color="#7F00FF" pen_style="dot_dashed" pen_width="1" index="5" show_y_axis="true">
 							<entity name="Hay_Price_Index[LS]"/>
 						</plot>
-						<plot color="#0CA0FF" pen_style="dotted" isee:keep_zero_visible="false" pen_width="1" index="6" show_y_axis="true">
+						<plot color="#0CA0FF" pen_style="dotted" pen_width="1" index="6" show_y_axis="true">
 							<entity name="Hay_Price_Index[NP]"/>
 						</plot>
-						<plot color="lime" pen_style="dashed" isee:keep_zero_visible="false" pen_width="1" index="7" show_y_axis="true">
+						<plot color="lime" pen_style="dashed" pen_width="1" index="7" show_y_axis="true">
 							<entity name="Hay_Price_Index[SP]"/>
 						</plot>
-						<plot color="#FF007F" isee:keep_zero_visible="false" pen_width="1" index="8" show_y_axis="true">
+						<plot color="#FF007F" pen_width="1" index="8" show_y_axis="true">
 							<entity name="Hay_Price_Index[M]"/>
 						</plot>
-						<plot color="aqua" pen_style="dot_dashed" isee:keep_zero_visible="false" pen_width="1" index="9" show_y_axis="true">
+						<plot color="aqua" pen_style="dot_dashed" pen_width="1" index="9" show_y_axis="true">
 							<entity name="Hay_Price_Index[P]"/>
 						</plot>
 					</graph>
 				</stacked_container>
-				<connector uid="3414" angle="90">
+				<connector uid="3413" angle="90">
 					<from>
-						<alias uid="3358"/>
+						<alias uid="3355"/>
 					</from>
 					<to>demand_vs_outflow</to>
 				</connector>
-				<connector uid="3415" angle="0">
+				<connector uid="3414" angle="0">
 					<from>
-						<alias uid="3357"/>
+						<alias uid="3356"/>
 					</from>
 					<to>demand_vs_outflow</to>
 				</connector>
-				<connector uid="3416" angle="88.7258">
+				<connector uid="3415" angle="88.7258">
 					<from>demand_vs_outflow</from>
 					<to>squared_error</to>
 				</connector>
-				<connector uid="3417" angle="35.2834">
+				<connector uid="3416" angle="35.2834">
 					<from>
-						<alias uid="3357"/>
+						<alias uid="3356"/>
 					</from>
 					<to>squared_error</to>
 				</connector>
-				<connector uid="3418" angle="0">
+				<connector uid="3417" angle="0">
 					<from>Inventory_Input_In_Nominal_Units</from>
 					<to>inv_payoff_metric</to>
 				</connector>
 				<aux color="red" background="#FFAAFF" font_color="red" x="4307.03" y="466.571" name="weight factor for inventory\npayoff"/>
-				<connector uid="3419" angle="205.082">
+				<connector uid="3418" angle="205.082">
 					<from>weight_factor_for_inventory_payoff</from>
 					<to>inv_payoff_metric</to>
 				</connector>
 				<aux color="red" background="#FFAAFF" font_color="red" x="4261.43" y="127.286" name="weight factor for prodn\npayoff"/>
-				<connector uid="3420" angle="233.786">
+				<connector uid="3419" angle="233.786">
 					<from>weight_factor_for_prodn_payoff</from>
 					<to>prodn_payoff_metric</to>
 				</connector>
 				<aux color="red" background="#FFAAFF" font_color="red" x="4265" y="289.571" name="weight factor for price payoff"/>
-				<connector uid="3421" angle="232.716">
+				<connector uid="3420" angle="232.716">
 					<from>weight_factor_for_price_payoff</from>
 					<to>price_payoff_metric</to>
 				</connector>
-				<alias color="red" font_style="italic" font_color="red" uid="3112" x="1676" y="1516" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="3111" x="1676" y="1516" width="18" height="18">
 					<of>spread_in_frac_chg_from_FS_prodn_consn</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="3268" x="2192" y="503" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="3267" x="2192" y="503" width="18" height="18">
 					<of>degree_of_price_coupling_with_CORN</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" label_angle="205.402" uid="3104" x="2834" y="1721" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" label_angle="205.402" uid="3103" x="2834" y="1721" width="18" height="18">
 					<of>feedstock_safety_stock_factor</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="3150" x="510" y="942" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="3149" x="510" y="942" width="18" height="18">
 					<of>acres_per_square_mile</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="3258" x="3961.43" y="472" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="3257" x="3961.43" y="472" width="18" height="18">
 					<of>Baseline_to_Nominal_Conversion_Factors</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="3100" x="102" y="990" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="3099" x="102" y="990" width="18" height="18">
 					<of>feedstock_production_urban_system</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="3360" x="1121" y="847" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="3359" x="1121" y="847" width="18" height="18">
 					<of>inv_impact_on_feedstock_consn</of>
 				</alias>
-				<alias color="#008F44" font_style="italic" font_color="#008F44" uid="3165" x="101" y="927" width="18" height="18">
+				<alias color="#008F44" font_style="italic" font_color="#008F44" uid="3164" x="101" y="927" width="18" height="18">
 					<of>reqd_annual_feedstock_supply</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="3050" x="2076" y="457" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="3049" x="2076" y="457" width="18" height="18">
 					<of>spread_in_frac_chg_from_crop_prodn_consn</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="3110" x="2613" y="1369" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="3109" x="2613" y="1369" width="18" height="18">
 					<of>Is_CM_connected</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" label_angle="219.225" uid="3091" x="1642" y="2227" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" label_angle="219.225" uid="3090" x="1642" y="2227" width="18" height="18">
 					<of>feedstock_production_forest_system</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="3369" x="3172.14" y="204" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="3368" x="3172.14" y="204" width="18" height="18">
 					<of>conversions_to_tons</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" label_angle="312.239" uid="3364" x="55" y="876" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" label_angle="312.239" uid="3363" x="55" y="876" width="18" height="18">
 					<of>Initial_Crop_regional_prices</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="3155" x="1962" y="2111" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="3154" x="1962" y="2111" width="18" height="18">
 					<of>Cellulosic_Coeffs</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="3340" x="3909.29" y="517.429" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="3339" x="3909.29" y="517.429" width="18" height="18">
 					<of>Raw_Inventory_Input_From_Baseline</of>
 				</alias>
-				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="3365" x="453" y="786" width="18" height="18">
+				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="3364" x="453" y="786" width="18" height="18">
 					<of>C_to_B_Feedstock_Consn</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="3128" x="1755" y="1941" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="3127" x="1755" y="1941" width="18" height="18">
 					<of>feedstock_pipeline_ag_system</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="3361" x="1122" y="972" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="3360" x="1122" y="972" width="18" height="18">
 					<of>price_impact_on_Hay_and_Forage_Demand</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="3120" x="3927.29" y="200.286" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="3119" x="3927.29" y="200.286" width="18" height="18">
 					<of>Raw_Prodn_Input_From_Baseline</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="3183" x="3191" y="1489" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="3182" x="3191" y="1489" width="18" height="18">
 					<of>C_to_B_cost_to_price_ratio_C</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="3055" x="3922.29" y="118.286" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="3054" x="3922.29" y="118.286" width="18" height="18">
 					<of>Baseline_to_Nominal_Conversion_Factors</of>
 				</alias>
-				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="3366" x="451" y="740" width="18" height="18">
+				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="3365" x="451" y="740" width="18" height="18">
 					<of>C_to_EtOH_Feedstock_Consn</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="3292" x="501" y="904" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="3291" x="501" y="904" width="18" height="18">
 					<of>feedstock_shed_radius</of>
 				</alias>
-				<alias color="black" font_style="italic" font_color="black" uid="3297" x="3948.29" y="54.2857" width="18" height="18">
+				<alias color="black" font_style="italic" font_color="black" uid="3296" x="3948.29" y="54.2857" width="18" height="18">
 					<of>crop_prodn_mm</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" label_angle="276.185" uid="3115" x="47" y="820" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" label_angle="276.185" uid="3114" x="47" y="820" width="18" height="18">
 					<of>Initial_Crop_Price</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" label_angle="2.00779" uid="3163" x="2550" y="324" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" label_angle="2.00779" uid="3162" x="2550" y="324" width="18" height="18">
 					<of>spread_in_frac_chg_from_crop_stock_use</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="3318" x="3640.43" y="113" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="3317" x="3640.43" y="113" width="18" height="18">
 					<of>Is_CM_connected</of>
 				</alias>
-				<alias color="#651818" font_style="italic" font_color="#651818" uid="3254" x="1618" y="1739" width="18" height="18">
+				<alias color="#651818" font_style="italic" font_color="#651818" uid="3253" x="1618" y="1739" width="18" height="18">
 					<of>Est_Ag_Cellulosic_plants_incl_pipeline</of>
 				</alias>
-				<alias color="#008F44" font_style="italic" font_color="#008F44" uid="3334" x="121" y="652" width="18" height="18">
+				<alias color="#008F44" font_style="italic" font_color="#008F44" uid="3333" x="121" y="652" width="18" height="18">
 					<of>crop_prodn_mm</of>
 				</alias>
-				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="3047" x="1665" y="1978" width="18" height="18">
+				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="3046" x="1665" y="1978" width="18" height="18">
 					<of>Use_Agnostic_FS_Conversion</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" label_angle="205.402" uid="3108" x="234" y="1095" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" label_angle="205.402" uid="3107" x="234" y="1095" width="18" height="18">
 					<of>expected_days_per_yr_online</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" label_angle="272.739" uid="3194" x="249" y="1993" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" label_angle="272.739" uid="3193" x="249" y="1993" width="18" height="18">
 					<of>initial_cellulosic_price</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="3076" x="2035" y="957" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="3075" x="2035" y="957" width="18" height="18">
 					<of>forage_prodn_from_pasture_Land</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="3081" x="1639" y="2163" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="3080" x="1639" y="2163" width="18" height="18">
 					<of>feedstock_production_urban_system</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="3139" x="3506" y="1623" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="3138" x="3506" y="1623" width="18" height="18">
 					<of>C_to_RR_Capacity_C</of>
 				</alias>
-				<alias color="black" font_style="italic" font_color="black" uid="3057" x="2778" y="1848" width="18" height="18">
+				<alias color="black" font_style="italic" font_color="black" uid="3056" x="2778" y="1848" width="18" height="18">
 					<of>desired_feedstock_exports_by_region</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="3053" x="3502" y="1548" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="3052" x="3502" y="1548" width="18" height="18">
 					<of>C_to_B_Capacity_C</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="3152" x="3698" y="397" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="3151" x="3698" y="397" width="18" height="18">
 					<of>Baseline_to_Nominal_Conversion_Factors</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="3226" x="1975" y="2326" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="3225" x="1975" y="2326" width="18" height="18">
 					<of>desired_feedstock_exports</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="3161" x="2872" y="1821" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="3160" x="2872" y="1821" width="18" height="18">
 					<of>C_to_RR_Reqd_fs_supply</of>
 				</alias>
-				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="3367" x="638" y="826" width="18" height="18">
+				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="3366" x="638" y="826" width="18" height="18">
 					<of>frac_supply_system_advanced</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="3135" x="3198" y="1422" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="3134" x="3198" y="1422" width="18" height="18">
 					<of>C_to_EtOH_cost_to_price_ratio_C</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="3373" x="480" y="2010" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="3372" x="480" y="2010" width="18" height="18">
 					<of>C_to_EtOH_fs_demand_incl_pipeline</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="3320" x="2653" y="1921" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="3319" x="2653" y="1921" width="18" height="18">
 					<of>target_feedstock_inv_coverage</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" label_angle="356.196" uid="3168" x="403" y="1101" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" label_angle="356.196" uid="3167" x="403" y="1101" width="18" height="18">
 					<of>feedstock_safety_stock_factor</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="3277" x="3163" y="1606" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="3276" x="3163" y="1606" width="18" height="18">
 					<of>C_to_RR_cost_to_price_ratio_C</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="3159" x="2588" y="2107" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="3158" x="2588" y="2107" width="18" height="18">
 					<of>C_to_B_demand_at_nominal_util</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="3133" x="1859" y="323" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="3132" x="1859" y="323" width="18" height="18">
 					<of>Perlack_Crop_Prodn_mm</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="3102" x="2696" y="2135" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="3101" x="2696" y="2135" width="18" height="18">
 					<of>C_to_RR_demand_at_nominal_util</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="3350" x="2982" y="1676" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="3349" x="2982" y="1676" width="18" height="18">
 					<of>AEO_Cellulosic_Demand_Scenario</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" label_angle="354.582" uid="3180" x="2936" y="1741" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" label_angle="354.582" uid="3179" x="2936" y="1741" width="18" height="18">
 					<of>C_to_EtOH_fs_demand_incl_pipeline</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="3352" x="640" y="893" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="3351" x="640" y="893" width="18" height="18">
 					<of>frac_feedstock_shed_ag_land</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="3061" x="2952" y="1552" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="3060" x="2952" y="1552" width="18" height="18">
 					<of>regional_distn_of_cellulose_capacity</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" label_angle="183.236" uid="3310" x="2020" y="1667" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" label_angle="183.236" uid="3309" x="2020" y="1667" width="18" height="18">
 					<of>spread_in_frac_chg_from_FS_inventory</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="3146" x="107" y="1050" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="3145" x="107" y="1050" width="18" height="18">
 					<of>feedstock_production_forest_system</of>
 				</alias>
-				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="3368" x="449" y="823" width="18" height="18">
+				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="3367" x="449" y="823" width="18" height="18">
 					<of>C_to_RR_Feedstock_Consn</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="3329" x="1758" y="1881" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="3328" x="1758" y="1881" width="18" height="18">
 					<of>de_minimus_fs_prodn</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="3272" x="1865" y="1031" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="3271" x="1865" y="1031" width="18" height="18">
 					<of>hay_prodn_from_ag_land</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="3213" x="673" y="923" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="3212" x="673" y="923" width="18" height="18">
 					<of>one_thousand</of>
 				</alias>
-				<alias color="black" font_style="italic" font_color="black" uid="3363" x="591" y="662" width="18" height="18">
+				<alias color="black" font_style="italic" font_color="black" uid="3362" x="591" y="662" width="18" height="18">
 					<of>reqd_feedstock_production_ag_system</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" label_angle="252.305" uid="3221" x="2245" y="1281" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" label_angle="252.305" uid="3220" x="2245" y="1281" width="18" height="18">
 					<of>max_FS_offer_price_plantgate</of>
 				</alias>
-				<alias color="black" font_style="italic" font_color="black" uid="3316" x="3920.71" y="262.571" width="18" height="18">
+				<alias color="black" font_style="italic" font_color="black" uid="3315" x="3920.71" y="262.571" width="18" height="18">
 					<of>Crop_Price</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" label_side="right" uid="3252" x="3497" y="1475" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" label_side="right" uid="3251" x="3497" y="1475" width="18" height="18">
 					<of>C_to_EtOH_Output_Capacity_incl_Pipeline</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" label_angle="357.347" uid="3098" x="2890" y="1773" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" label_angle="357.347" uid="3097" x="2890" y="1773" width="18" height="18">
 					<of>C_to_B_FS_demand_incl_pipeline</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="black" uid="3304" x="3907.21" y="418.214" width="45" height="35">
+				<alias color="blue" font_style="italic" font_color="black" uid="3303" x="3907.21" y="418.214" width="45" height="35">
 					<of>Crop_Inventories</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" label_angle="81.0236" uid="3245" x="203" y="1067" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" label_angle="81.0236" uid="3244" x="203" y="1067" width="18" height="18">
 					<of>plant_input_capacity_tpd</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="3356" x="4435" y="58.4286" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="3357" x="4435" y="58.4286" width="18" height="18">
 					<of>Perlack_Crop_Prodn_mm</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="3148" x="2006" y="64" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="3147" x="2006" y="64" width="18" height="18">
 					<of>commodity_crop_production_ag_system</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="3208" x="2159" y="750" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="3207" x="2159" y="750" width="18" height="18">
 					<of>hay_and_forage_demand_growth_scenario</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="3070" x="341" y="652" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="3069" x="341" y="652" width="18" height="18">
 					<of>one_million</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="3125" x="3136" y="46" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="3124" x="3136" y="46" width="18" height="18">
 					<of>SJ_fs_demand_at_nominal_utilization</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="3064" x="2477" y="1583" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="3063" x="2477" y="1583" width="18" height="18">
 					<of>initial_cellulosic_price</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" label_angle="37.8513" uid="3270" x="2925" y="74" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" label_angle="37.8513" uid="3269" x="2925" y="74" width="18" height="18">
 					<of>Perlack_Crop_Prodn_mm</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="3372" x="446" y="1864" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="3371" x="446" y="1864" width="18" height="18">
 					<of>Cellulosic_Coeffs</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="3087" x="309" y="700" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="3086" x="309" y="700" width="18" height="18">
 					<of>conversions_to_tons</of>
 				</alias>
-				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="3131" x="254" y="1851" width="18" height="18">
+				<alias color="#65183E" font_style="italic" font_color="#65183E" uid="3130" x="254" y="1851" width="18" height="18">
 					<of>Use_Agnostic_FS_Conversion</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" label_angle="0.932827" uid="3157" x="2704" y="866" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" label_angle="0.932827" uid="3156" x="2704" y="866" width="18" height="18">
 					<of>spread_in_frac_chg_from_Hay_prodn_consn</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" label_angle="263.815" uid="3359" x="886" y="1050" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" label_angle="263.815" uid="3358" x="886" y="1050" width="18" height="18">
 					<of>price_impact_on_demand</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" label_angle="205.402" uid="3172" x="3920.71" y="342.571" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" label_angle="205.402" uid="3171" x="3920.71" y="342.571" width="18" height="18">
 					<of>Raw_Price_Input_From_Baseline</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="3242" x="1639" y="2111" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="3241" x="1639" y="2111" width="18" height="18">
 					<of>feedstock_production_ag_system</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" label_angle="290.487" uid="3068" x="3128" y="121" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" label_angle="290.487" uid="3067" x="3128" y="121" width="18" height="18">
 					<of>S_to_EtOH_reqd_fs_supply</of>
 				</alias>
-				<alias color="#65183E" font_style="italic" font_color="#65183E" label_angle="255.613" uid="3362" x="30.5" y="648.5" width="45" height="35">
+				<alias color="#65183E" font_style="italic" font_color="#65183E" label_angle="255.613" uid="3361" x="30.5" y="648.5" width="45" height="35">
 					<of>Hay_Price_Index</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="3224" x="381" y="953" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="3223" x="381" y="953" width="18" height="18">
 					<of>one_million</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="black" label_angle="73.9683" uid="3072" x="23.5" y="760.5" width="45" height="35">
+				<alias color="blue" font_style="italic" font_color="black" label_angle="73.9683" uid="3071" x="23.5" y="760.5" width="45" height="35">
 					<of>Crop_Price_Index</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="3249" x="2585" y="251" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="3248" x="2585" y="251" width="18" height="18">
 					<of>Averaging_time_for_LT_stock_use_ratio</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_color="#008F44" uid="3347" x="243.5" y="1796.5" width="45" height="35">
+				<alias color="blue" font_style="italic" font_color="#008F44" uid="3346" x="243.5" y="1796.5" width="45" height="35">
 					<of>FS_Price_PlantGate</of>
 				</alias>
-				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" label_angle="234.408" uid="3096" x="2499" y="2097" width="18" height="18">
+				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" label_angle="234.408" uid="3095" x="2499" y="2097" width="18" height="18">
 					<of>C_to_EtOH_demand_at_nominal_util</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="3370" x="3299.93" y="197" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="3369" x="3299.93" y="197" width="18" height="18">
 					<of>dry_ton_factors</of>
 				</alias>
-				<alias color="#00007F" font_style="italic" font_color="#00007F" uid="3371" x="3239.57" y="143" width="18" height="18">
+				<alias color="#00007F" font_style="italic" font_color="#00007F" uid="3370" x="3239.57" y="143" width="18" height="18">
 					<of>conversions_to_Dry_Tons</of>
 				</alias>
-				<alias color="#008F44" font_style="italic" font_color="#008F44" uid="3357" x="4357.43" y="286.571" width="18" height="18">
+				<alias color="#008F44" font_style="italic" font_color="#008F44" uid="3356" x="4357.43" y="286.571" width="18" height="18">
 					<of>LT_crop_demand</of>
 				</alias>
-				<alias color="black" font_style="italic" font_color="black" uid="3358" x="4436.71" y="343.143" width="18" height="18">
+				<alias color="black" font_style="italic" font_color="black" uid="3355" x="4436.71" y="343.143" width="18" height="18">
 					<of>indicated_crop_demand</of>
 				</alias>
 			</view>
