@@ -13,10 +13,6 @@
 		<dt reciprocal="true">4</dt>
 	</sim_specs>
 	<dimensions>
-		<dim name="CtoATech">
-			<elem name="BC"/>
-			<elem name="TC"/>
-		</dim>
 		<dim name="Region">
 			<elem name="NE"/>
 			<elem name="A"/>
@@ -37,6 +33,10 @@
 			<elem name="Primary"/>
 			<elem name="Co1"/>
 			<elem name="Co2"/>
+		</dim>
+		<dim name="CtoATech">
+			<elem name="BC"/>
+			<elem name="TC"/>
 		</dim>
 	</dimensions>
 	<isee:prefs show_module_prefix="true" live_update_on_drag="true" show_restore_buttons="false" layer="model" interface_scale_ui="true" interface_max_page_width="10000" interface_max_page_height="10000" interface_min_page_width="0" interface_min_page_height="0" saved_runs="5" keep="false" rifp="false"/>
@@ -3000,8 +3000,8 @@ COMMENTS: </doc>
 				<units>USD per gallon</units>
 			</aux>
 			<group name="Outputs to Other Modules 3" run="false">
-				<entity name="B_gasoline_price_sensitivity_factor"/>
 				<entity name="avg_per_gal_markup"/>
+				<entity name="B_gasoline_price_sensitivity_factor"/>
 			</group>
 			<group name="Non Spreadsheet Inputs from Other Modules 3" run="false">
 				<entity name="FFV_Lo_Blend_Consn"/>
@@ -3042,34 +3042,34 @@ COMMENTS: </doc>
 				<entity name="Rollup_potential_EtOH_consn_Low_Blend"/>
 			</group>
 			<group name="EtOH POD and POU Pricing" run="false">
-				<entity name="distn_storage_subsidy"/>
-				<entity name="avg_Hi_Blend_Pump_Price"/>
-				<entity name="Hi_Blend_Gas_equivalent_price"/>
+				<entity name="Expected_PoU_Hi_Blend_Cost_after_Subz"/>
+				<entity name="Old_Logic_Hi_Blend_Pump_Price"/>
+				<entity name="Hi_Blend_POD_price"/>
+				<entity name="Hi_Blend_usage_weighting_factors"/>
+				<entity name="Gas_Price_Coupling_Pricing_Rule"/>
+				<entity name="hi_blend_use_wtd_pump_price_input"/>
+				<entity name="Cost_Plus_pricing_rule"/>
+				<entity name="Hi_Blend_POU_Subsidy"/>
+				<entity name="region_specific_import_cost"/>
+				<entity name="Expected_Hi_Blend_POU_Delivered_Cost"/>
+				<entity name="POU_Subsidy_PassOn_to_Eng_User"/>
+				<entity name="Hi_Blend_Volumetric_Offset"/>
+				<entity name="avg_Premium_Pump_Price"/>
+				<entity name="Avg_Gasoline_Pump_Price"/>
+				<entity name="Hi_Blend_Pump_Price_Before_Applying_POU_Subsidy_PassOn"/>
+				<entity name="Gasoline_POD_price"/>
+				<entity name="avg_frac_total_prodn_imported"/>
+				<entity name="EtOH_POD_price"/>
+				<entity name="Hi_Blend_Pump_Price"/>
 				<entity name="Regional_distn_storage_cost"/>
 				<entity name="chg_avg_frac_tot_prodn_import"/>
-				<entity name="EtOH_POD_price"/>
-				<entity name="Gasoline_Pump_Price"/>
-				<entity name="Hi_Blend_Pump_Price_Before_Applying_POU_Subsidy_PassOn"/>
-				<entity name="Avg_Gasoline_Pump_Price"/>
-				<entity name="avg_Premium_Pump_Price"/>
-				<entity name="Hi_Blend_Volumetric_Offset"/>
-				<entity name="Addl_Gasoline_Tax"/>
-				<entity name="POU_Subsidy_PassOn_to_Eng_User"/>
-				<entity name="Hi_Blend_Pump_Price"/>
-				<entity name="Expected_Hi_Blend_POU_Delivered_Cost"/>
-				<entity name="Gasoline_POD_price"/>
-				<entity name="Hi_Blend_POU_Subsidy"/>
-				<entity name="avg_frac_total_prodn_imported"/>
-				<entity name="hi_blend_use_wtd_pump_price_input"/>
-				<entity name="region_specific_import_cost"/>
-				<entity name="Hi_Blend_usage_weighting_factors"/>
-				<entity name="frac_prodn_imported"/>
 				<entity name="New_Logic_Hi_Blend_Pump_Price"/>
-				<entity name="Gas_Price_Coupling_Pricing_Rule"/>
-				<entity name="Hi_Blend_POD_price"/>
-				<entity name="Old_Logic_Hi_Blend_Pump_Price"/>
-				<entity name="Cost_Plus_pricing_rule"/>
-				<entity name="Expected_PoU_Hi_Blend_Cost_after_Subz"/>
+				<entity name="Hi_Blend_Gas_equivalent_price"/>
+				<entity name="avg_Hi_Blend_Pump_Price"/>
+				<entity name="Gasoline_Pump_Price"/>
+				<entity name="Addl_Gasoline_Tax"/>
+				<entity name="frac_prodn_imported"/>
+				<entity name="distn_storage_subsidy"/>
 			</group>
 			<group name="Data Inputs and Initializations" run="false">
 				<entity name="avging_time_for_consn"/>
@@ -3122,40 +3122,40 @@ COMMENTS: </doc>
 				<entity name="B_industrial_price_scenario"/>
 			</group>
 			<group name="Butanol Inventory and Pricing" run="false">
-				<entity name="B_industrial_price_input"/>
-				<entity name="frac_change_in_B_price"/>
-				<entity name="B_distn_storage_cost"/>
-				<entity name="target_B_inventory"/>
-				<entity name="nominal_attr_B_industrial"/>
-				<entity name="delta_in_gasoline_input_cost"/>
-				<entity name="B_industrial_price_multiplier"/>
-				<entity name="desired_B_industrial_consn"/>
-				<entity name="B_industrial_consn"/>
-				<entity name="RAT_Bio_B_industrial"/>
-				<entity name="offset_in_frac_chg_from_B_prodn_cons"/>
-				<entity name="B_logistic_price_response_curve_from_prodn_consn"/>
-				<entity name="B_logistic_price_response_curve_from_inv"/>
-				<entity name="nominal_attr_Bio_B_industrial"/>
-				<entity name="avg_gasoline_input_cost_PoD"/>
-				<entity name="B_production"/>
-				<entity name="B_price_input_from_prodn_consn"/>
-				<entity name="B_fuel_consn"/>
-				<entity name="B_Inventory"/>
-				<entity name="chg_B_price_index"/>
-				<entity name="frac_chg_B_price_inv"/>
-				<entity name="B_price_input_from_inv_ratio"/>
-				<entity name="total_desired_B_fuel_consn"/>
-				<entity name="B_inventory_ratio"/>
-				<entity name="inventory_constraint_on_B_consn"/>
-				<entity name="frac_chg_B_price_prodn_consn"/>
-				<entity name="offset_in_frac_chg_from_B_inv"/>
+				<entity name="B_POP_Price_Index"/>
+				<entity name="AVG_Desired_B_consn"/>
 				<entity name="B_POP_price"/>
 				<entity name="B_prodn_consn_ratio"/>
-				<entity name="Desired_B_inv_coverage"/>
-				<entity name="B_POD_price"/>
+				<entity name="offset_in_frac_chg_from_B_inv"/>
+				<entity name="frac_chg_B_price_prodn_consn"/>
+				<entity name="B_price_input_from_inv_ratio"/>
+				<entity name="B_inventory_ratio"/>
+				<entity name="total_desired_B_fuel_consn"/>
+				<entity name="B_Inventory"/>
+				<entity name="B_price_input_from_prodn_consn"/>
 				<entity name="total_desired_B_consn"/>
-				<entity name="AVG_Desired_B_consn"/>
-				<entity name="B_POP_Price_Index"/>
+				<entity name="B_production"/>
+				<entity name="avg_gasoline_input_cost_PoD"/>
+				<entity name="nominal_attr_Bio_B_industrial"/>
+				<entity name="B_logistic_price_response_curve_from_inv"/>
+				<entity name="B_fuel_consn"/>
+				<entity name="offset_in_frac_chg_from_B_prodn_cons"/>
+				<entity name="B_POD_price"/>
+				<entity name="RAT_Bio_B_industrial"/>
+				<entity name="desired_B_industrial_consn"/>
+				<entity name="frac_chg_B_price_inv"/>
+				<entity name="B_logistic_price_response_curve_from_prodn_consn"/>
+				<entity name="delta_in_gasoline_input_cost"/>
+				<entity name="inventory_constraint_on_B_consn"/>
+				<entity name="nominal_attr_B_industrial"/>
+				<entity name="Desired_B_inv_coverage"/>
+				<entity name="target_B_inventory"/>
+				<entity name="B_distn_storage_cost"/>
+				<entity name="chg_B_price_index"/>
+				<entity name="B_industrial_consn"/>
+				<entity name="frac_change_in_B_price"/>
+				<entity name="B_industrial_price_multiplier"/>
+				<entity name="B_industrial_price_input"/>
 			</group>
 			<group name="EtOH PoP Pricing" run="false">
 				<entity name="EtOH_price_input_from_prodn_consn"/>
@@ -4842,168 +4842,168 @@ COMMENTS: developed via simulations to put system in initial balance</doc>
 					<item uid="4894"/>
 				</group>
 				<group locked="true" color="black" font_color="black" x="2794" y="23" width="1806" height="725" name="EtOH POD and POU Pricing">
-					<item uid="4792"/>
-					<item uid="4773"/>
-					<item uid="4803"/>
-					<item uid="4602"/>
-					<item uid="4787"/>
-					<item uid="4737"/>
-					<item uid="4816"/>
-					<item uid="4591"/>
-					<item uid="4604"/>
-					<item uid="4691"/>
-					<item uid="4622"/>
-					<item uid="4813"/>
-					<item uid="4775"/>
-					<item uid="4767"/>
-					<item uid="4652"/>
-					<item uid="4759"/>
-					<item uid="4645"/>
-					<item uid="4796"/>
-					<item uid="4895"/>
-					<item uid="4788"/>
-					<item uid="4671"/>
-					<item uid="4821"/>
-					<item uid="4610"/>
-					<item uid="4860"/>
-					<item uid="4676"/>
-					<item uid="4597"/>
-					<item uid="4845"/>
-					<item uid="4861"/>
-					<item uid="4723"/>
-					<item uid="4820"/>
-					<item uid="4596"/>
-					<item uid="4607"/>
-					<item uid="4599"/>
-					<item uid="4758"/>
-					<item uid="4755"/>
-					<item uid="4643"/>
-					<item uid="4609"/>
-					<item uid="4595"/>
-					<item uid="4754"/>
-					<item uid="4777"/>
-					<item uid="4802"/>
-					<item uid="4747"/>
-					<item uid="4646"/>
-					<item uid="4600"/>
-					<item uid="4735"/>
-					<item uid="4814"/>
-					<item uid="4608"/>
-					<item uid="4601"/>
-					<item uid="4768"/>
-					<item uid="4783"/>
-					<item uid="4716"/>
-					<item uid="4678"/>
-					<item uid="4804"/>
-					<item uid="4774"/>
-					<item uid="4722"/>
-					<item uid="4873"/>
-					<item uid="4664"/>
-					<item uid="4805"/>
-					<item uid="4659"/>
-					<item uid="4651"/>
-					<item uid="4819"/>
-					<item uid="4685"/>
-					<item uid="4736"/>
-					<item uid="4797"/>
-					<item uid="4855"/>
-					<item uid="4647"/>
-					<item uid="4769"/>
-					<item uid="4844"/>
-					<item uid="4824"/>
-					<item uid="4640"/>
-					<item uid="4766"/>
-					<item uid="4770"/>
-					<item uid="4689"/>
-					<item uid="4822"/>
-					<item uid="4872"/>
-					<item uid="4858"/>
-					<item uid="4650"/>
-					<item uid="4714"/>
-					<item uid="4704"/>
-					<item uid="4782"/>
-					<item uid="4675"/>
-					<item uid="4684"/>
-					<item uid="4617"/>
-					<item uid="4677"/>
-					<item uid="4616"/>
-					<item uid="4658"/>
-					<item uid="4878"/>
-					<item uid="4846"/>
-					<item uid="4656"/>
+					<item uid="4772"/>
+					<item uid="4721"/>
+					<item uid="4713"/>
+					<item uid="4623"/>
 					<item uid="4672"/>
 					<item uid="4842"/>
+					<item uid="4656"/>
+					<item uid="4846"/>
+					<item uid="4878"/>
+					<item uid="4658"/>
+					<item uid="4677"/>
+					<item uid="4684"/>
+					<item uid="4782"/>
+					<item uid="4714"/>
+					<item uid="4872"/>
+					<item uid="4766"/>
+					<item uid="4640"/>
+					<item uid="4844"/>
+					<item uid="4675"/>
+					<item uid="4736"/>
+					<item uid="4664"/>
+					<item uid="4873"/>
+					<item uid="4774"/>
+					<item uid="4617"/>
+					<item uid="4678"/>
 					<item uid="4724"/>
+					<item uid="4650"/>
+					<item uid="4716"/>
+					<item uid="4783"/>
+					<item uid="4659"/>
+					<item uid="4608"/>
+					<item uid="4685"/>
+					<item uid="4735"/>
+					<item uid="4600"/>
+					<item uid="4770"/>
+					<item uid="4651"/>
+					<item uid="4747"/>
+					<item uid="4609"/>
+					<item uid="4643"/>
+					<item uid="4755"/>
+					<item uid="4599"/>
+					<item uid="4820"/>
+					<item uid="4802"/>
+					<item uid="4723"/>
 					<item uid="4877"/>
-					<item uid="4623"/>
-					<item uid="4713"/>
-					<item uid="4721"/>
-					<item uid="4772"/>
+					<item uid="4597"/>
+					<item uid="4824"/>
+					<item uid="4676"/>
+					<item uid="4610"/>
+					<item uid="4858"/>
+					<item uid="4821"/>
+					<item uid="4671"/>
+					<item uid="4777"/>
+					<item uid="4860"/>
+					<item uid="4722"/>
+					<item uid="4769"/>
+					<item uid="4895"/>
+					<item uid="4788"/>
+					<item uid="4804"/>
+					<item uid="4689"/>
+					<item uid="4607"/>
+					<item uid="4645"/>
+					<item uid="4813"/>
+					<item uid="4691"/>
+					<item uid="4758"/>
+					<item uid="4768"/>
+					<item uid="4796"/>
+					<item uid="4604"/>
+					<item uid="4805"/>
+					<item uid="4595"/>
+					<item uid="4704"/>
+					<item uid="4822"/>
+					<item uid="4816"/>
+					<item uid="4767"/>
+					<item uid="4754"/>
+					<item uid="4861"/>
+					<item uid="4737"/>
+					<item uid="4759"/>
+					<item uid="4787"/>
+					<item uid="4596"/>
+					<item uid="4797"/>
+					<item uid="4616"/>
+					<item uid="4622"/>
+					<item uid="4602"/>
+					<item uid="4647"/>
+					<item uid="4803"/>
+					<item uid="4601"/>
+					<item uid="4855"/>
+					<item uid="4775"/>
+					<item uid="4646"/>
+					<item uid="4819"/>
+					<item uid="4845"/>
+					<item uid="4652"/>
+					<item uid="4591"/>
+					<item uid="4773"/>
+					<item uid="4792"/>
+					<item uid="4814"/>
 				</group>
 				<group locked="false" x="2" y="624" width="753" height="749" name="Data Inputs and Initializations"/>
 				<group locked="true" color="white" font_color="white" x="1366" y="1809.5" width="1744" height="879" name="Butanol Inventory and Pricing">
-					<item uid="4780"/>
-					<item uid="4864"/>
-					<item uid="4614"/>
-					<item uid="4662"/>
-					<item uid="4806"/>
-					<item uid="4644"/>
+					<item uid="4810"/>
+					<item uid="4661"/>
+					<item uid="4825"/>
+					<item uid="4710"/>
+					<item uid="4751"/>
+					<item uid="4711"/>
+					<item uid="4690"/>
+					<item uid="4649"/>
+					<item uid="4771"/>
+					<item uid="4849"/>
+					<item uid="4896"/>
+					<item uid="4725"/>
+					<item uid="4688"/>
+					<item uid="4637"/>
+					<item uid="4654"/>
+					<item uid="4728"/>
+					<item uid="4695"/>
+					<item uid="4756"/>
+					<item uid="4734"/>
+					<item uid="4705"/>
+					<item uid="4897"/>
+					<item uid="4732"/>
+					<item uid="4854"/>
+					<item uid="4638"/>
+					<item uid="4778"/>
+					<item uid="4853"/>
+					<item uid="4744"/>
+					<item uid="4838"/>
+					<item uid="4870"/>
+					<item uid="4826"/>
+					<item uid="4648"/>
+					<item uid="4742"/>
+					<item uid="4859"/>
+					<item uid="4843"/>
+					<item uid="4876"/>
+					<item uid="4634"/>
+					<item uid="4880"/>
+					<item uid="4635"/>
+					<item uid="4815"/>
 					<item uid="4837"/>
 					<item uid="4807"/>
-					<item uid="4635"/>
-					<item uid="4852"/>
-					<item uid="4648"/>
-					<item uid="4826"/>
-					<item uid="4870"/>
-					<item uid="4703"/>
-					<item uid="4853"/>
-					<item uid="4859"/>
-					<item uid="4838"/>
-					<item uid="4811"/>
-					<item uid="4778"/>
-					<item uid="4633"/>
-					<item uid="4896"/>
-					<item uid="4638"/>
-					<item uid="4683"/>
-					<item uid="4779"/>
-					<item uid="4742"/>
-					<item uid="4876"/>
-					<item uid="4732"/>
-					<item uid="4734"/>
-					<item uid="4695"/>
-					<item uid="4618"/>
-					<item uid="4728"/>
-					<item uid="4744"/>
-					<item uid="4679"/>
-					<item uid="4843"/>
-					<item uid="4605"/>
-					<item uid="4654"/>
-					<item uid="4688"/>
-					<item uid="4725"/>
-					<item uid="4880"/>
-					<item uid="4634"/>
-					<item uid="4849"/>
-					<item uid="4619"/>
-					<item uid="4897"/>
-					<item uid="4771"/>
-					<item uid="4649"/>
-					<item uid="4637"/>
-					<item uid="4801"/>
-					<item uid="4869"/>
+					<item uid="4644"/>
 					<item uid="4875"/>
-					<item uid="4815"/>
-					<item uid="4705"/>
-					<item uid="4898"/>
-					<item uid="4751"/>
-					<item uid="4690"/>
-					<item uid="4710"/>
-					<item uid="4711"/>
-					<item uid="4825"/>
-					<item uid="4661"/>
-					<item uid="4756"/>
-					<item uid="4810"/>
-					<item uid="4854"/>
+					<item uid="4869"/>
+					<item uid="4679"/>
+					<item uid="4852"/>
+					<item uid="4633"/>
+					<item uid="4806"/>
 					<item uid="4789"/>
+					<item uid="4605"/>
+					<item uid="4662"/>
+					<item uid="4898"/>
+					<item uid="4614"/>
+					<item uid="4618"/>
+					<item uid="4864"/>
+					<item uid="4683"/>
+					<item uid="4811"/>
+					<item uid="4619"/>
+					<item uid="4703"/>
+					<item uid="4801"/>
+					<item uid="4780"/>
+					<item uid="4779"/>
 				</group>
 				<group locked="false" color="black" font_color="black" x="1938" y="22" width="857" height="522" name="EtOH PoP Pricing">
 					<item uid="4899"/>
@@ -5091,7 +5091,7 @@ COMMENTS: developed via simulations to put system in initial balance</doc>
 				<aux color="black" font_color="black" label_side="bottom" x="3047.33" y="2153.67" name="avg gasoline input cost PoD"/>
 				<connector uid="4919" angle="272.291">
 					<from>
-						<alias uid="4898"/>
+						<alias uid="4896"/>
 					</from>
 					<to>avg_gasoline_input_cost_PoD</to>
 				</connector>
@@ -5102,7 +5102,7 @@ COMMENTS: developed via simulations to put system in initial balance</doc>
 				</connector>
 				<connector uid="4921" angle="90">
 					<from>
-						<alias uid="4896"/>
+						<alias uid="4898"/>
 					</from>
 					<to>B_industrial_price_multiplier</to>
 				</connector>
@@ -5174,7 +5174,7 @@ COMMENTS: developed via simulations to put system in initial balance</doc>
 					</from>
 					<to>regional_prodn_consn_gap</to>
 				</connector>
-				<alias color="#008F44" font_style="italic" font_color="#008F44" uid="4889" x="655" y="1534" width="18" height="18">
+				<alias color="#008F44" font_style="italic" font_color="#008F44" uid="4886" x="655" y="1534" width="18" height="18">
 					<of>regional_EtOH_consumption</of>
 				</alias>
 				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="4727" x="2428" y="349" width="18" height="18">
@@ -5204,7 +5204,7 @@ COMMENTS: developed via simulations to put system in initial balance</doc>
 				<alias color="red" font_style="italic" font_color="red" uid="4685" x="4206" y="70" width="18" height="18">
 					<of>addl_gas_tax_amt</of>
 				</alias>
-				<alias color="#008F44" font_style="italic" font_color="#008F44" uid="4884" x="472" y="1525" width="18" height="18">
+				<alias color="#008F44" font_style="italic" font_color="#008F44" uid="4891" x="472" y="1525" width="18" height="18">
 					<of>EtOH_POD_price</of>
 				</alias>
 				<alias color="red" font_style="italic" font_color="red" uid="4755" x="4026" y="531" width="18" height="18">
@@ -5238,7 +5238,7 @@ COMMENTS: developed via simulations to put system in initial balance</doc>
 				<alias color="red" font_style="italic" font_color="red" uid="4811" x="2619" y="2172.5" width="18" height="18">
 					<of>spread_in_B_frac_chg_from_prodn_consn</of>
 				</alias>
-				<alias color="black" font_style="italic" font_color="black" uid="4891" x="169" y="1716" width="18" height="18">
+				<alias color="black" font_style="italic" font_color="black" uid="4884" x="169" y="1716" width="18" height="18">
 					<of>Hi_Blend_POU_Subsidy</of>
 				</alias>
 				<alias color="red" font_style="italic" font_color="red" uid="4807" x="1565" y="2395.5" width="18" height="18">
@@ -5259,7 +5259,7 @@ COMMENTS: developed via simulations to put system in initial balance</doc>
 				<alias color="red" font_style="italic" font_color="red" label_angle="258.185" uid="4593" x="2131" y="1050" width="18" height="18">
 					<of>Lo_blend_coefficient</of>
 				</alias>
-				<alias color="black" font_style="italic" font_color="black" uid="4890" x="280" y="1717" width="18" height="18">
+				<alias color="black" font_style="italic" font_color="black" uid="4885" x="280" y="1717" width="18" height="18">
 					<of>distn_storage_subsidy</of>
 				</alias>
 				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="4707" x="977" y="408" width="18" height="18">
@@ -5298,7 +5298,7 @@ COMMENTS: developed via simulations to put system in initial balance</doc>
 				<alias color="red" font_style="italic" font_color="red" label_angle="7.35456" uid="4878" x="4212" y="332" width="18" height="18">
 					<of>HiBlend_subs_stop_time</of>
 				</alias>
-				<alias color="#008F44" font_style="italic" font_color="#008F44" uid="4887" x="332" y="1523" width="18" height="18">
+				<alias color="#008F44" font_style="italic" font_color="#008F44" uid="4888" x="332" y="1523" width="18" height="18">
 					<of>Hi_Blend_Gas_equivalent_price</of>
 				</alias>
 				<alias color="#FF007F" font_style="italic" font_color="#FF007F" label_angle="92.7392" uid="4617" x="3737" y="162" width="18" height="18">
@@ -5319,7 +5319,7 @@ COMMENTS: developed via simulations to put system in initial balance</doc>
 				<alias color="red" font_style="italic" font_color="red" label_angle="278.976" uid="4848" x="820" y="669" width="18" height="18">
 					<of>desired_ETOH_inv_adj_time</of>
 				</alias>
-				<alias color="#008F44" font_style="italic" font_color="#008F44" uid="4883" x="88" y="1525" width="18" height="18">
+				<alias color="#008F44" font_style="italic" font_color="#008F44" uid="4892" x="88" y="1525" width="18" height="18">
 					<of>Hi_Blend_Pump_Price</of>
 				</alias>
 				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="4868" x="2474" y="149" width="18" height="18">
@@ -5343,7 +5343,7 @@ COMMENTS: developed via simulations to put system in initial balance</doc>
 				<alias color="red" font_style="italic" font_color="red" uid="4826" x="2309" y="2315.5" width="18" height="18">
 					<of>B_industrial_demand_scenario</of>
 				</alias>
-				<alias color="#008F44" font_style="italic" font_color="#008F44" uid="4886" x="200" y="1521" width="18" height="18">
+				<alias color="#008F44" font_style="italic" font_color="#008F44" uid="4889" x="200" y="1521" width="18" height="18">
 					<of>Expected_PoU_Hi_Blend_Cost_after_Subz</of>
 				</alias>
 				<alias color="red" font_style="italic" font_color="red" label_angle="104.716" uid="4720" x="1204" y="57" width="18" height="18">
@@ -5358,7 +5358,7 @@ COMMENTS: developed via simulations to put system in initial balance</doc>
 				<alias color="blue" font_style="italic" font_color="red" label_angle="171.57" uid="4608" x="3965" y="163" width="18" height="18">
 					<of>avg_per_gal_markup</of>
 				</alias>
-				<alias color="black" font_style="italic" font_color="black" uid="4885" x="387" y="1718" width="18" height="18">
+				<alias color="black" font_style="italic" font_color="black" uid="4890" x="387" y="1718" width="18" height="18">
 					<of>Addl_Gasoline_Tax</of>
 				</alias>
 				<alias color="blue" font_style="italic" font_weight="bold" uid="4765" x="947" y="144" width="18" height="18">
@@ -5377,7 +5377,7 @@ COMMENTS: developed via simulations to put system in initial balance</doc>
 				<alias color="red" font_style="italic" font_color="red" uid="4621" x="2594" y="609" width="18" height="18">
 					<of>lo_blend_attr_weighting</of>
 				</alias>
-				<alias color="#008F44" font_style="italic" font_color="#008F44" uid="4888" x="87" y="1577" width="18" height="18">
+				<alias color="#008F44" font_style="italic" font_color="#008F44" uid="4887" x="87" y="1577" width="18" height="18">
 					<of>Gasoline_Pump_Price</of>
 				</alias>
 				<alias color="red" font_style="italic" font_color="red" uid="4646" x="4088" y="165" width="18" height="18">
@@ -5425,10 +5425,10 @@ COMMENTS: developed via simulations to put system in initial balance</doc>
 				<alias color="#AA0000" font_style="italic" font_color="#AA0000" uid="4897" x="2940.83" y="1856.83" width="18" height="18">
 					<of>B_distn_storage_cost</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_weight="bold" uid="4898" x="3038.33" y="2068.67" width="18" height="18">
+				<alias color="blue" font_style="italic" font_weight="bold" uid="4896" x="3038.33" y="2068.67" width="18" height="18">
 					<of>Gasoline_POD_price_before_tax</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="4896" x="2967" y="2263.5" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="4898" x="2967" y="2263.5" width="18" height="18">
 					<of>B_gasoline_price_sensitivity_factor</of>
 				</alias>
 				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" label_side="left" uid="4899" x="2231" y="301" width="18" height="18">
@@ -5443,7 +5443,7 @@ COMMENTS: developed via simulations to put system in initial balance</doc>
 				<alias color="black" font_style="italic" font_color="black" uid="4903" x="984" y="609" width="18" height="18">
 					<of>EtOH_export_x_US</of>
 				</alias>
-				<alias color="#008F44" font_style="italic" font_color="#008F44" uid="4892" x="199" y="1586" width="18" height="18">
+				<alias color="#008F44" font_style="italic" font_color="#008F44" uid="4883" x="199" y="1586" width="18" height="18">
 					<of>EtOH_POP_price</of>
 				</alias>
 			</view>

@@ -13,14 +13,6 @@
 		<dt reciprocal="true">4</dt>
 	</sim_specs>
 	<dimensions>
-		<dim name="AnnualCrop">
-			<elem name="Corn"/>
-			<elem name="Soy"/>
-			<elem name="Wheat"/>
-			<elem name="Other_Grains"/>
-			<elem name="Cotton"/>
-		</dim>
-		<dim name="ProdnYear" size="10"/>
 		<dim name="Region">
 			<elem name="NE"/>
 			<elem name="A"/>
@@ -33,10 +25,18 @@
 			<elem name="M"/>
 			<elem name="P"/>
 		</dim>
+		<dim name="AnnualCrop">
+			<elem name="Corn"/>
+			<elem name="Soy"/>
+			<elem name="Wheat"/>
+			<elem name="Other_Grains"/>
+			<elem name="Cotton"/>
+		</dim>
 		<dim name="PECrop">
 			<elem name="Herbaceous"/>
 			<elem name="Woody"/>
 		</dim>
+		<dim name="ProdnYear" size="10"/>
 	</dimensions>
 	<isee:prefs show_module_prefix="true" live_update_on_drag="true" show_restore_buttons="false" layer="model" interface_scale_ui="true" interface_max_page_width="10000" interface_max_page_height="10000" interface_min_page_width="0" interface_min_page_height="0" saved_runs="5" keep="false" rifp="false"/>
 	<isee:multiplayer_settings include_chat="true" allow_observers="false" advance_time_increment="1" observer_start_page="home_page" enabled="false"/>
@@ -6320,40 +6320,40 @@ COMMENTS: </doc>
 				<entity name="Pasture_Hay_BCAP_CHST_Subsidy"/>
 			</group>
 			<group name="Production Costs" run="false">
-				<entity name="Residue_PCPA_input_cost_sensitivity_factor"/>
-				<entity name="Hay_PCPA_cost_multiplier"/>
-				<entity name="BCAP_HC_est_subs_by_year"/>
-				<entity name="Residue_PCPA"/>
-				<entity name="WC_PCPA_by_yr"/>
-				<entity name="HC_PCPA_input_cost_sensitivity_factor"/>
-				<entity name="Secondary_Crop_PCPA_cost_multiplier"/>
-				<entity name="net_HC_PCPA_by_yr_Pasture"/>
-				<entity name="WC_PCPA_cost_multiplier"/>
-				<entity name="Crop_PCPA_input_cost_sensitivity_factor"/>
-				<entity name="Annual_PCPA"/>
-				<entity name="avg_gasoline_input_cost_PoD"/>
-				<entity name="HC_PCPA_by_yr"/>
-				<entity name="WC_PCPA_by_yr_pasture"/>
-				<entity name="BCAP_WC_est_subs_by_year"/>
-				<entity name="Sec_Crop_PCPA"/>
-				<entity name="Pasture_as_Pasture_PCPA"/>
-				<entity name="HC_PCPA_by_yr_Pasture"/>
-				<entity name="BCAP_HC_est_subs_by_year_pasture"/>
-				<entity name="input_cost_sensitivity_switch"/>
-				<entity name="Secondary_Crop_PCPA_input_cost_sensitivity_factor"/>
-				<entity name="HC_PCPA_cost_multiplier"/>
+				<entity name="Hay_PCPA"/>
+				<entity name="Res_PCPA_cost_multiplier"/>
+				<entity name="HAY_PCPA_input_cost_sensitivity_factor"/>
+				<entity name="WC_PCPA_input_cost_sensitivity_factor"/>
+				<entity name="BCAP_WC_est_subs_by_year_pasture"/>
 				<entity name="delta_in_gasoline_input_cost"/>
 				<entity name="Residue_Net_PCPA"/>
-				<entity name="BCAP_WC_est_subs_by_year_pasture"/>
-				<entity name="WC_PCPA_input_cost_sensitivity_factor"/>
-				<entity name="net_HC_PCPA_by_yr"/>
-				<entity name="HAY_PCPA_input_cost_sensitivity_factor"/>
-				<entity name="Res_PCPA_cost_multiplier"/>
-				<entity name="Crop_PCPA_cost_multiplier"/>
-				<entity name="Hay_PCPA"/>
-				<entity name="net_WC_PCPA_by_yr"/>
+				<entity name="Secondary_Crop_PCPA_input_cost_sensitivity_factor"/>
 				<entity name="Pasture_as_Cellulose_PCPA"/>
+				<entity name="input_cost_sensitivity_switch"/>
+				<entity name="HC_PCPA_by_yr_Pasture"/>
+				<entity name="BCAP_WC_est_subs_by_year"/>
+				<entity name="HC_PCPA_cost_multiplier"/>
+				<entity name="WC_PCPA_by_yr_pasture"/>
+				<entity name="net_HC_PCPA_by_yr"/>
+				<entity name="Annual_PCPA"/>
+				<entity name="Crop_PCPA_input_cost_sensitivity_factor"/>
+				<entity name="Pasture_as_Pasture_PCPA"/>
+				<entity name="Sec_Crop_PCPA"/>
+				<entity name="net_HC_PCPA_by_yr_Pasture"/>
 				<entity name="net_WC_PCPA_by_yr_pasture"/>
+				<entity name="Secondary_Crop_PCPA_cost_multiplier"/>
+				<entity name="HC_PCPA_input_cost_sensitivity_factor"/>
+				<entity name="avg_gasoline_input_cost_PoD"/>
+				<entity name="Residue_PCPA"/>
+				<entity name="WC_PCPA_by_yr"/>
+				<entity name="BCAP_HC_est_subs_by_year"/>
+				<entity name="Crop_PCPA_cost_multiplier"/>
+				<entity name="Hay_PCPA_cost_multiplier"/>
+				<entity name="HC_PCPA_by_yr"/>
+				<entity name="BCAP_HC_est_subs_by_year_pasture"/>
+				<entity name="net_WC_PCPA_by_yr"/>
+				<entity name="WC_PCPA_cost_multiplier"/>
+				<entity name="Residue_PCPA_input_cost_sensitivity_factor"/>
 			</group>
 			<group name="Mosule Outputs" run="false">
 				<entity name="PCEC_YPA_by_year"/>
@@ -6784,7 +6784,7 @@ COMMENTS: </doc>
 				<isee:shape color="black" background="white" opacity="1" transparent_background="true"/>
 				<isee:selector color="black" background="white"/>
 			</style>
-			<view isee:show_pages="true" page_width="983" page_height="694" isee:page_cols="5" isee:page_rows="4" isee:scroll_x="1326.25" isee:scroll_y="1275" zoom="80" isee:popup_graphs_are_comparative="true" type="stock_flow">
+			<view isee:show_pages="true" page_width="1123" page_height="793" isee:page_cols="5" isee:page_rows="4" zoom="80" isee:popup_graphs_are_comparative="true" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="9pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -8656,79 +8656,79 @@ COMMENTS: </doc>
 					<item uid="4160"/>
 				</group>
 				<group isee:name_image="true" locked="true" color="#515151" font_color="#515151" x="3087" y="43" width="1402" height="855" name="Production Costs">
-					<item uid="4245"/>
-					<item uid="4230"/>
-					<item uid="4379"/>
-					<item uid="4196"/>
-					<item uid="4448"/>
-					<item uid="4246"/>
-					<item uid="4430"/>
-					<item uid="4137"/>
-					<item uid="4262"/>
-					<item uid="4337"/>
-					<item uid="4128"/>
-					<item uid="4377"/>
-					<item uid="4358"/>
+					<item uid="4202"/>
+					<item uid="4433"/>
+					<item uid="4427"/>
+					<item uid="4357"/>
+					<item uid="4165"/>
+					<item uid="4479"/>
+					<item uid="4378"/>
+					<item uid="4463"/>
+					<item uid="4122"/>
+					<item uid="4497"/>
+					<item uid="4224"/>
+					<item uid="4373"/>
+					<item uid="4140"/>
+					<item uid="4180"/>
+					<item uid="4330"/>
+					<item uid="4231"/>
+					<item uid="4240"/>
+					<item uid="4148"/>
+					<item uid="4291"/>
+					<item uid="4346"/>
+					<item uid="4226"/>
+					<item uid="4178"/>
+					<item uid="4336"/>
+					<item uid="4392"/>
+					<item uid="4301"/>
+					<item uid="4347"/>
+					<item uid="4123"/>
+					<item uid="4395"/>
+					<item uid="4147"/>
+					<item uid="4292"/>
+					<item uid="4199"/>
+					<item uid="4359"/>
+					<item uid="4136"/>
+					<item uid="4293"/>
+					<item uid="4424"/>
+					<item uid="4259"/>
+					<item uid="4260"/>
+					<item uid="4498"/>
+					<item uid="4124"/>
+					<item uid="4393"/>
+					<item uid="4257"/>
+					<item uid="4261"/>
+					<item uid="4179"/>
+					<item uid="4235"/>
+					<item uid="4139"/>
 					<item uid="4444"/>
 					<item uid="4478"/>
-					<item uid="4338"/>
-					<item uid="4179"/>
-					<item uid="4257"/>
-					<item uid="4393"/>
-					<item uid="4498"/>
-					<item uid="4260"/>
-					<item uid="4490"/>
-					<item uid="4261"/>
-					<item uid="4259"/>
-					<item uid="4215"/>
-					<item uid="4209"/>
-					<item uid="4424"/>
-					<item uid="4124"/>
-					<item uid="4293"/>
-					<item uid="4359"/>
-					<item uid="4199"/>
-					<item uid="4292"/>
-					<item uid="4139"/>
-					<item uid="4123"/>
-					<item uid="4347"/>
-					<item uid="4392"/>
-					<item uid="4178"/>
-					<item uid="4455"/>
-					<item uid="4155"/>
-					<item uid="4136"/>
-					<item uid="4226"/>
-					<item uid="4147"/>
-					<item uid="4291"/>
-					<item uid="4231"/>
-					<item uid="4235"/>
-					<item uid="4330"/>
-					<item uid="4373"/>
-					<item uid="4395"/>
-					<item uid="4368"/>
-					<item uid="4140"/>
-					<item uid="4224"/>
-					<item uid="4497"/>
-					<item uid="4345"/>
-					<item uid="4241"/>
-					<item uid="4431"/>
-					<item uid="4240"/>
-					<item uid="4122"/>
-					<item uid="4336"/>
-					<item uid="4301"/>
 					<item uid="4422"/>
-					<item uid="4148"/>
-					<item uid="4463"/>
-					<item uid="4378"/>
-					<item uid="4479"/>
-					<item uid="4165"/>
-					<item uid="4449"/>
-					<item uid="4357"/>
-					<item uid="4346"/>
-					<item uid="4427"/>
-					<item uid="4433"/>
-					<item uid="4180"/>
-					<item uid="4202"/>
+					<item uid="4358"/>
+					<item uid="4368"/>
+					<item uid="4455"/>
+					<item uid="4377"/>
+					<item uid="4137"/>
+					<item uid="4155"/>
+					<item uid="4345"/>
+					<item uid="4490"/>
+					<item uid="4246"/>
+					<item uid="4338"/>
+					<item uid="4209"/>
 					<item uid="4263"/>
+					<item uid="4128"/>
+					<item uid="4448"/>
+					<item uid="4430"/>
+					<item uid="4196"/>
+					<item uid="4449"/>
+					<item uid="4262"/>
+					<item uid="4337"/>
+					<item uid="4241"/>
+					<item uid="4230"/>
+					<item uid="4215"/>
+					<item uid="4379"/>
+					<item uid="4431"/>
+					<item uid="4245"/>
 				</group>
 				<group locked="false" color="#65183E" font_color="#65183E" x="4" y="1192" width="722" height="535" name="Mosule Outputs">
 					<item uid="4527"/>

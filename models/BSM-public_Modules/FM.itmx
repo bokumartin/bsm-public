@@ -13,25 +13,6 @@
 		<dt reciprocal="true">4</dt>
 	</sim_specs>
 	<dimensions>
-		<dim name="CtoATech">
-			<elem name="BC"/>
-			<elem name="TC"/>
-		</dim>
-		<dim name="CtoRRTech">
-			<elem name="FP"/>
-			<elem name="FT"/>
-			<elem name="IDL"/>
-			<elem name="CP"/>
-			<elem name="F"/>
-			<elem name="APR"/>
-		</dim>
-		<dim name="AnnualCrop">
-			<elem name="Corn"/>
-			<elem name="Soy"/>
-			<elem name="Wheat"/>
-			<elem name="Other_Grains"/>
-			<elem name="Cotton"/>
-		</dim>
 		<dim name="Region">
 			<elem name="NE"/>
 			<elem name="A"/>
@@ -44,6 +25,13 @@
 			<elem name="M"/>
 			<elem name="P"/>
 		</dim>
+		<dim name="AnnualCrop">
+			<elem name="Corn"/>
+			<elem name="Soy"/>
+			<elem name="Wheat"/>
+			<elem name="Other_Grains"/>
+			<elem name="Cotton"/>
+		</dim>
 		<dim name="PECrop">
 			<elem name="Herbaceous"/>
 			<elem name="Woody"/>
@@ -52,6 +40,18 @@
 			<elem name="Primary"/>
 			<elem name="Co1"/>
 			<elem name="Co2"/>
+		</dim>
+		<dim name="CtoRRTech">
+			<elem name="FP"/>
+			<elem name="FT"/>
+			<elem name="IDL"/>
+			<elem name="CP"/>
+			<elem name="F"/>
+			<elem name="APR"/>
+		</dim>
+		<dim name="CtoATech">
+			<elem name="BC"/>
+			<elem name="TC"/>
 		</dim>
 	</dimensions>
 	<isee:prefs show_module_prefix="true" live_update_on_drag="true" show_restore_buttons="false" layer="model" interface_scale_ui="true" interface_max_page_width="10000" interface_max_page_height="10000" interface_min_page_width="0" interface_min_page_height="0" saved_runs="5" keep="false" rifp="false"/>
@@ -4466,55 +4466,55 @@ COMMENTS: </doc>
 				<units>ton/year</units>
 			</aux>
 			<group name="Comparison Against Baseline" run="false">
-				<entity name="rollup_prodn_payoff_metric"/>
-				<entity name="squared_error"/>
-				<entity name="rollup_price_payoff_metric"/>
-				<entity name="rollup_inv_payoff_metric"/>
-				<entity name="weight_factor_for_inventory_payoff"/>
-				<entity name="prodn_payoff_metric"/>
-				<entity name="a_prodn_USDA"/>
-				<entity name="inv_payoff_metric"/>
-				<entity name="squared_error_demand_metric"/>
-				<entity name="a_prodn_model_rel_to_USDA"/>
-				<entity name="a_price_USDA"/>
-				<entity name="a_price_model_rel_to_USDA"/>
-				<entity name="a_price_model"/>
-				<entity name="Inventory_rel_to_Input"/>
+				<entity name="Inventory_Input_In_Nominal_Units"/>
+				<entity name="a_prodn_model"/>
+				<entity name="price_payoff_metric"/>
+				<entity name="demand_vs_outflow"/>
+				<entity name="weight_factor_for_prodn_payoff"/>
 				<entity name="weight_factor_for_price_payoff"/>
 				<entity name="demand_deviation_payoff"/>
-				<entity name="weight_factor_for_prodn_payoff"/>
-				<entity name="price_payoff_metric"/>
-				<entity name="a_prodn_model"/>
-				<entity name="demand_vs_outflow"/>
-				<entity name="Inventory_Input_In_Nominal_Units"/>
+				<entity name="a_price_model"/>
+				<entity name="a_price_model_rel_to_USDA"/>
+				<entity name="a_prodn_USDA"/>
+				<entity name="prodn_payoff_metric"/>
+				<entity name="weight_factor_for_inventory_payoff"/>
+				<entity name="rollup_inv_payoff_metric"/>
+				<entity name="Inventory_rel_to_Input"/>
+				<entity name="squared_error_demand_metric"/>
+				<entity name="rollup_price_payoff_metric"/>
+				<entity name="a_price_USDA"/>
+				<entity name="squared_error"/>
+				<entity name="a_prodn_model_rel_to_USDA"/>
+				<entity name="inv_payoff_metric"/>
+				<entity name="rollup_prodn_payoff_metric"/>
 			</group>
 			<group name="Commodity Crop Market" run="false">
-				<entity name="Crop_Consn_mm"/>
-				<entity name="crop_prodn_mm"/>
-				<entity name="frac_chg_crop_price_stock_to_use"/>
-				<entity name="total_frac_chg_price"/>
-				<entity name="relative_price_impact_on_sm_gr_demand"/>
-				<entity name="frac_chg_crop_price_prodn_consn"/>
-				<entity name="perlack_demand_switch"/>
-				<entity name="normalized_crop_stock_use_ratio"/>
-				<entity name="crop_logistic_price_response_curve_from_prodn_consn"/>
-				<entity name="LT_crop_demand"/>
-				<entity name="indic_frac_chg_crop_price"/>
-				<entity name="offset_in_frac_chg_from_crop_prodn_consn"/>
-				<entity name="prodn_rel_to_perlack"/>
-				<entity name="offset_in_frac_chg_from_crop_stock_use"/>
-				<entity name="indicated_crop_demand"/>
-				<entity name="Crop_Price_Index"/>
-				<entity name="crop_price_input_from_prodn_consn"/>
-				<entity name="crop_prodn_consn_index"/>
-				<entity name="price_impact_on_demand"/>
-				<entity name="long_term_stock_use_ratio"/>
+				<entity name="crop_price_input_from_stock_use"/>
+				<entity name="Crop_Inventories"/>
 				<entity name="crop_availability_constraint"/>
 				<entity name="crop_stock_use_ratio"/>
-				<entity name="chg_crop_price_index"/>
+				<entity name="long_term_stock_use_ratio"/>
 				<entity name="crop_logistic_price_response_curve_from_stock_use"/>
-				<entity name="Crop_Inventories"/>
-				<entity name="crop_price_input_from_stock_use"/>
+				<entity name="crop_prodn_consn_index"/>
+				<entity name="price_impact_on_demand"/>
+				<entity name="crop_price_input_from_prodn_consn"/>
+				<entity name="Crop_Price_Index"/>
+				<entity name="offset_in_frac_chg_from_crop_stock_use"/>
+				<entity name="offset_in_frac_chg_from_crop_prodn_consn"/>
+				<entity name="indic_frac_chg_crop_price"/>
+				<entity name="crop_logistic_price_response_curve_from_prodn_consn"/>
+				<entity name="LT_crop_demand"/>
+				<entity name="normalized_crop_stock_use_ratio"/>
+				<entity name="perlack_demand_switch"/>
+				<entity name="frac_chg_crop_price_prodn_consn"/>
+				<entity name="prodn_rel_to_perlack"/>
+				<entity name="total_frac_chg_price"/>
+				<entity name="chg_crop_price_index"/>
+				<entity name="crop_prodn_mm"/>
+				<entity name="frac_chg_crop_price_stock_to_use"/>
+				<entity name="relative_price_impact_on_sm_gr_demand"/>
+				<entity name="indicated_crop_demand"/>
+				<entity name="Crop_Consn_mm"/>
 			</group>
 			<group name="Pricing Inputs" run="false">
 				<entity name="spread_in_frac_chg_from_crop_prodn_consn"/>
@@ -4654,11 +4654,11 @@ COMMENTS: </doc>
 				<entity name="Xport_Dmand"/>
 			</group>
 			<group name="Module Interface with Demand Supply Curves" run="false">
-				<entity name="Price_from_ReEDS"/>
-				<entity name="Couple_with_ReEDS"/>
+				<entity name="period_count"/>
 				<entity name="Year"/>
 				<entity name="Run_Number"/>
-				<entity name="period_count"/>
+				<entity name="Couple_with_ReEDS"/>
+				<entity name="Price_from_ReEDS"/>
 			</group>
 			<group name="Module Interface with Conversion Modules" run="false">
 				<entity name="FS_Price_Input_to_CM"/>
@@ -6458,26 +6458,26 @@ COMMENTS: </doc>
 				<aux color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" x="565" y="1250" name="SJ fs demand at nominal utilization"/>
 				<aux color="#65183E" font_color="#65183E" label_angle="49.8045" x="225" y="661" name="crop production"/>
 				<group locked="true" color="black" font_color="black" x="3854.71" y="32.1429" width="721.286" height="556.857" name="Comparison Against Baseline">
-					<item uid="3355"/>
-					<item uid="3356"/>
-					<item uid="3119"/>
-					<item uid="3171"/>
-					<item uid="3296"/>
-					<item uid="3054"/>
-					<item uid="3357"/>
-					<item uid="3315"/>
-					<item uid="3257"/>
 					<item uid="3303"/>
+					<item uid="3257"/>
+					<item uid="3315"/>
+					<item uid="3054"/>
 					<item uid="3339"/>
+					<item uid="3296"/>
+					<item uid="3171"/>
+					<item uid="3355"/>
+					<item uid="3119"/>
+					<item uid="3356"/>
+					<item uid="3357"/>
 				</group>
 				<group locked="true" color="black" font_color="black" x="1549" y="29" width="1503" height="547" name="Commodity Crop Market">
-					<item uid="3162"/>
-					<item uid="3049"/>
-					<item uid="3269"/>
-					<item uid="3147"/>
-					<item uid="3267"/>
-					<item uid="3248"/>
 					<item uid="3132"/>
+					<item uid="3248"/>
+					<item uid="3147"/>
+					<item uid="3269"/>
+					<item uid="3049"/>
+					<item uid="3267"/>
+					<item uid="3162"/>
 				</group>
 				<group locked="false" x="778" y="1196" width="714" height="216" name="Pricing Inputs"/>
 				<group locked="false" color="black" font_color="black" x="1564" y="625" width="1485" height="519" name="Hay and Forage Market">
@@ -6933,7 +6933,7 @@ COMMENTS: </doc>
 				</stacked_container>
 				<connector uid="3413" angle="90">
 					<from>
-						<alias uid="3355"/>
+						<alias uid="3357"/>
 					</from>
 					<to>demand_vs_outflow</to>
 				</connector>
@@ -7170,7 +7170,7 @@ COMMENTS: </doc>
 				<alias color="red" font_style="italic" font_color="red" label_angle="81.0236" uid="3244" x="203" y="1067" width="18" height="18">
 					<of>plant_input_capacity_tpd</of>
 				</alias>
-				<alias color="red" font_style="italic" font_color="red" uid="3357" x="4435" y="58.4286" width="18" height="18">
+				<alias color="red" font_style="italic" font_color="red" uid="3355" x="4435" y="58.4286" width="18" height="18">
 					<of>Perlack_Crop_Prodn_mm</of>
 				</alias>
 				<alias color="#7F00FF" font_style="italic" font_weight="bold" font_color="#7F00FF" uid="3147" x="2006" y="64" width="18" height="18">
@@ -7242,7 +7242,7 @@ COMMENTS: </doc>
 				<alias color="#008F44" font_style="italic" font_color="#008F44" uid="3356" x="4357.43" y="286.571" width="18" height="18">
 					<of>LT_crop_demand</of>
 				</alias>
-				<alias color="black" font_style="italic" font_color="black" uid="3355" x="4436.71" y="343.143" width="18" height="18">
+				<alias color="black" font_style="italic" font_color="black" uid="3357" x="4436.71" y="343.143" width="18" height="18">
 					<of>indicated_crop_demand</of>
 				</alias>
 			</view>

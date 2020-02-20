@@ -13,15 +13,27 @@
 		<dt reciprocal="true">4</dt>
 	</sim_specs>
 	<dimensions>
-		<dim name="Car_v_Truck">
-			<elem name="Car"/>
-			<elem name="Truck"/>
+		<dim name="Region">
+			<elem name="NE"/>
+			<elem name="A"/>
+			<elem name="SE"/>
+			<elem name="DS"/>
+			<elem name="CB"/>
+			<elem name="LS"/>
+			<elem name="NP"/>
+			<elem name="SP"/>
+			<elem name="M"/>
+			<elem name="P"/>
 		</dim>
 		<dim name="CohortSlot">
 			<elem name="a"/>
 			<elem name="b"/>
 			<elem name="c"/>
 			<elem name="d"/>
+		</dim>
+		<dim name="Car_v_Truck">
+			<elem name="Car"/>
+			<elem name="Truck"/>
 		</dim>
 		<dim name="VehicleTech">
 			<elem name="Gas"/>
@@ -35,18 +47,6 @@
 			<elem name="MethanolPropane"/>
 			<elem name="RSPV"/>
 			<elem name="Scenario"/>
-		</dim>
-		<dim name="Region">
-			<elem name="NE"/>
-			<elem name="A"/>
-			<elem name="SE"/>
-			<elem name="DS"/>
-			<elem name="CB"/>
-			<elem name="LS"/>
-			<elem name="NP"/>
-			<elem name="SP"/>
-			<elem name="M"/>
-			<elem name="P"/>
 		</dim>
 	</dimensions>
 	<isee:prefs show_module_prefix="true" live_update_on_drag="true" show_restore_buttons="false" layer="model" interface_scale_ui="true" interface_max_page_width="10000" interface_max_page_height="10000" interface_min_page_width="0" interface_min_page_height="0" saved_runs="5" keep="false" rifp="false"/>

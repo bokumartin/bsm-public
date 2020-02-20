@@ -418,29 +418,29 @@ COMMENTS: </doc>
 				<units>Unitless</units>
 			</aux>
 			<group name="Import Logic" run="false">
-				<entity name="export_price_rel_to_threshold"/>
-				<entity name="export_price_from_US_incl_tariff"/>
-				<entity name="frac_import_capacity_utilized"/>
-				<entity name="import_cost_before_tariff"/>
-				<entity name="non_subsidized_PoP_price_rel_to_import_threshold"/>
-				<entity name="rollup_imports"/>
-				<entity name="distributed_ceiling_for_EtOH_import"/>
-				<entity name="EtOH_Import_from_x_US"/>
-				<entity name="threshold_PoP_price_for_import"/>
 				<entity name="desired_exports"/>
+				<entity name="threshold_PoP_price_for_import"/>
+				<entity name="distributed_ceiling_for_EtOH_import"/>
+				<entity name="rollup_imports"/>
+				<entity name="non_subsidized_PoP_price_rel_to_import_threshold"/>
+				<entity name="import_cost_before_tariff"/>
+				<entity name="frac_import_capacity_utilized"/>
+				<entity name="export_price_from_US_incl_tariff"/>
+				<entity name="EtOH_Import_from_x_US"/>
+				<entity name="export_price_rel_to_threshold"/>
 			</group>
 			<group name="Interfaces to Other Modules 1" run="false">
 				<entity name="EtOH_PoP_price"/>
 			</group>
 			<group name="Inputs and Initializations" run="false">
-				<entity name="export_tariff"/>
-				<entity name="base_threshold_PoP_price_for_import"/>
-				<entity name="distribution_of_imports"/>
-				<entity name="baseline_exports"/>
-				<entity name="import_cost_reduction_factor"/>
-				<entity name="export_price_responsiveness"/>
-				<entity name="ceiling_for_EtOH_import"/>
 				<entity name="import_tariff"/>
+				<entity name="ceiling_for_EtOH_import"/>
+				<entity name="export_price_responsiveness"/>
+				<entity name="import_cost_reduction_factor"/>
+				<entity name="baseline_exports"/>
+				<entity name="distribution_of_imports"/>
+				<entity name="base_threshold_PoP_price_for_import"/>
+				<entity name="export_tariff"/>
 			</group>
 			<aux name="export tariff">
 				<doc>DEFINITION: Tariff associated with ethanol exports from US--time dependent scenario.  Note stepwise graphical function
@@ -668,27 +668,27 @@ COMMENTS: value developed to calibrate exports against recent history</doc>
 				<aux color="black" font_color="black" x="1585" y="222" name="distributed ceiling for EtOH import"/>
 				<aux color="black" font_color="black" x="1449" y="144" name="frac import capacity utilized"/>
 				<group locked="true" color="black" font_color="black" x="844" y="50" width="924" height="341" name="Import Logic">
-					<item uid="4551"/>
-					<item uid="4566"/>
-					<item uid="4555"/>
-					<item uid="4560"/>
-					<item uid="4552"/>
-					<item uid="4553"/>
-					<item uid="4549"/>
-					<item uid="4567"/>
-					<item uid="4554"/>
-					<item uid="4557"/>
-					<item uid="4556"/>
-					<item uid="4564"/>
-					<item uid="4559"/>
-					<item uid="4550"/>
-					<item uid="4568"/>
-					<item uid="4563"/>
-					<item uid="4558"/>
-					<item uid="4562"/>
-					<item uid="4561"/>
-					<item uid="4569"/>
 					<item uid="4565"/>
+					<item uid="4561"/>
+					<item uid="4563"/>
+					<item uid="4564"/>
+					<item uid="4567"/>
+					<item uid="4549"/>
+					<item uid="4554"/>
+					<item uid="4568"/>
+					<item uid="4553"/>
+					<item uid="4552"/>
+					<item uid="4557"/>
+					<item uid="4562"/>
+					<item uid="4559"/>
+					<item uid="4560"/>
+					<item uid="4555"/>
+					<item uid="4550"/>
+					<item uid="4566"/>
+					<item uid="4556"/>
+					<item uid="4569"/>
+					<item uid="4558"/>
+					<item uid="4551"/>
 				</group>
 				<group locked="true" color="black" font_color="black" x="850" y="618" width="667" height="67" name="Interfaces to Other Modules 1">
 					<item uid="4570"/>

@@ -13,26 +13,6 @@
 		<dt reciprocal="true">4</dt>
 	</sim_specs>
 	<dimensions>
-		<dim name="CtoATech">
-			<elem name="BC"/>
-			<elem name="TC"/>
-		</dim>
-		<dim name="CtoRRTech">
-			<elem name="FP"/>
-			<elem name="FT"/>
-			<elem name="IDL"/>
-			<elem name="CP"/>
-			<elem name="F"/>
-			<elem name="APR"/>
-		</dim>
-		<dim name="AnnualCrop">
-			<elem name="Corn"/>
-			<elem name="Soy"/>
-			<elem name="Wheat"/>
-			<elem name="Other_Grains"/>
-			<elem name="Cotton"/>
-		</dim>
-		<dim name="ProdnYear" size="10"/>
 		<dim name="Region">
 			<elem name="NE"/>
 			<elem name="A"/>
@@ -45,9 +25,29 @@
 			<elem name="M"/>
 			<elem name="P"/>
 		</dim>
+		<dim name="AnnualCrop">
+			<elem name="Corn"/>
+			<elem name="Soy"/>
+			<elem name="Wheat"/>
+			<elem name="Other_Grains"/>
+			<elem name="Cotton"/>
+		</dim>
 		<dim name="PECrop">
 			<elem name="Herbaceous"/>
 			<elem name="Woody"/>
+		</dim>
+		<dim name="ProdnYear" size="10"/>
+		<dim name="CtoRRTech">
+			<elem name="FP"/>
+			<elem name="FT"/>
+			<elem name="IDL"/>
+			<elem name="CP"/>
+			<elem name="F"/>
+			<elem name="APR"/>
+		</dim>
+		<dim name="CtoATech">
+			<elem name="BC"/>
+			<elem name="TC"/>
 		</dim>
 		<dim name="FLPostHarvest">
 			<elem name="StoreQ"/>
@@ -1648,32 +1648,32 @@ COMMENTS: </doc>
 				<entity name="forest_residue_transport_storage_efficiency_factor"/>
 			</group>
 			<group name="Feedstock logistics params" run="false">
-				<entity name="Conventional_WC_HCCPT"/>
-				<entity name="adv_storage_loss_factor_HC"/>
-				<entity name="Conventional_ForRes_HCCPT"/>
-				<entity name="Advanced_HC_HCCPT"/>
-				<entity name="conv_storage_loss_factor_residue"/>
-				<entity name="adv_storage_loss_factor_residue"/>
-				<entity name="conv_harv_efficiency_residue"/>
-				<entity name="Advanced_Ag_Res_HCCPT"/>
-				<entity name="conv_storage_loss_factor_WC"/>
-				<entity name="Advanced_WC_HCCPT"/>
-				<entity name="Advanced_UrbanRes_HCCPT"/>
-				<entity name="adv_harvest_efficiency_WC"/>
-				<entity name="Advanced_ForRes_HCCPT"/>
+				<entity name="Advanced_W_PostHarvest_Cost"/>
+				<entity name="conv_harvest_efficiency_WC"/>
+				<entity name="adv_harv_efficiency_residue"/>
+				<entity name="conv_harves_efficiency_HC"/>
 				<entity name="adv_harvest_efficiency_HC"/>
 				<entity name="Conventional_UrbanRes_HCCPT"/>
-				<entity name="Advanced_H_PostHarvest_Cost"/>
-				<entity name="Conventional_H_PostHarvest_Cost"/>
-				<entity name="conv_storage_loss_factor_HC"/>
-				<entity name="Conventional_W_PostHarvest_Cost"/>
-				<entity name="conv_harves_efficiency_HC"/>
-				<entity name="adv_harv_efficiency_residue"/>
-				<entity name="conv_harvest_efficiency_WC"/>
-				<entity name="Conventional_HC_HCCPT"/>
+				<entity name="adv_harvest_efficiency_WC"/>
+				<entity name="Advanced_UrbanRes_HCCPT"/>
 				<entity name="Conventional_Ag_Res_HCCPT"/>
+				<entity name="Advanced_WC_HCCPT"/>
 				<entity name="adv_storage_loss_factor_WC"/>
-				<entity name="Advanced_W_PostHarvest_Cost"/>
+				<entity name="Advanced_H_PostHarvest_Cost"/>
+				<entity name="conv_storage_loss_factor_HC"/>
+				<entity name="conv_storage_loss_factor_WC"/>
+				<entity name="conv_harv_efficiency_residue"/>
+				<entity name="adv_storage_loss_factor_residue"/>
+				<entity name="Conventional_H_PostHarvest_Cost"/>
+				<entity name="conv_storage_loss_factor_residue"/>
+				<entity name="Advanced_HC_HCCPT"/>
+				<entity name="Advanced_ForRes_HCCPT"/>
+				<entity name="Conventional_ForRes_HCCPT"/>
+				<entity name="Conventional_W_PostHarvest_Cost"/>
+				<entity name="adv_storage_loss_factor_HC"/>
+				<entity name="Advanced_Ag_Res_HCCPT"/>
+				<entity name="Conventional_HC_HCCPT"/>
+				<entity name="Conventional_WC_HCCPT"/>
 			</group>
 			<group name="Feedstock Logistics" run="false">
 				<entity name="plants_with_conventional_logistics"/>

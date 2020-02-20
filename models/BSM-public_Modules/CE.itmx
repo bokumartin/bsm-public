@@ -13,24 +13,6 @@
 		<dt reciprocal="true">4</dt>
 	</sim_specs>
 	<dimensions>
-		<dim name="ConversionPolicy">
-			<elem name="Price"/>
-			<elem name="Feedstock"/>
-			<elem name="FCI"/>
-			<elem name="Loan"/>
-		</dim>
-		<dim name="CtoATech">
-			<elem name="BC"/>
-			<elem name="TC"/>
-		</dim>
-		<dim name="TechAttribute">
-			<elem name="ProcessYield"/>
-			<elem name="PSuccess"/>
-			<elem name="InputCap"/>
-			<elem name="CapitalCost"/>
-			<elem name="Risk"/>
-			<elem name="DebtFrac"/>
-		</dim>
 		<dim name="Region">
 			<elem name="NE"/>
 			<elem name="A"/>
@@ -51,6 +33,24 @@
 			<elem name="Primary"/>
 			<elem name="Co1"/>
 			<elem name="Co2"/>
+		</dim>
+		<dim name="TechAttribute">
+			<elem name="ProcessYield"/>
+			<elem name="PSuccess"/>
+			<elem name="InputCap"/>
+			<elem name="CapitalCost"/>
+			<elem name="Risk"/>
+			<elem name="DebtFrac"/>
+		</dim>
+		<dim name="ConversionPolicy">
+			<elem name="Price"/>
+			<elem name="Feedstock"/>
+			<elem name="FCI"/>
+			<elem name="Loan"/>
+		</dim>
+		<dim name="CtoATech">
+			<elem name="BC"/>
+			<elem name="TC"/>
 		</dim>
 	</dimensions>
 	<isee:prefs show_module_prefix="true" live_update_on_drag="true" show_restore_buttons="false" layer="model" interface_scale_ui="true" interface_max_page_width="10000" interface_max_page_height="10000" interface_min_page_width="0" interface_min_page_height="0" saved_runs="5" keep="false" rifp="false"/>

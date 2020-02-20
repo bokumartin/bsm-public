@@ -13,13 +13,18 @@
 		<dt reciprocal="true">4</dt>
 	</sim_specs>
 	<dimensions>
+		<dim name="Gen">
+			<elem name="One"/>
+			<elem name="OnePointFive"/>
+		</dim>
 		<dim name="AlgalTech">
 			<elem name="Pond"/>
 			<elem name="PBR"/>
 		</dim>
-		<dim name="CtoATech">
-			<elem name="BC"/>
-			<elem name="TC"/>
+		<dim name="OilCropTech">
+			<elem name="TransEster"/>
+			<elem name="HEFA"/>
+			<elem name="Catalytic"/>
 		</dim>
 		<dim name="CtoRRTech">
 			<elem name="FP"/>
@@ -29,14 +34,9 @@
 			<elem name="F"/>
 			<elem name="APR"/>
 		</dim>
-		<dim name="OilCropTech">
-			<elem name="TransEster"/>
-			<elem name="HEFA"/>
-			<elem name="Catalytic"/>
-		</dim>
-		<dim name="Gen">
-			<elem name="One"/>
-			<elem name="OnePointFive"/>
+		<dim name="CtoATech">
+			<elem name="BC"/>
+			<elem name="TC"/>
 		</dim>
 	</dimensions>
 	<isee:prefs show_module_prefix="true" live_update_on_drag="true" show_restore_buttons="false" layer="model" interface_scale_ui="true" interface_max_page_width="10000" interface_max_page_height="10000" interface_min_page_width="0" interface_min_page_height="0" saved_runs="5" keep="false" rifp="false"/>
@@ -1846,37 +1846,37 @@ COMMENTS: </doc>
 				<units>Unitless</units>
 			</aux>
 			<group name="Relative Attractiveness and Desired Starts" run="false">
-				<entity name="Des_A_to_RR_yrly_starts"/>
-				<entity name="Des_C_to_RR_yrly_starts"/>
-				<entity name="C_to_RR_Platform_Attr_C"/>
-				<entity name="Total_Attr"/>
-				<entity name="OilCrop_Platform_Attr_C"/>
-				<entity name="Max_Plant_Construction_Capacity"/>
-				<entity name="Algae_Platform_Attr_C"/>
+				<entity name="C_toB_Platform_Attr_C"/>
+				<entity name="RAT_C_to_B"/>
+				<entity name="S_to_J_platform_Attr"/>
+				<entity name="Des_C_to_EtOH_yrly_starts"/>
+				<entity name="Des_OC_to_RR_yrly_starts"/>
+				<entity name="Des_C_to_B_yrly_starts"/>
+				<entity name="S_to_EtOH_Platform_Attr"/>
+				<entity name="RAT_C_to_EtOH"/>
 				<entity name="RAT_S_to_J"/>
 				<entity name="C_to_EtOH_Platform_Attr_C"/>
-				<entity name="RAT_C_to_RR"/>
-				<entity name="RAT_C_to_EtOH"/>
+				<entity name="Algae_Platform_Attr_C"/>
 				<entity name="RAT_Oilcrop"/>
+				<entity name="Max_Plant_Construction_Capacity"/>
+				<entity name="OilCrop_Platform_Attr_C"/>
+				<entity name="RAT_C_to_RR"/>
+				<entity name="Total_Attr"/>
 				<entity name="RAT_Algae"/>
-				<entity name="S_to_EtOH_Platform_Attr"/>
-				<entity name="Des_C_to_B_yrly_starts"/>
-				<entity name="RAT_S_to_EtOH"/>
-				<entity name="Des_OC_to_RR_yrly_starts"/>
-				<entity name="Des_S_to_EtOH_yrly_starts"/>
-				<entity name="Des_C_to_EtOH_yrly_starts"/>
-				<entity name="S_to_J_platform_Attr"/>
-				<entity name="RAT_C_to_B"/>
-				<entity name="C_toB_Platform_Attr_C"/>
 				<entity name="Des_SJ_yrly_starts"/>
+				<entity name="Des_S_to_EtOH_yrly_starts"/>
+				<entity name="Des_C_to_RR_yrly_starts"/>
+				<entity name="C_to_RR_Platform_Attr_C"/>
+				<entity name="RAT_S_to_EtOH"/>
+				<entity name="Des_A_to_RR_yrly_starts"/>
 			</group>
 			<group name="Attractiveness of Other Investment Option" run="false">
-				<entity name="NPV_rel_to_a_million_OTHER"/>
-				<entity name="Platform_Attr_OTHER"/>
-				<entity name="RAT_OTHER"/>
-				<entity name="k_OTHER"/>
-				<entity name="invest_attractiveness_weighting"/>
 				<entity name="region_scaling_factor"/>
+				<entity name="invest_attractiveness_weighting"/>
+				<entity name="k_OTHER"/>
+				<entity name="RAT_OTHER"/>
+				<entity name="Platform_Attr_OTHER"/>
+				<entity name="NPV_rel_to_a_million_OTHER"/>
 			</group>
 			<group name="Cumulative Subsidy Constraints" run="false">
 				<entity name="use_system_wide_spending_input"/>
@@ -3134,49 +3134,49 @@ Starch is not included in this calculation, because of VEETC subsidy in the init
 				<aux color="black" font_color="black" label_angle="81.0236" x="2518.5" y="536.5" name="SJ Cume spend input"/>
 				<aux color="#651818" font_color="#651818" label_angle="81.0236" x="2703.5" y="536.5" name="SJ constraint from cume spend"/>
 				<group locked="true" color="#2A2A2A" font_color="#2A2A2A" x="1062.5" y="27.5" width="1009" height="854" name="Relative Attractiveness and Desired Starts">
-					<item uid="5904"/>
-					<item uid="5951"/>
-					<item uid="5937"/>
-					<item uid="6023"/>
-					<item uid="6051"/>
-					<item uid="5931"/>
-					<item uid="5976"/>
-					<item uid="5907"/>
-					<item uid="5965"/>
-					<item uid="5915"/>
-					<item uid="5920"/>
-					<item uid="6026"/>
-					<item uid="6047"/>
-					<item uid="5959"/>
-					<item uid="6021"/>
-					<item uid="5961"/>
-					<item uid="6041"/>
-					<item uid="5939"/>
-					<item uid="6004"/>
-					<item uid="6005"/>
-					<item uid="5970"/>
+					<item uid="6029"/>
+					<item uid="5903"/>
+					<item uid="5932"/>
+					<item uid="5936"/>
 					<item uid="5982"/>
+					<item uid="5997"/>
+					<item uid="5970"/>
 					<item uid="6033"/>
 					<item uid="6050"/>
-					<item uid="5936"/>
-					<item uid="5932"/>
-					<item uid="6034"/>
-					<item uid="5922"/>
-					<item uid="6043"/>
-					<item uid="5997"/>
-					<item uid="6036"/>
-					<item uid="5903"/>
-					<item uid="5947"/>
+					<item uid="6004"/>
 					<item uid="5998"/>
-					<item uid="6029"/>
+					<item uid="6041"/>
+					<item uid="5961"/>
+					<item uid="6026"/>
+					<item uid="6034"/>
+					<item uid="6021"/>
+					<item uid="6005"/>
+					<item uid="5915"/>
+					<item uid="6036"/>
+					<item uid="5947"/>
+					<item uid="6047"/>
+					<item uid="5965"/>
+					<item uid="5976"/>
+					<item uid="6043"/>
+					<item uid="5931"/>
+					<item uid="6051"/>
+					<item uid="5939"/>
+					<item uid="5959"/>
+					<item uid="6023"/>
+					<item uid="5937"/>
+					<item uid="5920"/>
+					<item uid="5951"/>
+					<item uid="5907"/>
+					<item uid="5922"/>
+					<item uid="5904"/>
 				</group>
 				<group locked="true" color="#2A2A2A" font_color="#2A2A2A" x="1063.5" y="907.5" width="459" height="243" name="Attractiveness of Other Investment Option">
-					<item uid="5943"/>
-					<item uid="5971"/>
-					<item uid="5974"/>
-					<item uid="5905"/>
-					<item uid="5983"/>
 					<item uid="5917"/>
+					<item uid="5983"/>
+					<item uid="5905"/>
+					<item uid="5974"/>
+					<item uid="5971"/>
+					<item uid="5943"/>
 				</group>
 				<group locked="false" x="2097.5" y="26.5" width="959" height="853" name="Cumulative Subsidy Constraints">
 					<item uid="6056"/>
